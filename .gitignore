@@ -1,0 +1,28 @@
+jobboard/refresh.log
+jobboard/partials/detail_cache.json
+*.tmp.html
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Secrets and machine-local configuration must never enter this public repo.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+
+# Private source material is maintained outside the deployment repository.
+jobboard/reference/
+downloads/
+
+# Editor and operating-system noise.
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+*.log

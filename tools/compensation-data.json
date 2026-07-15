@@ -1,0 +1,224 @@
+{
+  "version": "2026-07-14",
+  "currency": "USD",
+  "updatedLabel": "July 14, 2026",
+  "minimumSampleRules": {
+    "percentiles": 15,
+    "medianOnly": 10
+  },
+  "executiveAssistant": {
+    "cSuiteNational": {
+      "p25": 90000,
+      "median": 110000,
+      "p75": 136250,
+      "sample": 334,
+      "sampleApproximate": true,
+      "measure": "Self-reported base salary or salary-band midpoint",
+      "source": "C-Suite Assistants 2026",
+      "sourceUrl": "https://csuiteassistants.com/2026-salary-report/"
+    },
+    "cSuiteHybrid": {
+      "p25": 95000,
+      "median": 132000,
+      "p75": 167125,
+      "sample": 26,
+      "sampleApproximate": true,
+      "measure": "Self-reported base salary or salary-band midpoint",
+      "source": "C-Suite Assistants 2026",
+      "sourceUrl": "https://csuiteassistants.com/2026-salary-report/"
+    },
+    "independentNational": {
+      "allAdminMedian": 90000,
+      "allAdminMean": 94932,
+      "sample": 2424,
+      "eaShare": 0.49,
+      "measure": "Self-reported base salary",
+      "source": "2025 U.S. Administrative Professionals Salary Report",
+      "sourceUrl": "https://www.easalarysurvey.com/"
+    },
+    "titleMeans": {
+      "ea": {
+        "label": "Executive Assistant",
+        "meanBase": 94726,
+        "meanWithBonus": 100000
+      },
+      "senior_ea": {
+        "label": "Senior Executive Assistant",
+        "meanBase": 113968,
+        "meanWithBonus": 122028
+      },
+      "ebp": {
+        "label": "Executive Business Partner",
+        "meanBase": 127743,
+        "meanWithBonus": 137089
+      },
+      "epa": {
+        "label": "Executive Personal Assistant",
+        "meanBase": 139714,
+        "meanWithBonus": 152336
+      }
+    },
+    "robertHalfStarting": {
+      "ea": {
+        "low": 58250,
+        "mid": 70250,
+        "high": 86750
+      },
+      "senior_ea": {
+        "low": 76750,
+        "mid": 84500,
+        "high": 97250
+      },
+      "source": "Robert Half 2026",
+      "sourceUrl": "https://www.roberthalf.com/us/en/job-details/executive-assistant",
+      "measure": "Projected starting pay"
+    },
+    "bls": {
+      "medianAnnualized": 76586,
+      "meanAnnual": 79140,
+      "source": "BLS May 2025 OEWS",
+      "sourceUrl": "https://www.bls.gov/oes/2025/may/oes436011.htm",
+      "measure": "Employer-reported occupation wages"
+    },
+    "premium": {
+      "p25": 118125,
+      "median": 140000,
+      "p75": 164375,
+      "medianPublishedLow": 127000,
+      "medianPublishedHigh": 150000,
+      "sample": 130,
+      "source": "Exec Ops Brief active roles",
+      "sourceUrl": "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json",
+      "measure": "Posted salary midpoint",
+      "selection": "Only postings with a published pay midpoint of at least $100,000"
+    },
+    "geography": {
+      "sf": {
+        "label": "SF Bay Area",
+        "cSuiteLow": 118000,
+        "cSuiteMedian": 144000,
+        "cSuiteHigh": 178000,
+        "independentMean": 134883,
+        "premiumP25": 131250,
+        "premiumMedian": 150000,
+        "premiumP75": 170000,
+        "premiumSample": 55
+      },
+      "ny": {
+        "label": "New York City",
+        "cSuiteLow": 115000,
+        "cSuiteMedian": 141000,
+        "cSuiteHigh": 174000,
+        "independentMean": 120726,
+        "premiumP25": 115000,
+        "premiumMedian": 136500,
+        "premiumP75": 150000,
+        "premiumSample": 43
+      }
+    },
+    "bonusContext": {
+      "discretionaryShare": 0.52,
+      "guaranteedShare": 0.16,
+      "independentAveragePercent": 8.66
+    },
+    "equityContext": {
+      "cSuiteShare": 0.17,
+      "independentShare": 0.234
+    }
+  },
+  "chiefOfStaff": {
+    "stageMedians": {
+      "bootstrapped": 117500,
+      "seed": 140000,
+      "a": 160000,
+      "b": 170000,
+      "c": 196000,
+      "d": 197500,
+      "late": 190000,
+      "public": 200000
+    },
+    "stageLabels": {
+      "bootstrapped": "Bootstrapped",
+      "seed": "Seed",
+      "a": "Series A",
+      "b": "Series B",
+      "c": "Series C",
+      "d": "Series D",
+      "late": "Late-stage private",
+      "public": "Public"
+    },
+    "stageSource": {
+      "source": "Ask a Chief of Staff 2025",
+      "sourceUrl": "https://askachiefofstaff.substack.com/p/issue-84-how-much-does-a-chief-of",
+      "sample": 512,
+      "measure": "Self-reported median base salary"
+    },
+    "networkCrosscheck": {
+      "median": 160000,
+      "mean": 167954,
+      "source": "Chief of Staff Network 2025",
+      "sourceUrl": "https://www.chiefofstaff.network/blog/chief-of-staff-salary-report-2025",
+      "sample": null
+    },
+    "premium": {
+      "p25": 163125,
+      "median": 198500,
+      "p75": 252375,
+      "medianPublishedLow": 174500,
+      "medianPublishedHigh": 230000,
+      "sample": 66,
+      "source": "Exec Ops Brief active roles",
+      "sourceUrl": "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json",
+      "measure": "Posted salary midpoint"
+    },
+    "bonusContext": {
+      "prevalence": 0.56,
+      "averagePercentAmongRecipients": 19,
+      "source": "Chief of Staff Collective 2025",
+      "sourceUrl": "https://www.chiefofstaffcollective.org/2025-cosc-salary-survey",
+      "sample": 63
+    },
+    "equityContext": {
+      "prevalence": 0.54,
+      "source": "Chief of Staff Collective 2025",
+      "sourceUrl": "https://www.chiefofstaffcollective.org/2025-cosc-salary-survey",
+      "sample": 63
+    }
+  },
+  "executiveOperations": {
+    "premium": {
+      "p25": 154750,
+      "median": 179750,
+      "p75": 208000,
+      "medianPublishedLow": 150500,
+      "medianPublishedHigh": 204000,
+      "sample": 24,
+      "source": "Exec Ops Brief active roles",
+      "sourceUrl": "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json",
+      "measure": "Posted salary midpoint"
+    },
+    "blsProxies": [
+      {
+        "label": "Management Analysts",
+        "medianAnnualized": 101858,
+        "employment": 898280
+      },
+      {
+        "label": "General and Operations Managers",
+        "medianAnnualized": 105768,
+        "employment": 3503020
+      },
+      {
+        "label": "Administrative Services Managers",
+        "medianAnnualized": 114130,
+        "employment": 263960
+      }
+    ],
+    "paveContext": {
+      "label": "At the same level, CoS pay is roughly 15% ±5% above BizOps",
+      "source": "Pave 2025",
+      "sourceUrl": "https://www.pave.com/blog-posts/chief-of-staff-compensation",
+      "coverage": "11,000+ U.S. incumbent salary datapoints from 3,300+ customers"
+    }
+  }
+}

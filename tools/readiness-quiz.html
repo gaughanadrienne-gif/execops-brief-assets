@@ -1,0 +1,685 @@
+<!--
+  The Exec Ops Brief - Chief of Staff Readiness Quiz
+  Self-contained: inline scoped CSS + JS under #eob-quiz. Drop into a Squarespace
+  code block or embed via iframe. Matches the site design system
+  (Spectral + Public Sans + IBM Plex Mono; Paper/Ink/Navy/Oxblood/Muted/Line).
+  No em-dashes, no emojis in copy. No alert/confirm/prompt dialogs.
+
+  CONTENT HONESTY NOTE:
+  The twelve statements score the user across the six real competencies of the
+  Chief of Staff role as described in the site articles and the Interview Prep
+  Checklist: business and operating acumen, communication and influence,
+  judgment and discretion, execution and follow-through, managing up (the
+  relationship with a principal), and comfort with ambiguity. Every recommended
+  resource links to a real article at /library/{slug} or the free downloads at
+  /resources. Nothing here is fabricated.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div id="eob-quiz">
+<style>
+  #eob-quiz{
+    --paper:#F3F0E9; --paper-deep:#EAE5DA; --ink:#1B1712; --navy:#1C2C3A;
+    --oxblood:#7A2129; --oxblood-deep:#63191f; --oxblood-tint:#f0e0e0;
+    --muted:#6B6255; --line:#D8D0BF; --white:#ffffff;
+    --radius:12px; --radius-sm:8px;
+    --shadow:0 1px 2px rgba(27,23,18,.05), 0 10px 28px rgba(27,23,18,.07);
+    --shadow-lift:0 2px 6px rgba(27,23,18,.08), 0 22px 44px rgba(27,23,18,.12);
+    font-family:'Public Sans',system-ui,-apple-system,sans-serif;
+    color:var(--navy); line-height:1.6; -webkit-font-smoothing:antialiased;
+    max-width:760px; margin:0 auto; padding:0 4px; box-sizing:border-box;
+  }
+  #eob-quiz *{box-sizing:border-box}
+  #eob-quiz h1,#eob-quiz h2,#eob-quiz h3,#eob-quiz h4{
+    font-family:'Spectral',Georgia,serif;font-weight:600;line-height:1.15;color:var(--ink);letter-spacing:-.01em;margin:0;
+  }
+  #eob-quiz p{margin:0}
+  #eob-quiz .eob-eyebrow{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-weight:600;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--oxblood);
+  }
+  #eob-quiz .eob-mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+  /* Header */
+  #eob-quiz .eob-head{margin-bottom:1.4rem}
+  #eob-quiz .eob-head h2{font-size:clamp(1.7rem,3.2vw,2.35rem);margin:.5rem 0 .55rem}
+  #eob-quiz .eob-head p{font-size:1.02rem;color:var(--muted);max-width:44rem}
+
+  /* Card surface */
+  #eob-quiz .eob-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.5rem;margin-bottom:1.2rem;
+  }
+
+  /* Intro */
+  #eob-quiz .eob-intro h3{font-size:1.3rem;margin-bottom:.5rem}
+  #eob-quiz .eob-intro p{color:var(--muted);font-size:.98rem;margin-bottom:1.1rem;max-width:40rem}
+  #eob-quiz .eob-dims{
+    list-style:none;padding:0;margin:0 0 1.3rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;
+  }
+  #eob-quiz .eob-dims li{
+    font-size:.9rem;color:var(--navy);padding-left:1.1rem;position:relative;
+  }
+  #eob-quiz .eob-dims li:before{
+    content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:2px;background:var(--oxblood);
+  }
+  #eob-quiz .eob-start-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
+  #eob-quiz .eob-meta-note{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+  /* Buttons */
+  #eob-quiz .eob-btn{
+    background:var(--oxblood);color:#fff;font-family:inherit;font-weight:600;font-size:.96rem;
+    border:none;border-radius:var(--radius-sm);padding:.8rem 1.4rem;cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-quiz .eob-btn:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
+  #eob-quiz .eob-btn-ghost{
+    background:transparent;border:1px solid var(--line);color:var(--muted);
+    font-family:inherit;font-weight:600;font-size:.86rem;padding:.55rem 1rem;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;
+  }
+  #eob-quiz .eob-btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
+  #eob-quiz .eob-btn-ghost:disabled{opacity:.4;cursor:default}
+  #eob-quiz .eob-btn-ghost:disabled:hover{border-color:var(--line);color:var(--muted)}
+
+  /* Progress */
+  #eob-quiz .eob-progress-row{
+    display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;margin-bottom:.7rem;
+  }
+  #eob-quiz .eob-qcount{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  #eob-quiz .eob-dimtag{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.64rem;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--oxblood);background:var(--oxblood-tint);
+    border-radius:100px;padding:.2rem .6rem;
+  }
+  #eob-quiz .eob-track{
+    position:relative;height:6px;border-radius:100px;background:var(--paper-deep);overflow:hidden;margin-bottom:1.4rem;
+  }
+  #eob-quiz .eob-track-fill{
+    position:absolute;top:0;bottom:0;left:0;width:0;
+    background:linear-gradient(90deg,var(--oxblood-deep),var(--oxblood));border-radius:100px;
+    transition:width .3s ease;
+  }
+
+  /* Question */
+  #eob-quiz .eob-qtext{font-size:clamp(1.2rem,2.6vw,1.5rem);margin-bottom:1.2rem;line-height:1.28}
+  #eob-quiz .eob-options{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.3rem}
+  #eob-quiz .eob-opt{
+    display:flex;align-items:center;gap:.9rem;width:100%;text-align:left;
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.85rem 1rem;font-family:inherit;font-size:.98rem;color:var(--ink);cursor:pointer;transition:all .14s;
+  }
+  #eob-quiz .eob-opt:hover{border-color:var(--oxblood);background:var(--white)}
+  #eob-quiz .eob-opt.is-selected{border-color:var(--oxblood);background:var(--oxblood-tint);box-shadow:inset 0 0 0 1px var(--oxblood)}
+  #eob-quiz .eob-opt .eob-dot{
+    flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);
+    display:inline-flex;align-items:center;justify-content:center;transition:all .14s;
+  }
+  #eob-quiz .eob-opt:hover .eob-dot{border-color:var(--oxblood)}
+  #eob-quiz .eob-opt.is-selected .eob-dot{border-color:var(--oxblood);background:var(--oxblood)}
+  #eob-quiz .eob-opt.is-selected .eob-dot:after{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
+  #eob-quiz .eob-opt .eob-optlabel{flex:1}
+  #eob-quiz .eob-qnav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+
+  /* Result */
+  #eob-quiz .eob-result-head{
+    background:var(--navy);color:#fff;border-radius:var(--radius) var(--radius) 0 0;
+    padding:1.4rem 1.6rem 1.5rem;margin:-1.6rem -1.6rem 1.4rem;
+  }
+  #eob-quiz .eob-result-head .eob-eyebrow{color:#d69a8f}
+  #eob-quiz .eob-result-head h3{color:#fff;font-size:clamp(1.5rem,3.6vw,2rem);margin:.45rem 0 1rem}
+  #eob-quiz .eob-score-line{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;margin-bottom:.5rem}
+  #eob-quiz .eob-score-cap{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#c9b7a0}
+  #eob-quiz .eob-score-num{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:600;color:#fff;font-size:1.15rem}
+  #eob-quiz .eob-score-track{position:relative;height:8px;border-radius:100px;background:rgba(255,255,255,.14);overflow:hidden}
+  #eob-quiz .eob-score-fill{position:absolute;top:0;bottom:0;left:0;width:0;background:linear-gradient(90deg,#d69a8f,#fff);border-radius:100px;transition:width .5s ease}
+
+  #eob-quiz .eob-band-para{font-size:1rem;color:var(--navy);margin-bottom:1.4rem}
+
+  /* Dimension breakdown */
+  #eob-quiz .eob-bd-title,#eob-quiz .eob-rec-title,#eob-quiz .eob-focus-title{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.7rem;font-weight:600;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;
+  }
+  #eob-quiz .eob-breakdown{display:grid;grid-template-columns:1fr;gap:.55rem;margin-bottom:1.4rem}
+  #eob-quiz .eob-bd-row{display:grid;grid-template-columns:11.5rem 1fr auto;gap:.7rem;align-items:center}
+  #eob-quiz .eob-bd-label{font-size:.86rem;color:var(--navy)}
+  #eob-quiz .eob-bd-track{position:relative;height:7px;border-radius:100px;background:var(--paper-deep);overflow:hidden}
+  #eob-quiz .eob-bd-fill{position:absolute;top:0;bottom:0;left:0;width:0;background:var(--oxblood);border-radius:100px;transition:width .5s ease}
+  #eob-quiz .eob-bd-fill.is-low{background:var(--muted)}
+  #eob-quiz .eob-bd-val{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.76rem;color:var(--muted);white-space:nowrap}
+
+  /* Focus callout */
+  #eob-quiz .eob-focus{
+    background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--oxblood);
+    border-radius:var(--radius-sm);padding:.95rem 1.1rem;margin-bottom:1.5rem;
+  }
+  #eob-quiz .eob-focus .eob-focus-title{color:var(--oxblood);margin-bottom:.35rem}
+  #eob-quiz .eob-focus p{font-size:.92rem;color:var(--navy)}
+
+  /* Recommendations */
+  #eob-quiz .eob-recs{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.5rem}
+  #eob-quiz .eob-rec{
+    display:block;text-decoration:none;background:var(--white);border:1px solid var(--line);
+    border-radius:var(--radius-sm);padding:.95rem 1.1rem;transition:all .15s;
+  }
+  #eob-quiz .eob-rec:hover{border-color:var(--oxblood);box-shadow:var(--shadow);transform:translateY(-1px)}
+  #eob-quiz .eob-rec-tag{
+    display:inline-block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.6rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--oxblood);background:var(--oxblood-tint);
+    border-radius:100px;padding:.16rem .55rem;margin-bottom:.45rem;
+  }
+  #eob-quiz .eob-rec h4{font-size:1.02rem;margin-bottom:.2rem;display:flex;align-items:center;gap:.4rem}
+  #eob-quiz .eob-rec h4 .eob-arrow{color:var(--oxblood);transition:transform .15s}
+  #eob-quiz .eob-rec:hover h4 .eob-arrow{transform:translateX(3px)}
+  #eob-quiz .eob-rec p{font-size:.88rem;color:var(--muted)}
+  #eob-quiz .eob-retake-row{display:flex;justify-content:center;margin-top:.4rem}
+
+  /* Newsletter CTA */
+  #eob-quiz .eob-cta{
+    background:var(--ink);color:#fff;border-radius:var(--radius);padding:2rem 2.1rem;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-lift);margin-bottom:1.2rem;
+  }
+  #eob-quiz .eob-cta:before{
+    content:"";position:absolute;top:-50px;right:-30px;width:180px;height:180px;border-radius:50%;
+    background:radial-gradient(circle,rgba(122,33,41,.4),transparent 70%);pointer-events:none;
+  }
+  #eob-quiz .eob-cta .eob-eyebrow{color:#d69a8f;position:relative}
+  #eob-quiz .eob-cta h3{color:#fff;font-size:1.4rem;margin:.4rem 0;position:relative}
+  #eob-quiz .eob-cta p{color:#c2b6a6;font-size:.94rem;max-width:32rem;position:relative}
+  #eob-quiz .eob-cta form{display:flex;gap:.6rem;min-width:300px;position:relative}
+  #eob-quiz .eob-cta input{
+    flex:1;min-width:0;border:1px solid #3a322a;background:#241f19;color:#fff;
+    border-radius:var(--radius-sm);padding:.78rem .95rem;font-family:inherit;font-size:.94rem;
+  }
+  #eob-quiz .eob-cta input::placeholder{color:#8a7f70}
+  #eob-quiz .eob-cta input:focus{outline:none;border-color:var(--oxblood)}
+  #eob-quiz .eob-cta button{
+    background:var(--oxblood);color:#fff;font-family:inherit;font-weight:600;font-size:.94rem;
+    border:none;border-radius:var(--radius-sm);padding:.78rem 1.3rem;cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-quiz .eob-cta button:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
+  #eob-quiz .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#8a7f70}
+  #eob-quiz .eob-cta-msg{position:relative;margin-top:.55rem;font-size:.86rem;color:#d69a8f;font-weight:600;min-height:1.1em}
+
+  .eob-hidden{display:none !important}
+
+  /* Responsive */
+  @media (max-width:640px){
+    #eob-quiz .eob-dims{grid-template-columns:1fr}
+    #eob-quiz .eob-cta{grid-template-columns:1fr;padding:1.6rem}
+    #eob-quiz .eob-cta form{flex-direction:column;min-width:0}
+    #eob-quiz .eob-bd-row{grid-template-columns:1fr;gap:.25rem}
+    #eob-quiz .eob-bd-row .eob-bd-track{order:3}
+    #eob-quiz .eob-bd-val{justify-self:start}
+    #eob-quiz .eob-result-head{margin:-1.6rem -1.6rem 1.4rem}
+  }
+</style>
+
+  <div class="eob-head">
+    <span class="eob-eyebrow">The Readiness Quiz</span>
+    <h2>Are you ready to be a Chief of Staff?</h2>
+    <p>Twelve direct questions across the six competencies the role actually runs on. No vanity score. You get a candid read on where you stand and a specific path for the gaps.</p>
+  </div>
+
+  <!-- ================= INTRO ================= -->
+  <div class="eob-card eob-intro" id="eob-intro">
+    <h3>What this measures</h3>
+    <p>Chief of Staff hiring leans on judgment and evidence, not adjectives. This editorial self-assessment helps you reflect on your own examples across six competencies often emphasized in the role. It is not a validated hiring, psychological, or predictive instrument, and it cannot determine whether you will be hired or succeed in a role.</p>
+    <ul class="eob-dims">
+      <li>Business and operating acumen</li>
+      <li>Communication and influence</li>
+      <li>Judgment and discretion</li>
+      <li>Execution and follow-through</li>
+      <li>Managing up and the principal</li>
+      <li>Comfort with ambiguity</li>
+    </ul>
+    <div class="eob-start-row">
+      <button type="button" class="eob-btn" id="eob-start">Start the quiz</button>
+      <span class="eob-meta-note">12 questions, about 2 minutes</span>
+    </div>
+  </div>
+
+  <!-- ================= QUESTION STAGE ================= -->
+  <div class="eob-card eob-hidden" id="eob-stage">
+    <div class="eob-progress-row">
+      <span class="eob-qcount" id="eob-qcount">Question 1 of 12</span>
+      <span class="eob-dimtag" id="eob-dimtag">Dimension</span>
+    </div>
+    <div class="eob-track"><div class="eob-track-fill" id="eob-progress-fill"></div></div>
+
+    <h3 class="eob-qtext" id="eob-qtext">Question text</h3>
+    <div class="eob-options" id="eob-options" role="radiogroup" aria-label="Rate this statement"></div>
+
+    <div class="eob-qnav">
+      <button type="button" class="eob-btn-ghost" id="eob-back" disabled>Back</button>
+      <span class="eob-meta-note eob-mono" id="eob-scale-hint">Rarely to consistently</span>
+    </div>
+  </div>
+
+  <!-- ================= RESULT ================= -->
+  <div class="eob-hidden" id="eob-result">
+    <div class="eob-card">
+      <div class="eob-result-head">
+        <span class="eob-eyebrow" id="eob-band-eyebrow">Your result</span>
+        <h3 id="eob-band-title">Band</h3>
+        <p class="eob-meta-note">Editorial reflection only — use the prompts to organize examples and development priorities, not as a hiring prediction.</p>
+      </div>
+
+      <p class="eob-band-para" id="eob-band-para"></p>
+
+      <div class="eob-bd-title">Your responses by competency</div>
+      <div class="eob-breakdown" id="eob-breakdown"></div>
+
+      <div class="eob-focus">
+        <div class="eob-focus-title">Where to focus first</div>
+        <p id="eob-focus-body"></p>
+      </div>
+
+      <div class="eob-rec-title">Your next steps</div>
+      <div class="eob-recs" id="eob-recs"></div>
+
+      <div class="eob-retake-row">
+        <button type="button" class="eob-btn-ghost" id="eob-retake">Retake the quiz</button>
+      </div>
+    </div>
+
+    <!-- Newsletter call to action -->
+    <div class="eob-cta">
+      <div>
+        <span class="eob-eyebrow">The Brief</span>
+        <h3>Get your personalized path plus the weekly roles in The Brief.</h3>
+        <p>The free weekly newsletter for exec-ops operators: the guides that close each gap above, the operator templates you will use in the seat, and curated Chief of Staff roles.</p>
+        <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
+      </div>
+<form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
+        <input type="email" id="eob-email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+        <button type="submit">Subscribe to The Brief</button>
+        <div class="eob-cta-msg" id="eob-sub-msg" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById("eob-quiz");
+
+  /* ======================================================================
+     DIMENSIONS - the six real competencies of the Chief of Staff role,
+     each mapped to a real /library article for its targeted recommendation.
+     Sources: site articles 01, 05, 07 and the Interview Prep Checklist.
+     ====================================================================== */
+  var DIMS = {
+    biz: {
+      label: "Business and operating acumen",
+      tag: "Business acumen",
+      focus: "Business fluency is often the biggest gap for people moving up from a support or specialist track. Learn how your organization actually makes money, read the board deck if you can, and be able to reason about the metrics leadership watches. That is the line between shaping priorities and coordinating logistics.",
+      rec: { tag:"Article", title:"The Skills That Actually Get You Hired",
+             desc:"The five hard-to-fake skills hiring managers screen for, including business fluency, and how to show evidence of each.",
+             url:"/library/skills-to-get-hired-as-chief-of-staff" }
+    },
+    comm: {
+      label: "Communication and influence",
+      tag: "Communication",
+      focus: "A Chief of Staff moves work across every function with little or no formal authority, which only happens through trust and clear writing. Practice turning a leader's half-formed direction into a tight brief, and building coalitions by understanding what each stakeholder actually needs.",
+      rec: { tag:"Article", title:"Influence Without Authority",
+             desc:"How to move people and work through trust and framing rather than a reporting line, a core skill for working across functions.",
+             url:"/library/influence-without-authority" }
+    },
+    judg: {
+      label: "Judgment and discretion",
+      tag: "Judgment",
+      focus: "The role is defined by vague problems and incomplete information, and it runs on trust with sensitive context. Build a track record of naming your reasoning under uncertainty, and of being the person who holds a confidence when others push.",
+      rec: { tag:"Article", title:"The Trust Equation",
+             desc:"The mechanics of the trust a Chief of Staff role depends on, and how to build it deliberately rather than hoping for it.",
+             url:"/library/the-trust-equation" }
+    },
+    exec: {
+      label: "Execution and follow-through",
+      tag: "Execution",
+      focus: "Strategy that does not ship is worthless, and execution is the most verifiable of the skills. Own a messy cross-functional project end to end, close the loop so nothing gets decided twice, and be ready to quantify what you delivered.",
+      rec: { tag:"Article", title:"Leading Cross-Functional Projects Without Authority",
+             desc:"How to own the messy middle and drive cross-team work to a finished, measurable result.",
+             url:"/library/leading-cross-functional-projects-without-authority" }
+    },
+    manage: {
+      label: "Managing up and the principal",
+      tag: "Managing up",
+      focus: "The whole job is making one leader and their team more effective. Practice anticipating what your principal needs before they ask, and pushing back well when you believe they are wrong, in a way that earns respect rather than friction.",
+      rec: { tag:"Article", title:"Managing Up",
+             desc:"How to make the leader you support measurably more effective, the core of the Chief of Staff relationship.",
+             url:"/library/managing-up-chief-of-staff" }
+    },
+    ambig: {
+      label: "Comfort with ambiguity",
+      tag: "Ambiguity",
+      focus: "The role keeps changing shape, so the person who adapts fastest and asks the best questions wins. Get reps taking undefined problems and deciding what matters, rather than waiting for clear instructions before you move.",
+      rec: { tag:"Article", title:"What Does a Chief of Staff Actually Do?",
+             desc:"A clear, honest picture of the shape-shifting reality of the role, so you know what you are signing up for.",
+             url:"/library/what-does-a-chief-of-staff-do" }
+    }
+  };
+
+  /* Twelve statements, two per dimension. Rated 1 (rarely) to 4 (consistently). */
+  var QUESTIONS = [
+    { dim:"biz",    text:"I can explain how my organization actually makes money, including the metrics leadership watches and what drives them." },
+    { dim:"comm",   text:"I can turn a leader's half-formed direction into a clear written brief or decision memo." },
+    { dim:"judg",   text:"When I make a call with incomplete information, I can name what I knew, what I assumed, and why I chose what I did." },
+    { dim:"exec",   text:"When I own a cross-functional project, I drive it to a finished result across teams rather than losing it in the messy middle." },
+    { dim:"manage", text:"I anticipate what the leaders I work with need and make them more effective before they have to ask." },
+    { dim:"ambig",  text:"I am comfortable being handed a vague problem with incomplete information and expected to figure out what matters." },
+    { dim:"biz",    text:"In a leadership conversation about budget, forecast, or unit economics, I can follow the substance, not just the logistics." },
+    { dim:"comm",   text:"In my writing and updates I lead with the point, then support it, rather than burying the conclusion." },
+    { dim:"judg",   text:"When people push me for information I have been trusted to keep confidential, I hold the line without damaging the relationship." },
+    { dim:"exec",   text:"I close the loop on decisions, so nothing important gets decided twice or quietly dropped." },
+    { dim:"manage", text:"I can push back on or say no to a senior leader when I believe they are wrong, in a way they respect." },
+    { dim:"ambig",  text:"When my role or priorities keep shifting, I adapt and stay effective rather than waiting for clearer instructions." }
+  ];
+
+  var SCALE = [
+    { v:1, label:"Rarely" },
+    { v:2, label:"Sometimes" },
+    { v:3, label:"Often" },
+    { v:4, label:"Consistently" }
+  ];
+
+  /* Editorial routing bands based on self-reported responses. They are not validated thresholds or hiring predictions. */
+  var BANDS = {
+    building: {
+      eyebrow: "Your result",
+      title: "Build the evidence first",
+      para: "Your responses point to one or more competencies you may want to develop before deciding which Chief of Staff roles to pursue. That is useful information, not a verdict. Start by choosing one area to practise in a real project, then collect specific examples of your judgment, communication, or execution.",
+      download: { tag:"Free download", title:"The EA-to-Chief-of-Staff Roadmap",
+                  desc:"A free guide that breaks the transition into 30, 60, and 90-day milestones you can act on this quarter. Delivered when you join The Brief.",
+                  url:"/resources" },
+      anchorSlug: "land-first-chief-of-staff-role-without-the-title",
+      anchor: { tag:"Article", title:"Land Your First Chief of Staff Role Without the Title",
+                desc:"How to create the opening and build the evidence that turns potential into a real offer.",
+                url:"/library/land-first-chief-of-staff-role-without-the-title" }
+    },
+    nearly: {
+      eyebrow: "Your result",
+      title: "Target the thinner areas",
+      para: "Your responses suggest you already have examples in several competencies. Use the lower-scoring areas below as prompts for targeted practice and stronger stories. Interviewers will test for specifics, so focus on the evidence you can describe rather than treating this result as a pass-or-fail assessment.",
+      download: { tag:"Free download", title:"The Chief of Staff Interview Prep Checklist",
+                  desc:"A free kit that maps the questions companies actually ask to the skills behind them, so you walk in with evidence ready. Delivered when you join The Brief.",
+                  url:"/resources" },
+      anchorSlug: "skills-to-get-hired-as-chief-of-staff",
+      anchor: { tag:"Article", title:"The Skills That Actually Get You Hired",
+                desc:"Audit yourself against the five skills hiring managers screen for, and close the weakest gap deliberately.",
+                url:"/library/skills-to-get-hired-as-chief-of-staff" }
+    },
+    stronger: {
+      eyebrow: "Your result",
+      title: "Map your evidence",
+      para: "Your responses point to examples across several core competencies. This self-assessment cannot tell you whether you are ready, likely to be hired, or suited to every Chief of Staff role; scope, principal, company, and demonstrated results all matter. Use the prompts below to turn your strongest examples into clear interview stories and identify any evidence you still need.",
+      download: { tag:"Free download", title:"The First 90 Days Operating Plan",
+                  desc:"A free operating plan strong Chiefs of Staff run from day one, so you land ready to deliver. Delivered when you join The Brief.",
+                  url:"/resources" },
+      anchorSlug: "negotiate-chief-of-staff-offer",
+      anchor: { tag:"Article", title:"How to Negotiate a Chief of Staff Offer",
+                desc:"Negotiate the role and the compensation as separate, deliberate conversations once the offer comes.",
+                url:"/library/negotiate-chief-of-staff-offer" }
+    }
+  };
+
+  var els = {
+    intro:    root.querySelector("#eob-intro"),
+    start:    root.querySelector("#eob-start"),
+    stage:    root.querySelector("#eob-stage"),
+    qcount:   root.querySelector("#eob-qcount"),
+    dimtag:   root.querySelector("#eob-dimtag"),
+    progress: root.querySelector("#eob-progress-fill"),
+    qtext:    root.querySelector("#eob-qtext"),
+    options:  root.querySelector("#eob-options"),
+    back:     root.querySelector("#eob-back"),
+    result:   root.querySelector("#eob-result"),
+    bandEyebrow: root.querySelector("#eob-band-eyebrow"),
+    bandTitle:   root.querySelector("#eob-band-title"),
+    bandPara:    root.querySelector("#eob-band-para"),
+    breakdown:   root.querySelector("#eob-breakdown"),
+    focusBody:   root.querySelector("#eob-focus-body"),
+    recs:        root.querySelector("#eob-recs"),
+    retake:      root.querySelector("#eob-retake")
+  };
+
+  var answers = new Array(QUESTIONS.length).fill(null);
+  var current = 0;
+  var advanceTimer = null;
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  function show(el){ el.classList.remove("eob-hidden"); }
+  function hide(el){ el.classList.add("eob-hidden"); }
+
+  function renderQuestion(){
+    var q = QUESTIONS[current];
+    var dim = DIMS[q.dim];
+    els.qcount.textContent = "Question " + (current + 1) + " of " + QUESTIONS.length;
+    els.dimtag.textContent = dim.tag;
+    els.progress.style.width = ((current) / QUESTIONS.length * 100) + "%";
+    els.qtext.textContent = q.text;
+    els.back.disabled = (current === 0);
+
+    var html = "";
+    for (var i = 0; i < SCALE.length; i++){
+      var s = SCALE[i];
+      var sel = (answers[current] === s.v) ? " is-selected" : "";
+      var checked = (answers[current] === s.v) ? "true" : "false";
+      html += '<button type="button" class="eob-opt' + sel + '" role="radio" aria-checked="' + checked + '" data-val="' + s.v + '">' +
+                '<span class="eob-dot" aria-hidden="true"></span>' +
+                '<span class="eob-optlabel">' + esc(s.label) + '</span>' +
+              '</button>';
+    }
+    els.options.innerHTML = html;
+
+    var opts = els.options.querySelectorAll(".eob-opt");
+    for (var j = 0; j < opts.length; j++){
+      opts[j].addEventListener("click", onSelect);
+    }
+  }
+
+  function onSelect(e){
+    var btn = e.currentTarget;
+    var val = parseInt(btn.getAttribute("data-val"), 10);
+    answers[current] = val;
+
+    var opts = els.options.querySelectorAll(".eob-opt");
+    for (var i = 0; i < opts.length; i++){
+      var isSel = opts[i] === btn;
+      opts[i].classList.toggle("is-selected", isSel);
+      opts[i].setAttribute("aria-checked", isSel ? "true" : "false");
+    }
+
+    // Smooth auto-advance. Back button still lets the user revise.
+    if (advanceTimer) clearTimeout(advanceTimer);
+    advanceTimer = setTimeout(function(){
+      if (current < QUESTIONS.length - 1){
+        current++;
+        renderQuestion();
+      } else {
+        finish();
+      }
+      postHeight();
+    }, 260);
+  }
+
+  function goBack(){
+    if (advanceTimer) clearTimeout(advanceTimer);
+    if (current > 0){
+      current--;
+      renderQuestion();
+      postHeight();
+    }
+  }
+
+  function bandFor(pct){
+    if (pct >= 79) return "stronger";
+    if (pct >= 60) return "nearly";
+    return "building";
+  }
+
+  function finish(){
+    // Per-dimension totals (each dimension has 2 questions, max 8).
+    var dimScore = {};
+    for (var k in DIMS){ dimScore[k] = 0; }
+    var total = 0;
+    for (var i = 0; i < QUESTIONS.length; i++){
+      var v = answers[i] || 0;
+      total += v;
+      dimScore[QUESTIONS[i].dim] += v;
+    }
+    var maxTotal = QUESTIONS.length * 4;
+    var pct = Math.round(total / maxTotal * 100);
+    var bandKey = bandFor(pct);
+    var band = BANDS[bandKey];
+
+    // Rank dimensions weakest first (stable) to find the focus areas.
+    var order = Object.keys(DIMS);
+    var ranked = order.slice().sort(function(a, b){ return dimScore[a] - dimScore[b]; });
+    var lowest = ranked[0];
+    var second = ranked[1];
+
+    // Header + band paragraph.
+    els.bandEyebrow.textContent = band.eyebrow;
+    els.bandTitle.textContent = band.title;
+        els.bandPara.textContent = band.para;
+
+    // Dimension breakdown bars (out of 8).
+    var bdHTML = "";
+    for (var d = 0; d < order.length; d++){
+      var key = order[d];
+      var sc = dimScore[key];
+      var w = Math.round(sc / 8 * 100);
+      var lowClass = (key === lowest || key === second) ? " is-low" : "";
+      bdHTML += '<div class="eob-bd-row">' +
+                  '<span class="eob-bd-label">' + esc(DIMS[key].label) + '</span>' +
+                  '<span class="eob-bd-track"><span class="eob-bd-fill' + lowClass + '" data-w="' + w + '"></span></span>' +
+                  '<span class="eob-bd-val">' + sc + ' / 8</span>' +
+                '</div>';
+    }
+    els.breakdown.innerHTML = bdHTML;
+
+    // Focus callout = the weakest dimension.
+    els.focusBody.textContent = DIMS[lowest].focus;
+
+    // Recommendations: weakest dimension article, second-weakest dimension
+    // article, and the band-appropriate free download. If the band anchor
+    // article would duplicate a dimension pick, use it in place of the second.
+    var recs = [];
+    recs.push(DIMS[lowest].rec);
+    var picked = [DIMS[lowest].rec.url];
+
+    var secondRec = DIMS[second].rec;
+    if (band.anchorSlug && picked.indexOf(DIMS[second].rec.url) !== -1){
+      secondRec = band.anchor;
+    }
+    recs.push(secondRec);
+    picked.push(secondRec.url);
+
+    // Third slot: band anchor article if not already shown, else the download.
+    if (band.anchor && picked.indexOf(band.anchor.url) === -1 && bandKey !== "building"){
+      // For non-building bands, surface the anchor article, then the download last.
+      recs.push(band.anchor);
+      recs.push(band.download);
+    } else {
+      recs.push(band.download);
+    }
+
+    var recHTML = "";
+    for (var r = 0; r < recs.length; r++){
+      var rc = recs[r];
+      recHTML += '<a class="eob-rec" href="' + esc(rc.url) + '">' +
+                   '<span class="eob-rec-tag">' + esc(rc.tag) + '</span>' +
+                   '<h4>' + esc(rc.title) + ' <span class="eob-arrow" aria-hidden="true">&rarr;</span></h4>' +
+                   '<p>' + esc(rc.desc) + '</p>' +
+                 '</a>';
+    }
+    els.recs.innerHTML = recHTML;
+
+    // Swap views.
+    hide(els.stage);
+    show(els.result);
+    if (root.scrollIntoView){ root.scrollIntoView({ behavior:"smooth", block:"start" }); }
+
+    // Animate the fills after paint.
+    setTimeout(function(){
+      /* Overall percentage is intentionally not displayed: this is an editorial reflection, not a validated score. */
+      var fills = els.breakdown.querySelectorAll(".eob-bd-fill");
+      for (var f = 0; f < fills.length; f++){
+        fills[f].style.width = fills[f].getAttribute("data-w") + "%";
+      }
+      postHeight();
+    }, 60);
+  }
+
+  function startQuiz(){
+    answers = new Array(QUESTIONS.length).fill(null);
+    current = 0;
+    hide(els.intro);
+    hide(els.result);
+    show(els.stage);
+    renderQuestion();
+    postHeight();
+  }
+
+  function retake(){
+    hide(els.result);
+    hide(els.stage);
+    show(els.intro);
+    /* No overall score bar to reset: this is an editorial reflection. */
+    postHeight();
+  }
+
+  els.start.addEventListener("click", startQuiz);
+  els.back.addEventListener("click", goBack);
+  els.retake.addEventListener("click", retake);
+  /* ======================================================================
+     Auto-resize: report height to the parent so the iframe can size itself.
+     (Pattern for embedding via iframe. Host page listens for the message.)
+     ====================================================================== */
+  function postHeight(){
+    var h = root.scrollHeight;
+    if (window.parent && window.parent !== window){
+      window.parent.postMessage({ type: "eob-quiz-height", height: h }, "*");
+    }
+  }
+  if (window.ResizeObserver){
+    new ResizeObserver(postHeight).observe(root);
+  }
+  window.addEventListener("load", postHeight);
+  window.addEventListener("resize", postHeight);
+
+  var subForm = root.querySelector("#eob-subscribe");
+  var subMsg = root.querySelector("#eob-sub-msg");
+  if (subForm) {
+    var frame = document.createElement("iframe");
+    frame.name = "eob-ml-frame";
+    frame.style.display = "none";
+    frame.setAttribute("aria-hidden", "true");
+    root.appendChild(frame);
+    subForm.addEventListener("submit", function(){
+      var btn = subForm.querySelector("button");
+      if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+      setTimeout(function(){
+        if (subMsg) subMsg.textContent = "You are in. Check your inbox for the next note.";
+        subForm.reset();
+        if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; }
+        postHeight();
+      }, 900);
+    });
+  }
+})();
+</script>
+</div>

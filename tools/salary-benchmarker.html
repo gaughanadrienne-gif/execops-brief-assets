@@ -1,0 +1,556 @@
+<!--
+  The Exec Ops Brief - Salary & Comp Benchmarker
+  Self-contained: inline scoped CSS + JS under #eob-salary. Drop into a Squarespace
+  code block or embed via iframe. Matches the site design system
+  (Spectral + Public Sans + IBM Plex Mono; Paper/Ink/Navy/Oxblood/Muted/Line).
+  No em-dashes, no emojis in copy. No alert/confirm/prompt dialogs.
+
+  DATA HONESTY NOTE:
+  Figures are loaded from compensation-data.json and retain their source, sample,
+  measure, and snapshot date. This tool does not multiply one profession's salary
+  into another. It keeps employer wages, starting pay, incumbent surveys, and
+  premium job postings separate. All numbers are directional. Verify the linked
+  source before you cite or negotiate.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div id="eob-salary">
+<style>
+  #eob-salary{
+    --paper:#F3F0E9; --paper-deep:#EAE5DA; --ink:#1B1712; --navy:#1C2C3A;
+    --oxblood:#7A2129; --oxblood-deep:#63191f; --oxblood-tint:#f0e0e0;
+    --muted:#6B6255; --line:#D8D0BF; --white:#ffffff;
+    --radius:12px; --radius-sm:8px;
+    --shadow:0 1px 2px rgba(27,23,18,.05), 0 10px 28px rgba(27,23,18,.07);
+    --shadow-lift:0 2px 6px rgba(27,23,18,.08), 0 22px 44px rgba(27,23,18,.12);
+    font-family:'Public Sans',system-ui,-apple-system,sans-serif;
+    color:var(--navy); line-height:1.6; -webkit-font-smoothing:antialiased;
+    max-width:960px; margin:0 auto; padding:0 4px; box-sizing:border-box;
+  }
+  #eob-salary *{box-sizing:border-box}
+  #eob-salary h1,#eob-salary h2,#eob-salary h3,#eob-salary h4{
+    font-family:'Spectral',Georgia,serif;font-weight:600;line-height:1.15;color:var(--ink);letter-spacing:-.01em;margin:0;
+  }
+  #eob-salary .eob-eyebrow{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-weight:600;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--oxblood);
+  }
+
+  /* Header */
+  #eob-salary .eob-head{margin-bottom:1.4rem}
+  #eob-salary .eob-head h2{font-size:clamp(1.7rem,3.2vw,2.35rem);margin:.5rem 0 .55rem}
+  #eob-salary .eob-head p{font-size:1.02rem;color:var(--muted);max-width:44rem}
+
+  /* Controls card */
+  #eob-salary .eob-controls{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.2rem 1.3rem;box-shadow:var(--shadow);margin-bottom:1.2rem;
+    display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.1rem;
+  }
+  #eob-salary .eob-field{display:flex;flex-direction:column;gap:.4rem;min-width:0}
+  #eob-salary .eob-field label{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  }
+  #eob-salary .eob-field select{
+    width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.64rem .85rem;font-family:inherit;font-size:.94rem;color:var(--ink);background:var(--paper);
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='10'%20height='6'%3E%3Cpath%20d='M0%200l5%206%205-6z'%20fill='%237A2129'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .85rem center;padding-right:2.1rem;
+  }
+  #eob-salary .eob-field select:focus{outline:none;border-color:var(--oxblood);background-color:var(--white)}
+
+  /* Result card */
+  #eob-salary .eob-result{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;margin-bottom:1.2rem;
+  }
+  #eob-salary .eob-result-head{
+    background:var(--navy);color:#fff;padding:1.1rem 1.4rem;
+    display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem;
+  }
+  #eob-salary .eob-result-head .eob-rlabel{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.12em;
+    text-transform:uppercase;color:#c9b7a0;
+  }
+  #eob-salary .eob-result-head h3{color:#fff;font-size:1.12rem;font-weight:600}
+  #eob-salary .eob-result-body{padding:1.5rem 1.4rem 1.3rem}
+
+  /* Range display */
+  #eob-salary .eob-range{
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;text-align:center;margin-bottom:.4rem;
+  }
+  #eob-salary .eob-range .eob-rcell{padding:.4rem .2rem}
+  #eob-salary .eob-range .eob-rcap{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:.35rem;
+  }
+  #eob-salary .eob-range .eob-rnum{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:600;color:var(--ink);
+    font-size:clamp(1.25rem,4.4vw,1.7rem);line-height:1;
+  }
+  #eob-salary .eob-range .eob-mid .eob-rnum{color:var(--oxblood);font-size:clamp(1.7rem,6vw,2.5rem)}
+  #eob-salary .eob-range .eob-mid .eob-rcap{color:var(--oxblood)}
+  #eob-salary .eob-track{
+    position:relative;height:8px;border-radius:100px;background:var(--paper-deep);
+    margin:.6rem 0 1.1rem;overflow:hidden;
+  }
+  #eob-salary .eob-track-fill{
+    position:absolute;top:0;bottom:0;left:12%;right:12%;
+    background:linear-gradient(90deg,var(--oxblood-tint),var(--oxblood),var(--oxblood-tint));border-radius:100px;
+  }
+  #eob-salary .eob-range-label{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.7rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:1.1rem;
+  }
+
+  /* Total comp note */
+  #eob-salary .eob-tc{
+    background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--oxblood);
+    border-radius:var(--radius-sm);padding:.85rem 1rem;font-size:.92rem;color:var(--navy);
+  }
+  #eob-salary .eob-tc strong{color:var(--ink);font-weight:600}
+  #eob-salary .eob-tc .eob-tc-title{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.68rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--oxblood);display:block;margin-bottom:.3rem;
+  }
+  #eob-salary .eob-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin-top:1rem}
+  #eob-salary .eob-source-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.9rem 1rem;min-width:0;
+  }
+  #eob-salary .eob-source-card h4{font-size:1rem;margin-bottom:.35rem}
+  #eob-salary .eob-source-card p{font-size:.86rem;color:var(--navy);margin:.2rem 0}
+  #eob-salary .eob-stat{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:1.22rem;font-weight:600;
+    color:var(--oxblood);line-height:1.25;margin:.25rem 0 .35rem;
+  }
+  #eob-salary .eob-cite{font-size:.76rem!important;color:var(--muted)!important;margin-top:.55rem!important}
+  #eob-salary .eob-cite a,#eob-salary .eob-method a{color:var(--oxblood);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  #eob-salary .eob-cite a:hover,#eob-salary .eob-method a:hover{color:var(--oxblood-deep)}
+  #eob-salary .eob-confidence{
+    display:inline-block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.6rem;
+    font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--navy);
+    background:var(--white);border:1px solid var(--line);border-radius:100px;padding:.16rem .5rem;margin-left:.35rem;
+  }
+  #eob-salary .eob-notice{
+    margin-top:.85rem;padding:.75rem .9rem;border-left:3px solid var(--oxblood);
+    background:var(--oxblood-tint);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+    color:var(--navy);font-size:.86rem;
+  }
+  #eob-salary .eob-loading{padding:1rem;color:var(--muted);font-size:.9rem}
+  #eob-salary .eob-hidden{display:none!important}
+
+  /* Sources / methodology */
+  #eob-salary .eob-method{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:1.2rem 1.3rem;margin-bottom:1.2rem;
+  }
+  #eob-salary .eob-method h4{
+    font-size:1.02rem;margin-bottom:.5rem;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  #eob-salary .eob-method .eob-badge{
+    display:inline-block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.6rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--oxblood);background:var(--oxblood-tint);
+    border-radius:100px;padding:.18rem .55rem;
+  }
+  #eob-salary .eob-method p{font-size:.9rem;color:var(--muted);margin:0 0 .6rem}
+  #eob-salary .eob-method p:last-child{margin-bottom:0}
+  #eob-salary .eob-method .eob-derive{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.8rem;color:var(--navy);
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.6rem .8rem;margin:.2rem 0 .7rem;overflow-x:auto;white-space:nowrap;
+  }
+  #eob-salary .eob-sources{
+    list-style:none;padding:0;margin:.2rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem;
+  }
+  #eob-salary .eob-sources li{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.72rem;color:var(--navy);
+    background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:.28rem .7rem;
+  }
+  #eob-salary .eob-caveat{
+    margin-top:.9rem;padding-top:.85rem;border-top:1px solid var(--line);
+    font-size:.86rem;color:var(--muted);
+  }
+  #eob-salary .eob-caveat strong{color:var(--oxblood);font-weight:600}
+
+  /* Newsletter CTA */
+  #eob-salary .eob-cta{
+    background:var(--ink);color:#fff;border-radius:var(--radius);padding:2rem 2.1rem;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-lift);
+  }
+  #eob-salary .eob-cta:before{
+    content:"";position:absolute;top:-50px;right:-30px;width:180px;height:180px;border-radius:50%;
+    background:radial-gradient(circle,rgba(122,33,41,.4),transparent 70%);pointer-events:none;
+  }
+  #eob-salary .eob-cta .eob-eyebrow{color:#d69a8f;position:relative}
+  #eob-salary .eob-cta h3{color:#fff;font-size:1.5rem;margin:.4rem 0;position:relative}
+  #eob-salary .eob-cta p{color:#c2b6a6;font-size:.94rem;max-width:32rem;position:relative}
+  #eob-salary .eob-cta form{display:flex;gap:.6rem;min-width:300px;position:relative}
+  #eob-salary .eob-cta input{
+    flex:1;min-width:0;border:1px solid #3a322a;background:#241f19;color:#fff;
+    border-radius:var(--radius-sm);padding:.78rem .95rem;font-family:inherit;font-size:.94rem;
+  }
+  #eob-salary .eob-cta input::placeholder{color:#8a7f70}
+  #eob-salary .eob-cta input:focus{outline:none;border-color:var(--oxblood)}
+  #eob-salary .eob-cta button{
+    background:var(--oxblood);color:#fff;font-family:inherit;font-weight:600;font-size:.94rem;
+    border:none;border-radius:var(--radius-sm);padding:.78rem 1.3rem;cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-salary .eob-cta button:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
+  #eob-salary .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#8a7f70}
+  #eob-salary .eob-cta-msg{position:relative;margin-top:.55rem;font-size:.86rem;color:#d69a8f;font-weight:600;min-height:1.1em}
+
+  /* Responsive */
+  @media (max-width:720px){
+    #eob-salary .eob-controls{grid-template-columns:1fr}
+    #eob-salary .eob-source-grid{grid-template-columns:1fr}
+    #eob-salary .eob-cta{grid-template-columns:1fr}
+    #eob-salary .eob-cta form{flex-direction:column;min-width:0}
+  }
+  @media (max-width:460px){
+    #eob-salary .eob-range .eob-rnum{font-size:1.1rem}
+    #eob-salary .eob-range .eob-mid .eob-rnum{font-size:1.5rem}
+  }
+</style>
+
+  <div class="eob-head">
+    <span class="eob-eyebrow">The Benchmarker</span>
+    <h2>Salary and comp benchmarker.</h2>
+    <p>Compare broad employer pay, executive-support incumbent data, and premium $100k-plus opportunities without blending unlike markets into one estimate.</p>
+  </div>
+
+  <div class="eob-controls">
+    <div class="eob-field">
+      <label for="eob-role">Role</label>
+      <select id="eob-role">
+        <option value="ea">Executive Assistant</option>
+        <option value="cos" selected>Chief of Staff</option>
+        <option value="ops">Executive Operations / BizOps</option>
+      </select>
+    </div>
+    <div class="eob-field eob-hidden" id="eob-title-wrap">
+      <label for="eob-title">EA title</label>
+      <select id="eob-title">
+        <option value="ea">Executive Assistant</option>
+        <option value="senior_ea">Senior Executive Assistant</option>
+        <option value="ebp">Executive Business Partner</option>
+        <option value="epa">Executive Personal Assistant</option>
+        <option value="eapa">EA / PA hybrid</option>
+      </select>
+    </div>
+    <div class="eob-field" id="eob-stage-wrap">
+      <label for="eob-stage">Company stage</label>
+      <select id="eob-stage">
+        <option value="bootstrapped">Bootstrapped</option>
+        <option value="seed">Seed</option>
+        <option value="a" selected>Series A</option>
+        <option value="b">Series B</option>
+        <option value="c">Series C</option>
+        <option value="d">Series D</option>
+        <option value="late">Late-stage private</option>
+        <option value="public">Public</option>
+      </select>
+    </div>
+    <div class="eob-field eob-hidden" id="eob-market-wrap">
+      <label for="eob-market">EA market</label>
+      <select id="eob-market">
+        <option value="national" selected>National</option>
+        <option value="sf">SF Bay Area</option>
+        <option value="ny">New York City</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="eob-result">
+    <div class="eob-result-head">
+      <span class="eob-rlabel">Observed compensation comparisons</span>
+      <h3 id="eob-summary">Chief of Staff, Series A</h3>
+    </div>
+    <div class="eob-result-body" id="eob-output">
+      <div class="eob-loading">Loading the July 2026 compensation dataset...</div>
+    </div>
+  </div>
+
+  <div class="eob-method">
+    <h4>How to read this <span class="eob-badge">Observed, not blended</span></h4>
+    <p>Each card preserves what its source actually measures: employer wages, projected starting pay, self-reported incumbent pay, or active posted salary. No role, location, remote-work, or experience multiplier is applied. Sample and confidence notes appear beside the result.</p>
+    <div class="eob-derive" id="eob-derive">Data version: loading...</div>
+    <p style="margin-bottom:.35rem">Linked sources used by this tool:</p>
+    <ul class="eob-sources">
+      <li><a href="https://askachiefofstaff.substack.com/p/issue-84-how-much-does-a-chief-of" target="_blank" rel="noopener noreferrer">Ask a Chief of Staff 2025</a></li>
+      <li><a href="https://csuiteassistants.com/2026-salary-report/" target="_blank" rel="noopener noreferrer">C-Suite Assistants 2026</a></li>
+      <li><a href="https://www.easalarysurvey.com/" target="_blank" rel="noopener noreferrer">2025 U.S. Admin Professionals</a></li>
+      <li><a href="https://www.bls.gov/oes/2025/may/oes436011.htm" target="_blank" rel="noopener noreferrer">BLS May 2025</a></li>
+      <li><a href="https://www.roberthalf.com/us/en/job-details/executive-assistant" target="_blank" rel="noopener noreferrer">Robert Half 2026</a></li>
+      <li><a href="https://www.pave.com/blog-posts/chief-of-staff-compensation" target="_blank" rel="noopener noreferrer">Pave 2025</a></li>
+      <li><a href="https://www.chiefofstaff.network/blog/chief-of-staff-salary-report-2025" target="_blank" rel="noopener noreferrer">CoS Network 2025</a></li>
+      <li><a href="https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json" target="_blank" rel="noopener noreferrer">Exec Ops Brief active roles</a></li>
+    </ul>
+    <div class="eob-caveat">
+      <strong>Read before you cite or negotiate.</strong> These figures are directional, not audited. The premium posting sample only includes roles with a published pay midpoint of at least $100,000 and is concentrated in NYC and the Bay Area. Self-reported surveys, employer wages, starting-pay projections, and job postings answer different questions. Use the source link and population label shown with each result.
+    </div>
+  </div>
+
+  <!-- Newsletter call to action -->
+  <div class="eob-cta">
+    <div>
+      <span class="eob-eyebrow">The Brief</span>
+      <h3>Get the full Salary and Leveling Guide.</h3>
+      <p>The complete guide with the company-stage pay table, the leveling matrix, and every source, plus curated $100k-plus exec-ops roles delivered weekly in The Brief.</p>
+      <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
+    </div>
+<form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
+      <input type="email" id="eob-email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+      <button type="submit">Subscribe to The Brief</button>
+      <div class="eob-cta-msg" id="eob-sub-msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById("eob-salary");
+
+  var data = null;
+  var ROLE_LABEL = { ea:"Executive Assistant", cos:"Chief of Staff", ops:"Executive Operations / BizOps" };
+  var els = {
+    role: root.querySelector("#eob-role"),
+    title: root.querySelector("#eob-title"),
+    stage: root.querySelector("#eob-stage"),
+    market: root.querySelector("#eob-market"),
+    titleWrap: root.querySelector("#eob-title-wrap"),
+    stageWrap: root.querySelector("#eob-stage-wrap"),
+    marketWrap: root.querySelector("#eob-market-wrap"),
+    summary: root.querySelector("#eob-summary"),
+    output: root.querySelector("#eob-output"),
+    derive: root.querySelector("#eob-derive")
+  };
+
+  function money(v){
+    return "$" + Math.round(v).toLocaleString("en-US");
+  }
+  function esc(v){
+    return String(v == null ? "" : v)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+  }
+  function cite(label,url,detail){
+    return '<p class="eob-cite">Source: <a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">'
+      + esc(label) + '</a>' + (detail ? " · " + esc(detail) : "") + '</p>';
+  }
+  function confidence(label){
+    return '<span class="eob-confidence">' + esc(label) + '</span>';
+  }
+  function rangeBlock(title,low,mid,high,labels,note,citation,badge){
+    return '<div class="eob-tc"><span class="eob-tc-title">' + esc(title)
+      + (badge ? confidence(badge) : "") + '</span>'
+      + '<div class="eob-range">'
+      + '<div class="eob-rcell"><div class="eob-rcap">' + esc(labels[0]) + '</div><div class="eob-rnum">' + money(low) + '</div></div>'
+      + '<div class="eob-rcell eob-mid"><div class="eob-rcap">' + esc(labels[1]) + '</div><div class="eob-rnum">' + money(mid) + '</div></div>'
+      + '<div class="eob-rcell"><div class="eob-rcap">' + esc(labels[2]) + '</div><div class="eob-rnum">' + money(high) + '</div></div>'
+      + '</div><div class="eob-track"><div class="eob-track-fill"></div></div>'
+      + '<p>' + esc(note) + '</p>' + citation + '</div>';
+  }
+  function sourceCard(title,stat,body,citation,badge){
+    return '<div class="eob-source-card"><h4>' + esc(title) + (badge ? confidence(badge) : "") + '</h4>'
+      + '<div class="eob-stat">' + esc(stat) + '</div><p>' + esc(body) + '</p>' + citation + '</div>';
+  }
+
+  function renderEA(){
+    var ea = data.executiveAssistant;
+    var titleKey = els.title.value;
+    var marketKey = els.market.value;
+    var titleLabel = els.title.options[els.title.selectedIndex].text;
+    els.summary.textContent = titleLabel + (marketKey === "national" ? ", national comparisons" : ", " + ea.geography[marketKey].label);
+    var html = "";
+
+    if (titleKey === "ea" && marketKey !== "national"){
+      var geo = ea.geography[marketKey];
+      html += rangeBlock(
+        geo.label + " executive-support market range",
+        geo.cSuiteLow,geo.cSuiteMedian,geo.cSuiteHigh,
+        ["Published low","Market median","Published high"],
+        "Market cell size is not disclosed, so use this as a directional incumbent comparison rather than a precise local percentile band.",
+        cite(ea.cSuiteNational.source,ea.cSuiteNational.sourceUrl,"self-reported base; geographic n not disclosed"),
+        "Limited local sample detail"
+      );
+      html += '<div class="eob-source-grid">'
+        + sourceCard("Independent city cross-check",money(geo.independentMean),"All-administrative-professional city mean, not an EA-only median.",cite(ea.independentNational.source,ea.independentNational.sourceUrl,"city cell n not disclosed"),"Context only")
+        + sourceCard("Premium active postings",money(geo.premiumMedian),"Posted midpoint P25 " + money(geo.premiumP25) + "; P75 " + money(geo.premiumP75) + ".",cite(ea.premium.source,ea.premium.sourceUrl,"n=" + geo.premiumSample + "; $100k midpoint floor"),"Moderate confidence")
+        + '</div>';
+    } else if (titleKey === "ea"){
+      html += rangeBlock(
+        "Executive-support incumbent base",
+        ea.cSuiteNational.p25,ea.cSuiteNational.median,ea.cSuiteNational.p75,
+        ["P25","Median","P75"],
+        "The middle 50% of a specialized executive-support network. Salary-band midpoints are used when exact pay was not supplied.",
+        cite(ea.cSuiteNational.source,ea.cSuiteNational.sourceUrl,"n≈" + ea.cSuiteNational.sample + " EAs; self-reported base"),
+        "Moderate confidence"
+      );
+      html += '<div class="eob-source-grid">'
+        + sourceCard("Broad employer market",money(ea.bls.medianAnnualized),"Annualized occupation median; employer-reported and not startup-specific.",cite(ea.bls.source,ea.bls.sourceUrl,ea.bls.measure),"Broad baseline")
+        + sourceCard("Projected starting pay",money(ea.robertHalfStarting.ea.low) + " - " + money(ea.robertHalfStarting.ea.high),"National EA low, midpoint " + money(ea.robertHalfStarting.ea.mid) + ", and high starting pay.",cite(ea.robertHalfStarting.source,ea.robertHalfStarting.sourceUrl,ea.robertHalfStarting.measure),"Starting pay")
+        + sourceCard("Independent incumbent survey",money(ea.titleMeans.ea.meanBase),"EA mean base. The all-admin national median is " + money(ea.independentNational.allAdminMedian) + ".",cite(ea.independentNational.source,ea.independentNational.sourceUrl,"n=" + ea.independentNational.sample + " overall; EA title n not disclosed"),"Contextual mean")
+        + sourceCard("Premium active postings",money(ea.premium.median),"Posted midpoint P25 " + money(ea.premium.p25) + "; P75 " + money(ea.premium.p75) + ".",cite(ea.premium.source,ea.premium.sourceUrl,"n=" + ea.premium.sample + "; $100k midpoint floor"),"Moderate confidence")
+        + '</div>';
+    } else if (titleKey === "eapa"){
+      html += rangeBlock(
+        "EA / PA hybrid incumbent base",
+        ea.cSuiteHybrid.p25,ea.cSuiteHybrid.median,ea.cSuiteHybrid.p75,
+        ["P25","Median","P75"],
+        "Useful title context, but the national title sample is small and should not be split further by location.",
+        cite(ea.cSuiteHybrid.source,ea.cSuiteHybrid.sourceUrl,"n≈" + ea.cSuiteHybrid.sample + "; self-reported base"),
+        "Limited sample"
+      );
+      html += '<div class="eob-source-grid">'
+        + sourceCard("Standard EA incumbent band",money(ea.cSuiteNational.median),"Standard EA median; P25 " + money(ea.cSuiteNational.p25) + " and P75 " + money(ea.cSuiteNational.p75) + ".",cite(ea.cSuiteNational.source,ea.cSuiteNational.sourceUrl,"n≈" + ea.cSuiteNational.sample),"Comparison")
+        + sourceCard("Premium EA postings",money(ea.premium.median),"All EA postings, not an EA/PA-only cell.",cite(ea.premium.source,ea.premium.sourceUrl,"n=" + ea.premium.sample + "; $100k midpoint floor"),"Context only")
+        + '</div>';
+    } else {
+      var t = ea.titleMeans[titleKey];
+      html += '<div class="eob-tc"><span class="eob-tc-title">' + esc(t.label) + confidence("Contextual mean") + '</span>'
+        + '<div class="eob-source-grid">'
+        + sourceCard("Mean base",money(t.meanBase),"Title-specific self-reported mean; no title median or cell size is published.","","")
+        + sourceCard("Mean including bonus",money(t.meanWithBonus),"Descriptive total including bonus; bonus receipt and payout vary.","","")
+        + '</div>'
+        + cite(ea.independentNational.source,ea.independentNational.sourceUrl,"n=" + ea.independentNational.sample + " overall; title cell n not disclosed")
+        + '</div>';
+      html += '<div class="eob-source-grid">';
+      if (titleKey === "senior_ea"){
+        html += sourceCard("Senior EA starting pay",money(ea.robertHalfStarting.senior_ea.low) + " - " + money(ea.robertHalfStarting.senior_ea.high),"Projected national starting range; midpoint " + money(ea.robertHalfStarting.senior_ea.mid) + ".",cite(ea.robertHalfStarting.source,ea.robertHalfStarting.sourceUrl,ea.robertHalfStarting.measure),"Starting pay");
+      }
+      html += sourceCard("Standard EA incumbent band",money(ea.cSuiteNational.median),"P25 " + money(ea.cSuiteNational.p25) + "; P75 " + money(ea.cSuiteNational.p75) + ".",cite(ea.cSuiteNational.source,ea.cSuiteNational.sourceUrl,"n≈" + ea.cSuiteNational.sample),"Role context")
+        + sourceCard("Premium EA postings",money(ea.premium.median),"All EA postings; seniority is not complete enough for a title-specific cut.",cite(ea.premium.source,ea.premium.sourceUrl,"n=" + ea.premium.sample + "; $100k midpoint floor"),"Context only")
+        + '</div>';
+      if (marketKey !== "national"){
+        html += '<div class="eob-notice">No defensible ' + esc(t.label) + ' by city cell is available. The tool is showing national title context and has not applied a location multiplier.</div>';
+      }
+    }
+
+    html += '<div class="eob-notice">Bonus and equity are not assumed. In C-Suite Assistants, 52% reported discretionary bonus, 16% guaranteed bonus, and 17% equity/options. The independent survey reported equity/options for 23.4%. See the linked reports before applying these rates to a specific offer.</div>';
+    els.output.innerHTML = html;
+  }
+
+  function renderCoS(){
+    var cos = data.chiefOfStaff;
+    var stage = els.stage.value;
+    var stageLabel = cos.stageLabels[stage];
+    var median = cos.stageMedians[stage];
+    els.summary.textContent = "Chief of Staff, " + stageLabel;
+    els.output.innerHTML =
+      '<div class="eob-tc"><span class="eob-tc-title">Observed company-stage median ' + confidence("Primary benchmark") + '</span>'
+      + '<div class="eob-stat">' + money(median) + '</div>'
+      + '<p>Self-reported median base for the selected company stage. This is not an estimated range and no experience or location multiplier has been applied.</p>'
+      + cite(cos.stageSource.source,cos.stageSource.sourceUrl,"n=" + cos.stageSource.sample + " overall; stage cell n not published") + '</div>'
+      + '<div class="eob-source-grid">'
+      + sourceCard("Overall incumbent cross-check",money(cos.networkCrosscheck.median),"Overall median; published mean " + money(cos.networkCrosscheck.mean) + ".",cite(cos.networkCrosscheck.source,cos.networkCrosscheck.sourceUrl,"public sample size not disclosed"),"Context only")
+      + sourceCard("Premium active postings",money(cos.premium.median),"Posted midpoint P25 " + money(cos.premium.p25) + "; P75 " + money(cos.premium.p75) + ".",cite(cos.premium.source,cos.premium.sourceUrl,"n=" + cos.premium.sample + "; $100k midpoint floor"),"Moderate confidence")
+      + sourceCard("CoS versus BizOps","About 15% ±5%","Pave finds a same-level CoS salary premium over BizOps. This is a relationship, not a stage-specific salary band.",cite(data.executiveOperations.paveContext.source,data.executiveOperations.paveContext.sourceUrl,data.executiveOperations.paveContext.coverage),"Employer records")
+      + sourceCard("Bonus and equity incidence","56% / 54%","In a small mixed-geography CoS survey, 56% received bonus and 54% held equity. Do not treat either as guaranteed.",cite(cos.bonusContext.source,cos.bonusContext.sourceUrl,"n=" + cos.bonusContext.sample),"Context only")
+      + '</div>';
+  }
+
+  function renderOps(){
+    var ops = data.executiveOperations;
+    var bls = data.executiveAssistant.bls;
+    els.summary.textContent = "Executive Operations / BizOps";
+    var proxyText = ops.blsProxies.map(function(p){ return p.label + ": " + money(p.medianAnnualized); }).join(" · ");
+    els.output.innerHTML =
+      rangeBlock(
+        "Premium active opportunity market",
+        ops.premium.p25,ops.premium.median,ops.premium.p75,
+        ["P25","Median","P75"],
+        "Posted salary midpoints from active roles. Title ambiguity and the $100k midpoint floor mean this is not a national occupation median.",
+        cite(ops.premium.source,ops.premium.sourceUrl,"n=" + ops.premium.sample + "; posted pay"),
+        "Moderate confidence"
+      )
+      + '<div class="eob-source-grid">'
+      + sourceCard("Broad occupation proxies","$102k - $114k",proxyText + ". These occupations are context, not direct equivalents.",cite("BLS May 2025 OEWS",bls.sourceUrl,"employer-reported wages"),"Proxy only")
+      + sourceCard("CoS versus BizOps relationship","About 15% ±5%",ops.paveContext.label + ". Do not convert this into a universal role multiplier.",cite(ops.paveContext.source,ops.paveContext.sourceUrl,ops.paveContext.coverage),"Employer records")
+      + '</div>'
+      + '<div class="eob-notice">There is no clean national Executive Operations occupation series. Level, scope, and title normalization are more reliable than the word operations alone.</div>';
+  }
+
+  function updateControls(){
+    var role = els.role.value;
+    els.titleWrap.classList.toggle("eob-hidden",role !== "ea");
+    els.marketWrap.classList.toggle("eob-hidden",role !== "ea");
+    els.stageWrap.classList.toggle("eob-hidden",role !== "cos");
+  }
+  function render(){
+    updateControls();
+    if (!data) return;
+    if (els.role.value === "ea") renderEA();
+    else if (els.role.value === "cos") renderCoS();
+    else renderOps();
+    setTimeout(postHeight,60);
+  }
+
+  els.role.addEventListener("change",render);
+  els.title.addEventListener("change",render);
+  els.stage.addEventListener("change",render);
+  els.market.addEventListener("change",render);
+
+  fetch("compensation-data.json",{cache:"no-store"})
+    .then(function(response){
+      if (!response.ok) throw new Error("Data request failed");
+      return response.json();
+    })
+    .then(function(payload){
+      data = payload;
+      els.derive.textContent = "Data version: " + data.updatedLabel + " · USD annual base unless labeled otherwise";
+      render();
+    })
+    .catch(function(){
+      els.output.innerHTML = '<div class="eob-notice"><strong>Benchmark data is temporarily unavailable.</strong> Refresh the page or use the linked source reports below.</div>';
+      els.derive.textContent = "Data file unavailable";
+      postHeight();
+    });
+  updateControls();
+
+  /* ======================================================================
+     Auto-resize: report height to the parent so the iframe can size itself.
+     (Pattern for embedding via iframe. Host page listens for the message.)
+     ====================================================================== */
+  function postHeight(){
+    var h = root.scrollHeight;
+    if (window.parent && window.parent !== window){
+      window.parent.postMessage({ type: "eob-salary-height", height: h }, "*");
+    }
+  }
+  if (window.ResizeObserver){
+    new ResizeObserver(postHeight).observe(root);
+  }
+  window.addEventListener("load", postHeight);
+  window.addEventListener("resize", postHeight);
+  root.addEventListener("change", function(){ setTimeout(postHeight, 60); });
+
+  var subForm = root.querySelector("#eob-subscribe");
+  var subMsg = root.querySelector("#eob-sub-msg");
+  if (subForm) {
+    var frame = document.createElement("iframe");
+    frame.name = "eob-ml-frame";
+    frame.style.display = "none";
+    frame.setAttribute("aria-hidden", "true");
+    root.appendChild(frame);
+    subForm.addEventListener("submit", function(){
+      var btn = subForm.querySelector("button");
+      if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+      setTimeout(function(){
+        if (subMsg) subMsg.textContent = "You are in. Check your inbox for the next note.";
+        subForm.reset();
+        if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; }
+        postHeight();
+      }, 900);
+    });
+  }
+})();
+</script>

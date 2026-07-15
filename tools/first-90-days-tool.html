@@ -1,0 +1,563 @@
+<!--
+  The Exec Ops Brief - First 90 Days interactive planning tool
+  Self-contained: inline scoped CSS + JS under #eob-first90. Google Fonts link only, inline SVG only.
+  Drop into a Squarespace code block or embed via iframe. Auto-resizes via postMessage.
+  Design tokens: Spectral (headings) + Public Sans (body) + IBM Plex Mono (labels/data).
+  Colors: paper #F3F0E9, ink #1B1712, navy #1C2C3A, oxblood #7A2129, muted #6B6255, line #D8D0BF.
+  No em-dashes, no emojis in copy. No alert/confirm/prompt dialogs.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div id="eob-first90">
+<style>
+  #eob-first90{
+    --paper:#F3F0E9; --ink:#1B1712; --navy:#1C2C3A; --oxblood:#7A2129; --oxblood-deep:#631a20;
+    --muted:#6B6255; --line:#D8D0BF; --white:#ffffff;
+    --paper-deep:#EAE6DB; --oxblood-tint:#f3e2e0;
+    --radius:14px; --radius-sm:9px;
+    --shadow:0 1px 2px rgba(27,23,18,.05), 0 10px 30px rgba(27,23,18,.06);
+    --shadow-lift:0 2px 6px rgba(27,23,18,.08), 0 24px 48px rgba(27,23,18,.12);
+    font-family:'Public Sans',system-ui,-apple-system,sans-serif;
+    color:var(--navy); line-height:1.62; -webkit-font-smoothing:antialiased;
+    max-width:900px; margin:0 auto; padding:0 4px; box-sizing:border-box;
+  }
+  #eob-first90 *{box-sizing:border-box}
+  #eob-first90 h1,#eob-first90 h2,#eob-first90 h3,#eob-first90 h4{
+    font-family:'Spectral',Georgia,serif;font-weight:600;line-height:1.16;color:var(--ink);letter-spacing:-.01em;margin:0;
+  }
+  #eob-first90 .eob-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oxblood);
+  }
+  #eob-first90 p{margin:0}
+
+  /* Header */
+  #eob-first90 .eob-head{margin-bottom:1.4rem}
+  #eob-first90 .eob-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem);margin:.5rem 0 .55rem}
+  #eob-first90 .eob-head p{font-size:1.04rem;color:var(--muted);max-width:44rem}
+
+  /* Sticky progress bar */
+  #eob-first90 .eob-progress{
+    position:sticky;top:0;z-index:5;background:var(--white);border:1px solid var(--line);
+    border-radius:var(--radius);padding:1rem 1.2rem;box-shadow:var(--shadow);margin-bottom:1.4rem;
+  }
+  #eob-first90 .eob-progress-top{
+    display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.6rem;
+  }
+  #eob-first90 .eob-progress-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  }
+  #eob-first90 .eob-progress-count{font-family:'Spectral',serif;font-size:1.15rem;font-weight:600;color:var(--ink)}
+  #eob-first90 .eob-progress-count b{color:var(--oxblood)}
+  #eob-first90 .eob-progress-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+  #eob-first90 .eob-track{height:8px;background:var(--paper-deep);border-radius:100px;overflow:hidden}
+  #eob-first90 .eob-fill{height:100%;width:0;background:var(--oxblood);border-radius:100px;transition:width .35s ease}
+  #eob-first90 .eob-btn{
+    font-family:'Public Sans',sans-serif;font-weight:600;font-size:.82rem;padding:.5rem .95rem;
+    border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;border:1px solid var(--line);
+    background:transparent;color:var(--muted);
+  }
+  #eob-first90 .eob-btn:hover{border-color:var(--ink);color:var(--ink)}
+  #eob-first90 .eob-btn-primary{background:var(--oxblood);color:#fff;border-color:var(--oxblood)}
+  #eob-first90 .eob-btn-primary:hover{background:var(--oxblood-deep);border-color:var(--oxblood-deep);color:#fff}
+
+  /* Cards / phases */
+  #eob-first90 .eob-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.6rem 1.7rem;box-shadow:var(--shadow);margin-bottom:1.4rem;
+  }
+  #eob-first90 .eob-phase-head{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem}
+  #eob-first90 .eob-phase-num{
+    flex:none;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.78rem;letter-spacing:.06em;
+    color:#fff;background:var(--navy);border-radius:100px;padding:.35rem .8rem;white-space:nowrap;margin-top:.2rem;
+  }
+  #eob-first90 .eob-phase-head h3{font-size:1.5rem;margin-bottom:.15rem}
+  #eob-first90 .eob-phase-head .eob-phase-sub{color:var(--muted);font-size:.95rem}
+  #eob-first90 .eob-goal{
+    background:var(--paper);border-left:3px solid var(--oxblood);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+    padding:.8rem 1rem;margin-bottom:1.2rem;font-size:.96rem;color:var(--ink);
+  }
+  #eob-first90 .eob-goal b{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--oxblood);display:block;margin-bottom:.25rem;font-weight:600}
+
+  #eob-first90 .eob-block{margin-bottom:1.3rem}
+  #eob-first90 .eob-block:last-child{margin-bottom:0}
+  #eob-first90 .eob-block-title{
+    font-family:'IBM Plex Mono',monospace;font-size:.74rem;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--navy);margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:1px solid var(--line);
+  }
+
+  /* Checkable items */
+  #eob-first90 .eob-item{
+    display:flex;align-items:flex-start;gap:.7rem;padding:.5rem .1rem;cursor:pointer;
+    border-radius:var(--radius-sm);transition:background .12s;
+  }
+  #eob-first90 .eob-item:hover{background:var(--paper)}
+  #eob-first90 .eob-item input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+  #eob-first90 .eob-box{
+    flex:none;width:20px;height:20px;margin-top:.1rem;border:1.5px solid var(--line);border-radius:6px;
+    background:var(--white);display:flex;align-items:center;justify-content:center;transition:all .15s;
+  }
+  #eob-first90 .eob-box svg{width:12px;height:12px;opacity:0;transform:scale(.6);transition:all .15s}
+  #eob-first90 .eob-item input:checked + .eob-box{background:var(--oxblood);border-color:var(--oxblood)}
+  #eob-first90 .eob-item input:checked + .eob-box svg{opacity:1;transform:scale(1)}
+  #eob-first90 .eob-item input:focus-visible + .eob-box{outline:2px solid var(--oxblood);outline-offset:2px}
+  #eob-first90 .eob-item-text{font-size:.96rem;color:var(--ink)}
+  #eob-first90 .eob-item input:checked ~ .eob-item-text{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+  #eob-first90 .eob-week{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.8rem;color:var(--oxblood);margin-right:.15rem}
+
+  /* Fill-in fields */
+  #eob-first90 .eob-fill-field{margin:.9rem 0}
+  #eob-first90 .eob-fill-field label{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;
+  }
+  #eob-first90 .eob-fill-field textarea,
+  #eob-first90 .eob-fill-field input{
+    width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--paper);
+    padding:.65rem .85rem;font-family:'Public Sans',sans-serif;font-size:.95rem;color:var(--ink);resize:vertical;
+  }
+  #eob-first90 .eob-fill-field textarea:focus,
+  #eob-first90 .eob-fill-field input:focus{outline:none;border-color:var(--oxblood);background:var(--white)}
+
+  /* Reference blocks (non-checkable prompts / notes) */
+  #eob-first90 .eob-ref{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);padding:1rem 1.15rem}
+  #eob-first90 .eob-ref p{font-size:.92rem;color:var(--muted);margin-bottom:.6rem}
+  #eob-first90 .eob-ref ol,#eob-first90 .eob-ref ul{margin:0;padding-left:1.15rem}
+  #eob-first90 .eob-ref li{font-size:.94rem;color:var(--ink);margin-bottom:.4rem}
+  #eob-first90 .eob-ref li:last-child{margin-bottom:0}
+  #eob-first90 .eob-note{font-size:.85rem;color:var(--muted);font-style:italic;margin-top:.6rem}
+
+  /* Newsletter CTA */
+  #eob-first90 .eob-cta{
+    background:var(--ink);color:#fff;border-radius:var(--radius);padding:2rem 2.2rem;margin-top:.4rem;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-lift);
+  }
+  #eob-first90 .eob-cta:before{
+    content:"";position:absolute;top:-50px;right:-30px;width:180px;height:180px;border-radius:50%;
+    background:radial-gradient(circle,rgba(122,33,41,.42),transparent 70%);pointer-events:none;
+  }
+  #eob-first90 .eob-cta .eob-eyebrow{color:var(--oxblood-tint);position:relative}
+  #eob-first90 .eob-cta h3{color:#fff;font-size:1.5rem;margin:.4rem 0;position:relative}
+  #eob-first90 .eob-cta p{color:#c9c2b6;font-size:.95rem;max-width:32rem;position:relative}
+  #eob-first90 .eob-cta form{display:flex;gap:.6rem;min-width:300px;position:relative;flex-wrap:wrap}
+  #eob-first90 .eob-cta input{
+    flex:1;min-width:0;border:1px solid #3a3530;background:#26221d;color:#fff;
+    border-radius:var(--radius-sm);padding:.78rem .95rem;font-family:inherit;font-size:.94rem;
+  }
+  #eob-first90 .eob-cta input::placeholder{color:#8a8177}
+  #eob-first90 .eob-cta input:focus{outline:none;border-color:var(--oxblood)}
+  #eob-first90 .eob-cta button{
+    background:var(--oxblood);color:#fff;font-family:inherit;font-weight:600;font-size:.94rem;
+    border:none;border-radius:var(--radius-sm);padding:.78rem 1.3rem;cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-first90 .eob-cta button:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
+  #eob-first90 .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#8a8177}
+  #eob-first90 .eob-cta-msg{position:relative;margin-top:.55rem;font-size:.86rem;color:var(--oxblood-tint);font-weight:600;min-height:1.1em;width:100%}
+
+  #eob-first90 .eob-foot{text-align:center;color:var(--muted);font-size:.85rem;margin:1.6rem 0 .4rem}
+
+  /* Responsive */
+  @media (max-width:640px){
+    #eob-first90 .eob-card{padding:1.3rem 1.15rem}
+    #eob-first90 .eob-cta{grid-template-columns:1fr;padding:1.6rem}
+    #eob-first90 .eob-cta form{flex-direction:column}
+    #eob-first90 .eob-phase-head{flex-direction:column;gap:.5rem}
+    #eob-first90 .eob-progress-top{gap:.5rem}
+  }
+
+  /* Print stylesheet */
+  @media print{
+    #eob-first90{max-width:none;padding:0;color:#000}
+    #eob-first90 .eob-progress{position:static;box-shadow:none;border:1px solid #999}
+    #eob-first90 .eob-progress-actions{display:none}
+    #eob-first90 .eob-card{box-shadow:none;border:1px solid #999;break-inside:avoid;page-break-inside:avoid;margin-bottom:.8rem}
+    #eob-first90 .eob-cta{display:none}
+    #eob-first90 .eob-item:hover{background:none}
+    #eob-first90 .eob-box{border-color:#333}
+    #eob-first90 .eob-item input:checked + .eob-box{background:#000;border-color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #eob-first90 .eob-fill,#eob-first90 .eob-goal,#eob-first90 .eob-ref{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    #eob-first90 .eob-fill-field textarea,#eob-first90 .eob-fill-field input{border:1px solid #999;background:#fff}
+    #eob-first90 .eob-foot{display:none}
+  }
+</style>
+
+  <div class="eob-head">
+    <span class="eob-eyebrow">The Exec Ops Brief</span>
+    <h2>Your First 90 Days plan.</h2>
+    <p>A working 30/60/90 plan for a new Chief of Staff. Check items off as you go, capture your own context in the fields, and print a clean copy for your week-one review with your principal. Your progress saves in this browser.</p>
+  </div>
+
+  <!-- Live progress indicator -->
+  <div class="eob-progress">
+    <div class="eob-progress-top">
+      <div>
+        <div class="eob-progress-label">Plan progress</div>
+        <div class="eob-progress-count" id="eob-count"><b>0</b> of 0 complete</div>
+      </div>
+      <div class="eob-progress-actions">
+        <button type="button" class="eob-btn" id="eob-reset">Reset plan</button>
+        <button type="button" class="eob-btn eob-btn-primary" id="eob-print">Print my plan</button>
+      </div>
+    </div>
+    <div class="eob-track"><div class="eob-fill" id="eob-fill"></div></div>
+  </div>
+
+  <!-- BEFORE DAY ONE -->
+  <div class="eob-card">
+    <div class="eob-phase-head">
+      <span class="eob-phase-num">PREP</span>
+      <div>
+        <h3>Before day one</h3>
+        <div class="eob-phase-sub">If you have any offer-signed access</div>
+      </div>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Groundwork</div>
+      <label class="eob-item"><input type="checkbox" data-k="p0-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Read the last two quarters of board decks, all-hands decks, and any strategy or planning docs.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p0-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Read the last three months of the leadership team's meeting notes, if they exist.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p0-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Skim the org chart. Note who reports to your principal and who the informal power holders are.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p0-4"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Ask your principal for a list of the 5 to 8 people you should meet first, and why.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p0-5"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Ask your principal: "What does success in this role look like to you at 90 days?" Write the answer down verbatim.</span></label>
+    </div>
+
+    <div class="eob-fill-field">
+      <label for="eob-f-success">Principal's stated 90-day success</label>
+      <textarea id="eob-f-success" data-fk="success" rows="2" placeholder="Write their answer here, in their words."></textarea>
+    </div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="eob-card">
+    <div class="eob-phase-head">
+      <span class="eob-phase-num">DAYS 1-30</span>
+      <div>
+        <h3>Listen, map, and stabilize</h3>
+        <div class="eob-phase-sub">Phase 1</div>
+      </div>
+    </div>
+    <div class="eob-goal"><b>Phase goal</b>Understand how the organization actually operates, build relationships, and take one or two low-risk things off your principal's plate.</div>
+
+    <div class="eob-fill-field">
+      <label for="eob-f-align1">Principal alignment (confirm in week 1)</label>
+      <input type="text" id="eob-f-align1" data-fk="align1" placeholder="What you and your principal agree this phase must produce.">
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Focus by week</div>
+      <label class="eob-item"><input type="checkbox" data-k="p1w-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 1</span>Onboarding logistics, access, and your principal's operating rhythm. Sit in on every meeting you can as an observer.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1w-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 2</span>Listening tour begins. Start the stakeholder interviews.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1w-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 3</span>Continue interviews. Begin mapping the meeting and decision cadence.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1w-4"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 4</span>Synthesize. Deliver your "first 30 days" readout to your principal.</span></label>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Listening tour (aim for 12 to 20 conversations)</div>
+      <div class="eob-ref">
+        <p>Use the same core questions with everyone so you can spot patterns.</p>
+        <ol>
+          <li>What is working well right now that we should protect?</li>
+          <li>What is the most frustrating recurring problem you deal with?</li>
+          <li>Where do decisions get stuck?</li>
+          <li>What does your principal do that helps you most? What gets in your way?</li>
+          <li>If you had my role, what is the first thing you would fix?</li>
+        </ol>
+        <div class="eob-note">Track each conversation in your own doc: person, role, date, top theme, follow-up owed.</div>
+      </div>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Understand your principal</div>
+      <label class="eob-item"><input type="checkbox" data-k="p1u-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">How do they prefer to receive information: written brief, live conversation, or a mix?</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1u-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">What are their non-negotiables and pet peeves?</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1u-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">What are they avoiding right now that they know they should deal with?</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1u-4"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">How do they want to be interrupted in an emergency?</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1u-5"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">What decisions do they want to keep, and what are they willing to delegate to you?</span></label>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Artifacts to produce by day 30</div>
+      <label class="eob-item"><input type="checkbox" data-k="p1a-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">A written stakeholder map with themes and tensions.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1a-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">A current-state map of the leadership meeting and decision cadence.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1a-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">A short "first 30 days" readout: what you heard, three problems worth solving, and what you propose next.</span></label>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Day 30 milestones</div>
+      <label class="eob-item"><input type="checkbox" data-k="p1m-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">You can describe how the top-level operating cadence works without looking it up.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1m-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Your principal has handed you at least one recurring responsibility.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p1m-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">You have named the two or three problems to focus on next, and your principal agrees.</span></label>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="eob-card">
+    <div class="eob-phase-head">
+      <span class="eob-phase-num">DAYS 31-60</span>
+      <div>
+        <h3>Build and prove</h3>
+        <div class="eob-phase-sub">Phase 2</div>
+      </div>
+    </div>
+    <div class="eob-goal"><b>Phase goal</b>Put your first system in place and show early, concrete value. Pick something visible enough to matter and small enough to finish.</div>
+
+    <div class="eob-fill-field">
+      <label for="eob-f-align2">Principal alignment (confirm at day 30)</label>
+      <input type="text" id="eob-f-align2" data-fk="align2" placeholder="What you and your principal agree this phase must produce.">
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Choose your first build (don't attempt all)</div>
+      <label class="eob-item"><input type="checkbox" data-k="p2f-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Fix the leadership team meeting: agenda, pre-reads, decisions captured, follow-ups tracked.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p2f-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Stand up a decision log or single source of truth.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p2f-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Install a weekly priorities brief that flows up to your principal.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p2f-4"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Create a clean, current view of the top company goals and their status.</span></label>
+    </div>
+
+    <div class="eob-fill-field">
+      <label for="eob-f-build">My first build</label>
+      <input type="text" id="eob-f-build" data-fk="build" placeholder="Name the one system you will ship this phase.">
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Weekly focus</div>
+      <label class="eob-item"><input type="checkbox" data-k="p2w-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 5</span>Design the system. Write down what "good" looks like and who it serves.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p2w-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 6</span>Pilot it with the leadership team or your principal. Gather reactions.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p2w-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 7</span>Adjust based on real use. Remove anything that added friction without value.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p2w-4"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 8</span>Deliver your "first 60 days" readout with evidence the system is working.</span></label>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Watch-outs</div>
+      <div class="eob-ref">
+        <ul>
+          <li>Don't reorganize things people rely on without explaining why.</li>
+          <li>Don't confuse activity with progress. One system that sticks beats five that people quietly ignore.</li>
+          <li>Keep your principal informed before the leadership team hears about a change, not after.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Day 60 milestones</div>
+      <label class="eob-item"><input type="checkbox" data-k="p2m-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">One system you built is in active use, not just designed.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p2m-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">At least one leadership team member has told you, unprompted, that something got easier.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p2m-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">You are trusted to run at least one meeting or process on your principal's behalf.</span></label>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="eob-card">
+    <div class="eob-phase-head">
+      <span class="eob-phase-num">DAYS 61-90</span>
+      <div>
+        <h3>Own and scale</h3>
+        <div class="eob-phase-sub">Phase 3</div>
+      </div>
+    </div>
+    <div class="eob-goal"><b>Phase goal</b>Move from proving yourself to running a defined part of the operating system. Set up how the next quarter will work and where you fit.</div>
+
+    <div class="eob-fill-field">
+      <label for="eob-f-align3">Principal alignment (confirm at day 60)</label>
+      <input type="text" id="eob-f-align3" data-fk="align3" placeholder="What you and your principal agree this phase must produce.">
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Focus</div>
+      <label class="eob-item"><input type="checkbox" data-k="p3f-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Formalize your remit. Write down what you own, what you support, and what stays with your principal.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3f-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Extend or harden the system you built so it survives without you babysitting it.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3f-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Take ownership of one full cycle, for example run the quarterly planning prep end to end.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3f-4"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Identify the next two problems worth solving in the coming quarter.</span></label>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Weekly focus</div>
+      <label class="eob-item"><input type="checkbox" data-k="p3w-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 9</span>Draft your remit doc. Review it with your principal.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3w-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 10</span>Lead a full process cycle without your principal in the driver's seat.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3w-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 11</span>Document the systems you built so they are transferable.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3w-4"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text"><span class="eob-week">Week 12</span>Deliver your 90-day readout and propose your priorities for the next quarter.</span></label>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">The 90-day readout (deliver to your principal)</div>
+      <div class="eob-ref">
+        <ol>
+          <li>What I learned about how we operate.</li>
+          <li>What I built and the evidence it is working.</li>
+          <li>Where I now own the work, and where I still support.</li>
+          <li>The two or three things I recommend we tackle next quarter.</li>
+          <li>What I need from you to be more effective.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="eob-block">
+      <div class="eob-block-title">Day 90 milestones</div>
+      <label class="eob-item"><input type="checkbox" data-k="p3m-1"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Your remit is written down and agreed.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3m-2"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">A leadership process runs on you without your principal stepping in.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3m-3"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">Your principal can point to specific things that improved because you were there.</span></label>
+      <label class="eob-item"><input type="checkbox" data-k="p3m-4"><span class="eob-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="eob-item-text">You and your principal agree on the priorities for the next 90 days.</span></label>
+    </div>
+  </div>
+
+  <!-- Newsletter call to action -->
+  <div class="eob-cta">
+    <div>
+      <span class="eob-eyebrow">The Brief</span>
+      <h3>Get the full First 90 Days PDF plus weekly playbooks.</h3>
+      <p>The Brief is the free weekly newsletter from The Exec Ops Brief: a First 90 Days deep-dive guide, operator templates, and one hard-won insight every week.</p>
+      <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
+    </div>
+<form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
+      <input type="email" id="eob-email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+      <button type="submit">Subscribe to The Brief</button>
+      <div class="eob-cta-msg" id="eob-sub-msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <div class="eob-foot">Your checks and notes are saved in this browser only. Print your plan to keep a copy.</div>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById("eob-first90");
+  var STORE_KEY = "eob-first90-v1";
+
+  // localStorage guard: some embeds / private modes disallow it.
+  var mem = {};
+  var LS = (function(){
+    try {
+      var t = "__eob_t__";
+      window.localStorage.setItem(t, "1");
+      window.localStorage.removeItem(t);
+      return window.localStorage;
+    } catch(e){ return null; }
+  })();
+
+  function loadState(){
+    if (LS){
+      try { return JSON.parse(LS.getItem(STORE_KEY) || "{}") || {}; }
+      catch(e){ return {}; }
+    }
+    return mem;
+  }
+  function saveState(state){
+    if (LS){
+      try { LS.setItem(STORE_KEY, JSON.stringify(state)); } catch(e){ mem = state; }
+    } else { mem = state; }
+  }
+
+  var state = loadState();
+  if (!state.checks) state.checks = {};
+  if (!state.fields) state.fields = {};
+
+  var checks = Array.prototype.slice.call(root.querySelectorAll('input[type="checkbox"][data-k]'));
+  var fields = Array.prototype.slice.call(root.querySelectorAll('[data-fk]'));
+
+  var countEl = root.querySelector("#eob-count");
+  var fillEl  = root.querySelector("#eob-fill");
+
+  function updateProgress(){
+    var total = checks.length;
+    var done = 0;
+    checks.forEach(function(c){ if (c.checked) done++; });
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    countEl.innerHTML = "<b>" + done + "</b> of " + total + " complete";
+    fillEl.style.width = pct + "%";
+  }
+
+  // Restore checkbox state
+  checks.forEach(function(c){
+    var k = c.getAttribute("data-k");
+    if (state.checks[k]) c.checked = true;
+    c.addEventListener("change", function(){
+      if (c.checked) state.checks[k] = 1; else delete state.checks[k];
+      saveState(state);
+      updateProgress();
+    });
+  });
+
+  // Restore + persist fill-in fields
+  fields.forEach(function(f){
+    var k = f.getAttribute("data-fk");
+    if (typeof state.fields[k] === "string") f.value = state.fields[k];
+    f.addEventListener("input", function(){
+      state.fields[k] = f.value;
+      saveState(state);
+    });
+  });
+
+  updateProgress();
+
+  // Print. No dialogs.
+  var printBtn = root.querySelector("#eob-print");
+  if (printBtn) printBtn.addEventListener("click", function(){ window.print(); });
+
+  // Reset: clears checks and fields with a two-step confirm on the button itself (no confirm dialog).
+  var resetBtn = root.querySelector("#eob-reset");
+  var resetArmed = false, resetTimer = null;
+  if (resetBtn){
+    resetBtn.addEventListener("click", function(){
+      if (!resetArmed){
+        resetArmed = true;
+        resetBtn.textContent = "Tap again to reset";
+        resetBtn.style.borderColor = "#7A2129";
+        resetBtn.style.color = "#7A2129";
+        resetTimer = setTimeout(function(){
+          resetArmed = false;
+          resetBtn.textContent = "Reset plan";
+          resetBtn.style.borderColor = "";
+          resetBtn.style.color = "";
+        }, 3000);
+        return;
+      }
+      clearTimeout(resetTimer);
+      resetArmed = false;
+      resetBtn.textContent = "Reset plan";
+      resetBtn.style.borderColor = "";
+      resetBtn.style.color = "";
+      state = { checks:{}, fields:{} };
+      saveState(state);
+      checks.forEach(function(c){ c.checked = false; });
+      fields.forEach(function(f){ f.value = ""; });
+      updateProgress();
+    });
+  }
+  // Auto-resize: post height to the parent frame so an iframe embed fits without inner scroll.
+  function postHeight(){
+    var h = root.scrollHeight;
+    try { window.parent.postMessage({ type: "eob-first90-height", height: h }, "*"); } catch(e){}
+  }
+  if (window.ResizeObserver){
+    new ResizeObserver(postHeight).observe(root);
+  } else {
+    window.addEventListener("resize", postHeight);
+  }
+  window.addEventListener("load", postHeight);
+  postHeight();
+
+  var subForm = root.querySelector("#eob-subscribe");
+  var subMsg = root.querySelector("#eob-sub-msg");
+  if (subForm) {
+    var frame = document.createElement("iframe");
+    frame.name = "eob-ml-frame";
+    frame.style.display = "none";
+    frame.setAttribute("aria-hidden", "true");
+    root.appendChild(frame);
+    subForm.addEventListener("submit", function(){
+      var btn = subForm.querySelector("button");
+      if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+      setTimeout(function(){
+        if (subMsg) subMsg.textContent = "You are in. Check your inbox for the next note.";
+        subForm.reset();
+        if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; }
+        postHeight();
+      }, 900);
+    });
+  }
+})();
+</script>

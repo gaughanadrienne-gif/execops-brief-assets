@@ -1,0 +1,742 @@
+<!--
+  The Exec Ops Brief - Offer Evaluator
+  Self-contained: inline scoped CSS + JS under #eob-offer. Drop into a Squarespace
+  code block or embed via iframe. Matches the site design system
+  (Spectral + Public Sans + IBM Plex Mono; Paper/Ink/Navy/Oxblood/Muted/Line).
+  No em-dashes, no emojis in copy. No alert/confirm/prompt dialogs.
+
+  DATA HONESTY NOTE:
+  Benchmarks load from compensation-data.json and retain their source, sample,
+  measure, and snapshot date. Base, guaranteed cash, target cash, equity
+  information readiness, and terms are evaluated separately. Private equity is
+  never added to cash or assigned a pass/fail value grade. All figures are
+  directional. Verify the linked source before you cite or negotiate.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div id="eob-offer">
+<style>
+  #eob-offer{
+    --paper:#F3F0E9; --paper-deep:#EAE5DA; --ink:#1B1712; --navy:#1C2C3A;
+    --oxblood:#7A2129; --oxblood-deep:#63191f; --oxblood-tint:#f0e0e0;
+    --muted:#6B6255; --line:#D8D0BF; --white:#ffffff;
+    --radius:12px; --radius-sm:8px;
+    --shadow:0 1px 2px rgba(27,23,18,.05), 0 10px 28px rgba(27,23,18,.07);
+    --shadow-lift:0 2px 6px rgba(27,23,18,.08), 0 22px 44px rgba(27,23,18,.12);
+    font-family:'Public Sans',system-ui,-apple-system,sans-serif;
+    color:var(--navy); line-height:1.6; -webkit-font-smoothing:antialiased;
+    max-width:960px; margin:0 auto; padding:0 4px; box-sizing:border-box;
+  }
+  #eob-offer *{box-sizing:border-box}
+  #eob-offer h1,#eob-offer h2,#eob-offer h3,#eob-offer h4{
+    font-family:'Spectral',Georgia,serif;font-weight:600;line-height:1.15;color:var(--ink);letter-spacing:-.01em;margin:0;
+  }
+  #eob-offer .eob-eyebrow{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-weight:600;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--oxblood);
+  }
+
+  /* Header */
+  #eob-offer .eob-head{margin-bottom:1.4rem}
+  #eob-offer .eob-head h2{font-size:clamp(1.7rem,3.2vw,2.35rem);margin:.5rem 0 .55rem}
+  #eob-offer .eob-head p{font-size:1.02rem;color:var(--muted);max-width:44rem;margin:0}
+
+  /* Controls card */
+  #eob-offer .eob-controls{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.2rem 1.3rem;box-shadow:var(--shadow);margin-bottom:1.2rem;
+    display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.1rem;
+  }
+  #eob-offer .eob-field{display:flex;flex-direction:column;gap:.4rem;min-width:0}
+  #eob-offer .eob-field label{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  }
+  #eob-offer .eob-field select,
+  #eob-offer .eob-field input[type=text]{
+    width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.64rem .85rem;font-family:inherit;font-size:.94rem;color:var(--ink);background:var(--paper);
+  }
+  #eob-offer .eob-field select{
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='10'%20height='6'%3E%3Cpath%20d='M0%200l5%206%205-6z'%20fill='%237A2129'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .85rem center;padding-right:2.1rem;
+  }
+  #eob-offer .eob-field select:focus,
+  #eob-offer .eob-field input[type=text]:focus{outline:none;border-color:var(--oxblood);background-color:var(--white)}
+  #eob-offer .eob-field input[type=text]:disabled{opacity:.45;cursor:not-allowed}
+  #eob-offer .eob-hidden{display:none!important}
+  #eob-offer .eob-span{grid-column:1 / -1}
+  #eob-offer .eob-subgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+  #eob-offer .eob-field-note{font-size:.76rem;color:var(--muted);line-height:1.4}
+  #eob-offer .eob-inline-check{
+    display:flex;align-items:center;gap:.45rem;font-size:.85rem;color:var(--muted);
+    font-family:'Public Sans',system-ui,sans-serif;text-transform:none;letter-spacing:0;
+    margin-top:.15rem;cursor:pointer;
+  }
+  #eob-offer .eob-inline-check input{accent-color:var(--oxblood);width:15px;height:15px;cursor:pointer;margin:0}
+
+  /* Terms fieldset */
+  #eob-offer .eob-terms{grid-column:1 / -1;border-top:1px solid var(--line);padding-top:1rem}
+  #eob-offer .eob-terms .eob-terms-cap{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+    display:block;margin-bottom:.2rem;
+  }
+  #eob-offer .eob-terms .eob-terms-sub{font-size:.85rem;color:var(--muted);margin:0 0 .7rem}
+  #eob-offer .eob-terms-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem}
+  #eob-offer .eob-term{
+    display:flex;align-items:flex-start;gap:.55rem;cursor:pointer;
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.55rem .7rem;font-size:.88rem;color:var(--navy);
+  }
+  #eob-offer .eob-term input{accent-color:var(--oxblood);width:15px;height:15px;cursor:pointer;margin-top:.2rem;flex:none}
+  #eob-offer .eob-term strong{display:block;font-weight:600;color:var(--ink)}
+  #eob-offer .eob-term span{display:block;font-size:.78rem;color:var(--muted);line-height:1.45}
+
+  /* Evaluate button row */
+  #eob-offer .eob-actions{grid-column:1 / -1;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:1rem}
+  #eob-offer .eob-evaluate{
+    background:var(--oxblood);color:#fff;font-family:inherit;font-weight:600;font-size:.98rem;
+    border:none;border-radius:var(--radius-sm);padding:.8rem 1.6rem;cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-offer .eob-evaluate:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
+  #eob-offer .eob-form-err{font-size:.88rem;color:var(--oxblood);font-weight:600;min-height:1.1em;margin:0}
+
+  /* Result card */
+  #eob-offer .eob-result{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;margin-bottom:1.2rem;display:none;
+  }
+  #eob-offer .eob-result.eob-show{display:block}
+  #eob-offer .eob-result-head{
+    background:var(--navy);color:#fff;padding:1.1rem 1.4rem;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;
+  }
+  #eob-offer .eob-result-head .eob-rlabel{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.12em;
+    text-transform:uppercase;color:#c9b7a0;display:block;margin-bottom:.2rem;
+  }
+  #eob-offer .eob-result-head h3{color:#fff;font-size:1.12rem;font-weight:600}
+  #eob-offer .eob-verdict{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.78rem;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;border-radius:100px;padding:.4rem .95rem;white-space:nowrap;
+  }
+  #eob-offer .eob-verdict.eob-g-strong{background:#e6ead9;color:#33511d}
+  #eob-offer .eob-verdict.eob-g-solid{background:var(--paper);color:var(--navy)}
+  #eob-offer .eob-verdict.eob-g-below{background:var(--oxblood-tint);color:var(--oxblood)}
+  #eob-offer .eob-verdict.eob-g-wait{background:#e4e0d6;color:var(--muted)}
+  #eob-offer .eob-result-body{padding:1.4rem 1.4rem 1.3rem}
+  #eob-offer .eob-overall{font-size:.98rem;color:var(--navy);margin:0 0 1.2rem;max-width:46rem}
+
+  /* Component rows */
+  #eob-offer .eob-comp{border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:.7rem;padding:.85rem 1rem;background:var(--paper)}
+  #eob-offer .eob-comp-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;margin-bottom:.35rem}
+  #eob-offer .eob-comp-name{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.7rem;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
+  }
+  #eob-offer .eob-grade{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.64rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;border-radius:100px;padding:.2rem .65rem;white-space:nowrap;
+  }
+  #eob-offer .eob-grade.eob-g-strong{background:#e6ead9;color:#33511d}
+  #eob-offer .eob-grade.eob-g-solid{background:var(--white);color:var(--navy);border:1px solid var(--line)}
+  #eob-offer .eob-grade.eob-g-below{background:var(--oxblood-tint);color:var(--oxblood)}
+  #eob-offer .eob-grade.eob-g-wait{background:#e4e0d6;color:var(--muted)}
+  #eob-offer .eob-comp p{font-size:.9rem;color:var(--navy);margin:0}
+  #eob-offer .eob-comp .eob-band-line{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.78rem;color:var(--muted);margin:0 0 .3rem;
+  }
+  #eob-offer .eob-comp ul{margin:.4rem 0 0;padding-left:1.1rem}
+  #eob-offer .eob-comp li{font-size:.87rem;color:var(--navy);margin-bottom:.2rem}
+  #eob-offer .eob-cash-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:.45rem 0}
+  #eob-offer .eob-cash-stat{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);padding:.65rem .75rem}
+  #eob-offer .eob-cash-stat span{
+    display:block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.61rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;
+  }
+  #eob-offer .eob-cash-stat strong{font-family:'IBM Plex Mono',ui-monospace,monospace;color:var(--oxblood);font-size:1rem}
+  #eob-offer .eob-cite{font-size:.76rem!important;color:var(--muted)!important;margin-top:.5rem!important}
+  #eob-offer .eob-cite a,#eob-offer .eob-method a{color:var(--oxblood);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  #eob-offer .eob-cite a:hover,#eob-offer .eob-method a:hover{color:var(--oxblood-deep)}
+  #eob-offer .eob-scenarios{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem;margin-top:.55rem}
+  #eob-offer .eob-scenario{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);padding:.6rem .7rem}
+  #eob-offer .eob-scenario span{display:block;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  #eob-offer .eob-scenario strong{font-family:'IBM Plex Mono',ui-monospace,monospace;color:var(--navy)}
+
+  /* Next questions */
+  #eob-offer .eob-questions{
+    background:var(--white);border:1px solid var(--line);border-left:3px solid var(--oxblood);
+    border-radius:var(--radius-sm);padding:.95rem 1.1rem;margin-top:1.1rem;
+  }
+  #eob-offer .eob-questions .eob-q-title{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.68rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--oxblood);display:block;margin-bottom:.45rem;
+  }
+  #eob-offer .eob-questions ol{margin:0;padding-left:1.2rem}
+  #eob-offer .eob-questions li{font-size:.92rem;color:var(--navy);margin-bottom:.45rem}
+  #eob-offer .eob-questions li:last-child{margin-bottom:0}
+
+  /* Sources / methodology */
+  #eob-offer .eob-method{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:1.2rem 1.3rem;margin-bottom:1.2rem;
+  }
+  #eob-offer .eob-method h4{font-size:1.02rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+  #eob-offer .eob-method .eob-badge{
+    display:inline-block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.6rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--oxblood);background:var(--oxblood-tint);
+    border-radius:100px;padding:.18rem .55rem;
+  }
+  #eob-offer .eob-method p{font-size:.9rem;color:var(--muted);margin:0 0 .6rem}
+  #eob-offer .eob-method p:last-child{margin-bottom:0}
+  #eob-offer .eob-sources{list-style:none;padding:0;margin:.2rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem}
+  #eob-offer .eob-sources li{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.72rem;color:var(--navy);
+    background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:.28rem .7rem;
+  }
+  #eob-offer .eob-caveat{margin-top:.9rem;padding-top:.85rem;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+  #eob-offer .eob-caveat strong{color:var(--oxblood);font-weight:600}
+
+  /* Newsletter CTA */
+  #eob-offer .eob-cta{
+    background:var(--ink);color:#fff;border-radius:var(--radius);padding:2rem 2.1rem;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-lift);
+  }
+  #eob-offer .eob-cta:before{
+    content:"";position:absolute;top:-50px;right:-30px;width:180px;height:180px;border-radius:50%;
+    background:radial-gradient(circle,rgba(122,33,41,.4),transparent 70%);pointer-events:none;
+  }
+  #eob-offer .eob-cta .eob-eyebrow{color:#d69a8f;position:relative}
+  #eob-offer .eob-cta h3{color:#fff;font-size:1.5rem;margin:.4rem 0;position:relative}
+  #eob-offer .eob-cta p{color:#c2b6a6;font-size:.94rem;max-width:32rem;position:relative;margin:0}
+  #eob-offer .eob-cta form{display:flex;gap:.6rem;min-width:300px;position:relative}
+  #eob-offer .eob-cta input{
+    flex:1;min-width:0;border:1px solid #3a322a;background:#241f19;color:#fff;
+    border-radius:var(--radius-sm);padding:.78rem .95rem;font-family:inherit;font-size:.94rem;
+  }
+  #eob-offer .eob-cta input::placeholder{color:#8a7f70}
+  #eob-offer .eob-cta input:focus{outline:none;border-color:var(--oxblood)}
+  #eob-offer .eob-cta button{
+    background:var(--oxblood);color:#fff;font-family:inherit;font-weight:600;font-size:.94rem;
+    border:none;border-radius:var(--radius-sm);padding:.78rem 1.3rem;cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-offer .eob-cta button:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
+  #eob-offer .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#8a7f70}
+  #eob-offer .eob-cta-msg{position:relative;margin-top:.55rem;font-size:.86rem;color:#d69a8f;font-weight:600;min-height:1.1em}
+
+  /* Responsive */
+  @media (max-width:720px){
+    #eob-offer .eob-controls{grid-template-columns:1fr}
+    #eob-offer .eob-subgrid,#eob-offer .eob-cash-grid,#eob-offer .eob-scenarios{grid-template-columns:1fr}
+    #eob-offer .eob-span{grid-column:auto}
+    #eob-offer .eob-terms-grid{grid-template-columns:1fr}
+    #eob-offer .eob-cta{grid-template-columns:1fr}
+    #eob-offer .eob-cta form{flex-direction:column;min-width:0}
+  }
+</style>
+
+  <div class="eob-head">
+    <span class="eob-eyebrow">The Offer Evaluator</span>
+    <h2>Evaluate the offer component by component.</h2>
+    <p>Compare base with a named observed benchmark, separate guaranteed cash from target cash, check whether the equity information is complete enough to evaluate, and identify the terms still open.</p>
+  </div>
+
+  <div class="eob-controls">
+    <div class="eob-field">
+      <label for="eob-oe-role">Role</label>
+      <select id="eob-oe-role">
+        <option value="cos" selected>Chief of Staff</option>
+        <option value="ea">Executive Assistant</option>
+        <option value="senior_ea">Senior Executive Assistant</option>
+        <option value="ops">Executive Operations / BizOps</option>
+      </select>
+    </div>
+    <div class="eob-field" id="eob-oe-stage-wrap">
+      <label for="eob-oe-stage">Company stage</label>
+      <select id="eob-oe-stage">
+        <option value="bootstrapped">Bootstrapped</option>
+        <option value="seed">Seed</option>
+        <option value="a" selected>Series A</option>
+        <option value="b">Series B</option>
+        <option value="c">Series C</option>
+        <option value="d">Series D</option>
+        <option value="late">Late-stage private</option>
+        <option value="public">Public</option>
+      </select>
+    </div>
+    <div class="eob-field eob-hidden" id="eob-oe-location-wrap">
+      <label for="eob-oe-tier">Location</label>
+      <select id="eob-oe-tier">
+        <option value="national" selected>National</option>
+        <option value="sf">SF Bay Area</option>
+        <option value="ny">New York City</option>
+      </select>
+    </div>
+    <div class="eob-field">
+      <label for="eob-oe-base">Base salary (annual, USD)</label>
+      <input type="text" id="eob-oe-base" inputmode="numeric" autocomplete="off" placeholder="165,000">
+    </div>
+    <div class="eob-field">
+      <label for="eob-oe-guaranteed">Guaranteed annual bonus or minimum (USD)</label>
+      <input type="text" id="eob-oe-guaranteed" inputmode="numeric" autocomplete="off" placeholder="0">
+    </div>
+    <div class="eob-field">
+      <label for="eob-oe-bonus">Target annual bonus (% of base)</label>
+      <input type="text" id="eob-oe-bonus" inputmode="numeric" autocomplete="off" placeholder="15">
+      <span class="eob-field-note">Enter 0 when there is no target bonus. The guaranteed amount is treated as the minimum, not added twice.</span>
+    </div>
+    <div class="eob-field">
+      <label for="eob-oe-signon">Sign-on bonus (USD)</label>
+      <input type="text" id="eob-oe-signon" inputmode="numeric" autocomplete="off" placeholder="0">
+    </div>
+    <div class="eob-field">
+      <label for="eob-oe-equity">Equity type</label>
+      <select id="eob-oe-equity">
+        <option value="none">No equity in the offer</option>
+        <option value="options" selected>Private-company options</option>
+        <option value="rsu">Public-company RSUs</option>
+        <option value="other">Other or not specified</option>
+      </select>
+    </div>
+
+    <div class="eob-terms eob-span" id="eob-oe-equity-fields">
+      <span class="eob-terms-cap">Equity details</span>
+      <p class="eob-terms-sub">Enter what you have. Blank fields will become questions to ask, not assumptions.</p>
+      <div class="eob-subgrid">
+        <div class="eob-field"><label for="eob-oe-shares">Grant shares / options</label><input type="text" id="eob-oe-shares" inputmode="numeric" placeholder="25,000"></div>
+        <div class="eob-field"><label for="eob-oe-fdshares">Fully diluted shares</label><input type="text" id="eob-oe-fdshares" inputmode="numeric" placeholder="20,000,000"></div>
+        <div class="eob-field"><label for="eob-oe-ownership">Ownership percentage</label><input type="text" id="eob-oe-ownership" inputmode="decimal" placeholder="0.125"></div>
+        <div class="eob-field"><label for="eob-oe-strike">Strike price per share</label><input type="text" id="eob-oe-strike" inputmode="decimal" placeholder="1.25"></div>
+        <div class="eob-field"><label for="eob-oe-409a">Latest 409A / common value</label><input type="text" id="eob-oe-409a" inputmode="decimal" placeholder="2.10"></div>
+        <div class="eob-field"><label for="eob-oe-preferred">Latest preferred price</label><input type="text" id="eob-oe-preferred" inputmode="decimal" placeholder="4.50"></div>
+        <div class="eob-field"><label for="eob-oe-grantvalue">Stated RSU / grant value (USD)</label><input type="text" id="eob-oe-grantvalue" inputmode="numeric" placeholder="75,000"></div>
+      </div>
+    </div>
+
+    <div class="eob-terms">
+      <span class="eob-terms-cap">The terms people forget</span>
+      <p class="eob-terms-sub">Check each one the offer (or the company, in writing) has already addressed.</p>
+      <div class="eob-terms-grid">
+        <label class="eob-term"><input type="checkbox" id="eob-oe-t-severance"><span><strong>Severance</strong><span>The most overlooked protection in a role tied so closely to one person.</span></span></label>
+        <label class="eob-term"><input type="checkbox" id="eob-oe-t-vesting"><span><strong>Vesting schedule and cliff</strong><span>When the grant becomes yours and what happens during year one.</span></span></label>
+        <label class="eob-term"><input type="checkbox" id="eob-oe-t-review"><span><strong>Refresh grants and review timing</strong><span>So a strong first year is recognized.</span></span></label>
+        <label class="eob-term"><input type="checkbox" id="eob-oe-t-title"><span><strong>Title and level clarity</strong><span>These affect your next role as much as this one.</span></span></label>
+        <label class="eob-term"><input type="checkbox" id="eob-oe-t-window"><span><strong>Post-termination exercise window</strong><span>How long you have to buy vested options if you leave.</span></span></label>
+        <label class="eob-term"><input type="checkbox" id="eob-oe-t-change"><span><strong>Change-of-control treatment</strong><span>What happens to vesting if the company is sold or the role disappears.</span></span></label>
+        <label class="eob-term"><input type="checkbox" id="eob-oe-t-benefits"><span><strong>Benefits and flexibility</strong><span>Health, retirement, PTO, work mode, and any agreed flexibility.</span></span></label>
+      </div>
+    </div>
+
+    <div class="eob-actions">
+      <button type="button" class="eob-evaluate" id="eob-oe-go" disabled>Loading compensation data...</button>
+      <p class="eob-form-err" id="eob-oe-err" role="alert" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="eob-result" id="eob-oe-result" aria-live="polite">
+    <div class="eob-result-head">
+      <div>
+        <span class="eob-rlabel">The read on this offer</span>
+        <h3 id="eob-oe-summary">Chief of Staff, Series A</h3>
+      </div>
+      <span class="eob-verdict eob-g-solid" id="eob-oe-verdict">Component readout</span>
+    </div>
+    <div class="eob-result-body">
+      <p class="eob-overall" id="eob-oe-overall"></p>
+
+      <div class="eob-comp">
+        <div class="eob-comp-top">
+          <span class="eob-comp-name">Base salary position</span>
+          <span class="eob-grade" id="eob-oe-g-base">Solid</span>
+        </div>
+        <p class="eob-band-line" id="eob-oe-baseband"></p>
+        <p id="eob-oe-basetext"></p>
+      </div>
+
+      <div class="eob-comp">
+        <div class="eob-comp-top">
+          <span class="eob-comp-name">Guaranteed first-year cash</span>
+          <span class="eob-grade" id="eob-oe-g-guaranteed">Calculated</span>
+        </div>
+        <p id="eob-oe-guaranteedtext"></p>
+      </div>
+
+      <div class="eob-comp">
+        <div class="eob-comp-top">
+          <span class="eob-comp-name">Target annual cash</span>
+          <span class="eob-grade" id="eob-oe-g-target">Calculated</span>
+        </div>
+        <div id="eob-oe-targettext"></div>
+      </div>
+
+      <div class="eob-comp">
+        <div class="eob-comp-top">
+          <span class="eob-comp-name">Equity information readiness</span>
+          <span class="eob-grade" id="eob-oe-g-equity">Missing information</span>
+        </div>
+        <p id="eob-oe-equitytext"></p>
+        <ul id="eob-oe-equitylist"></ul>
+        <div id="eob-oe-scenarios"></div>
+      </div>
+
+      <div class="eob-comp">
+        <div class="eob-comp-top">
+          <span class="eob-comp-name">The terms people forget</span>
+          <span class="eob-grade" id="eob-oe-g-terms">Solid</span>
+        </div>
+        <p id="eob-oe-termstext"></p>
+        <ul id="eob-oe-termslist"></ul>
+      </div>
+
+      <div class="eob-questions">
+        <span class="eob-q-title">Ask these next</span>
+        <ol id="eob-oe-questions"></ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="eob-method">
+    <h4>How this is evaluated <span class="eob-badge">Components, not a composite grade</span></h4>
+    <p>Base is compared with an explicitly named observed band, median, or mean. Guaranteed cash and target cash are calculated separately. Equity receives an information-readiness status, not a value grade, and hypothetical private-option scenarios are kept outside cash compensation. No role, remote-work, or location multiplier is used.</p>
+    <p id="eob-oe-data-version">Compensation data version: loading...</p>
+    <p style="margin-bottom:.35rem">Linked sources used by this tool:</p>
+    <ul class="eob-sources">
+      <li><a href="https://askachiefofstaff.substack.com/p/issue-84-how-much-does-a-chief-of" target="_blank" rel="noopener noreferrer">Ask a Chief of Staff 2025</a></li>
+      <li><a href="https://csuiteassistants.com/2026-salary-report/" target="_blank" rel="noopener noreferrer">C-Suite Assistants 2026</a></li>
+      <li><a href="https://www.easalarysurvey.com/" target="_blank" rel="noopener noreferrer">2025 U.S. Admin Professionals</a></li>
+      <li><a href="https://www.roberthalf.com/us/en/job-details/executive-assistant" target="_blank" rel="noopener noreferrer">Robert Half 2026</a></li>
+      <li><a href="https://www.chiefofstaffcollective.org/2025-cosc-salary-survey" target="_blank" rel="noopener noreferrer">CoS Collective 2025</a></li>
+      <li><a href="https://www.pave.com/blog-posts/chief-of-staff-compensation" target="_blank" rel="noopener noreferrer">Pave 2025</a></li>
+      <li><a href="https://carta.com/learn/equity/startup-equity-calculator/" target="_blank" rel="noopener noreferrer">Carta equity guide</a></li>
+      <li><a href="https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json" target="_blank" rel="noopener noreferrer">Exec Ops Brief active roles</a></li>
+    </ul>
+    <div class="eob-caveat">
+      <strong>Read before you decide.</strong> Posted salaries, incumbent surveys, employer wages, and starting-pay projections measure different markets. Private equity can be worth zero and is affected by vesting, dilution, taxes, preferences, exercise cost, and liquidity. Scenario math is illustrative, ignores taxes and future dilution, and is not financial, tax, or legal advice.
+    </div>
+  </div>
+
+  <!-- Newsletter call to action -->
+  <div class="eob-cta">
+    <div>
+      <span class="eob-eyebrow">The Brief</span>
+      <h3>Get the offer-evaluation worksheet.</h3>
+      <p>The Chief of Staff Interview Prep Checklist includes a worksheet for scoring base, bonus, equity, and scope side by side, plus curated $100k-plus exec-ops roles delivered weekly in The Brief.</p>
+      <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
+    </div>
+<!-- PLACEHOLDER: this reuses the shared tools form id 192281502704207669 (same form as
+     salary-benchmarker, first-90-days, and readiness-quiz; MailerLite account 2493859,
+     subscribes to The Brief). If a dedicated Offer Evaluator form is created in
+     MailerLite, replace ONLY the form id segment of the action URL below. -->
+<form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
+      <input type="email" id="eob-email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+      <button type="submit">Subscribe to The Brief</button>
+      <div class="eob-cta-msg" id="eob-sub-msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<script type="text/plain" id="eob-offer-legacy">
+(function(){
+  var root = document.getElementById("eob-offer");
+
+  /* ======================================================================
+     DATA MODEL - drawn from Articles 13, 14, and 33
+     ----------------------------------------------------------------------
+     BAND (in $000s): Chief of Staff base band by company stage, from the
+       Ask a Chief of Staff 2024 report as cited in Article 13.
+       Seed or pre-seed: median near 120, working band 120 to 140.
+       Series B to D and public: median about 190, working band 160 to 200.
+       Series A: interpolated between the two sourced bands (140 to 175),
+       labeled as interpolated in the output.
+     ROLE: Senior Executive Assistant = 0.62 x the Chief of Staff spine,
+       the same scaled estimate the Salary Benchmarker uses, because the
+       sourced survey data covers Chief of Staff only.
+     TIER: tempered from the Glassdoor metro figures cited in Article 13
+       (SF around $330k total, NY around $254k, well above national).
+       Remote roles are increasingly benchmarked to national bands.
+     BONUS: 56% of Chiefs of Staff receive an annual bonus, averaging
+       around 19% of base (Chief of Staff Network 2025, per Article 13).
+     ====================================================================== */
+  var BAND = {
+    seed:  { low:120, high:140, interpolated:false },
+    a:     { low:140, high:175, interpolated:true  },
+    bd:    { low:160, high:200, interpolated:false },
+    public:{ low:160, high:200, interpolated:false }
+  };
+  var ROLE_MULT = { cos:1.00, ea:0.62 };
+  var TIER_MULT = { sfny:1.15, metro:1.00, remote:0.95 };
+  var BONUS_AVG = 19;
+
+  var ROLE_LABEL  = { cos:"Chief of Staff", ea:"Senior Executive Assistant" };
+  var STAGE_LABEL = { seed:"seed or pre-seed", a:"Series A", bd:"Series B to D", public:"public or late stage" };
+  var TIER_LABEL  = { sfny:"SF Bay Area or New York", metro:"other major metro", remote:"a national remote band" };
+
+  var GRADE_LABEL = { strong:"Strong", solid:"Solid", below:"Below band", wait:"Can't evaluate yet" };
+  var GRADE_CLASS = { strong:"eob-g-strong", solid:"eob-g-solid", below:"eob-g-below", wait:"eob-g-wait" };
+
+  var TERMS = [
+    { id:"eob-oe-t-severance", name:"Severance",
+      why:"the single most overlooked protection in a role this dependent on one principal. If your principal leaves, your role can change overnight." },
+    { id:"eob-oe-t-signon", name:"Sign-on bonus",
+      why:"it can bridge a gap when base is capped by internal bands." },
+    { id:"eob-oe-t-review", name:"Refresh grants and review timing",
+      why:"so a strong first year is recognized." },
+    { id:"eob-oe-t-title", name:"Title and level clarity",
+      why:"title and level affect your next role as much as this one." },
+    { id:"eob-oe-t-window", name:"Post-termination exercise window",
+      why:"how long you have to buy your vested options if you leave." }
+  ];
+
+  function $(id){ return root.querySelector("#" + id); }
+  function fmtK(k){ return "$" + Math.round(k) + "k"; }
+  function fmtD(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  function setGrade(el, g){
+    el.textContent = GRADE_LABEL[g];
+    el.className = el.className.replace(/eob-g-\w+/g, "").trim() + " " + GRADE_CLASS[g];
+  }
+  function parseNum(v){
+    var n = parseFloat(String(v).replace(/[^0-9.]/g, ""));
+    return isNaN(n) ? null : n;
+  }
+
+  function evaluate(){
+    var err = $("eob-oe-err");
+    err.textContent = "";
+
+    var role = $("eob-oe-role").value;
+    var stage = $("eob-oe-stage").value;
+    var tier = $("eob-oe-tier").value;
+    var equity = $("eob-oe-equity").value;
+    var noBonus = $("eob-oe-nobonus").checked;
+
+    var base = parseNum($("eob-oe-base").value);
+    if (base === null || base <= 0){
+      err.textContent = "Enter the base salary so there is something to grade.";
+      $("eob-oe-result").className = $("eob-oe-result").className.replace(" eob-show","");
+      return;
+    }
+    if (base < 1000) base = base * 1000; // typed in thousands, e.g. 165
+
+    var bonusPct = noBonus ? 0 : parseNum($("eob-oe-bonus").value);
+    if (!noBonus && bonusPct === null){
+      err.textContent = "Enter the bonus percent, or check \"No bonus in this offer\".";
+      $("eob-oe-result").className = $("eob-oe-result").className.replace(" eob-show","");
+      return;
+    }
+
+    var mult = ROLE_MULT[role] * TIER_MULT[tier];
+    var low = BAND[stage].low * mult, high = BAND[stage].high * mult;
+    var baseK = base / 1000;
+
+    /* ---- Base grade ---- */
+    var gBase, baseText;
+    var bandNote = BAND[stage].interpolated
+      ? " The Series A band is interpolated between the sourced seed and Series B to D bands."
+      : "";
+    var eaNote = (role === "ea")
+      ? " Senior Executive Assistant bands are scaled estimates; the sourced survey data covers Chief of Staff only."
+      : "";
+    if (baseK >= high){
+      gBase = "strong";
+      baseText = "A base of " + fmtD(base) + " sits at or above the top of the band. Stage-appropriate data supports this number." + bandNote + eaNote;
+    } else if (baseK >= low){
+      gBase = "solid";
+      baseText = "A base of " + fmtD(base) + " sits inside the band. Where you land within it should track scope: who you report to, what you own outright, and whether the role carries budget or headcount authority." + bandNote + eaNote;
+    } else {
+      gBase = "below";
+      baseText = "A base of " + fmtD(base) + " sits about " + fmtK(low - baseK) + " below the bottom of the band. That's worth raising, anchored to stage-appropriate data rather than a single headline average." + bandNote + eaNote;
+    }
+
+    /* ---- Bonus grade ---- */
+    var gBonus, bonusText;
+    if (noBonus || bonusPct === 0){
+      gBonus = "below";
+      bonusText = "No bonus in the offer. 56% of Chiefs of Staff now receive an annual bonus, averaging around 19% of base (Chief of Staff Network 2025), so it's fair to ask about. If base is capped, bonus and sign-on are common places to find flexibility.";
+    } else if (bonusPct >= BONUS_AVG){
+      gBonus = "strong";
+      bonusText = "A target bonus of " + bonusPct + "% is at or above the roughly 19% average among Chiefs of Staff who receive one (Chief of Staff Network 2025). Still ask how it's determined and whether it has historically paid out. A bonus that always pays is close to base; a bonus that never pays is marketing.";
+    } else {
+      gBonus = "solid";
+      bonusText = "A target bonus of " + bonusPct + "% sits below the roughly 19% average among Chiefs of Staff who receive one (Chief of Staff Network 2025), but having one at all puts this offer with the 56% that include one. Ask whether it's discretionary or tied to targets, and whether it has historically paid out.";
+    }
+    if (role === "ea"){
+      bonusText += " Note the survey figures cover Chiefs of Staff, so treat them as a reference point rather than an EA benchmark.";
+    }
+
+    /* ---- Equity grade ---- */
+    var gEquity, equityText;
+    var earlyStage = (stage === "seed" || stage === "a" || stage === "bd");
+    if (equity === "known"){
+      gEquity = "strong";
+      equityText = "You can turn the grant into an ownership percentage, which is the number that matters. As rough anchors from the equity guide, Index Ventures puts VP grants around 0.3 to 0.8 percent of fully diluted equity at Series A and roughly 0.2 to 0.7 percent at Series B, and a Chief of Staff grant most often sits at or somewhat below the VP band. Verify against several current sources, and confirm the strike price, the vesting schedule, and the cliff before you lean on any of it.";
+    } else if (equity === "unknown"){
+      gEquity = "wait";
+      equityText = "Don't value equity you can't value. Get the number of shares and the total fully diluted shares outstanding so you can compute your percentage, plus the strike price and the date of the last 409A valuation. A serious company will share enough for you to calculate your ownership; reluctance to do so is itself a data point. Until then, treat the equity as unknown, not as its aspirational headline value.";
+    } else if (earlyStage && role === "cos"){
+      gEquity = "below";
+      equityText = "A Chief of Staff at a startup will almost always be offered equity, and at this stage it's often the largest long-term component of the package. No grant here is worth questioning directly, or trading for more cash if the company simply doesn't grant options at your level.";
+    } else if (stage === "public"){
+      gEquity = "solid";
+      equityText = "At public and late-stage companies the equity story shifts from options toward RSUs, which have value as long as the stock does. The absence of a startup-style option grant isn't unusual here, but it's still fair to ask whether RSUs or an annual equity component are part of the package. Make sure the cash works on its own.";
+    } else {
+      gEquity = "solid";
+      equityText = "No equity in the offer. The sourced equity benchmarks cover Chief of Staff roles at funded startups, so there is no clean band to grade against here. Evaluate the cash on its own merits, and it's still reasonable to ask whether any grant is available at your level.";
+    }
+
+    /* ---- Terms coverage ---- */
+    var covered = [], missing = [];
+    TERMS.forEach(function(t){
+      if ($(t.id).checked) covered.push(t); else missing.push(t);
+    });
+    // The exercise window only applies when options are in play.
+    var relevantMissing = missing.filter(function(t){
+      return !(t.id === "eob-oe-t-window" && equity === "none");
+    });
+    var relevantTotal = (equity === "none") ? 4 : 5;
+    var coveredCount = relevantTotal - relevantMissing.length;
+    var gTerms = coveredCount >= relevantTotal ? "strong" : (coveredCount >= 3 ? "solid" : "below");
+    var termsText = "The offer addresses " + coveredCount + " of " + relevantTotal + " of the terms people forget.";
+    if (relevantMissing.length === 0){
+      termsText += " That's the full set. These are the levers most candidates never raise.";
+    } else {
+      termsText += " Still open:";
+    }
+    var termsList = $("eob-oe-termslist");
+    termsList.innerHTML = "";
+    relevantMissing.forEach(function(t){
+      var li = document.createElement("li");
+      li.textContent = t.name + ": " + t.why;
+      termsList.appendChild(li);
+    });
+
+    /* ---- Overall verdict ---- */
+    var gOverall, overallText;
+    var equityUnvalued = (equity === "unknown");
+    if (equityUnvalued && earlyStage){
+      gOverall = "wait";
+      overallText = "This offer can't be fully evaluated yet, because at this stage equity can be the largest long-term component and you can't compute what you've been offered. "
+        + (gBase === "below" ? "The base also sits below the sourced band, so there are two conversations to have. " : "The cash components read " + GRADE_LABEL[gBase].toLowerCase() + " on their own. ")
+        + "Get the share count and the total outstanding before you decide anything.";
+    } else if (gBase === "below"){
+      gOverall = "below";
+      overallText = "The base sits below the sourced band for this stage, and base is the anchor that compounds every future raise. Counter once, cleanly: reaffirm you want the role, present your target with a one-line rationale tied to stage and scope, and name one or two secondary asks.";
+    } else if (gBase === "strong" && gBonus !== "below" && gEquity !== "below" && gEquity !== "wait"){
+      gOverall = "strong";
+      overallText = "This is a strong package against the sourced data: base at or above the top of the stage band, a bonus in line with the survey average, and equity you can actually evaluate. The remaining work is confirming the terms people forget, in writing, before you sign.";
+    } else {
+      gOverall = "solid";
+      overallText = "This offer reads solid against the sourced data. The number is defensible for the stage; the open items below are where the remaining value sits. You often have more room on equity clarity, sign-on, and review timing than on base, so spend your asks there.";
+    }
+
+    /* ---- Next questions (2 to 3, priority order) ---- */
+    var qs = [];
+    if (equity === "unknown"){
+      qs.push("How many total fully diluted shares are outstanding, and what is the current strike price and the date of the last 409A valuation?");
+    }
+    if (gBase === "below"){
+      qs.push("Is there room to get closer to " + fmtK(low) + " on base, and if not, where is there flexibility?");
+    }
+    if (!$("eob-oe-t-severance").checked){
+      qs.push("What severance applies if my principal leaves or the role changes? In a role tied this closely to one person, that protection matters more than usual.");
+    }
+    if (noBonus || bonusPct === 0){
+      qs.push("Is an annual bonus on the table? More than half of Chiefs of Staff now receive one.");
+    } else {
+      qs.push("Is the bonus discretionary or tied to targets, and has it historically paid out?");
+    }
+    if (equity !== "none" && !$("eob-oe-t-window").checked){
+      qs.push("What is the post-termination exercise window on vested options if I leave?");
+    }
+    if (!$("eob-oe-t-review").checked){
+      qs.push("When is the first compensation review, and are refresh grants part of the picture, so a strong first year is recognized?");
+    }
+    if (!$("eob-oe-t-title").checked){
+      qs.push("What internal level does this role map to? Title and level affect my next role as much as this one.");
+    }
+    // Scope questions from the negotiation guide, so there are always at least two asks.
+    if (qs.length < 2){
+      qs.push("What does success look like in the first year, in concrete terms?");
+    }
+    if (qs.length < 2){
+      qs.push("What do I own outright versus influence, and does the role carry budget or headcount authority?");
+    }
+    qs = qs.slice(0, 3);
+    var qList = $("eob-oe-questions");
+    qList.innerHTML = "";
+    qs.forEach(function(q){
+      var li = document.createElement("li");
+      li.textContent = q;
+      qList.appendChild(li);
+    });
+
+    /* ---- Render ---- */
+    $("eob-oe-summary").textContent = ROLE_LABEL[role] + ", " + STAGE_LABEL[stage].charAt(0).toUpperCase() + STAGE_LABEL[stage].slice(1);
+    setGrade($("eob-oe-verdict"), gOverall);
+    $("eob-oe-overall").textContent = overallText;
+    $("eob-oe-baseband").textContent = "Sourced band, " + STAGE_LABEL[stage] + ", adjusted for " + TIER_LABEL[tier] + ": " + fmtK(low) + " to " + fmtK(high) + " base.";
+    setGrade($("eob-oe-g-base"), gBase);
+    $("eob-oe-basetext").textContent = baseText;
+    setGrade($("eob-oe-g-bonus"), gBonus);
+    $("eob-oe-bonustext").textContent = bonusText;
+    setGrade($("eob-oe-g-equity"), gEquity);
+    $("eob-oe-equitytext").textContent = equityText;
+    setGrade($("eob-oe-g-terms"), gTerms);
+    $("eob-oe-termstext").textContent = termsText;
+
+    var panel = $("eob-oe-result");
+    if (panel.className.indexOf("eob-show") === -1) panel.className += " eob-show";
+    setTimeout(postHeight, 60);
+  }
+
+  $("eob-oe-go").addEventListener("click", evaluate);
+  $("eob-oe-nobonus").addEventListener("change", function(){
+    $("eob-oe-bonus").disabled = this.checked;
+    if (this.checked) $("eob-oe-bonus").value = "";
+  });
+
+  /* ======================================================================
+     Auto-resize: report height to the parent so the iframe can size itself.
+     (Pattern for embedding via iframe. Host page listens for the message.)
+     ====================================================================== */
+  function postHeight(){
+    var h = root.scrollHeight;
+    if (window.parent && window.parent !== window){
+      window.parent.postMessage({ type: "eob-offer-height", height: h }, "*");
+    }
+  }
+  if (window.ResizeObserver){
+    new ResizeObserver(postHeight).observe(root);
+  }
+  window.addEventListener("load", postHeight);
+  window.addEventListener("resize", postHeight);
+  root.addEventListener("change", function(){ setTimeout(postHeight, 60); });
+
+  var subForm = root.querySelector("#eob-subscribe");
+  var subMsg = root.querySelector("#eob-sub-msg");
+  if (subForm) {
+    var frame = document.createElement("iframe");
+    frame.name = "eob-ml-frame";
+    frame.style.display = "none";
+    frame.setAttribute("aria-hidden", "true");
+    root.appendChild(frame);
+    subForm.addEventListener("submit", function(){
+      var btn = subForm.querySelector("button");
+      if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+      setTimeout(function(){
+        if (subMsg) subMsg.textContent = "You are in. Check your inbox for the next note.";
+        subForm.reset();
+        if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; }
+        postHeight();
+      }, 900);
+    });
+  }
+})();
+</script>
+<script src="offer-evaluator-v2.js"></script>

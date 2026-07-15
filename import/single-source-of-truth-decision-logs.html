@@ -1,0 +1,61 @@
+<p><strong>Takeaway:</strong> A single source of truth is a maintained written record of what your team decided and why, so people stop relitigating settled questions and new hires can understand the organization without a meeting.</p>
+<p>Every growing organization hits the same wall. A decision gets made in a meeting, everyone nods, and three weeks later half the room remembers it differently and the other half never heard about it. The question gets reopened. The same debate happens again. Multiply that across dozens of decisions a quarter and you have a team that spends much of its energy re-deciding things it already settled.</p>
+<p>The fix is not more meetings or better memories. It is a written record: a single, trusted place where decisions and the reasoning behind them live, so anyone can find out what was decided, by whom, and why. Building and maintaining that record is one of the highest-leverage things a chief of staff owns, because it turns the team's decisions into durable institutional knowledge instead of fading conversation.</p>
+<h2>Why Written Records Beat Memory</h2>
+<p>The software world worked this out early, and the pattern transfers cleanly to operations. In 2011, Michael Nygard proposed the Architecture Decision Record, a short document that captures a single decision, its context, and its consequences, so that people months or years later can understand why the system was built the way it was (<a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions">Cognitect</a>). Martin Fowler later described the practice and noted the compounding benefit: a good decision record explains why something was done, which is exactly the knowledge that otherwise walks out the door when people leave (<a href="https://martinfowler.com/bliki/ArchitectureDecisionRecord.html">martinfowler.com</a>).</p>
+<p>The reason this matters is that the "why" is the part memory loses first. People remember what was decided for a while. They forget the reasoning almost immediately, and once the reasoning is gone, any change in circumstances reopens the whole question. A written record preserves the reasoning, which is what lets a team say "we already considered that, here is why we chose otherwise" and move on.</p>
+<p>There is a second benefit that shows up in the writing itself. Amazon built its meeting culture around narrative memos precisely because, as Jeff Bezos put it in his 2017 shareholder letter, writing in full sentences forces a clarity of thinking that bullet points let you skip (<a href="https://www.aboutamazon.com/news/company-news/2017-letter-to-shareholders">Amazon 2017 Letter to Shareholders</a>). Writing a decision down often exposes that it was fuzzier than it felt in the room. Better to discover that at the moment of decision than three weeks into executing it.</p>
+<h2>What a Single Source of Truth Actually Is</h2>
+<p>The phrase gets thrown around loosely, so define it plainly. A single source of truth is the one place a given kind of information lives, that everyone agrees to trust and to keep current. The two words that matter are "single" and "maintained." If the same fact lives in three documents, none of them is a source of truth, because they will drift out of sync and no one will know which to believe.</p>
+<p>For a chief of staff, the single source of truth usually spans a few connected pieces:</p>
+<ul>
+<li><strong>A decision log.</strong> The running record of significant decisions.</li>
+<li><strong>Operating documents.</strong> The living documents that describe how the organization runs: goals and metrics, the operating cadence, roles and ownership, key policies.</li>
+<li><strong>A clear home and structure.</strong> One agreed location, organized so people can actually find things.</li>
+</ul>
+<p>You do not need all of it on day one. The decision log is the highest-value place to start.</p>
+<h2>Building a Decision Log</h2>
+<p>A decision log is a simple, chronological record of the decisions that matter. It does not capture every choice. It captures the ones that are significant, cross-functional, or likely to be questioned later.</p>
+<h3>What to capture per decision</h3>
+<p>Borrow the structure of an architecture decision record and keep each entry short:</p>
+<ul>
+<li><strong>The decision.</strong> What was decided, stated in a sentence or two.</li>
+<li><strong>The date.</strong> When it was made.</li>
+<li><strong>The owner.</strong> The single person accountable for the decision. Not a committee.</li>
+<li><strong>The context.</strong> The situation and the problem that prompted it.</li>
+<li><strong>The options considered.</strong> Briefly, including what was rejected and why.</li>
+<li><strong>The consequences.</strong> What this commits the team to, and any known tradeoffs.</li>
+<li><strong>Status.</strong> Proposed, accepted, superseded. When a later decision reverses an earlier one, mark the old one superseded and link them rather than deleting history.</li>
+</ul>
+<p>Keep entries to a paragraph or two. The discipline is not length, it is capturing the reasoning while it is fresh.</p>
+<h3>Name a single owner per decision</h3>
+<p>The habit of assigning one accountable owner is worth borrowing from Atlassian's DACI framework, which separates the Driver who runs the process from the Approver who makes the call, and insists there be exactly one Approver. Their reasoning is direct: if two people share the final say, the decision stalls whenever they disagree (<a href="https://www.atlassian.com/team-playbook/plays/daci">Atlassian Team Playbook</a>). A decision log with "the team" listed as owner is a log of things no one is accountable for. One name per decision.</p>
+<h3>Make logging part of the meeting, not a separate chore</h3>
+<p>The decision log dies if it depends on someone remembering to update it later. Wire it into the operating rhythm instead. Capture decisions live during the leadership meeting, then publish them with the notes the same day. The chief of staff who owns the meeting owns the log by default, which is the natural place for it to live.</p>
+<h2>Operating Documents: The Rest of the System</h2>
+<p>The decision log records what changed. Operating documents describe the current state of how the organization runs. Together they answer both "what did we decide" and "how do things work here now."</p>
+<p>Useful operating documents include a current goals and metrics doc, a description of the operating cadence and who owns each meeting, a roles-and-ownership map so people know who decides what, and the small set of policies people actually reference. The test for whether something belongs is simple: if people keep asking the same question, the answer should live in a document, not in your head.</p>
+<p>The hardest part is not writing these. It is keeping them true. A stale operating doc is worse than none, because people trust it and act on wrong information. Assign each document an owner, put a "last reviewed" date on it, and build a light review into your operating cadence, for instance a quick check each quarter that the core docs still reflect reality.</p>
+<h2>Keep It Usable, or It Will Rot</h2>
+<p>A single source of truth only works if people use it, and people only use what they can navigate. A few principles keep it alive:</p>
+<ul>
+<li><strong>One home.</strong> Pick one platform and one structure. Resist the urge to let information sprawl across email threads, chat, and five tools.</li>
+<li><strong>Findable in under a minute.</strong> If someone cannot locate a decision quickly, they will ask in a meeting instead, and you are back where you started.</li>
+<li><strong>Owned, not orphaned.</strong> Every document has a name attached to keeping it current. Unowned docs decay.</li>
+<li><strong>Short over comprehensive.</strong> A concise record people read beats an exhaustive one they ignore. Nygard's whole point about architecture records was that they should be short, a couple of pages at most.</li>
+<li><strong>Link, do not duplicate.</strong> When a fact needs to appear in two places, link to the one source rather than copying it, so it can never contradict itself.</li>
+</ul>
+<p>The chief of staff is usually the natural steward of all this, because the role already sits at the center of the leadership team's decisions and information flow. Owning the single source of truth is not administrative busywork. It is one of the quiet ways an operator makes an entire organization faster and more consistent.</p>
+<h2>FAQ</h2>
+<p><strong>What is the difference between a decision log and meeting notes?</strong>
+Meeting notes capture everything that happened in one meeting and are rarely revisited. A decision log is a curated, lasting record of significant decisions across all meetings, structured so anyone can find a past decision and the reasoning behind it. The log usually draws from the notes, but it is maintained as its own durable record.</p>
+<p><strong>What should go in a decision log entry?</strong>
+At minimum: the decision, the date, a single accountable owner, the context that prompted it, the options considered, and the consequences or tradeoffs. Adding a status field lets you mark a decision as superseded when a later one reverses it, so the history stays intact.</p>
+<p><strong>Who owns the single source of truth?</strong>
+In most leadership teams the chief of staff is the natural steward, because they already sit at the center of decisions and the operating cadence. Individual documents should each have their own named owner responsible for keeping them current, so nothing goes stale from neglect.</p>
+<p><strong>How do I get people to actually use it?</strong>
+Make capture part of the workflow rather than a separate task, keep everything in one findable place, and reference the log in meetings so people learn it is the real source. When someone reopens a settled question, pointing to the entry, kindly, teaches the team that the record is trustworthy.</p>
+<p><strong>How is this different from just using a wiki or shared drive?</strong>
+The tool is not the point. A wiki with duplicated, unmaintained pages is not a single source of truth. What makes it one is the discipline: one agreed home, one owner per document, current information, and a habit of writing decisions down as they are made rather than trusting memory.</p>
+<hr />
+<p>If you want a starting structure, our <strong>Decision Log and Single Source of Truth</strong> template gives you a ready-made format for logging decisions with owners, context, and status, plus a simple layout for your core operating docs. Join the email list to download it and get future operator playbooks as they publish.</p>

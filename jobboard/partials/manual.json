@@ -1,0 +1,71 @@
+{
+  "_note": "Non-automatable curated roles (per-role PDFs, low-volume firms). Merged into roles.json on every refresh run so they are not lost. Update by hand as these roles fill/expire. Removed 2026-07-06: truex-* (now scraped automatically from truexmetier.com/jobs), mission-1/2 (postings taken down, 404), whitman-1 ($65-70k, below the $100k board floor).",
+  "roles": [
+    {
+      "id": "daliassociates-1",
+      "title": "Executive Assistant to Two Partners",
+      "org_type": "Venture capital firm",
+      "category": "Executive Assistant",
+      "seniority": "Senior",
+      "comp_low": null,
+      "comp_high": 160000,
+      "location": "Menlo Park, CA",
+      "remote": "Onsite",
+      "date_posted": "2026-03-23",
+      "apply_url": "https://www.daliassociates.com/open-positions/EA-MenloPark-CA_2026-03-23.pdf",
+      "source": "Dali Associates"
+    },
+    {
+      "id": "larko-1",
+      "title": "Executive Assistant to the CIO Office",
+      "org_type": "Financial services firm",
+      "category": "Executive Assistant",
+      "seniority": "Senior",
+      "comp_low": null,
+      "comp_high": 150000,
+      "location": "New York, NY",
+      "remote": "Onsite",
+      "apply_url": "https://www.thelarkogroup.com/executive-assistant-hybrid-2/",
+      "source": "The Larko Group"
+    },
+    {
+      "id": "larko-2",
+      "title": "Executive Assistant to the CEO (with Chief of Staff duties)",
+      "org_type": "High-growth startup",
+      "category": "Executive Assistant",
+      "seniority": "Senior",
+      "comp_low": null,
+      "comp_high": null,
+      "location": "Chicago, IL",
+      "remote": "Hybrid",
+      "apply_url": "https://www.thelarkogroup.com/customer-service-representative-onsite/",
+      "source": "The Larko Group"
+    },
+    {
+      "id": "premier-1",
+      "title": "Executive Assistant to Senior Leadership",
+      "org_type": "Biotech / AI research organization",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": null,
+      "comp_high": null,
+      "location": "San Francisco, CA",
+      "remote": "Hybrid",
+      "apply_url": "https://jobs.premiertalentpartners.com/jobs/30243",
+      "source": "Premier Talent Partners"
+    },
+    {
+      "id": "premier-2",
+      "title": "Executive Assistant to the Executive Director",
+      "org_type": "Nonprofit",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": null,
+      "comp_high": null,
+      "location": "Seattle, WA",
+      "remote": "Onsite",
+      "apply_url": "https://jobs.premiertalentpartners.com/jobs/30233",
+      "source": "Premier Talent Partners"
+    }
+  ]
+}

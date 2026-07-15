@@ -1,0 +1,545 @@
+<!--
+  The Exec Ops Brief - Job Board Widget
+  Self-contained: inline CSS + JS. Drop into a Squarespace code block or embed via iframe.
+  Matches the site design system (Spectral + Public Sans + IBM Plex Mono, bond paper + navy + oxblood).
+  No em-dashes, no emojis in copy. No alert/confirm/prompt dialogs.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div id="eob-jobboard">
+<style>
+  /* ===== SET THIS: point at your hosted roles.json once uploaded to GitHub Pages ===== */
+  /* Default is the local file sitting beside this widget. */
+  /* Example hosted value: https://YOURNAME.github.io/execopsbrief-assets/roles.json */
+
+  #eob-jobboard{
+    --ink:#1B1712; --navy:#1C2C3A; --slate:#6B6255; --slate-light:#8a8175;
+    --mist:#D8D0BF; --paper:#F3F0E9; --paper-deep:#EBE6DA; --white:#ffffff;
+    --line:#D8D0BF; --line-dark:#33465a;
+    --ox:#7A2129; --ox-deep:#5E181F; --ox-tint:#efe1da;
+    --green:#4a5b41; --green-tint:#e4e6d5;
+    --radius:3px; --radius-sm:2px;
+    --shadow:0 1px 2px rgba(22,32,46,.05), 0 10px 30px rgba(22,32,46,.06);
+    --shadow-lift:0 2px 6px rgba(22,32,46,.08), 0 24px 48px rgba(22,32,46,.12);
+    font-family:'Public Sans',system-ui,-apple-system,sans-serif;
+    color:var(--navy); line-height:1.6; -webkit-font-smoothing:antialiased;
+    max-width:1120px; margin:0 auto; padding:0 4px; box-sizing:border-box;
+  }
+  #eob-jobboard *{box-sizing:border-box}
+  #eob-jobboard h1,#eob-jobboard h2,#eob-jobboard h3,#eob-jobboard h4{
+    font-family:'Spectral',Georgia,serif;font-weight:600;line-height:1.14;color:var(--ink);letter-spacing:-.01em;margin:0;
+  }
+  #eob-jobboard .eob-eyebrow{
+    font-weight:600;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ox-deep);
+  }
+
+  /* Header */
+  #eob-jobboard .eob-head{margin-bottom:1.6rem}
+  #eob-jobboard .eob-head h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin:.5rem 0 .55rem}
+  #eob-jobboard .eob-head p{font-size:1.05rem;color:var(--slate);max-width:46rem}
+
+  /* Controls */
+  #eob-jobboard .eob-controls{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.1rem 1.2rem;box-shadow:var(--shadow);margin-bottom:1.2rem;
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:.8rem;align-items:end;
+  }
+  #eob-jobboard .eob-field{display:flex;flex-direction:column;gap:.35rem;min-width:0}
+  #eob-jobboard .eob-field label{
+    font-size:.7rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--slate-light);
+  }
+  #eob-jobboard .eob-field input,
+  #eob-jobboard .eob-field select{
+    width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.62rem .8rem;font-family:inherit;font-size:.92rem;color:var(--ink);background:var(--paper);
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+  }
+  #eob-jobboard .eob-field input{cursor:text}
+  #eob-jobboard .eob-field select{
+    background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='10'%20height='6'%3E%3Cpath%20d='M0%200l5%206%205-6z'%20fill='%234A5D70'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .8rem center;padding-right:2rem;
+  }
+  #eob-jobboard .eob-field input:focus,
+  #eob-jobboard .eob-field select:focus{outline:none;border-color:var(--ox);background-color:var(--white)}
+
+  #eob-jobboard .eob-bar{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem;margin-bottom:1rem;
+  }
+  #eob-jobboard .eob-count{font-size:.9rem;color:var(--slate)}
+  #eob-jobboard .eob-count strong{color:var(--ink);font-weight:600}
+  #eob-jobboard .eob-reset{
+    background:transparent;border:1px solid var(--line);color:var(--slate);
+    font-family:inherit;font-weight:600;font-size:.82rem;padding:.45rem .9rem;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;
+  }
+  #eob-jobboard .eob-reset:hover{border-color:var(--ink);color:var(--ink)}
+  #eob-jobboard .eob-bar-right{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem}
+  #eob-jobboard .eob-toggle{display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:500;color:var(--slate);cursor:pointer;user-select:none}
+  #eob-jobboard .eob-toggle input{width:15px;height:15px;accent-color:var(--ox);cursor:pointer;margin:0}
+
+  /* Role cards */
+  #eob-jobboard .eob-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  #eob-jobboard .eob-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.4rem 1.5rem;box-shadow:var(--shadow);display:flex;flex-direction:column;
+    transition:transform .16s,box-shadow .16s;
+  }
+  #eob-jobboard .eob-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+  #eob-jobboard .eob-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.6rem}
+  #eob-jobboard .eob-card h3{font-size:1.18rem;line-height:1.24}
+  #eob-jobboard .eob-org{color:var(--slate);font-size:.88rem;margin-top:.25rem}
+  #eob-jobboard .eob-comp{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ox-deep,#5E181F);font-size:1.1rem;white-space:nowrap}
+  #eob-jobboard .eob-comp-none{color:var(--slate-light);font-size:.92rem;font-style:italic}
+  #eob-jobboard .eob-meta{display:flex;flex-wrap:wrap;gap:.45rem;margin:.7rem 0 .9rem}
+  #eob-jobboard .eob-summary{
+    font-size:.9rem;color:var(--slate);line-height:1.55;margin:0 0 .9rem;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  #eob-jobboard .eob-benefits{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:0 0 1rem}
+  #eob-jobboard .eob-blabel{
+    font-family:'IBM Plex Mono',monospace;font-size:.64rem;font-weight:600;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--slate-light);margin-right:.1rem;
+  }
+  #eob-jobboard .eob-benefit{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:500;
+    padding:.2rem .55rem;border-radius:var(--radius-sm);
+    background:var(--green-tint);color:var(--green);white-space:nowrap;
+  }
+  #eob-jobboard .eob-pill{
+    display:inline-block;font-size:.74rem;font-weight:600;padding:.28rem .68rem;border-radius:100px;
+    background:var(--ox-tint);color:var(--ox-deep);white-space:nowrap;
+  }
+  #eob-jobboard .eob-pill-cat{background:var(--paper-deep);color:var(--navy);border:1px solid var(--line)}
+  #eob-jobboard .eob-pill-remote{background:var(--green-tint);color:var(--green)}
+  #eob-jobboard .eob-pill-loc{background:var(--paper-deep);color:var(--slate);border:1px solid var(--line)}
+  #eob-jobboard .eob-pill-src{background:var(--white);color:var(--slate-light);border:1px solid var(--line)}
+  #eob-jobboard .eob-card-foot{
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    margin-top:auto;padding-top:.9rem;border-top:1px solid var(--line);
+  }
+  #eob-jobboard .eob-posted{font-size:.82rem;color:var(--slate-light)}
+  #eob-jobboard .eob-apply{
+    display:inline-flex;align-items:center;gap:.4rem;background:var(--ox);color:#fff;
+    font-family:inherit;font-weight:600;font-size:.88rem;padding:.55rem 1.05rem;border-radius:var(--radius-sm);
+    transition:all .16s;text-decoration:none;
+  }
+  #eob-jobboard .eob-apply:hover{background:var(--ox-deep);transform:translateY(-1px)}
+
+  /* States */
+  #eob-jobboard .eob-empty,#eob-jobboard .eob-loading{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:2.6rem 1.6rem;text-align:center;box-shadow:var(--shadow);
+  }
+  #eob-jobboard .eob-empty h3{font-size:1.25rem;margin-bottom:.5rem}
+  #eob-jobboard .eob-empty p{color:var(--slate);font-size:.98rem;max-width:32rem;margin:0 auto}
+
+  /* Newsletter CTA */
+  #eob-jobboard .eob-cta{
+    background:var(--ink);color:#fff;border-radius:var(--radius);padding:2rem 2.2rem;margin-top:1.8rem;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-lift);
+  }
+  #eob-jobboard .eob-cta:before{
+    content:"";position:absolute;top:-50px;right:-30px;width:180px;height:180px;border-radius:50%;
+    background:radial-gradient(circle,rgba(192,134,43,.32),transparent 70%);pointer-events:none;
+  }
+  #eob-jobboard .eob-cta .eob-eyebrow{color:var(--ox);position:relative}
+  #eob-jobboard .eob-cta h3{color:#fff;font-size:1.55rem;margin:.4rem 0 .4rem;position:relative}
+  #eob-jobboard .eob-cta p{color:#b7c1d1;font-size:.96rem;max-width:32rem;position:relative}
+  #eob-jobboard .eob-cta form{display:flex;gap:.6rem;min-width:300px;position:relative}
+  #eob-jobboard .eob-cta input{
+    flex:1;min-width:0;border:1px solid var(--line-dark);background:#111c2b;color:#fff;
+    border-radius:var(--radius-sm);padding:.78rem .95rem;font-family:inherit;font-size:.94rem;
+  }
+  #eob-jobboard .eob-cta input::placeholder{color:#7c889b}
+  #eob-jobboard .eob-cta input:focus{outline:none;border-color:var(--ox)}
+  #eob-jobboard .eob-cta button{
+    background:var(--ox);color:#fff;font-family:inherit;font-weight:600;font-size:.94rem;
+    border:none;border-radius:var(--radius-sm);padding:.78rem 1.3rem;cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-jobboard .eob-cta button:hover{background:var(--ox-deep);transform:translateY(-1px)}
+  #eob-jobboard .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#7c889b}
+  #eob-jobboard .eob-cta-msg{position:relative;margin-top:.55rem;font-size:.86rem;color:var(--ox);font-weight:600;min-height:1.1em}
+
+  /* Responsive */
+  @media (max-width:820px){
+    #eob-jobboard .eob-controls{grid-template-columns:1fr 1fr}
+    #eob-jobboard .eob-cta{grid-template-columns:1fr}
+  }
+  @media (max-width:600px){
+    #eob-jobboard .eob-controls{grid-template-columns:1fr}
+    #eob-jobboard .eob-grid{grid-template-columns:1fr}
+    #eob-jobboard .eob-cta{padding:1.6rem}
+    #eob-jobboard .eob-cta form{flex-direction:column}
+    #eob-jobboard .eob-card-top{flex-direction:column;gap:.5rem}
+  }
+</style>
+
+  <div class="eob-head">
+    <span class="eob-eyebrow">The Job Board</span>
+    <h2>Curated exec-ops roles, all paying $100k or more.</h2>
+    <p>Every listing carries a comp figure the source firm published, and the midpoint of that figure is at least $100,000. If a firm didn't publish a number, the role isn't here. Nothing's estimated. Filter to what fits, then get the week's set delivered in The Brief.</p>
+  </div>
+
+  <div class="eob-controls">
+    <div class="eob-field">
+      <label for="eob-search">Search</label>
+      <input type="text" id="eob-search" placeholder="Title, company type, or location" autocomplete="off">
+    </div>
+    <div class="eob-field">
+      <label for="eob-category">Category</label>
+      <!-- Options are built from roles.json at load time (buildCategoryOptions). -->
+      <select id="eob-category">
+        <option value="">All categories</option>
+      </select>
+    </div>
+    <div class="eob-field">
+      <label for="eob-remote">Work type</label>
+      <select id="eob-remote">
+        <option value="">Any work type</option>
+        <option value="Remote">Remote</option>
+        <option value="Hybrid">Hybrid</option>
+        <option value="Onsite">Onsite</option>
+      </select>
+    </div>
+    <div class="eob-field">
+      <label for="eob-comp">Minimum comp</label>
+      <select id="eob-comp">
+        <option value="0">Any comp</option>
+        <option value="100000">$100k and up</option>
+        <option value="150000">$150k and up</option>
+        <option value="200000">$200k and up</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="eob-bar">
+    <div class="eob-count" id="eob-count">Loading roles</div>
+    <div class="eob-bar-right">
+      <label class="eob-toggle" for="eob-nocomp">
+        <input type="checkbox" id="eob-nocomp" checked>
+        <span>Include roles without listed comp</span>
+      </label>
+      <button type="button" class="eob-reset" id="eob-reset">Reset filters</button>
+    </div>
+  </div>
+
+  <div id="eob-results">
+    <div class="eob-loading">Loading curated roles.</div>
+  </div>
+
+  <!-- Newsletter call to action -->
+  <div class="eob-cta">
+    <div>
+      <span class="eob-eyebrow">The Brief</span>
+      <h3>Get these roles weekly in The Brief.</h3>
+      <p>A curated digest of EA, exec-ops, and Chief of Staff roles paying $100k and up, plus one operator insight. Free, every week.</p>
+      <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
+    </div>
+    <form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
+      <input type="email" id="eob-email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>
+      <input type="hidden" name="ml-submit" value="1">
+      <input type="hidden" name="anticsrf" value="true">
+      <button type="submit">Subscribe to The Brief</button>
+      <div class="eob-cta-msg" id="eob-sub-msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ===== SET THIS once roles.json is hosted on GitHub Pages ===== */
+  /* Local preview default: */
+  /* GitHub Pages (same origin as this widget): refreshes within ~10 min of a
+     push, no CDN purge needed. jsDelivr fallback kept for reference:
+     https://cdn.jsdelivr.net/gh/gaughanadrienne-gif/execops-brief-assets@main/jobboard/roles.json */
+  var ROLES_URL = "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json";
+
+  var root = document.getElementById("eob-jobboard");
+  var els = {
+    search:   root.querySelector("#eob-search"),
+    category: root.querySelector("#eob-category"),
+    remote:   root.querySelector("#eob-remote"),
+    comp:     root.querySelector("#eob-comp"),
+    nocomp:   root.querySelector("#eob-nocomp"),
+    count:    root.querySelector("#eob-count"),
+    reset:    root.querySelector("#eob-reset"),
+    results:  root.querySelector("#eob-results")
+  };
+
+  var ALL = [];
+
+  function fmtK(n){
+    // 165000 -> "165k"; 220000 -> "220k"; keeps one decimal only if needed.
+    var k = n / 1000;
+    return (Math.round(k * 10) / 10).toString().replace(/\.0$/, "") + "k";
+  }
+  function fmtComp(lo, hi){ return "$" + fmtK(lo) + " - $" + fmtK(hi); }
+  function hasComp(r){ return r.comp_low != null && r.comp_high != null; }
+  function fmtHr(v){
+    // 44.5 -> "44.50" (money style), 50 -> "50"
+    return (v % 1) ? v.toFixed(2) : String(v);
+  }
+  // Hourly-paid postings carry comp_period "hr": comp_low/high are verbatim
+  // $/hr figures. For min-comp filtering they annualize at 2080h.
+  function isHourly(r){ return r.comp_period === "hr"; }
+  function annualHigh(r){
+    return isHourly(r) ? r.comp_high * 2080 : r.comp_high;
+  }
+  function compHTML(r){
+    if (!hasComp(r)) return '<div class="eob-comp eob-comp-none">Comp not listed</div>';
+    if (isHourly(r)){
+      var txt = (r.comp_low === r.comp_high)
+        ? "$" + fmtHr(r.comp_low) + "/hr"
+        : "$" + fmtHr(r.comp_low) + " - $" + fmtHr(r.comp_high) + "/hr";
+      return '<div class="eob-comp">' + txt + '</div>';
+    }
+    return '<div class="eob-comp">' + fmtComp(r.comp_low, r.comp_high) + '</div>';
+  }
+  // Sort key: use the posting date if present. Undated roles are still live,
+  // but they cannot honestly be treated as newly posted, so they sort last.
+  function sortTime(r){
+    if (!r.date_posted) return 0;
+    var t = new Date(r.date_posted + "T00:00:00").getTime();
+    return isNaN(t) ? 0 : t;
+  }
+
+  function relTime(iso){
+    var then = new Date(iso + "T00:00:00");
+    var now = new Date();
+    var days = Math.round((now - then) / 86400000);
+    if (isNaN(days)) return "Recently posted";
+    if (days <= 0) return "Posted today";
+    if (days === 1) return "Posted yesterday";
+    if (days < 7) return "Posted " + days + " days ago";
+    var weeks = Math.round(days / 7);
+    if (weeks === 1) return "Posted 1 week ago";
+    if (weeks < 5) return "Posted " + weeks + " weeks ago";
+    var months = Math.round(days / 30);
+    return "Posted " + months + (months === 1 ? " month ago" : " months ago");
+  }
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  function getFilters(){
+    return {
+      q: (els.search.value || "").trim().toLowerCase(),
+      category: els.category.value,
+      remote: els.remote.value,
+      minComp: parseInt(els.comp.value, 10) || 0,
+      includeNoComp: els.nocomp ? els.nocomp.checked : true
+    };
+  }
+
+  var EXEC_OPS_CATEGORIES = [
+    "Exec Ops",
+    "Executive Operations",
+    "Director / VP of Operations",
+    "COO / Operating Executive"
+  ];
+  function categoryMatches(selected, actual){
+    if (!selected) return true;
+    if (selected === "Exec Ops" || selected === "Executive Operations"){
+      return EXEC_OPS_CATEGORIES.indexOf(actual) !== -1;
+    }
+    return selected === actual;
+  }
+  function matches(role, f){
+    if (!categoryMatches(f.category, role.category)) return false;
+    if (f.remote && role.remote !== f.remote) return false;
+    // Minimum comp: applies only to roles that have a published comp range.
+    // Roles without listed comp are kept unless the include toggle is off.
+    if (f.minComp){
+      if (hasComp(role)){
+        if (annualHigh(role) < f.minComp) return false;
+      } else if (!f.includeNoComp){
+        return false;
+      }
+    }
+    if (f.q){
+      var hay = [role.title, role.org_type, role.location, role.category, role.seniority, role.source,
+                 role.summary || "", (role.benefits || []).join(" ")]
+        .join(" ").toLowerCase();
+      if (hay.indexOf(f.q) === -1) return false;
+    }
+    return true;
+  }
+
+  function summaryHTML(r){
+    if (!r.summary) return "";
+    return '<p class="eob-summary">' + esc(r.summary) + '</p>';
+  }
+  function benefitsHTML(r){
+    var b = r.benefits || [];
+    if (!b.length) return "";
+    return '<div class="eob-benefits"><span class="eob-blabel">Also includes</span>' +
+      b.map(function(x){ return '<span class="eob-benefit">' + esc(x) + '</span>'; }).join("") +
+      '</div>';
+  }
+
+  function cardHTML(r){
+    var orgLabel = r.org_type || r.source || "Source listing";
+    var sourcePill = r.source && r.source !== orgLabel
+      ? '<span class="eob-pill eob-pill-src">' + esc(r.source) + '</span>'
+      : "";
+    return '<div class="eob-card">' +
+      '<div class="eob-card-top">' +
+        '<div>' +
+          '<h3>' + esc(r.title) + '</h3>' +
+          '<div class="eob-org">' + esc(orgLabel) + (r.seniority ? " &middot; " + esc(r.seniority) : "") + '</div>' +
+        '</div>' +
+        compHTML(r) +
+      '</div>' +
+      '<div class="eob-meta">' +
+        '<span class="eob-pill eob-pill-cat">' + esc(r.category) + '</span>' +
+        '<span class="eob-pill eob-pill-remote">' + esc(r.remote) + '</span>' +
+        (r.location ? '<span class="eob-pill eob-pill-loc">' + esc(r.location) + '</span>' : "") +
+        sourcePill +
+      '</div>' +
+      summaryHTML(r) +
+      benefitsHTML(r) +
+      '<div class="eob-card-foot">' +
+        '<span class="eob-posted">' + esc(relTime(r.date_posted)) + '</span>' +
+        '<a class="eob-apply" href="' + esc(r.apply_url || "#") + '" target="_blank" rel="noopener">View role</a>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function render(){
+    var f = getFilters();
+    var list = ALL.filter(function(r){ return matches(r, f); });
+    // Newest first; undated live listings follow the dated set.
+    list.sort(function(a, b){ return sortTime(b) - sortTime(a); });
+
+    var total = ALL.length;
+    if (list.length === total){
+      els.count.innerHTML = "<strong>" + total + "</strong> curated roles";
+    } else {
+      els.count.innerHTML = "<strong>" + list.length + "</strong> of " + total + " roles";
+    }
+
+    if (!list.length){
+      els.results.innerHTML =
+        '<div class="eob-empty">' +
+          '<h3>No roles match those filters.</h3>' +
+          '<p>Try widening the comp range or clearing the search. The board syncs with the source agencies every morning, and subscribers get the full set in The Brief.</p>' +
+        '</div>';
+      return;
+    }
+    els.results.innerHTML = '<div class="eob-grid">' + list.map(cardHTML).join("") + '</div>';
+  }
+
+  function resetFilters(){
+    els.search.value = "";
+    els.category.value = "";
+    els.remote.value = "";
+    els.comp.value = "0";
+    if (els.nocomp) els.nocomp.checked = true;
+    render();
+  }
+
+  els.search.addEventListener("input", render);
+  els.category.addEventListener("change", render);
+  els.remote.addEventListener("change", render);
+  els.comp.addEventListener("change", render);
+  if (els.nocomp) els.nocomp.addEventListener("change", render);
+  els.reset.addEventListener("click", resetFilters);
+
+  var subForm = root.querySelector("#eob-subscribe");
+  var subMsg = root.querySelector("#eob-sub-msg");
+  if (subForm) {
+    var frame = document.createElement("iframe");
+    frame.name = "eob-ml-frame";
+    frame.style.display = "none";
+    frame.setAttribute("aria-hidden", "true");
+    root.appendChild(frame);
+    subForm.addEventListener("submit", function(){
+      var btn = subForm.querySelector("button");
+      if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+      setTimeout(function(){
+        if (subMsg) {
+          subMsg.style.color = "";
+          subMsg.textContent = "You are in. Check your inbox for the next note.";
+        }
+        subForm.reset();
+        if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; }
+        try{ parent.postMessage({eobHeight: root.scrollHeight}, "*"); }catch(e){}
+      }, 900);
+    });
+  }
+
+  /* The category list is built FROM THE DATA, not hardcoded. The scraper's role
+     taxonomy (5 visible categories as of 2026-07-14, and whatever it grows into)
+     would otherwise drift away from a fixed <option> list and leave real roles
+     unfilterable. Order follows CAT_ORDER where known, then anything new. */
+  var CAT_ORDER = ["Executive Assistant", "Chief of Staff", "Executive Operations",
+                   "Director / VP of Operations", "COO / Operating Executive"];
+  function buildCategoryOptions(){
+    var sel = els.category;
+    if (!sel) return;
+    var present = {};
+    ALL.forEach(function(r){ if (r && r.category) present[r.category] = 1; });
+    var cats = Object.keys(present).sort(function(a, b){
+      var ia = CAT_ORDER.indexOf(a), ib = CAT_ORDER.indexOf(b);
+      if (ia < 0) ia = 99;
+      if (ib < 0) ib = 99;
+      return ia - ib || a.localeCompare(b);
+    });
+    var keep = sel.value;
+    sel.innerHTML = '<option value="">All categories</option>';
+    cats.forEach(function(c){
+      var o = document.createElement("option");
+      o.value = c;
+      o.textContent = c === "Executive Operations"
+        ? "Exec Ops & Operations Leadership"
+        : c;
+      sel.appendChild(o);
+    });
+    if (keep && present[keep]) sel.value = keep;
+  }
+
+  function load(){
+    fetch(ROLES_URL, {cache: "no-store"})
+      .then(function(res){
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function(data){
+        ALL = (data && Array.isArray(data.roles)) ? data.roles :
+              (Array.isArray(data) ? data : []);
+        buildCategoryOptions();
+        render();
+      })
+      .catch(function(){
+        els.count.textContent = "";
+        els.results.innerHTML =
+          '<div class="eob-empty">' +
+            '<h3>Roles could not be loaded.</h3>' +
+            '<p>Please refresh the page. If this keeps happening, the roles file may be temporarily unavailable.</p>' +
+          '</div>';
+      });
+  }
+
+  load();
+})();
+</script>
+
+<script>
+/* auto-resize: report content height to the embedding page */
+(function(){
+  var root = document.getElementById("eob-jobboard");
+  function ph(){
+    try{
+      var h = root ? root.scrollHeight : document.body.scrollHeight;
+      parent.postMessage({eobHeight: h}, "*");
+    }catch(e){}
+  }
+  try{ if(root) new ResizeObserver(ph).observe(root); }catch(e){}
+  window.addEventListener("load", ph); setTimeout(ph,400); setTimeout(ph,1500);
+})();
+</script>
