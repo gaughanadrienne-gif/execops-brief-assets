@@ -1,7 +1,7 @@
 {
   "_note": "REAL curated Executive Assistant, Executive Operations, and Chief of Staff roles for The Exec Ops Brief job board, aggregated from recruiting agencies, direct job boards, and VC portfolio feeds. PAY FLOOR (enforced in code since 2026-07-13): every role on this board carries a compensation figure PUBLISHED BY THE SOURCE whose midpoint -- (comp_low + comp_high) / 2, or the single figure where only one is published -- is at least $100,000. A role whose published midpoint falls below $100k is excluded, and a role whose source publishes no comp figure at all is excluded (there are no 'comp not listed' rows). No comp figure is ever estimated, inferred, or invented; comp honesty outranks board size. Where a posting publishes an HOURLY rate instead of a salary, comp_period='hr' and comp_low/comp_high hold the verbatim $/hr figures (annualized at 2080h ONLY to apply the floor, never for display). Most roles also carry a short summary excerpted VERBATIM from the posting (never paraphrased); summary is null rather than invented when the source lacks readable role-specific text. A benefits list (bonus, equity, 401(k), health coverage, PTO, etc) is detected only where the posting states it. Apply links point to the original source listing.",
-  "updated": "2026-07-16",
-  "count": 238,
+  "updated": "2026-07-17",
+  "count": 237,
   "roles": [
     {
       "id": "bloom-1468",
@@ -484,7 +484,7 @@
       "comp_high": 190000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-07-15",
+      "date_posted": "2026-07-16",
       "apply_url": "https://app.loxo.co/job/MTcwNS1jZHhhbHN4dGk1ZDY1ZXFx",
       "source": "Burke & Co",
       "summary": "Our client, a highly-regarded boutique venture capital firm, is seeking an expert Executive Assistant to support its Co-Founder/Managing Director.",
@@ -500,7 +500,7 @@
       "comp_high": 220000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-07-15",
+      "date_posted": "2026-07-16",
       "apply_url": "https://app.loxo.co/job/MTcwNS0wanJ3Nm43bDExd2ZmdmZz",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing AI startup, is seeking a high-impact Executive Assistant to support their CFO and Head of Talent. This is a highly visible, strategic role and is the perfect opportunity for someone who thrives in fast-paced environments and enjoys serving as the operational backbone...",
@@ -518,7 +518,7 @@
       "comp_high": 110000,
       "location": "Chicago, Illinois",
       "remote": "Onsite",
-      "date_posted": "2026-07-07",
+      "date_posted": "2026-07-08",
       "apply_url": "https://app.loxo.co/job/MTcwNS1xNnA5bzdldTYxYWY1Z2li",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing independent wealth management firm managing over $1 billion in assets for UHNWIs, is seeking an Executive Assistant/Client Services Associate to support their CEO/Managing Partner & team of advisors.",
@@ -536,7 +536,7 @@
       "comp_high": 155000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-07-13",
+      "date_posted": "2026-07-14",
       "apply_url": "https://app.loxo.co/job/MTcwNS1qM2xhcXp5MTc4MGdxcHU4",
       "source": "Burke & Co",
       "summary": "Our client, a Bay Area based SaaS startup with global reach, seeks a top-notch Executive Assistant to support two senior executives. This is a highly visible, high-impact role for someone who thrives at the center of executive operations and brings structure, rigor, and forward-thinking execution...",
@@ -554,7 +554,7 @@
       "comp_high": 170000,
       "location": "New York City, New York",
       "remote": "Onsite",
-      "date_posted": "2026-07-13",
+      "date_posted": "2026-07-14",
       "apply_url": "https://app.loxo.co/job/MTcwNS12dG14NjF2b3R5OHMzNGsx",
       "source": "Burke & Co",
       "summary": "Our client, a high-growth tech startup building a purpose-driven AI platform, is seeking a highly polished & adaptable Executive Assistant to support the President and a Senior VP.",
@@ -573,7 +573,7 @@
       "comp_high": 170000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-07-13",
+      "date_posted": "2026-07-14",
       "apply_url": "https://app.loxo.co/job/MTcwNS1veWRsdnM1eG5xa3dvZXFs",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly scaling & venture-backed AI startup transforming the healthcare industry, is seeking an experienced Executive Assistant to provide high-level support to their Founder & CEO.",
@@ -591,7 +591,7 @@
       "comp_high": 180000,
       "location": "NYC",
       "remote": "Onsite",
-      "date_posted": "2026-07-15",
+      "date_posted": "2026-07-16",
       "apply_url": "https://app.loxo.co/job/MTcwNS0xa2NjeWJzaHZ3eGl3OGRk",
       "source": "Burke & Co",
       "summary": "Our client, a multi-billion dollar hedge fund in New York City, seeks a razor-sharp Senior Executive Assistant to support their Founder. This is a unique opportunity spanning Executive Assistant, Personal Assistant, and operational support responsibilities.",
@@ -609,7 +609,7 @@
       "comp_high": 200000,
       "location": "San Mateo, California",
       "remote": "Hybrid",
-      "date_posted": "2026-07-13",
+      "date_posted": "2026-07-14",
       "apply_url": "https://app.loxo.co/job/MTcwNS11YnVrN3ZpMnFkbHV3dTho",
       "source": "Burke & Co",
       "summary": "Our client, an innovative & well-funded AI startup, seeks Executive Assistant to support their CEO/co-founder. This role provide expert-level administrative support, streamline their executive's day to day, and assist with project management & process improvements.",
@@ -1015,7 +1015,7 @@
       "comp_high": 140000,
       "location": "New York City Metropolitan Area",
       "remote": "Onsite",
-      "date_posted": "2026-07-11",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.linkedin.com/jobs/view/4439320452/",
       "source": "Truex Metier",
       "summary": "We are partnering with a highly successful private investment firm to find a dynamic, team-oriented Executive Assistant for their close-knit New York office.",
@@ -1033,7 +1033,7 @@
       "comp_high": 190000,
       "location": "San Francisco Bay Area",
       "remote": "Onsite",
-      "date_posted": "2026-07-11",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.linkedin.com/jobs/view/4439351339/",
       "source": "Truex Metier",
       "summary": "We’re partnering with a fast-growing, venture-backed tech company on the search for an exceptional Executive Assistant to support senior leadership during a pivotal stage of growth.",
@@ -1051,7 +1051,7 @@
       "comp_high": 150000,
       "location": "San Francisco Bay Area",
       "remote": "Onsite",
-      "date_posted": "2026-07-11",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.linkedin.com/jobs/view/4439356342/",
       "source": "Truex Metier",
       "summary": "We are thrilled to partner with a top-tier, premier venture investment firm in San Francisco to recruit an exceptional, high-energy Office Manager / Executive Assistant .",
@@ -1067,7 +1067,7 @@
       "comp_high": 190000,
       "location": "San Francisco Bay Area",
       "remote": "Onsite",
-      "date_posted": "2026-07-11",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.linkedin.com/jobs/view/4439344702/",
       "source": "Truex Metier",
       "summary": "We are seeking a highly organized, execution-oriented Executive Business Partner to serve as a strategic partner to executive leadership at a rapidly scaling Series G technology company backed by some of Silicon Valley’s most prominent venture capital firms.",
@@ -1638,58 +1638,6 @@
       ]
     },
     {
-      "id": "cosn-chief-of-staff-to-the-ceo-builderorchestrator-productai-p9p",
-      "title": "Chief of Staff to the CEO — Builder-Orchestrator",
-      "org_type": "Product.ai",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 200000,
-      "comp_high": 250000,
-      "location": "Los Angeles, CA",
-      "remote": "Hybrid",
-      "date_posted": "2026-06-01",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-to-the-ceo-builderorchestrator-productai-p9p",
-      "source": "Chief of Staff Network",
-      "summary": "Job Description: Product.ai is building the truth engine for shopping. Profitable. Bootstrapped. No outside investors. No board. 25 people outperforming companies 10x our size. ​ We're hiring a Chief of Staff to the CEO.",
-      "benefits": [
-        "Equity",
-        "Paid time off",
-        "Profit sharing"
-      ]
-    },
-    {
-      "id": "cosn-chief-of-staff-staffgreatcom-d4p",
-      "title": "Chief of Staff",
-      "org_type": "StaffGreat.com",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 250000,
-      "comp_high": 300000,
-      "location": "San Francisco Bay Area",
-      "remote": "Onsite",
-      "date_posted": "2026-06-01",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-staffgreatcom-d4p",
-      "source": "Chief of Staff Network",
-      "summary": "Job Description: Our client, a fast-growing AI B2B startup, is hiring a Chief of Staff with 5-7 years of experience to act as a direct partner to the co-founder.",
-      "benefits": []
-    },
-    {
-      "id": "cosn-chief-of-staff-managed-services-organization-ladders-ekx",
-      "title": "Chief of Staff, Managed Services Organization",
-      "org_type": "Ladders",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 228000,
-      "comp_high": 342000,
-      "location": "United States",
-      "remote": "Remote",
-      "date_posted": "2026-06-01",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-managed-services-organization-ladders-ekx",
-      "source": "Chief of Staff Network",
-      "summary": "Job Description: For our client, we are seeking a Chief Of Staff Managed Services Organization to join the team of a leader in the Healthcare space. This role will lead operational priorities focused on execution quality, efficiency, safety, and measurable performance outcomes.",
-      "benefits": []
-    },
-    {
       "id": "pocketbook-2291",
       "title": "Senior Executive Assistant to Senior Founders",
       "org_type": "",
@@ -1705,6 +1653,25 @@
       "summary": "We're looking for someone who doesn't simply react to requests but actively looks around corners, identifies potential challenges, and creates solutions before issues reach the executives' desks.",
       "benefits": [
         "Equity"
+      ]
+    },
+    {
+      "id": "beacon-129375",
+      "title": "Executive Assistant",
+      "org_type": "Beacon Hill Staffing Group",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 50.0,
+      "comp_high": 50.0,
+      "location": "Bedford Hills, New York",
+      "remote": "Hybrid",
+      "date_posted": "2026-07-16",
+      "apply_url": "https://bhsg.com/jobs/job/a1466741ny-temp_1784214844-executive-assistant-bedford-hills-new-york/",
+      "source": "Beacon Hill",
+      "comp_period": "hr",
+      "summary": "Environmental services company located in Westchester County (Bedford Hills) is seeking to hire a Temporary Executive Assistant to support C-Suite individuals during a maternity leave, starting ASAP through February 2027.",
+      "benefits": [
+        "Parental leave"
       ]
     },
     {
@@ -1759,6 +1726,84 @@
       "source": "Beacon Hill",
       "summary": "Our client is seeking a highly capable Executive Assistant to support its C-Suite. This is a dynamic, high-visibility role that blends high-level executive support & calendar management with team coordination and executive operations, requiring exceptional attention to detail, organization, and...",
       "benefits": []
+    },
+    {
+      "id": "beacon-129421",
+      "title": "Office Coordinator/Executive Assistant",
+      "org_type": "Beacon Hill Staffing Group",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 110000,
+      "comp_high": 120000,
+      "location": "New York, New York",
+      "remote": "Onsite",
+      "date_posted": "2026-07-16",
+      "apply_url": "https://bhsg.com/jobs/job/a1467003ny-perm_1784235421-office-coordinator-executive-assistant-new-york-new-york/",
+      "source": "Beacon Hill",
+      "summary": "Our client is seeking a highly organized, polished Executive Assistant/Office Coordinator to support a team of senior investment professionals within a leading outsourced investment office.",
+      "benefits": [
+        "Bonus",
+        "401(k)",
+        "Health coverage",
+        "Paid time off",
+        "Wellness",
+        "Overtime pay"
+      ]
+    },
+    {
+      "id": "beacon-129383",
+      "title": "Executive Assistant",
+      "org_type": "Beacon Hill Staffing Group",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 50.0,
+      "comp_high": 50.0,
+      "location": "New York, New York",
+      "remote": "Onsite",
+      "date_posted": "2026-07-16",
+      "apply_url": "https://bhsg.com/jobs/job/a1466944ny-temp_1784219393-executive-assistant-new-york-new-york/",
+      "source": "Beacon Hill",
+      "comp_period": "hr",
+      "summary": "Our client is seeking a professional, proactive, and highly organized Temporary Executive/Personal Assistant to support a senior executive in a fast-paced, high-touch environment.",
+      "benefits": []
+    },
+    {
+      "id": "beacon-129376",
+      "title": "Executive Assistant",
+      "org_type": "Beacon Hill Staffing Group",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 50.0,
+      "comp_high": 50.0,
+      "location": "New York, New York",
+      "remote": "Onsite",
+      "date_posted": "2026-07-16",
+      "apply_url": "https://bhsg.com/jobs/job/a1466857ny-temp_1784214980-executive-assistant-new-york-new-york/",
+      "source": "Beacon Hill",
+      "comp_period": "hr",
+      "summary": "Our cleint, a Pivate Equity firm located in Midtown West, Manhattan is seeking to hire a Temporary Executive Assistant to provide coverage through April 2027.",
+      "benefits": [
+        "Equity"
+      ]
+    },
+    {
+      "id": "beacon-129362",
+      "title": "Executive Assistant",
+      "org_type": "Beacon Hill Staffing Group",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 50.0,
+      "comp_high": 50.0,
+      "location": "New York, New York",
+      "remote": "Onsite",
+      "date_posted": "2026-07-16",
+      "apply_url": "https://bhsg.com/jobs/job/a1466698ny-temp_1784212201-executive-assistant-new-york-new-york/",
+      "source": "Beacon Hill",
+      "comp_period": "hr",
+      "summary": "Our client, a private equity firm located in Midtown, Manhattan is looking for a Temporary Executive Assistant to join their team. This position will start ASAP and will be in-office 5 day. Hours are 8:30 AM – 5:30 PM (flexibility required) for about 2-3 months. Hourly rate is up to $50/hr DOE.",
+      "benefits": [
+        "Equity"
+      ]
     },
     {
       "id": "beacon-129356",
@@ -1992,27 +2037,6 @@
       ]
     },
     {
-      "id": "beacon-128880",
-      "title": "Executive Assistant",
-      "org_type": "Beacon Hill Staffing Group",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 110000,
-      "comp_high": 110000,
-      "location": "New York, New York",
-      "remote": "Onsite",
-      "date_posted": "2026-07-08",
-      "apply_url": "https://bhsg.com/jobs/job/a1465699ny-perm_1783525404-executive-assistant-new-york-new-york/",
-      "source": "Beacon Hill",
-      "summary": "Our client is seeking a highly organized, proactive Executive Assistant to support a senior leader within the Development team at a leading real estate firm.",
-      "benefits": [
-        "Bonus",
-        "401(k)",
-        "Health coverage",
-        "Wellness"
-      ]
-    },
-    {
       "id": "beacon-128054",
       "title": "Executive Assistant",
       "org_type": "Beacon Hill Staffing Group",
@@ -2034,22 +2058,6 @@
       ]
     },
     {
-      "id": "beacon-128170",
-      "title": "Executive Assistant to President & Director, $45-$50/hr, DC",
-      "org_type": "Beacon Hill Staffing Group",
-      "category": "Executive Assistant",
-      "seniority": "Director",
-      "comp_low": 90000,
-      "comp_high": 110000,
-      "location": "Washington, District of Columbia",
-      "remote": "Onsite",
-      "date_posted": "2026-06-23",
-      "apply_url": "https://bhsg.com/jobs/job/a1463772dc-temp_1782236905-executive-assistant-to-president-director-45-50-hr-dc-washington-district-of-columbia/",
-      "source": "Beacon Hill",
-      "summary": "Our client, a mission-driven advocacy organization is seeking an Executive Assistant to join their team on a temporary to permanent in Washington, D.C.",
-      "benefits": []
-    },
-    {
       "id": "lasalle-57740",
       "title": "Calendar Manager and Executive Assistant",
       "org_type": "",
@@ -2059,7 +2067,7 @@
       "comp_high": 130000,
       "location": "New York , New York",
       "remote": "Onsite",
-      "date_posted": "2026-07-14",
+      "date_posted": "2026-07-13",
       "apply_url": "https://www.thelasallenetwork.com/jobs/calendar-manager-and-executive-assistant-161072/",
       "source": "LaSalle Network",
       "summary": "LaSalle Network is hiring for an experienced Calendar Manager and Executive Assistant on behalf of one of our top clients in the global holdings industry in New York City to support one of their Managing Directors.",
@@ -2077,7 +2085,7 @@
       "comp_high": 70.0,
       "location": "New York, New York",
       "remote": "Onsite",
-      "date_posted": "2026-07-11",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.thelasallenetwork.com/jobs/executive-assistant-161749/",
       "source": "LaSalle Network",
       "comp_period": "hr",
@@ -2094,7 +2102,7 @@
       "comp_high": 145000,
       "location": "New York, New York",
       "remote": "Onsite",
-      "date_posted": "2026-07-10",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.thelasallenetwork.com/jobs/executive-assistant-161835/",
       "source": "LaSalle Network",
       "summary": "A prestigious law firm in New York City is seeking an experienced Executive Assistant to support a senior partner. The ideal candidate is a polished professional who thrives on staying one step ahead, managing complex priorities, and serving as a trusted right hand.",
@@ -2977,6 +2985,25 @@
       "benefits": []
     },
     {
+      "id": "consider-sequoia-8637303002",
+      "title": "Executive Assistant, Brand",
+      "org_type": "Faire Wholesale, Inc.",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 55.75,
+      "comp_high": 76.7,
+      "location": "San Francisco, CA",
+      "remote": "Onsite",
+      "date_posted": "2026-07-16",
+      "apply_url": "https://boards.greenhouse.io/faire/jobs/8637303002?gh_jid=8637303002",
+      "source": "Sequoia Portfolio",
+      "comp_period": "hr",
+      "summary": "Skillfully manage five leader’s calendars across time zones with diplomacy, discretion, and excellent judgment",
+      "benefits": [
+        "Equity"
+      ]
+    },
+    {
       "id": "consider-sequoia-6014246004",
       "title": "Senior Executive Assistant, Global Customer Solutions | United States | PST or MST | Remote",
       "org_type": "Grafana Labs",
@@ -3120,28 +3147,6 @@
       ]
     },
     {
-      "id": "consider-bessemer-4706462005",
-      "title": "Executive Assistant",
-      "org_type": "VTS",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 95000,
-      "comp_high": 125000,
-      "location": "New York, New York, United States",
-      "remote": "Onsite",
-      "date_posted": "2026-06-16",
-      "apply_url": "https://job-boards.greenhouse.io/vts/jobs/4706462005",
-      "source": "Bessemer Portfolio",
-      "summary": "Manage a meeting heavy calendar and stay on top of their changing priorities, acting as a gatekeeper and partner",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Paid time off",
-        "Parental leave"
-      ]
-    },
-    {
       "id": "consider-bessemer-20041f6d-718f-48ea-8f92-",
       "title": "Executive Assistant",
       "org_type": "Legora",
@@ -3187,23 +3192,24 @@
       ]
     },
     {
-      "id": "getro-222-84719493",
-      "title": "Business Operations Lead, Print",
-      "org_type": "Canva",
-      "category": "Executive Operations",
+      "id": "consider-bessemer-4706462005",
+      "title": "Executive Assistant",
+      "org_type": "VTS",
+      "category": "Executive Assistant",
       "seniority": "",
-      "comp_low": 151000,
-      "comp_high": 208000,
-      "location": "San Francisco, CA, USA",
+      "comp_low": 95000,
+      "comp_high": 125000,
+      "location": "New York, New York, United States",
       "remote": "Onsite",
-      "date_posted": "2026-06-30",
-      "apply_url": "https://jobs.smartrecruiters.com/Canva/6000000001192109",
-      "source": "General Catalyst Portfolio",
-      "summary": "Thanks for stopping by. We know job hunting can be a little time-consuming and you're probably keen to find out what's on offer, so we'll get straight to the point.",
+      "date_posted": "2026-06-16",
+      "apply_url": "https://job-boards.greenhouse.io/vts/jobs/4706462005",
+      "source": "Bessemer Portfolio",
+      "summary": "Manage a meeting heavy calendar and stay on top of their changing priorities, acting as a gatekeeper and partner",
       "benefits": [
         "Equity",
         "401(k)",
         "Health coverage",
+        "Paid time off",
         "Parental leave"
       ]
     },
@@ -3804,27 +3810,6 @@
       ]
     },
     {
-      "id": "getro-222-86400740",
-      "title": "Global Partnerships Operations Lead",
-      "org_type": "Canva",
-      "category": "Director / VP of Operations",
-      "seniority": "",
-      "comp_low": 204000,
-      "comp_high": 313000,
-      "location": "San Francisco, CA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-15",
-      "apply_url": "https://jobs.smartrecruiters.com/Canva/6000000001232423",
-      "source": "General Catalyst Portfolio",
-      "summary": "Thanks for stopping by. We know job hunting can be a little time consuming and you're probably keen to find out what's on offer, so we'll get straight to the point.",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Parental leave"
-      ]
-    },
-    {
       "id": "getro-222-86231755",
       "title": "Head of Operations Planning",
       "org_type": "Mercor",
@@ -3864,6 +3849,27 @@
         "Equity",
         "401(k)",
         "Health coverage"
+      ]
+    },
+    {
+      "id": "getro-222-86400740",
+      "title": "Global Partnerships Operations Lead",
+      "org_type": "Canva",
+      "category": "Director / VP of Operations",
+      "seniority": "",
+      "comp_low": 204000,
+      "comp_high": 313000,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-07-15",
+      "apply_url": "https://jobs.smartrecruiters.com/Canva/6000000001232423",
+      "source": "General Catalyst Portfolio",
+      "summary": "Thanks for stopping by. We know job hunting can be a little time consuming and you're probably keen to find out what's on offer, so we'll get straight to the point.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Parental leave"
       ]
     },
     {
@@ -4022,24 +4028,6 @@
       ]
     },
     {
-      "id": "getro-8672-73849000",
-      "title": "Chief of Staff",
-      "org_type": "Ema Unlimited",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 200000,
-      "comp_high": 250000,
-      "location": "San Francisco, CA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-04-09",
-      "apply_url": "https://jobs.ashbyhq.com/ema/2856915c-3957-4472-8e79-0ec28acab899",
-      "source": "Accel Portfolio",
-      "summary": "As Chief of Staff to the CEO, you will be the strategic nerve center of the entire company — a true force-multiplier to Surojit Chatterjee (ex CPO Coinbase, VP Products at Google).",
-      "benefits": [
-        "Equity"
-      ]
-    },
-    {
       "id": "getro-8672-86529373",
       "title": "Senior Executive Assistant to the CEO & CRO",
       "org_type": "commercetools",
@@ -4120,21 +4108,25 @@
       ]
     },
     {
-      "id": "getro-8672-84229663",
-      "title": "Executive Assistant",
-      "org_type": "Hpe Simplivity",
+      "id": "getro-8672-84486682",
+      "title": "Executive Assistant/Senior Executive Assistant",
+      "org_type": "Airkit",
       "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 44.52,
-      "comp_high": 102.64,
-      "location": "Spring, TX, USA",
+      "seniority": "Senior",
+      "comp_low": 81800,
+      "comp_high": 145200,
+      "location": "San Francisco, CA, USA",
       "remote": "Onsite",
-      "date_posted": "2026-06-26",
-      "apply_url": "https://careers.hpe.com/us/en/job/1209419",
+      "date_posted": "2026-06-29",
+      "apply_url": "https://www.salesforce.com/company/careers/jobs/JR337145/executive-assistantsenior-executive-assistant/",
       "source": "Accel Portfolio",
-      "comp_period": "hr",
-      "summary": "Embrace the opportunity to become an Executive Assistant supporting the Chief People Officer. Leverage your expertise in calendar management, travel coordination, and meeting facilitation to drive executive productivity.",
-      "benefits": []
+      "summary": "Our Executive Assistants are made up of a team of experienced professionals that support our top executives across the globe. These critical team members are viewed as strategic partners who keep the executives and their teams focused on company goals while embracing the Salesforce Ohana.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Parental leave"
+      ]
     },
     {
       "id": "getro-8672-82874655",
@@ -4175,6 +4167,28 @@
       ]
     },
     {
+      "id": "getro-8672-82265004",
+      "title": "Lead Executive Assistant",
+      "org_type": "DocuSign",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 118000,
+      "comp_high": 183050,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-06-10",
+      "apply_url": "https://uscareers-docusign.icims.com/jobs/29585/lead-executive-assistant/job",
+      "source": "Accel Portfolio",
+      "summary": "We are looking for a seasoned, strategic, and demonstrated leader to join our team as the Lead Executive Assistant to our President and General Manager of Growth.",
+      "benefits": [
+        "Bonus",
+        "Equity",
+        "Health coverage",
+        "Paid time off",
+        "Parental leave"
+      ]
+    },
+    {
       "id": "getro-8672-84873082",
       "title": "Executive Business Partner",
       "org_type": "Klaviyo",
@@ -4192,22 +4206,6 @@
         "Bonus",
         "Equity"
       ]
-    },
-    {
-      "id": "getro-8672-83701862",
-      "title": "Executive Business Partner",
-      "org_type": "Dropbox",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 121400,
-      "comp_high": 184800,
-      "location": "United States",
-      "remote": "Remote",
-      "date_posted": "2026-06-23",
-      "apply_url": "https://www.dropbox.jobs/en/jobs/8014038/executive-business-partner/",
-      "source": "Accel Portfolio",
-      "summary": "You have typed the web address incorrectly, or; the page you were looking for may have been moved, updated or deleted.; Building Dash: How RAG and AI agents help us meet the needs of businesses",
-      "benefits": []
     },
     {
       "id": "getro-8672-78911858",
@@ -4230,19 +4228,19 @@
       ]
     },
     {
-      "id": "getro-8672-84358480",
-      "title": "Programs and Business Operations Lead",
-      "org_type": "HotelTonight",
-      "category": "Executive Operations",
-      "seniority": "",
-      "comp_low": 168000,
-      "comp_high": 203000,
-      "location": "United States",
+      "id": "getro-8672-73849000",
+      "title": "Chief of Staff",
+      "org_type": "Ema Unlimited",
+      "category": "Chief of Staff",
+      "seniority": "Lead",
+      "comp_low": 200000,
+      "comp_high": 250000,
+      "location": "San Francisco, CA, USA",
       "remote": "Onsite",
-      "date_posted": "2026-06-27",
-      "apply_url": "https://careers.airbnb.com/positions/8028783/",
+      "date_posted": "2026-04-09",
+      "apply_url": "https://jobs.ashbyhq.com/ema/2856915c-3957-4472-8e79-0ec28acab899",
       "source": "Accel Portfolio",
-      "summary": "Airbnb was born in 2007 when two hosts welcomed three guests to their San Francisco home, and has since grown to over 5 million hosts who have welcomed over 2 billion guest arrivals in almost every country across the globe.",
+      "summary": "As Chief of Staff to the CEO, you will be the strategic nerve center of the entire company — a true force-multiplier to Surojit Chatterjee (ex CPO Coinbase, VP Products at Google).",
       "benefits": [
         "Equity"
       ]
