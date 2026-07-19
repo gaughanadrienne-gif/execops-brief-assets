@@ -1,207 +1,8 @@
 {
   "_note": "REAL curated Executive Assistant, Executive Operations, and Chief of Staff roles for The Exec Ops Brief job board, aggregated from recruiting agencies, direct job boards, and VC portfolio feeds. PAY FLOOR (enforced in code since 2026-07-13): every role on this board carries a compensation figure PUBLISHED BY THE SOURCE whose midpoint -- (comp_low + comp_high) / 2, or the single figure where only one is published -- is at least $100,000. A role whose published midpoint falls below $100k is excluded, and a role whose source publishes no comp figure at all is excluded (there are no 'comp not listed' rows). No comp figure is ever estimated, inferred, or invented; comp honesty outranks board size. Where a posting publishes an HOURLY rate instead of a salary, comp_period='hr' and comp_low/comp_high hold the verbatim $/hr figures (annualized at 2080h ONLY to apply the floor, never for display). Most roles also carry a short summary excerpted VERBATIM from the posting (never paraphrased); summary is null rather than invented when the source lacks readable role-specific text. A benefits list (bonus, equity, 401(k), health coverage, PTO, etc) is detected only where the posting states it. Apply links point to the original source listing.",
-  "updated": "2026-07-18",
-  "count": 251,
+  "updated": "2026-07-19",
+  "count": 231,
   "roles": [
-    {
-      "id": "bloom-1468",
-      "title": "Executive Assistant at Series B Fintech Startup",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 150000,
-      "comp_high": 180000,
-      "location": "New York City",
-      "remote": "Onsite",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1468",
-      "source": "Bloom Talent",
-      "summary": "Fast growing fintech startup is looking for an Executive Assistant to support Senior Leadership. With their recent funding backed by well-known VCs, this is an incredible opportunity to be a part of a close-knit team at a cutting-edge company reshaping an entire industry.",
-      "benefits": [
-        "Equity",
-        "Paid time off"
-      ]
-    },
-    {
-      "id": "bloom-1466",
-      "title": "Executive Assistant to CEO / Office Manager at Series B AI Safety Startup",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 140000,
-      "comp_high": 150000,
-      "location": "New York",
-      "remote": "Onsite",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1466",
-      "source": "Bloom Talent",
-      "summary": "AI infrastructure safety startup dedicated to making the internet safer is looking for an Executive Assistant to the CEO who will also act as the Office Manager.",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Paid time off"
-      ]
-    },
-    {
-      "id": "bloom-1463",
-      "title": "Executive Assistant to CEO at Series B Fintech Startup",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 180000,
-      "comp_high": 200000,
-      "location": "New York",
-      "remote": "Onsite",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1463",
-      "source": "Bloom Talent",
-      "summary": "Fast-growing, mission-driven fintech is looking for an Executive Assistant to support their Co-Founder & CEO. Backed by top-tier VC’s and at a pivotal growth moment, this is an exciting opportunity to be the CEO’s first Executive Assistant and work alongside a collaborative, high-energy team of 60.",
-      "benefits": [
-        "401(k)",
-        "Paid time off"
-      ]
-    },
-    {
-      "id": "bloom-1458",
-      "title": "Executive Assistant to Co-Founders at Mission-driven Research Organization",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 130000,
-      "comp_high": 150000,
-      "location": "New York",
-      "remote": "Hybrid",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1458",
-      "source": "Bloom Talent",
-      "summary": "Mission-driven scientific research organization is looking for an Executive Assistant to support the two Co-Founders. This is a rare opportunity to be part of a 20-person team doing something genuinely meaningful at the intersection of science, policy, and institutional change.",
-      "benefits": [
-        "401(k)",
-        "Paid time off",
-        "Wellness"
-      ]
-    },
-    {
-      "id": "bloom-1376",
-      "title": "Executive Assistant/Personal Assistant to Office of the CEO at Series C Internet Infrastructure Startup",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 150000,
-      "comp_high": 180000,
-      "location": "San Francisco",
-      "remote": "Onsite",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1376",
-      "source": "Bloom Talent",
-      "summary": "Innovative startup revolutionizing network infrastructure for businesses is looking for an Executive Assistant/Personal Assistant to join the Office of the CEO. With a recent Series C, it's an exciting time to step into a high-impact role at the center of a fast-moving organization.",
-      "benefits": [
-        "Equity",
-        "Paid time off"
-      ]
-    },
-    {
-      "id": "bloom-1454",
-      "title": "Executive Assistant to a Partner at a Leading Venture Firm",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 130000,
-      "comp_high": 160000,
-      "location": "San Francisco",
-      "remote": "Hybrid",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1454",
-      "source": "Bloom Talent",
-      "summary": "Leading venture capital firm known for backing founders at the earliest stages is looking for an Executive Assistant to support one of their Partners.",
-      "benefits": [
-        "401(k)",
-        "Paid time off"
-      ]
-    },
-    {
-      "id": "bloom-1394",
-      "title": "Executive Assistant to CTO/President at Early-stage Mission-driven Startup",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 150000,
-      "comp_high": 200000,
-      "location": "San Francisco",
-      "remote": "Onsite",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1394",
-      "source": "Bloom Talent",
-      "summary": "Early-stage, mission-driven startup focused on transforming the daily human experience is looking for an Executive Assistant to support the CTO/President.",
-      "benefits": [
-        "Equity"
-      ]
-    },
-    {
-      "id": "bloom-1362",
-      "title": "Executive Assistant to Founder of Fast-growing Series A Startup",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 140000,
-      "comp_high": 150000,
-      "location": "New York",
-      "remote": "Onsite",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1362",
-      "source": "Bloom Talent",
-      "summary": "High-profile founder is looking for an Executive Assistant to join her team. With their recent Series A, this is an incredible opportunity to join a fast-growing startup and be an early member of the team!",
-      "benefits": [
-        "Paid time off"
-      ]
-    },
-    {
-      "id": "bloom-1304",
-      "title": "Executive Assistant to Partners at Well-known Venture Firm",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 130000,
-      "comp_high": 150000,
-      "location": "New York",
-      "remote": "Hybrid",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1304",
-      "source": "Bloom Talent",
-      "summary": "VC firm known for its portfolio of high-profile companies is looking for Executive Assistant(s) to support Senior Executives / Partners. This is a great opportunity to join a collaborative, hard-working team along with 10 other EAs.",
-      "benefits": [
-        "401(k)",
-        "Health coverage",
-        "Paid time off"
-      ]
-    },
-    {
-      "id": "bloom-1425",
-      "title": "Executive Assistant/Office Manager at Early-stage Venture Firm",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 130000,
-      "comp_high": 140000,
-      "location": "Palo Alto",
-      "remote": "Hybrid",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1425",
-      "source": "Bloom Talent",
-      "summary": "Early-stage venture firm investing in deep tech, health tech, and software is looking for an Executive Assistant/Office Manager to join their team. This is a great opportunity to grow alongside the firm as it scales!",
-      "benefits": [
-        "Bonus",
-        "401(k)",
-        "Paid time off"
-      ]
-    },
-    {
-      "id": "bloom-1469",
-      "title": "Executive Assistant to Founder & Operations at Early-stage, Mission-driven Startup",
-      "org_type": "",
-      "category": "Executive Operations",
-      "seniority": "Senior",
-      "comp_low": 120000,
-      "comp_high": 170000,
-      "location": "New York",
-      "remote": "Onsite",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1469",
-      "source": "Bloom Talent",
-      "summary": "Early-stage, seed-funded startup on a mission to build cleaner alternatives to high-exposure everyday consumer products is looking for an Executive Assistant & Operations partner to support the Founder/CEO.",
-      "benefits": [
-        "Equity"
-      ]
-    },
     {
       "id": "cgc-185211",
       "title": "Executive Assistant to CEO",
@@ -278,6 +79,22 @@
       "benefits": [
         "Equity"
       ]
+    },
+    {
+      "id": "cgc-183785",
+      "title": "Executive Assistant",
+      "org_type": "",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 100000,
+      "comp_high": 125000,
+      "location": "San Francisco, CA",
+      "remote": "Onsite",
+      "date_posted": "2026-07-01",
+      "apply_url": "https://www.careergroupcompanies.com/job-posting/183785",
+      "source": "Career Group",
+      "summary": "A prestigious global law firm known for its collaborative culture, international reach, and growth-focused mindset is seeking an experienced Executive Assistant to support a senior Finance Partner and broader legal team.",
+      "benefits": []
     },
     {
       "id": "cgc-184865",
@@ -440,41 +257,6 @@
       ]
     },
     {
-      "id": "cgc-183354",
-      "title": "Executive Assistant",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 130000,
-      "comp_high": 155000,
-      "location": "San Francisco, CA",
-      "remote": "Onsite",
-      "date_posted": "2026-06-08",
-      "apply_url": "https://www.careergroupcompanies.com/job-posting/183354",
-      "source": "Career Group",
-      "summary": "Our Client Our client is a top-tier private equity firm building out a new, high-impact team . Known for their sharp intellect, collaborative culture, and ambitious mindset, this group is positioning themselves among the top players in the space.",
-      "benefits": [
-        "Bonus",
-        "Equity"
-      ]
-    },
-    {
-      "id": "cgc-182390",
-      "title": "Executive Assistant/Office Manager",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 120000,
-      "comp_high": 140000,
-      "location": "San Francisco, CA",
-      "remote": "Onsite",
-      "date_posted": "2026-06-08",
-      "apply_url": "https://www.careergroupcompanies.com/job-posting/182390",
-      "source": "Career Group",
-      "summary": "Our client, a high-growth, venture-backed startup, is seeking an Office Manager & Executive Assistant to join their team and play a pivotal role in shaping how the company operates and scales.",
-      "benefits": []
-    },
-    {
       "id": "burke-k1ZDY1ZXFx",
       "title": "Executive Assistant to Co-Founder",
       "org_type": "Venture Capital Firm",
@@ -489,6 +271,24 @@
       "source": "Burke & Co",
       "summary": "Our client, a highly-regarded boutique venture capital firm, is seeking an expert Executive Assistant to support its Co-Founder/Managing Director.",
       "benefits": []
+    },
+    {
+      "id": "burke-YxYWY1Z2li",
+      "title": "Executive Assistant/Client Services Associate",
+      "org_type": "Wealth Management Firm",
+      "category": "Executive Assistant",
+      "seniority": "",
+      "comp_low": 100000,
+      "comp_high": 110000,
+      "location": "Chicago, Illinois",
+      "remote": "Onsite",
+      "date_posted": "2026-07-07",
+      "apply_url": "https://app.loxo.co/job/MTcwNS1xNnA5bzdldTYxYWY1Z2li",
+      "source": "Burke & Co",
+      "summary": "Our client, a rapidly growing independent wealth management firm managing over $1 billion in assets for UHNWIs, is seeking an Executive Assistant/Client Services Associate to support their CEO/Managing Partner & team of advisors.",
+      "benefits": [
+        "Bonus"
+      ]
     },
     {
       "id": "burke-Exd2ZmdmZz",
@@ -509,42 +309,6 @@
       ]
     },
     {
-      "id": "burke-YxYWY1Z2li",
-      "title": "Executive Assistant/Client Services Associate",
-      "org_type": "Wealth Management Firm",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 100000,
-      "comp_high": 110000,
-      "location": "Chicago, Illinois",
-      "remote": "Onsite",
-      "date_posted": "2026-07-09",
-      "apply_url": "https://app.loxo.co/job/MTcwNS1xNnA5bzdldTYxYWY1Z2li",
-      "source": "Burke & Co",
-      "summary": "Our client, a rapidly growing independent wealth management firm managing over $1 billion in assets for UHNWIs, is seeking an Executive Assistant/Client Services Associate to support their CEO/Managing Partner & team of advisors.",
-      "benefits": [
-        "Bonus"
-      ]
-    },
-    {
-      "id": "burke-c4MGdxcHU4",
-      "title": "Executive Assistant to Senior Leadership",
-      "org_type": "SaaS Startup",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 130000,
-      "comp_high": 155000,
-      "location": "San Francisco, California",
-      "remote": "Onsite",
-      "date_posted": "2026-07-15",
-      "apply_url": "https://app.loxo.co/job/MTcwNS1qM2xhcXp5MTc4MGdxcHU4",
-      "source": "Burke & Co",
-      "summary": "Our client, a Bay Area based SaaS startup with global reach, seeks a top-notch Executive Assistant to support two senior executives. This is a highly visible, high-impact role for someone who thrives at the center of executive operations and brings structure, rigor, and forward-thinking execution...",
-      "benefits": [
-        "Equity"
-      ]
-    },
-    {
       "id": "burke-R5OHMzNGsx",
       "title": "Executive Assistant to President & VP",
       "org_type": "AI Startup",
@@ -554,7 +318,7 @@
       "comp_high": 170000,
       "location": "New York City, New York",
       "remote": "Onsite",
-      "date_posted": "2026-07-15",
+      "date_posted": "2026-07-13",
       "apply_url": "https://app.loxo.co/job/MTcwNS12dG14NjF2b3R5OHMzNGsx",
       "source": "Burke & Co",
       "summary": "Our client, a high-growth tech startup building a purpose-driven AI platform, is seeking a highly polished & adaptable Executive Assistant to support the President and a Senior VP.",
@@ -573,7 +337,7 @@
       "comp_high": 170000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-07-15",
+      "date_posted": "2026-07-17",
       "apply_url": "https://app.loxo.co/job/MTcwNS1veWRsdnM1eG5xa3dvZXFs",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly scaling & venture-backed AI startup transforming the healthcare industry, is seeking an experienced Executive Assistant to provide high-level support to their Founder & CEO.",
@@ -609,7 +373,7 @@
       "comp_high": 200000,
       "location": "San Mateo, California",
       "remote": "Hybrid",
-      "date_posted": "2026-07-15",
+      "date_posted": "2026-07-17",
       "apply_url": "https://app.loxo.co/job/MTcwNS11YnVrN3ZpMnFkbHV3dTho",
       "source": "Burke & Co",
       "summary": "Our client, an innovative & well-funded AI startup, seeks Executive Assistant to support their CEO/co-founder. This role provide expert-level administrative support, streamline their executive's day to day, and assist with project management & process improvements.",
@@ -824,25 +588,6 @@
       ]
     },
     {
-      "id": "csuite-c09936c6",
-      "title": "Executive Assistant to Co-Founders of Consulting Firm, Short Hills, NJ",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 115000,
-      "comp_high": 120000,
-      "location": "Short Hills, New Jersey",
-      "remote": "Onsite",
-      "apply_url": "https://careers.topechelon.com/portals/4384ddd4-53cf-4f9f-be2f-180d5e77ccf9/jobs/c09936c6-2cfd-4c23-b676-67559b2e974f",
-      "source": "C-Suite Assistants",
-      "summary": "A successful, growing global consulting firm in Short Hills, NJ is looking for an Executive Assistant to the Co-Founders. The company has been in business for 6 years and has offices in the US and UK and a total of 270 employees, with 65 in the NJ office. The role is 5 days in office.",
-      "benefits": [
-        "401(k)",
-        "Health coverage",
-        "Paid time off"
-      ]
-    },
-    {
       "id": "csuite-6d146b9a",
       "title": "Hybrid Executive Assistant to Leadership Team",
       "org_type": "",
@@ -1015,7 +760,7 @@
       "comp_high": 140000,
       "location": "New York City Metropolitan Area",
       "remote": "Onsite",
-      "date_posted": "2026-07-13",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.linkedin.com/jobs/view/4439320452/",
       "source": "Truex Metier",
       "summary": "We are partnering with a highly successful private investment firm to find a dynamic, team-oriented Executive Assistant for their close-knit New York office.",
@@ -1033,7 +778,7 @@
       "comp_high": 190000,
       "location": "San Francisco Bay Area",
       "remote": "Onsite",
-      "date_posted": "2026-07-13",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.linkedin.com/jobs/view/4439351339/",
       "source": "Truex Metier",
       "summary": "We’re partnering with a fast-growing, venture-backed tech company on the search for an exceptional Executive Assistant to support senior leadership during a pivotal stage of growth.",
@@ -1051,7 +796,7 @@
       "comp_high": 150000,
       "location": "San Francisco Bay Area",
       "remote": "Onsite",
-      "date_posted": "2026-07-13",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.linkedin.com/jobs/view/4439356342/",
       "source": "Truex Metier",
       "summary": "We are thrilled to partner with a top-tier, premier venture investment firm in San Francisco to recruit an exceptional, high-energy Office Manager / Executive Assistant .",
@@ -1067,7 +812,7 @@
       "comp_high": 190000,
       "location": "San Francisco Bay Area",
       "remote": "Onsite",
-      "date_posted": "2026-07-13",
+      "date_posted": "2026-07-12",
       "apply_url": "https://www.linkedin.com/jobs/view/4439344702/",
       "source": "Truex Metier",
       "summary": "We are seeking a highly organized, execution-oriented Executive Business Partner to serve as a strategic partner to executive leadership at a rapidly scaling Series G technology company backed by some of Silicon Valley’s most prominent venture capital firms.",
@@ -1088,24 +833,6 @@
       "source": "Chief of Staff Network",
       "summary": null,
       "benefits": []
-    },
-    {
-      "id": "cosn-chief-of-staff-to-the-ceo-selective-insurance-c5f",
-      "title": "Chief of Staff to the CEO",
-      "org_type": "Selective Insurance",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 300000,
-      "comp_high": 350000,
-      "location": "Short Hills, NJ",
-      "remote": "Onsite",
-      "date_posted": "2026-06-18",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-to-the-ceo-selective-insurance-c5f",
-      "source": "Chief of Staff Network",
-      "summary": "About Us At Selective, we don't just insure uniquely, we employ uniqueness. ​ Selective is a midsized U.S. domestic property and casualty insurance company with a history of strong, consistent financial performance for nearly 100 years.",
-      "benefits": [
-        "Paid time off"
-      ]
     },
     {
       "id": "cosn-deputy-chief-of-staff-remotehunter-1ad",
@@ -1300,6 +1027,27 @@
       "summary": "Chief of Staff - High-Growth Fintech Location: NYC (preferred) or remote US with NYC travel once a month. EST/CST. Comp: $90,000-$170,000 plus equity ​ For the right person, this role offers a pathway towards broader operational leadership and future COO responsibilities.",
       "benefits": [
         "Equity"
+      ]
+    },
+    {
+      "id": "getro-222-82447597",
+      "title": "Chief of Staff",
+      "org_type": "Fabric",
+      "category": "Chief of Staff",
+      "seniority": "Lead",
+      "comp_low": 160000,
+      "comp_high": 190000,
+      "location": "New York, NY, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-06-11",
+      "apply_url": "https://jobs.gem.com/fabrichealth/am9icG9zdDpm2NwjqHIn0MMK8dxJSf_3",
+      "source": "General Catalyst Portfolio",
+      "summary": "Fabric is looking for a Chief of Staff to serve as the CEO's operational right hand. This is not a strategy-only role. You will own the operating rhythm of the executive team, drive governance and accountability across the organization, and get into the details when something is stuck, behind, or...",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off"
       ]
     },
     {
@@ -1529,6 +1277,24 @@
         "Equity",
         "Health coverage",
         "Parental leave"
+      ]
+    },
+    {
+      "id": "cosn-chief-of-staff-to-the-ceo-selective-insurance-c5f",
+      "title": "Chief of Staff to the CEO",
+      "org_type": "Selective Insurance",
+      "category": "Chief of Staff",
+      "seniority": "Lead",
+      "comp_low": 300000,
+      "comp_high": 350000,
+      "location": "Short Hills, NJ",
+      "remote": "Onsite",
+      "date_posted": "2026-06-18",
+      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-to-the-ceo-selective-insurance-c5f",
+      "source": "Chief of Staff Network",
+      "summary": "About Us At Selective, we don't just insure uniquely, we employ uniqueness. ​ Selective is a midsized U.S. domestic property and casualty insurance company with a history of strong, consistent financial performance for nearly 100 years.",
+      "benefits": [
+        "Paid time off"
       ]
     },
     {
@@ -3197,28 +2963,6 @@
       ]
     },
     {
-      "id": "consider-bessemer-6093807004",
-      "title": "Senior Executive Assistant, GTM",
-      "org_type": "Syndio",
-      "category": "Executive Assistant",
-      "seniority": "Senior",
-      "comp_low": 95000,
-      "comp_high": 112000,
-      "location": "Remote Home Office - United States",
-      "remote": "Remote",
-      "date_posted": "2026-06-18",
-      "apply_url": "https://synd.io/careers/?gh_jid=6093807004",
-      "source": "Bessemer Portfolio",
-      "summary": "As Syndio's go-to-market organization scales, we're seeking a GTM Executive Assistant to provide dedicated, high-quality administrative and operational support to our SVP, Revenue, SVP, Marketing and our Chief Legal & Partnerships Officer — based in EST, CT and PT time zones.",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Paid time off",
-        "Parental leave"
-      ]
-    },
-    {
       "id": "consider-bessemer-20041f6d-718f-48ea-8f92-",
       "title": "Executive Assistant",
       "org_type": "Legora",
@@ -3264,6 +3008,28 @@
       ]
     },
     {
+      "id": "consider-bessemer-6093807004",
+      "title": "Senior Executive Assistant, GTM",
+      "org_type": "Syndio",
+      "category": "Executive Assistant",
+      "seniority": "Senior",
+      "comp_low": 95000,
+      "comp_high": 112000,
+      "location": "Remote Home Office - United States",
+      "remote": "Remote",
+      "date_posted": "2026-06-18",
+      "apply_url": "https://synd.io/careers/?gh_jid=6093807004",
+      "source": "Bessemer Portfolio",
+      "summary": "As Syndio's go-to-market organization scales, we're seeking a GTM Executive Assistant to provide dedicated, high-quality administrative and operational support to our SVP, Revenue, SVP, Marketing and our Chief Legal & Partnerships Officer — based in EST, CT and PT time zones.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off",
+        "Parental leave"
+      ]
+    },
+    {
       "id": "consider-bessemer-4706462005",
       "title": "Executive Assistant",
       "org_type": "VTS",
@@ -3302,22 +3068,6 @@
       "benefits": [
         "Equity"
       ]
-    },
-    {
-      "id": "consider-lightspeed-e80ad17e32ad1001ae7895e5",
-      "title": "Associate Vice President, Chief of Staff & Business Operations, Connectivity",
-      "org_type": "Marvell Semiconductor",
-      "category": "Chief of Staff",
-      "seniority": "VP",
-      "comp_low": 224460,
-      "comp_high": 336300,
-      "location": "Santa Clara, CA",
-      "remote": "Onsite",
-      "date_posted": "2026-06-25",
-      "apply_url": "https://marvell.wd1.myworkdayjobs.com/MarvellCareers/job/Santa-Clara-CA/Associate-Vice-President--Chief-of-Staff---Business-Operations--Connectivity_2602108",
-      "source": "Lightspeed Portfolio",
-      "summary": "Marvell’s semiconductor solutions are the essential building blocks of the data infrastructure that connects our world. Across enterprise, cloud and AI, and carrier architectures, our innovative technology is enabling new possibilities.",
-      "benefits": []
     },
     {
       "id": "consider-lightspeed-4706669005",
@@ -3688,159 +3438,6 @@
       ]
     },
     {
-      "id": "getro-222-86308118",
-      "title": "Expert Opportunity - Chief of Staff to the CEO ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "Austin, TX, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-14",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-to-the-ceo-%2480-hr-up-to-%241-600-week-at-ethos-4440506043",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff to the CEO who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
-      "id": "getro-222-86308065",
-      "title": "Expert Opportunity - Chief of Staff to the CEO ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "Chicago, IL, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-14",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-to-the-ceo-%2480-hr-up-to-%241-600-week-at-ethos-4440398265",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff to the CEO who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
-      "id": "getro-222-86308040",
-      "title": "Expert Opportunity - Chief of Staff / Business Operations Lead ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "Chicago, IL, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-14",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-business-operations-lead-%2480-hr-up-to-%241-600-week-at-ethos-4439591941",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff and business operations leaders who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
-      "id": "getro-222-86307914",
-      "title": "Expert Opportunity - Chief of Staff to the CEO ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "Boston, MA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-14",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-to-the-ceo-%2480-hr-up-to-%241-600-week-at-ethos-4440392807",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff to the CEO who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
-      "id": "getro-222-86307873",
-      "title": "Expert Opportunity - Chief of Staff to the CEO ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "San Francisco, CA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-14",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-to-the-ceo-%2480-hr-up-to-%241-600-week-at-ethos-4440395448",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff to the CEO who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
-      "id": "getro-222-86307817",
-      "title": "Expert Opportunity - Chief of Staff to the CEO ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "Seattle, WA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-14",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-to-the-ceo-%2480-hr-up-to-%241-600-week-at-ethos-4440500268",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff to the CEO who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
-      "id": "getro-222-86307747",
-      "title": "Expert Opportunity - Chief of Staff to the CEO ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "Los Angeles, CA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-14",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-to-the-ceo-%2480-hr-up-to-%241-600-week-at-ethos-4440394592",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff to the CEO who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
-      "id": "getro-222-86307613",
-      "title": "Expert Opportunity - Chief of Staff to the CEO ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "New York, NY, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-14",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-to-the-ceo-%2480-hr-up-to-%241-600-week-at-ethos-4440501213",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff to the CEO who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
-      "id": "getro-222-86106190",
-      "title": "Expert Opportunity - Chief of Staff / Business Operations Lead ($80/hr, up to $1,600/week)",
-      "org_type": "Ethos",
-      "category": "Chief of Staff",
-      "seniority": "Lead",
-      "comp_low": 80.0,
-      "comp_high": 80.0,
-      "location": "Seattle, WA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-12",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-business-operations-lead-%2480-hr-up-to-%241-600-week-at-ethos-4439700723",
-      "source": "General Catalyst Portfolio",
-      "comp_period": "hr",
-      "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff and business operations leaders who can help train their latest language model on professional presentation and slide deck tasks.",
-      "benefits": []
-    },
-    {
       "id": "getro-222-86105429",
       "title": "Expert Opportunity - Chief of Staff / Business Operations Lead ($80/hr, up to $1,600/week)",
       "org_type": "Ethos",
@@ -3858,17 +3455,17 @@
       "benefits": []
     },
     {
-      "id": "getro-222-86105344",
+      "id": "getro-222-86105362",
       "title": "Expert Opportunity - Chief of Staff / Business Operations Lead ($80/hr, up to $1,600/week)",
       "org_type": "Ethos",
       "category": "Chief of Staff",
       "seniority": "Lead",
       "comp_low": 80.0,
       "comp_high": 80.0,
-      "location": "United States",
+      "location": "New York, NY, USA",
       "remote": "Onsite",
       "date_posted": "2026-07-12",
-      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-business-operations-lead-%2480-hr-up-to-%241-600-week-at-ethos-4439580188",
+      "apply_url": "https://www.linkedin.com/jobs/view/expert-opportunity-chief-of-staff-business-operations-lead-%2480-hr-up-to-%241-600-week-at-ethos-4439563691",
       "source": "General Catalyst Portfolio",
       "comp_period": "hr",
       "summary": "We're working with a leading foundational AI lab to find experienced chiefs of staff and business operations leaders who can help train their latest language model on professional presentation and slide deck tasks.",
@@ -3888,6 +3485,42 @@
       "apply_url": "https://jobs.ashbyhq.com/arca/247dc0e1-c23c-4ace-8a51-5e0827fd3f17",
       "source": "General Catalyst Portfolio",
       "summary": "As Chief of Staff to the CEO, you are the company's force multiplier. You work on the priorities that matter most to the business, and you help build the functions and systems that keep it running and let it grow.",
+      "benefits": [
+        "Equity"
+      ]
+    },
+    {
+      "id": "getro-222-72204622",
+      "title": "Chief of Staff",
+      "org_type": "Sapien",
+      "category": "Chief of Staff",
+      "seniority": "Lead",
+      "comp_low": 125000,
+      "comp_high": 200000,
+      "location": "",
+      "remote": "Onsite",
+      "date_posted": "2026-03-26",
+      "apply_url": "https://jobs.ashbyhq.com/sapien/6233af5e-9bf1-4727-820a-382d9bd3fe1a",
+      "source": "General Catalyst Portfolio",
+      "summary": "Sapien is moving fast. The Chief of Staff exists to make sure the company moves with intention, not just speed. You'll sit directly with the founders, own the operational layer that keeps everything running, and drive the cross-functional work that doesn't fit neatly into any one function.",
+      "benefits": [
+        "Equity"
+      ]
+    },
+    {
+      "id": "getro-222-5346721",
+      "title": "Chief of Staff",
+      "org_type": "Hive",
+      "category": "Chief of Staff",
+      "seniority": "Lead",
+      "comp_low": 90000,
+      "comp_high": 160000,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2021-06-23",
+      "apply_url": "https://jobs.lever.co/hive/45a75ef2-3a69-401d-8ca7-274dc554bb59",
+      "source": "General Catalyst Portfolio",
+      "summary": "We are looking for a highly organized, detail-oriented Chief of Staff to work closely with our executive team to help streamline our productivity and oversee critical internal operations.",
       "benefits": [
         "Equity"
       ]
@@ -4117,6 +3750,24 @@
         "401(k)",
         "Health coverage",
         "Parental leave"
+      ]
+    },
+    {
+      "id": "getro-8672-86803975",
+      "title": "Chief of Staff, Go to Market",
+      "org_type": "UiPath",
+      "category": "Chief of Staff",
+      "seniority": "Lead",
+      "comp_low": 250000,
+      "comp_high": 260000,
+      "location": "New York, NY, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-07-18",
+      "apply_url": "https://jobs.ashbyhq.com/uipath/b76c09fa-8eed-4d65-90e1-9a22f1b9daf8",
+      "source": "Accel Portfolio",
+      "summary": "The anticipated base salary range for this position is between the amounts in the Compensation Tier . Base salary ranges may vary by geographic location and relevant experience, education, certifications, and seniority as compared to others doing substantially similar work.",
+      "benefits": [
+        "Equity"
       ]
     },
     {
