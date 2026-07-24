@@ -1106,6 +1106,13 @@
       form.dataset.eobBound = '1';
       form.setAttribute('target', 'eob-ml-frame');
       form.addEventListener('submit', function(){
+        // GA4 conversion: fire newsletter_signup on any opt-in submit (single opt-in, so submit ~= signup).
+        try {
+          var _idm = /\/forms\/(\d+)\/subscribe/.exec(form.getAttribute('action') || '');
+          var _fid = _idm ? _idm[1] : '';
+          if (window.gtag) { window.gtag('event', 'newsletter_signup', { method: 'mailerlite', form_id: _fid }); }
+          else if (window.dataLayer) { window.dataLayer.push({ event: 'newsletter_signup', method: 'mailerlite', form_id: _fid }); }
+        } catch(e){}
         var button = form.querySelector('button[type="submit"]');
         if (button){ button.disabled = true; button.textContent = 'Sending...'; }
         window.setTimeout(function(){
