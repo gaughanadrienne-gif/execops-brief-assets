@@ -1314,6 +1314,63 @@
     }
   }
 
+  // ---- 10d. /roles email trade (weekly new-roles alert) --------------------
+  // The board shows every role free on the page, so "subscribe for the roles"
+  // trades for something the visitor already has. This offers the one thing the
+  // page cannot: the weekly DELTA, delivered. Sender: Commercialization/Email/
+  // roles_digest.py (diffs roles.json against a snapshot, so a role is only
+  // announced once).
+  //
+  // DARK UNTIL WIRED: MailerLite's public API cannot create forms, so the
+  // "Roles Alert" form has to be made in the dashboard. Group already exists
+  // (193937631315231876). Drop the form id in below and this goes live on the
+  // next push. Empty id = module no-ops, nothing renders.
+  var ROLES_ALERT_FORM_ID = '';
+  function rolesOptIn(){
+    if (!ROLES_ALERT_FORM_ID) return;              // not wired yet
+    var board = byId('eob-jobboard');
+    if (!board || byId('eob-roles-optin')) return;
+    var head = board.querySelector('.eob-head');
+    if (!head) return;
+
+    if (!byId('eob-roles-optin-css')){
+      var st = document.createElement('style');
+      st.id = 'eob-roles-optin-css';
+      st.textContent =
+        '#eob-roles-optin{border:1px solid #D8D0BF;border-top:3px solid #7A2129;background:#fff;padding:1.15rem 1.25rem;margin:0 0 1.6rem;border-radius:2px}' +
+        '#eob-roles-optin .ro-k{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#7A2129;margin:0 0 .35rem}' +
+        '#eob-roles-optin .ro-h{font-family:"Spectral",Georgia,serif;font-weight:600;font-size:1.12rem;line-height:1.25;color:#1B1712;margin:0 0 .3rem}' +
+        '#eob-roles-optin .ro-p{font-family:"Public Sans",system-ui,sans-serif;font-size:.92rem;line-height:1.5;color:#6B6255;margin:0 0 .8rem;max-width:44rem}' +
+        '#eob-roles-optin form{display:flex;gap:.5rem;max-width:30rem;flex-wrap:wrap}' +
+        '#eob-roles-optin input[type="email"]{flex:1;min-width:12rem;border:1px solid #D8D0BF;border-radius:2px;padding:.6rem .8rem;font-family:"Public Sans",system-ui,sans-serif;font-size:.92rem;color:#1B1712;background:#F3F0E9}' +
+        '#eob-roles-optin input[type="email"]:focus{outline:none;border-color:#7A2129}' +
+        '#eob-roles-optin button{border:none;border-radius:2px;cursor:pointer;padding:.6rem 1.05rem;background:#7A2129;color:#F3F0E9;font-family:"Public Sans",system-ui,sans-serif;font-weight:600;font-size:.9rem;white-space:nowrap}' +
+        '#eob-roles-optin button:hover{background:#5E181F}' +
+        '#eob-roles-optin .eob-form-success{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.8rem;color:#1B1712}' +
+        '@media(max-width:520px){#eob-roles-optin form{flex-direction:column}#eob-roles-optin button{width:100%}}';
+      document.head.appendChild(st);
+    }
+
+    var box = document.createElement('section');
+    box.id = 'eob-roles-optin';
+    box.innerHTML =
+      '<p class="ro-k">Weekly roles alert</p>' +
+      '<h2 class="ro-h">Get the week\'s new $100k+ roles in your inbox.</h2>' +
+      '<p class="ro-p">The board below is always free and always current. The Monday email is the part you can\'t get by bookmarking it: only the roles that posted since last week, so you\'re not re-reading the same list to find what changed.</p>' +
+      '<form class="eob-ml-form" action="https://assets.mailerlite.com/jsonp/2493859/forms/' +
+        ROLES_ALERT_FORM_ID + '/subscribe" method="post" target="eob-ml-frame">' +
+        '<input type="email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>' +
+        '<input type="hidden" name="ml-submit" value="1">' +
+        '<input type="hidden" name="anticsrf" value="true">' +
+        '<button type="submit">Send me new roles</button>' +
+      '</form>';
+    head.parentNode.insertBefore(box, head.nextSibling);
+    // formFeedback() (module 7) binds .eob-ml-form site-wide for the hidden
+    // iframe target, success state and the GA4 newsletter_signup event, and it
+    // runs before this module, so re-run it for the form just inserted.
+    try { formFeedback(); } catch(e){}
+  }
+
   // ---- 11. BreadcrumbList schema -------------------------------------------
   // The header code-injection block already emits Organization + WebSite
   // site-wide and Article + FAQPage on /library/{slug}. BreadcrumbList was the
@@ -1369,6 +1426,7 @@
     try { shopPolish(); } catch(e){}           // native store styling (shop list + product pages)
     try { rolesPolish(); } catch(e){}          // /roles: h1 + honest board language until re-paste
     try { honestCopy(); } catch(e){}           // "curated" overclaim in shared CTA copy (site-wide)
+    try { rolesOptIn(); } catch(e){}           // /roles weekly new-roles trade (dark until form id set)
     try { breadcrumbs(); } catch(e){}          // BreadcrumbList JSON-LD (site-wide, non-home)
     if (!slug || !findArticle(slug)) return;   // only on known article pages (path-agnostic)
     var host = contentEl();
