@@ -1233,6 +1233,130 @@
     }
   }
 
+  // ---- 10. Roles page self-heal (H1 + honest board language) ----------------
+  // The live /roles paste predates the corrected pages_html/roles.html, so it
+  // still (a) has NO h1 at all, only an h2, and (b) calls the board "curated",
+  // which implies human vetting it does not do: it is an automated 7am scrape
+  // plus a published-comp $100k-midpoint rule filter. Same self-heal pattern as
+  // homePolish/fixLinks: hold the honest copy here until the page is re-pasted
+  // from source, then this quietly no-ops (every edit is guarded on the old
+  // string still being present). Idempotent.
+  function rolesPolish(){
+    var board = byId('eob-jobboard');
+    if (!board) return;
+
+    // 10a. Promote the head h2 to a real h1 (the page's only top-level heading)
+    // and carry .eob-head h2's size rule across, since the shared h1-h4 base
+    // rule does not include it.
+    var head = board.querySelector('.eob-head');
+    var h2 = head && head.querySelector('h2');
+    if (h2 && !head.querySelector('h1')){
+      if (!byId('eob-roles-h1-css')){
+        var st = document.createElement('style');
+        st.id = 'eob-roles-h1-css';
+        st.textContent = '#eob-jobboard .eob-head h1{font-size:clamp(1.7rem,3.2vw,2.4rem);margin:.5rem 0 .55rem}';
+        document.head.appendChild(st);
+      }
+      var h1 = document.createElement('h1');
+      h1.className = h2.className;
+      // Matches pages_html/roles.html, so a future paste is a no-op, not a flip.
+      h1.textContent = 'High-paying Executive Assistant and exec ops jobs.';
+      h2.parentNode.replaceChild(h1, h2);
+    }
+
+    // 10b. "Curated" overclaims. The loading string and the rendered count are
+    // written by the page's own inline script, so the count is patched again
+    // after it renders (observer self-disconnects, no long-lived listener).
+    var load = board.querySelector('.eob-loading');
+    if (load && /curated/i.test(load.textContent)) load.textContent = 'Loading roles.';
+
+    function fixCount(){
+      var n = board.querySelector('.eob-count') ||
+              board.querySelector('[class*="count"]');
+      if (n && /curated roles/i.test(n.innerHTML)){
+        n.innerHTML = n.innerHTML.replace(/curated roles/ig, 'roles');
+        return true;
+      }
+      return false;
+    }
+    if (!fixCount() && window.MutationObserver){
+      var obs = new MutationObserver(function(){ if (fixCount()) obs.disconnect(); });
+      obs.observe(board, { childList: true, subtree: true, characterData: true });
+      setTimeout(function(){ obs.disconnect(); }, 8000);
+    }
+  }
+
+  // ---- 10c. "Curated" overclaim, site-wide ---------------------------------
+  // The same claim appears in shared newsletter/CTA copy on several pages. The
+  // board is an automated scrape plus a published-comp $100k-midpoint filter,
+  // so "curated" (which reads as human vetting) is replaced with what is
+  // actually true. Exact-string map, text nodes only, so nothing else on the
+  // page can be touched; a re-paste from corrected source makes it a no-op.
+  var COPY_FIXES = [
+    ['Curated roles and operator playbooks', 'New $100k+ roles and operator playbooks'],
+    ['A curated digest of EA, exec-ops, and Chief of Staff roles',
+     'A weekly digest of EA, exec-ops, and Chief of Staff roles'],
+    ['A curated set of executive assistant, chief of staff, and operations openings',
+     'A screened set of executive assistant, chief of staff, and operations openings']
+  ];
+  function honestCopy(){
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    var node, hits = [];
+    while ((node = walker.nextNode())){
+      if (node.nodeValue.indexOf('urated') !== -1) hits.push(node);
+    }
+    for (var i = 0; i < hits.length; i++){
+      var v = hits[i].nodeValue;
+      for (var j = 0; j < COPY_FIXES.length; j++){
+        if (v.indexOf(COPY_FIXES[j][0]) !== -1) v = v.split(COPY_FIXES[j][0]).join(COPY_FIXES[j][1]);
+      }
+      if (v !== hits[i].nodeValue) hits[i].nodeValue = v;
+    }
+  }
+
+  // ---- 11. BreadcrumbList schema -------------------------------------------
+  // The header code-injection block already emits Organization + WebSite
+  // site-wide and Article + FAQPage on /library/{slug}. BreadcrumbList was the
+  // remaining gap (flagged in the 2026-07-23 review). Emitted here rather than
+  // in code injection, which is owner-only. Distinct id, so it cannot collide
+  // with the injected blocks.
+  var CRUMB_NAMES = {
+    'library': 'Library', 'roles': 'Roles', 'shop': 'Shop',
+    'resources': 'Resources', 'the-brief': 'The Brief', 'about': 'About',
+    'legal': 'Legal', 'salary-benchmarker': 'Salary Benchmarker',
+    'readiness-quiz': 'Readiness Quiz', 'first-90-days': 'First 90 Days',
+    'offer-evaluator': 'Offer Evaluator',
+    'how-to-become-a-chief-of-staff': 'How to Become a Chief of Staff'
+  };
+  function titleCase(s){
+    return s.replace(/-/g, ' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+  }
+  function breadcrumbs(){
+    if (byId('eob-schema-breadcrumb')) return;
+    var origin = 'https://execopsbrief.com';
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    if (!parts.length) return;                       // homepage: no breadcrumb
+    var items = [{ '@type': 'ListItem', position: 1, name: 'Home', item: origin }];
+    var path = '';
+    for (var i = 0; i < parts.length; i++){
+      path += '/' + parts[i];
+      var last = (i === parts.length - 1);
+      var name = CRUMB_NAMES[parts[i]] ||
+                 (last ? (findArticle(parts[i]) || {}).t : null) ||
+                 titleCase(parts[i]);
+      items.push({ '@type': 'ListItem', position: i + 2, name: name, item: origin + path });
+    }
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.id = 'eob-schema-breadcrumb';
+    s.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': items
+    });
+    document.head.appendChild(s);
+  }
+
   // ---- boot --------------------------------------------------------------
   function run(){
     var slug = currentSlug();
@@ -1243,6 +1367,9 @@
     try { homePolish(); } catch(e){}           // home page mobile overflow + live counts
     try { autoHeader(); } catch(e){}           // featured image -> in-article header (any article page)
     try { shopPolish(); } catch(e){}           // native store styling (shop list + product pages)
+    try { rolesPolish(); } catch(e){}          // /roles: h1 + honest board language until re-paste
+    try { honestCopy(); } catch(e){}           // "curated" overclaim in shared CTA copy (site-wide)
+    try { breadcrumbs(); } catch(e){}          // BreadcrumbList JSON-LD (site-wide, non-home)
     if (!slug || !findArticle(slug)) return;   // only on known article pages (path-agnostic)
     var host = contentEl();
     if (!host) return;
