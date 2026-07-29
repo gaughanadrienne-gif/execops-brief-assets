@@ -44,8 +44,9 @@
   #eob-jobboard .eob-controls{
     background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
     padding:1.1rem 1.2rem;box-shadow:var(--shadow);margin-bottom:1.2rem;
-    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:.8rem;align-items:end;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;align-items:end;
   }
+  #eob-jobboard .eob-field-wide{grid-column:span 2}
   #eob-jobboard .eob-field{display:flex;flex-direction:column;gap:.35rem;min-width:0}
   #eob-jobboard .eob-field label{
     font-size:.7rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--slate-light);
@@ -165,10 +166,12 @@
   /* Responsive */
   @media (max-width:820px){
     #eob-jobboard .eob-controls{grid-template-columns:1fr 1fr}
+    #eob-jobboard .eob-field-wide{grid-column:span 2}
     #eob-jobboard .eob-cta{grid-template-columns:1fr}
   }
   @media (max-width:600px){
     #eob-jobboard .eob-controls{grid-template-columns:1fr}
+    #eob-jobboard .eob-field-wide{grid-column:auto}
     #eob-jobboard .eob-grid{grid-template-columns:1fr}
     #eob-jobboard .eob-cta{padding:1.6rem}
     #eob-jobboard .eob-cta form{flex-direction:column}
@@ -178,20 +181,48 @@
 
   <div class="eob-head">
     <span class="eob-eyebrow">The Job Board</span>
-    <h2>Curated exec-ops roles, all paying $100k or more.</h2>
+    <h2>Exec-ops roles, all paying $100k or more.</h2>
     <p>Every listing carries a comp figure the source firm published, and the midpoint of that figure is at least $100,000. If a firm didn't publish a number, the role isn't here. Nothing's estimated. Filter to what fits, then get the week's set delivered in The Brief.</p>
   </div>
 
   <div class="eob-controls">
-    <div class="eob-field">
+    <div class="eob-field eob-field-wide">
       <label for="eob-search">Search</label>
       <input type="text" id="eob-search" placeholder="Title, company type, or location" autocomplete="off">
+    </div>
+    <div class="eob-field">
+      <label for="eob-sort">Sort</label>
+      <select id="eob-sort">
+        <option value="newest">Newest first</option>
+        <option value="comp-desc">Highest comp</option>
+        <option value="comp-asc">Lowest comp</option>
+      </select>
     </div>
     <div class="eob-field">
       <label for="eob-category">Category</label>
       <!-- Options are built from roles.json at load time (buildCategoryOptions). -->
       <select id="eob-category">
         <option value="">All categories</option>
+      </select>
+    </div>
+    <div class="eob-field" id="eob-seniority-wrap" hidden>
+      <label for="eob-seniority">Role track</label>
+      <!-- Built from the data. Roles whose title states no track are omitted. -->
+      <select id="eob-seniority">
+        <option value="">All role tracks</option>
+      </select>
+    </div>
+    <div class="eob-field" id="eob-metro-wrap" hidden>
+      <label for="eob-metro">Location</label>
+      <!-- Built from the data. Locations the rules cannot place stay under All. -->
+      <select id="eob-metro">
+        <option value="">All locations</option>
+      </select>
+    </div>
+    <div class="eob-field" id="eob-srctype-wrap" hidden>
+      <label for="eob-srctype">Source</label>
+      <select id="eob-srctype">
+        <option value="">All sources</option>
       </select>
     </div>
     <div class="eob-field">
@@ -226,7 +257,7 @@
   </div>
 
   <div id="eob-results">
-    <div class="eob-loading">Loading curated roles.</div>
+    <div class="eob-loading">Loading roles.</div>
   </div>
 
   <!-- Newsletter call to action -->
@@ -234,7 +265,7 @@
     <div>
       <span class="eob-eyebrow">The Brief</span>
       <h3>Get these roles weekly in The Brief.</h3>
-      <p>A curated digest of EA, exec-ops, and Chief of Staff roles paying $100k and up, plus one operator insight. Free, every week.</p>
+      <p>A weekly digest of EA, exec-ops, and Chief of Staff roles paying $100k and up, plus one operator insight. Free, every week.</p>
       <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
     </div>
     <form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
@@ -258,14 +289,21 @@
 
   var root = document.getElementById("eob-jobboard");
   var els = {
-    search:   root.querySelector("#eob-search"),
-    category: root.querySelector("#eob-category"),
-    remote:   root.querySelector("#eob-remote"),
-    comp:     root.querySelector("#eob-comp"),
-    nocomp:   root.querySelector("#eob-nocomp"),
-    count:    root.querySelector("#eob-count"),
-    reset:    root.querySelector("#eob-reset"),
-    results:  root.querySelector("#eob-results")
+    search:      root.querySelector("#eob-search"),
+    sort:        root.querySelector("#eob-sort"),
+    category:    root.querySelector("#eob-category"),
+    seniority:   root.querySelector("#eob-seniority"),
+    metro:       root.querySelector("#eob-metro"),
+    srctype:     root.querySelector("#eob-srctype"),
+    remote:      root.querySelector("#eob-remote"),
+    comp:        root.querySelector("#eob-comp"),
+    nocomp:      root.querySelector("#eob-nocomp"),
+    count:       root.querySelector("#eob-count"),
+    reset:       root.querySelector("#eob-reset"),
+    results:     root.querySelector("#eob-results"),
+    seniorityWrap: root.querySelector("#eob-seniority-wrap"),
+    metroWrap:     root.querySelector("#eob-metro-wrap"),
+    srctypeWrap:   root.querySelector("#eob-srctype-wrap")
   };
 
   var ALL = [];
@@ -286,6 +324,16 @@
   function isHourly(r){ return r.comp_period === "hr"; }
   function annualHigh(r){
     return isHourly(r) ? r.comp_high * 2080 : r.comp_high;
+  }
+  // The same annualization the pay floor uses, applied to the MIDPOINT. It is
+  // what "highest comp" has to mean on a board that carries both $/hr and
+  // annual figures: $95/hr outranks $150k, and a hidden $/hr sort would put it
+  // at the bottom. The card keeps showing the verbatim rate either way.
+  function annualMid(r){
+    if (!hasComp(r)) return null;
+    var lo = isHourly(r) ? r.comp_low * 2080 : r.comp_low;
+    var hi = annualHigh(r);
+    return (lo + hi) / 2;
   }
   function compHTML(r){
     if (!hasComp(r)) return '<div class="eob-comp eob-comp-none">Comp not listed</div>';
@@ -330,6 +378,9 @@
     return {
       q: (els.search.value || "").trim().toLowerCase(),
       category: els.category.value,
+      seniority: els.seniority ? els.seniority.value : "",
+      metro: els.metro ? els.metro.value : "",
+      srctype: els.srctype ? els.srctype.value : "",
       remote: els.remote.value,
       minComp: parseInt(els.comp.value, 10) || 0,
       includeNoComp: els.nocomp ? els.nocomp.checked : true
@@ -351,6 +402,9 @@
   }
   function matches(role, f){
     if (!categoryMatches(f.category, role.category)) return false;
+    if (f.seniority && role.seniority !== f.seniority) return false;
+    if (f.metro && role.metro !== f.metro) return false;
+    if (f.srctype && role.source_type !== f.srctype) return false;
     if (f.remote && role.remote !== f.remote) return false;
     // Minimum comp: applies only to roles that have a published comp range.
     // Roles without listed comp are kept unless the include toggle is off.
@@ -362,7 +416,8 @@
       }
     }
     if (f.q){
-      var hay = [role.title, role.org_type, role.location, role.category, role.seniority, role.source,
+      var hay = [role.title, role.org_type, role.location, role.metro, role.category,
+                 role.seniority, role.source, role.source_type,
                  role.summary || "", (role.benefits || []).join(" ")]
         .join(" ").toLowerCase();
       if (hay.indexOf(f.q) === -1) return false;
@@ -384,6 +439,9 @@
 
   function cardHTML(r){
     var orgLabel = r.org_type || r.source || "Source listing";
+    // The track is only worth printing when it says something the category
+    // pill does not already say. "Chief of Staff, Chief of Staff" is noise.
+    var track = (r.seniority && r.seniority !== r.category) ? r.seniority : "";
     var sourcePill = r.source && r.source !== orgLabel
       ? '<span class="eob-pill eob-pill-src">' + esc(r.source) + '</span>'
       : "";
@@ -391,7 +449,7 @@
       '<div class="eob-card-top">' +
         '<div>' +
           '<h3>' + esc(r.title) + '</h3>' +
-          '<div class="eob-org">' + esc(orgLabel) + (r.seniority ? " &middot; " + esc(r.seniority) : "") + '</div>' +
+          '<div class="eob-org">' + esc(orgLabel) + (track ? " &middot; " + esc(track) : "") + '</div>' +
         '</div>' +
         compHTML(r) +
       '</div>' +
@@ -410,15 +468,33 @@
     '</div>';
   }
 
+  // Comp sorts run on the annualized midpoint. A role with no published comp
+  // has no place in a comp ranking, so it sorts to the bottom in both
+  // directions rather than being treated as $0 (or as infinity).
+  function bySort(mode){
+    if (mode === "comp-desc" || mode === "comp-asc"){
+      var dir = mode === "comp-asc" ? 1 : -1;
+      return function(a, b){
+        var ma = annualMid(a), mb = annualMid(b);
+        if (ma == null && mb == null) return sortTime(b) - sortTime(a);
+        if (ma == null) return 1;
+        if (mb == null) return -1;
+        if (ma !== mb) return (ma - mb) * dir;
+        return sortTime(b) - sortTime(a);
+      };
+    }
+    // Newest first; undated live listings follow the dated set.
+    return function(a, b){ return sortTime(b) - sortTime(a); };
+  }
+
   function render(){
     var f = getFilters();
     var list = ALL.filter(function(r){ return matches(r, f); });
-    // Newest first; undated live listings follow the dated set.
-    list.sort(function(a, b){ return sortTime(b) - sortTime(a); });
+    list.sort(bySort(els.sort ? els.sort.value : "newest"));
 
     var total = ALL.length;
     if (list.length === total){
-      els.count.innerHTML = "<strong>" + total + "</strong> curated roles";
+      els.count.innerHTML = "<strong>" + total + "</strong> roles";
     } else {
       els.count.innerHTML = "<strong>" + list.length + "</strong> of " + total + " roles";
     }
@@ -437,6 +513,10 @@
   function resetFilters(){
     els.search.value = "";
     els.category.value = "";
+    if (els.sort) els.sort.value = "newest";
+    if (els.seniority) els.seniority.value = "";
+    if (els.metro) els.metro.value = "";
+    if (els.srctype) els.srctype.value = "";
     els.remote.value = "";
     els.comp.value = "0";
     if (els.nocomp) els.nocomp.checked = true;
@@ -447,6 +527,9 @@
   els.category.addEventListener("change", render);
   els.remote.addEventListener("change", render);
   els.comp.addEventListener("change", render);
+  ["sort", "seniority", "metro", "srctype"].forEach(function(k){
+    if (els[k]) els[k].addEventListener("change", render);
+  });
   if (els.nocomp) els.nocomp.addEventListener("change", render);
   els.reset.addEventListener("click", resetFilters);
 
@@ -503,6 +586,51 @@
     if (keep && present[keep]) sel.value = keep;
   }
 
+  /* The three derived filters (role track, location, source type) are built
+     the same way, FROM THE DATA. refresh_roles.py writes a value only when its
+     rules classify a role cleanly and omits the key otherwise, so a filter
+     option exists here only when there are real roles behind it. A role the
+     rules could not place is never given a made-up bucket: it stays reachable
+     under the All option and through search. If a whole field is missing from
+     roles.json, its control hides itself rather than offering an empty list. */
+  function buildFacet(sel, wrap, field, order, allLabel){
+    if (!sel) return;
+    var present = {};
+    ALL.forEach(function(r){ if (r && r[field]) present[r[field]] = (present[r[field]] || 0) + 1; });
+    var vals = Object.keys(present).sort(function(a, b){
+      var ia = order.indexOf(a), ib = order.indexOf(b);
+      if (ia < 0) ia = 99;
+      if (ib < 0) ib = 99;
+      return ia - ib || a.localeCompare(b);
+    });
+    if (wrap) wrap.hidden = vals.length < 2;
+    var keep = sel.value;
+    sel.innerHTML = "";
+    var all = document.createElement("option");
+    all.value = "";
+    all.textContent = allLabel;
+    sel.appendChild(all);
+    vals.forEach(function(v){
+      var o = document.createElement("option");
+      o.value = v;
+      o.textContent = v + " (" + present[v] + ")";
+      sel.appendChild(o);
+    });
+    if (keep && present[keep]) sel.value = keep;
+  }
+
+  var TRACK_ORDER = ["Executive Assistant", "Senior Executive Assistant",
+                     "Executive Business Partner", "Chief of Staff",
+                     "Senior Chief of Staff", "Operations", "Operations Leadership"];
+  var METRO_ORDER = ["SF Bay Area", "NYC", "LA", "Remote", "Other"];
+  var SRCTYPE_ORDER = ["VC portfolio", "Recruiter", "Network"];
+
+  function buildFacetOptions(){
+    buildFacet(els.seniority, els.seniorityWrap, "seniority", TRACK_ORDER, "All role tracks");
+    buildFacet(els.metro, els.metroWrap, "metro", METRO_ORDER, "All locations");
+    buildFacet(els.srctype, els.srctypeWrap, "source_type", SRCTYPE_ORDER, "All sources");
+  }
+
   function load(){
     fetch(ROLES_URL, {cache: "no-store"})
       .then(function(res){
@@ -513,6 +641,7 @@
         ALL = (data && Array.isArray(data.roles)) ? data.roles :
               (Array.isArray(data) ? data : []);
         buildCategoryOptions();
+        buildFacetOptions();
         render();
       })
       .catch(function(){

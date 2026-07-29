@@ -665,6 +665,126 @@ def test_strip_private_keys():
 
 
 # =========================================================================== #
+# 6. DERIVED FILTER FIELDS -- seniority track, metro, source type
+#
+# These three fields drive the board's filters. Every rule here is read off the
+# title or the location text alone. Nothing is inferred from comp, company, or
+# source, and an unclassifiable value must come back "" rather than guessed.
+# =========================================================================== #
+def test_seniority_plain_ea():
+    assert R.seniority_of("Executive Assistant") == "Executive Assistant"
+    assert R.seniority_of("Executive Assistant to CEO") == "Executive Assistant"
+
+
+def test_seniority_senior_ea():
+    assert R.seniority_of("Senior Executive Assistant") == "Senior Executive Assistant"
+    assert R.seniority_of("Sr. Executive Assistant, Impact") == "Senior Executive Assistant"
+
+
+def test_an_ea_to_a_head_of_is_not_a_senior_ea():
+    # The level words belong to the principal, not to the job.
+    assert R.seniority_of("Executive Assistant to Head of Product") == "Executive Assistant"
+    assert R.seniority_of("Executive Assistant to the VP of Sales") == "Executive Assistant"
+
+
+def test_seniority_business_partner():
+    assert R.seniority_of("Executive Business Partner") == "Executive Business Partner"
+    assert R.seniority_of("Administrative Business Partner") == "Executive Business Partner"
+
+
+def test_seniority_chief_of_staff():
+    assert R.seniority_of("Chief of Staff") == "Chief of Staff"
+    assert R.seniority_of("Chief of Staff to the CEO") == "Chief of Staff"
+    # A deputy reports to a chief of staff; that is not a step above one.
+    assert R.seniority_of("Deputy Chief of Staff") == "Chief of Staff"
+
+
+def test_seniority_senior_chief_of_staff():
+    assert R.seniority_of("Senior Chief of Staff") == "Senior Chief of Staff"
+    assert R.seniority_of("VP, Chief of Staff") == "Senior Chief of Staff"
+
+
+def test_a_chief_of_staff_to_an_exec_is_not_an_exec():
+    assert R.seniority_of("Chief of Staff to the COO") == "Chief of Staff"
+
+
+def test_seniority_ops_track():
+    assert R.seniority_of("Business Operations Lead") == "Operations"
+    assert R.seniority_of("Strategy and Operations Manager") == "Operations"
+    assert R.seniority_of("Director of Operations") == "Operations Leadership"
+    assert R.seniority_of("VP of Operations") == "Operations Leadership"
+
+
+def test_seniority_unknown_stays_blank():
+    assert R.seniority_of("Program Coordinator") == ""
+    assert R.seniority_of("") == ""
+
+
+def test_metro_normalizes_every_spelling_of_one_place():
+    for loc in ("San Francisco", "San Francisco, CA", "San Francisco, CA, USA",
+                "San Francisco, California, United States", "SF",
+                "San Francisco Bay Area (On-site)", "Menlo Park, CA (Hybrid)",
+                "San Jose, CA, USA"):
+        assert R.metro_of(loc) == "SF Bay Area", loc
+    for loc in ("New York, NY", "New York, New York", "NYC", "Brooklyn, NY",
+                "New York City Metropolitan Area (On-site)"):
+        assert R.metro_of(loc) == "NYC", loc
+    assert R.metro_of("Los Angeles, CA") == "LA"
+    assert R.metro_of("El Segundo, California, United States") == "LA"
+
+
+def test_metro_state_guard():
+    # A city name is not enough. The state printed beside it has to agree.
+    assert R.metro_of("Sunnyvale, TX") == "Other"
+    assert R.metro_of("Bedford Hills, New York") == "Other"
+
+
+def test_metro_remote_and_unknown():
+    assert R.metro_of("Remote") == "Remote"
+    assert R.metro_of("Remote (Eastern Time Zone)") == "Remote"
+    assert R.metro_of("", "Remote") == "Remote"
+    assert R.metro_of("United States", "Remote") == "Remote"
+    assert R.metro_of("") == ""
+    # Readable but unplaceable stays reachable under All, never guessed.
+    assert R.metro_of("Providence, Rhode Island") == "Other"
+
+
+def test_a_city_beats_the_work_type_flag():
+    assert R.metro_of("San Francisco, CA", "Hybrid") == "SF Bay Area"
+    assert R.metro_of("New York, NY", "Remote") == "NYC"
+
+
+def test_source_type_comes_from_the_registry():
+    assert R.source_type_of("a16z Portfolio") == "VC portfolio"
+    assert R.source_type_of("Sequoia Portfolio") == "VC portfolio"
+    assert R.source_type_of("Bloom Talent") == "Recruiter"
+    assert R.source_type_of("Beacon Hill") == "Recruiter"
+    assert R.source_type_of("Chief of Staff Network") == "Network"
+    assert R.source_type_of("Some Hand Curated Firm") == ""
+
+
+def test_annotate_drops_empties_instead_of_writing_blanks():
+    roles = [{"title": "Executive Assistant", "location": "New York, NY",
+              "remote": "Hybrid", "source": "Bloom Talent"},
+             {"title": "Program Coordinator", "location": "",
+              "remote": "Onsite", "source": "Nowhere"}]
+    R.annotate(roles)
+    assert roles[0]["seniority"] == "Executive Assistant"
+    assert roles[0]["metro"] == "NYC"
+    assert roles[0]["source_type"] == "Recruiter"
+    for k in ("seniority", "metro", "source_type"):
+        assert k not in roles[1]
+
+
+def test_annotate_overwrites_the_retired_level_vocabulary():
+    # manual.json rows were hand-labelled "Senior"/"Lead" under the old scheme.
+    roles = [{"title": "Executive Assistant to Two Partners", "seniority": "Senior",
+              "location": "San Francisco, CA", "remote": "Onsite", "source": "x"}]
+    R.annotate(roles)
+    assert roles[0]["seniority"] == "Executive Assistant"
+
+
+# =========================================================================== #
 def _main():
     fns = [(n, f) for n, f in sorted(globals().items())
            if n.startswith("test_") and callable(f)]

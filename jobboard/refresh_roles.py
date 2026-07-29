@@ -684,23 +684,250 @@ def classify(title, context=""):
     return r["category"] if r else None
 
 
+# --------------------------------------------------------------------------- #
+# SENIORITY  (rewritten 2026-07-29)
+#
+# The old labels were a bare level ladder (Senior / Lead / Director / VP /
+# Executive) read off whatever words happened to appear in the title. It left
+# 141 of 265 board roles blank, because the single commonest title on the board
+# is the unadorned "Executive Assistant", which carries no level word at all.
+# A filter built on that field would have hidden more than half the board.
+#
+# The replacement is a ROLE TRACK, which is what the titles actually support:
+# the family (EA / EBP / CoS / Ops) plus a senior step where the title states
+# one. It is deterministic, derived from the title only, and never inferred
+# from comp, source, or company. A title that states no track still returns ""
+# and the widget simply omits it from the filter.
+#
+# An Executive Assistant TO a VP is not a VP, so the EA family is matched
+# before any exec-level word is read, and the ops track is matched last.
+# --------------------------------------------------------------------------- #
+SENIORITY_LABELS = [
+    "Executive Assistant",
+    "Senior Executive Assistant",
+    "Executive Business Partner",
+    "Chief of Staff",
+    "Senior Chief of Staff",
+    "Operations",
+    "Operations Leadership",
+]
+
+# "Senior", "Sr", "Lead", "Principal", "Head of". NOT "Deputy": a deputy chief
+# of staff reports to one, it is not a step above.
+_SENIOR_WORD = re.compile(r"\b(?:senior|sr\.?|lead|principal|head of)\b")
+_EXEC_WORD = re.compile(
+    r"\b(?:vp|svp|evp|vice president|chief operating officer|coo|chief of operations)\b")
+_DIRECTOR_WORD = re.compile(r"\bdirector\b")
+_EA_WORD = re.compile(r"\bexecutive assistant\b|\bea\b|\bexecutive personal assistant\b")
+_BIZ_PARTNER_WORD = re.compile(
+    r"\b(?:executive|administrative|admin)\s+business partner\b")
+_OPS_WORD = re.compile(r"\boperations\b|\bbizops\b|\bbusiness ops\b|\bops\b")
+
+
+def _title_head(t):
+    """The part of a title that describes the JOB, not who it reports to.
+
+    "Executive Assistant to Head of Product" is an EA job, not a head-of
+    anything, and "Chief of Staff to the COO" is a chief of staff, not an
+    executive. Level words are therefore only ever read from the segment before
+    the first "to", comma, pipe, slash or parenthesis.
+    """
+    return re.split(r"\bto\b|,|\||\(|/|-\s", t, maxsplit=1)[0]
+
+
 def seniority_of(title):
-    """Seniority label. An Executive Assistant TO a VP is not a VP, so the
-    exec-level labels are only read off titles that are not EA titles."""
-    t = title.lower()
-    is_ea = "executive assistant" in t or re.search(r"\bea\b", t)
-    if not is_ea:
-        if re.search(r"\bchief operating officer\b|\bcoo\b|\bchief \w+ officer\b", t):
-            return "Executive"
-        if re.search(r"\b(?:vp|svp|vice president)\b|\bhead of\b", t):
-            return "VP"
+    """The role track for a title, drawn from SENIORITY_LABELS, or ""."""
+    t = (title or "").lower()
+    head = _title_head(t)
+    senior = bool(_SENIOR_WORD.search(head))
+    exec_level = bool(_EXEC_WORD.search(head) or _DIRECTOR_WORD.search(head))
+
     if "chief of staff" in t:
-        return "Lead"
-    if "director" in t:
-        return "Director"
-    if "senior" in t or "sr." in t or "sr " in t:
-        return "Senior"
+        return "Senior Chief of Staff" if (senior or exec_level) else "Chief of Staff"
+    if _BIZ_PARTNER_WORD.search(t):
+        return "Executive Business Partner"
+    if _EA_WORD.search(t):
+        return "Senior Executive Assistant" if senior else "Executive Assistant"
+    if _OPS_WORD.search(t):
+        return "Operations Leadership" if exec_level else "Operations"
+    if exec_level:
+        return "Operations Leadership"
     return ""
+
+
+# --------------------------------------------------------------------------- #
+# METRO  (added 2026-07-29)
+#
+# The `location` field is whatever each source printed, so the same place
+# arrives as "San Francisco", "San Francisco, CA, USA", "SF" and "San
+# Francisco Bay Area (On-site)". This normalizes ONLY the metros the board has
+# enough volume to filter honestly, and returns "Other" for everything it can
+# read but cannot place. A location it cannot classify is never guessed at: it
+# stays reachable under "All locations" and through search.
+#
+# The state guard matters. "Sunnyvale, TX" is not the Bay Area and "Bedford
+# Hills, New York" is not New York City, so a city keyword only counts when the
+# state printed beside it agrees (or no state is printed at all).
+# --------------------------------------------------------------------------- #
+METRO_LABELS = ["SF Bay Area", "NYC", "LA", "Remote", "Other"]
+
+_BAY_CITIES = (
+    "san francisco", "sf", "bay area", "palo alto", "menlo park", "mountain view",
+    "sunnyvale", "santa clara", "san jose", "san mateo", "redwood city",
+    "emeryville", "oakland", "berkeley", "san carlos", "foster city",
+    "burlingame", "cupertino", "fremont", "hayward", "milpitas", "campbell",
+    "los altos", "belmont", "brisbane", "daly city", "south san francisco",
+)
+_NYC_CITIES = (
+    "new york", "new york city", "nyc", "manhattan", "brooklyn", "bronx",
+    "queens", "staten island", "long island city",
+)
+_LA_CITIES = (
+    "los angeles", "el segundo", "santa monica", "culver city", "pasadena",
+    "burbank", "glendale", "long beach", "torrance", "inglewood", "hollywood",
+    "west hollywood", "beverly hills", "marina del rey", "playa vista",
+)
+
+_US_STATES = {
+    "al": "al", "ak": "ak", "az": "az", "ar": "ar", "ca": "ca", "co": "co",
+    "ct": "ct", "de": "de", "fl": "fl", "ga": "ga", "hi": "hi", "id": "id",
+    "il": "il", "in": "in", "ia": "ia", "ks": "ks", "ky": "ky", "la": "la",
+    "me": "me", "md": "md", "ma": "ma", "mi": "mi", "mn": "mn", "ms": "ms",
+    "mo": "mo", "mt": "mt", "ne": "ne", "nv": "nv", "nh": "nh", "nj": "nj",
+    "nm": "nm", "ny": "ny", "nc": "nc", "nd": "nd", "oh": "oh", "ok": "ok",
+    "or": "or", "pa": "pa", "ri": "ri", "sc": "sc", "sd": "sd", "tn": "tn",
+    "tx": "tx", "ut": "ut", "vt": "vt", "va": "va", "wa": "wa", "wv": "wv",
+    "wi": "wi", "wy": "wy", "dc": "dc",
+    "california": "ca", "new york": "ny", "texas": "tx", "illinois": "il",
+    "massachusetts": "ma", "washington": "wa", "colorado": "co",
+    "new jersey": "nj", "connecticut": "ct", "virginia": "va", "nevada": "nv",
+    "district of columbia": "dc", "rhode island": "ri", "georgia": "ga",
+    "florida": "fl", "pennsylvania": "pa", "utah": "ut", "arizona": "az",
+    "oregon": "or", "michigan": "mi", "minnesota": "mn", "ohio": "oh",
+    "north carolina": "nc", "tennessee": "tn", "maryland": "md",
+}
+
+
+def _location_parts(loc):
+    """The comma-separated pieces of a location, lowercased, chrome removed."""
+    s = (loc or "").lower()
+    s = re.sub(r"\((?:on-?site|hybrid|remote)\)", " ", s)
+    s = s.replace(" ", " ")
+    parts = [re.sub(r"\s+", " ", p).strip(" .-") for p in re.split(r"[,/|]", s)]
+    return [p for p in parts if p]
+
+
+_COUNTRY_PARTS = ("united states", "united states of america", "usa", "us")
+
+
+def _state_of(parts):
+    """(state, index) for the US state printed in a location, else ("", -1).
+
+    Read from the RIGHT, because "New York, New York" prints the city first and
+    the state second, and the state slot is the one that must not then be read
+    back as a city ("Bedford Hills, New York" is not New York City).
+    """
+    for i in range(len(parts) - 1, -1, -1):
+        p = parts[i]
+        if p in _COUNTRY_PARTS:
+            continue
+        st = _US_STATES.get(p)
+        if st:
+            return st, i
+    return "", -1
+
+
+def _metro_from_parts(parts, state):
+    for p in parts:
+        p = re.sub(r"\b(metropolitan area|metro area|metro|greater)\b", " ", p)
+        p = re.sub(r"\s+", " ", p).strip()
+        if not p:
+            continue
+        if p in _NYC_CITIES and state in ("", "ny"):
+            return "NYC"
+        if p in _BAY_CITIES and state in ("", "ca"):
+            return "SF Bay Area"
+        if p in _LA_CITIES and state in ("", "ca"):
+            return "LA"
+        if "san francisco bay" in p and state in ("", "ca"):
+            return "SF Bay Area"
+        if "new york city" in p and state in ("", "ny"):
+            return "NYC"
+    return ""
+
+
+def metro_of(location, remote=""):
+    """One of METRO_LABELS, or "" when there is nothing to classify.
+
+    A city always wins over the work-type flag, so a hybrid San Francisco role
+    is filed under SF Bay Area rather than disappearing into Remote.
+    """
+    parts = _location_parts(location)
+    if parts:
+        state, state_i = _state_of(parts)
+        # The state slot is not a city. But a bare "New York" is both, so when
+        # dropping it would leave nothing to read, read the whole string.
+        cities = [p for i, p in enumerate(parts) if i != state_i]
+        hit = _metro_from_parts(cities or parts, state)
+        if hit:
+            return hit
+        if any(p.startswith("remote") or p == "anywhere" for p in parts):
+            return "Remote"
+        if all(p in _COUNTRY_PARTS for p in parts):
+            return "Remote" if remote == "Remote" else "Other"
+        return "Other"
+    return "Remote" if remote == "Remote" else ""
+
+
+# --------------------------------------------------------------------------- #
+# SOURCE TYPE  (added 2026-07-29)
+#
+# Derived from the source registry below, never hand-listed twice: every
+# CONSIDER_BOARDS / GETRO_BOARDS label is a VC portfolio board, the Chief of
+# Staff Network is a professional network, and the remaining named firms in
+# SOURCES are search/staffing recruiters. A source not in the registry (a hand
+# curated manual.json row, say) returns "" and is omitted from the filter.
+# --------------------------------------------------------------------------- #
+SOURCE_TYPE_LABELS = ["VC portfolio", "Recruiter", "Network"]
+NETWORK_SOURCES = {"Chief of Staff Network"}
+
+_SOURCE_TYPES = None
+
+
+def source_type_of(source):
+    """One of SOURCE_TYPE_LABELS for a registered source name, else ""."""
+    global _SOURCE_TYPES
+    if _SOURCE_TYPES is None:
+        types = {}
+        for name, _fn in SOURCES:
+            if name in NETWORK_SOURCES:
+                types[name] = "Network"
+            elif name.endswith(" Portfolio"):
+                types[name] = "VC portfolio"
+            else:
+                types[name] = "Recruiter"
+        _SOURCE_TYPES = types
+    return _SOURCE_TYPES.get(source or "", "")
+
+
+def annotate(roles):
+    """Fill the three derived filter fields on every row that reaches the board.
+
+    Seniority is RECOMPUTED here rather than trusted, so hand-written
+    manual.json rows and the old level vocabulary cannot leave two different
+    labelling schemes on one board. Empty values are dropped instead of written
+    as "", which keeps roles.json honest about what is unknown.
+    """
+    for r in roles:
+        for key, value in (("seniority", seniority_of(r.get("title", ""))),
+                           ("metro", metro_of(r.get("location", ""),
+                                              r.get("remote", ""))),
+                           ("source_type", source_type_of(r.get("source", "")))):
+            if value:
+                r[key] = value
+            else:
+                r.pop(key, None)
+    return roles
 
 
 # --------------------------------------------------------------------------- #
@@ -1448,8 +1675,7 @@ def parse_bloom(run_date):
             pass
         r = build_role(f"bloom-{jid}", title, "Bloom Talent", url,
                        location=location, remote=remote,
-                       category=cat, comp=comp,
-                       seniority="Senior" if cat != "Chief of Staff" else "Lead")
+                       category=cat, comp=comp)
         if det:
             r["_detail_md"] = det
         roles.append(r)
@@ -3239,6 +3465,7 @@ def main():
     total = len(merged)
     for r in merged:
         strip_private(r)
+    annotate(merged)
 
     print("\n--- Summary ---")
     for name, (status, info) in per_source.items():
@@ -3257,6 +3484,19 @@ def main():
     other = {c: n for c, n in cats.items() if c not in VISIBLE_CATEGORIES}
     for cat, n in sorted(other.items()):
         print(f"  {str(cat):<28} {n:>3}   (legacy category)")
+
+    # Derived filter fields. Coverage is printed, not assumed: a rule set that
+    # quietly stops classifying is a filter that quietly empties.
+    print("\n--- Derived filter coverage ---")
+    for field, labels in (("seniority", SENIORITY_LABELS),
+                          ("metro", METRO_LABELS),
+                          ("source_type", SOURCE_TYPE_LABELS)):
+        counts = Counter(r.get(field, "") for r in merged)
+        known = sum(n for k, n in counts.items() if k)
+        print(f"  {field:<12} {known}/{len(merged)} classified")
+        for label in labels:
+            if counts.get(label):
+                print(f"      {label:<28} {counts[label]:>3}")
 
     # The promise, asserted -- not assumed.
     assert_floor(merged)
