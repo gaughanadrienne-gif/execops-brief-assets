@@ -1325,7 +1325,7 @@
   // "Roles Alert" form has to be made in the dashboard. Group already exists
   // (193937631315231876). Drop the form id in below and this goes live on the
   // next push. Empty id = module no-ops, nothing renders.
-  var ROLES_ALERT_FORM_ID = '';
+  var ROLES_ALERT_FORM_ID = '194356696889427252';
   function rolesOptIn(){
     if (!ROLES_ALERT_FORM_ID) return;              // not wired yet
     var board = byId('eob-jobboard');
