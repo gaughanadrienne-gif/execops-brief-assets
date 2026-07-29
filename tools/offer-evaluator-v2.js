@@ -386,10 +386,116 @@
     }
   }
 
-  $("eob-oe-go").addEventListener("click",evaluate);
+  /* ======================================================================
+     Local persistence. Ported from the First 90 Days planner: same guarded
+     localStorage handle, same "restore, then save on every change" shape.
+     An offer is private, so nothing here leaves the browser. The email field
+     in the newsletter form is deliberately excluded.
+     ====================================================================== */
+  var STORE_KEY = "eob-offer-v1";
+  var mem = {};
+  var LS = (function(){
+    try {
+      var t = "__eob_t__";
+      window.localStorage.setItem(t,"1");
+      window.localStorage.removeItem(t);
+      return window.localStorage;
+    } catch(e){ return null; }
+  })();
+
+  function loadState(){
+    if (LS){
+      try { return JSON.parse(LS.getItem(STORE_KEY) || "{}") || {}; }
+      catch(e){ return {}; }
+    }
+    return mem;
+  }
+  function saveState(state){
+    if (LS){
+      try { LS.setItem(STORE_KEY,JSON.stringify(state)); } catch(e){ mem = state; }
+    } else { mem = state; }
+  }
+
+  var state = loadState();
+  if (!state.fields) state.fields = {};
+
+  var savedFields = Array.prototype.slice.call(
+    root.querySelectorAll("select[id], input[id]")
+  ).filter(function(el){
+    return el.id && el.id.indexOf("eob-oe-") === 0;
+  });
+
+  function captureState(){
+    savedFields.forEach(function(el){
+      state.fields[el.id] = (el.type === "checkbox") ? !!el.checked : el.value;
+    });
+    saveState(state);
+  }
+
+  function restoreState(){
+    savedFields.forEach(function(el){
+      var v = state.fields[el.id];
+      if (v === undefined) return;
+      if (el.type === "checkbox") el.checked = !!v;
+      else el.value = v;
+    });
+  }
+
+  restoreState();
+  savedFields.forEach(function(el){
+    el.addEventListener("change",captureState);
+    if (el.tagName === "INPUT" && el.type === "text") el.addEventListener("input",captureState);
+  });
+
+  $("eob-oe-go").addEventListener("click",function(){
+    captureState();
+    state.evaluated = true;
+    saveState(state);
+    evaluate();
+  });
   $("eob-oe-role").addEventListener("change",updateConditionalFields);
   $("eob-oe-equity").addEventListener("change",updateConditionalFields);
   updateConditionalFields();
+
+  var printBtn = $("eob-oe-print");
+  if (printBtn) printBtn.addEventListener("click",function(){ window.print(); });
+
+  /* Clear: two-step confirm on the button itself. No confirm() dialog. */
+  var clearBtn = $("eob-oe-clear");
+  if (clearBtn){
+    var armed = false, armTimer = null;
+    clearBtn.addEventListener("click",function(){
+      if (!armed){
+        armed = true;
+        clearBtn.textContent = "Tap again to clear";
+        clearBtn.style.borderColor = "#7A2129";
+        clearBtn.style.color = "#7A2129";
+        armTimer = setTimeout(function(){
+          armed = false;
+          clearBtn.textContent = "Clear saved entries";
+          clearBtn.style.borderColor = "";
+          clearBtn.style.color = "";
+        },4000);
+        return;
+      }
+      clearTimeout(armTimer);
+      armed = false;
+      clearBtn.textContent = "Clear saved entries";
+      clearBtn.style.borderColor = "";
+      clearBtn.style.color = "";
+      state = { fields:{} };
+      saveState(state);
+      savedFields.forEach(function(el){
+        if (el.type === "checkbox") el.checked = false;
+        else if (el.tagName === "SELECT") el.selectedIndex = 0;
+        else el.value = "";
+      });
+      var panel = $("eob-oe-result");
+      panel.className = panel.className.replace(" eob-show","");
+      $("eob-oe-err").textContent = "";
+      updateConditionalFields();
+    });
+  }
 
   fetch("compensation-data.json",{cache:"no-store"})
     .then(function(response){
@@ -401,6 +507,9 @@
       $("eob-oe-go").disabled = false;
       $("eob-oe-go").textContent = "Evaluate this offer";
       $("eob-oe-data-version").textContent = "Compensation data version: " + data.updatedLabel + ".";
+      // A restored session gets its readout back, not just its inputs. The
+      // benchmark file has to be in hand first, so this runs here.
+      if (state.evaluated && $("eob-oe-base").value) evaluate();
       postHeight();
     })
     .catch(function(){

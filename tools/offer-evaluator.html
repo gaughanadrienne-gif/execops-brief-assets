@@ -103,7 +103,17 @@
     border:none;border-radius:var(--radius-sm);padding:.8rem 1.6rem;cursor:pointer;transition:all .16s;white-space:nowrap;
   }
   #eob-offer .eob-evaluate:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
+  #eob-offer .eob-btn{
+    background:transparent;border:1px solid var(--line);color:var(--muted);
+    font-family:inherit;font-weight:600;font-size:.88rem;padding:.72rem 1.1rem;
+    border-radius:var(--radius-sm);cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-offer .eob-btn:hover{border-color:var(--ink);color:var(--ink)}
   #eob-offer .eob-form-err{font-size:.88rem;color:var(--oxblood);font-weight:600;min-height:1.1em;margin:0}
+  #eob-offer .eob-foot{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:.72rem;letter-spacing:.03em;color:var(--muted);margin:.9rem 0 0;text-align:center;
+  }
 
   /* Result card */
   #eob-offer .eob-result{
@@ -238,6 +248,25 @@
     #eob-offer .eob-cta{grid-template-columns:1fr}
     #eob-offer .eob-cta form{flex-direction:column;min-width:0}
   }
+
+  /* Print stylesheet. Ported from the First 90 Days planner: drop the chrome,
+     keep the readout and every citation, and never break a card across pages. */
+  @media print{
+    #eob-offer{max-width:none;padding:0;color:#000}
+    #eob-offer .eob-controls,#eob-offer .eob-result,#eob-offer .eob-method{
+      box-shadow:none;border:1px solid #999;break-inside:avoid;page-break-inside:avoid;
+    }
+    #eob-offer .eob-comp,#eob-offer .eob-cash-grid,#eob-offer .eob-scenarios{
+      break-inside:avoid;page-break-inside:avoid;
+    }
+    #eob-offer .eob-actions,#eob-offer .eob-cta,#eob-offer .eob-foot{display:none}
+    #eob-offer .eob-field select,#eob-offer .eob-field input[type=text]{
+      border:1px solid #999;background:#fff;
+    }
+    #eob-offer .eob-grade,#eob-offer .eob-verdict,#eob-offer .eob-badge{
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    }
+  }
 </style>
 
   <div class="eob-head">
@@ -334,9 +363,13 @@
 
     <div class="eob-actions">
       <button type="button" class="eob-evaluate" id="eob-oe-go" disabled>Loading compensation data...</button>
+      <button type="button" class="eob-btn" id="eob-oe-print">Print this readout</button>
+      <button type="button" class="eob-btn" id="eob-oe-clear">Clear saved entries</button>
       <p class="eob-form-err" id="eob-oe-err" role="alert" aria-live="polite"></p>
     </div>
   </div>
+
+  <p class="eob-foot">Your entries are saved in this browser only. Nothing about this offer is sent anywhere.</p>
 
   <div class="eob-result" id="eob-oe-result" aria-live="polite">
     <div class="eob-result-head">
