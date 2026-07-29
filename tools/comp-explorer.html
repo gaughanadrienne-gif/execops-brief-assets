@@ -1,0 +1,768 @@
+<!--
+  The Exec Ops Brief - Live Comp Explorer  (intended page: /salary-data)
+  Self-contained: inline scoped CSS + JS under #eob-comp. Serve from GitHub Pages
+  and embed as an auto-resizing iframe, the same pattern as the Salary Benchmarker.
+  Matches the live briefing-document design system (bond paper, oxblood, Spectral +
+  Public Sans + IBM Plex Mono). No em-dashes, no emojis in copy.
+
+  WHERE THE NUMBERS COME FROM
+  Every figure is read from comp-explorer-data.json, which is built by
+  Analytics & SEO/Analytics/build_comp_explorer.py. That script imports
+  salary_report.py as a module, so the statistics on this page are the same
+  statistics as the Salary Transparency Report, computed by the same code with the
+  same seeded bootstrap. This page performs no statistics of its own. It formats,
+  gates and labels.
+
+  HONESTY RULES THIS FILE OBEYS
+  - Every figure carries its n and a confidence label. No exceptions.
+  - A slice under the data file's publish_median_min_n shows its count and the
+    words "not enough data yet". It never shows a median.
+  - Quartiles and the 95% interval appear only at or above publish_spread_min_n.
+  - Missing is missing. Empty location, empty seniority, absent posting date and a
+    withheld hiring organization are shown as missing counts, never as zero and
+    never as a category.
+  - The board carries no funding stage, so the stage view reports coverage counts
+    only and says why no stage median is published.
+  - Hourly postings are reported in dollars per hour, separately, and are excluded
+    from every salary distribution.
+  - The freshness line is specific: build date, run time, sources that answered.
+    If the board has refreshed since the figures were computed, the page says so
+    instead of implying the figures are current.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div id="eob-comp">
+<style>
+  #eob-comp{
+    --paper:#F3F0E9; --paper-deep:#EAE5DA; --ink:#1B1712; --navy:#1C2C3A;
+    --oxblood:#7A2129; --oxblood-deep:#63191f; --oxblood-tint:#f0e0e0;
+    --muted:#6B6255; --line:#D8D0BF; --white:#ffffff;
+    --radius:12px; --radius-sm:8px;
+    --shadow:0 1px 2px rgba(27,23,18,.05), 0 10px 28px rgba(27,23,18,.07);
+    --shadow-lift:0 2px 6px rgba(27,23,18,.08), 0 22px 44px rgba(27,23,18,.12);
+    font-family:'Public Sans',system-ui,-apple-system,sans-serif;
+    color:var(--navy); line-height:1.6; -webkit-font-smoothing:antialiased;
+    max-width:960px; margin:0 auto; padding:0 4px; box-sizing:border-box;
+  }
+  #eob-comp *{box-sizing:border-box}
+  #eob-comp h1,#eob-comp h2,#eob-comp h3,#eob-comp h4{
+    font-family:'Spectral',Georgia,serif;font-weight:600;line-height:1.15;color:var(--ink);letter-spacing:-.01em;margin:0;
+  }
+  #eob-comp .eob-eyebrow{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-weight:600;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--oxblood);
+  }
+  #eob-comp .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+  /* Header */
+  #eob-comp .eob-head{margin-bottom:1rem}
+  #eob-comp .eob-head h2{font-size:clamp(1.7rem,3.2vw,2.35rem);margin:.5rem 0 .55rem}
+  #eob-comp .eob-head p{font-size:1.02rem;color:var(--muted);max-width:46rem;margin:0}
+
+  /* Freshness strip */
+  #eob-comp .eob-fresh{
+    background:var(--navy);color:#fff;border-radius:var(--radius);
+    padding:.85rem 1.1rem;margin-bottom:1.1rem;box-shadow:var(--shadow);
+  }
+  #eob-comp .eob-fresh .eob-fresh-label{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.14em;
+    text-transform:uppercase;color:#c9b7a0;display:block;margin-bottom:.25rem;
+  }
+  #eob-comp .eob-fresh .eob-fresh-line{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.86rem;color:#fff;line-height:1.5;
+  }
+  #eob-comp .eob-fresh .eob-fresh-sub{font-size:.8rem;color:#c2b6a6;margin-top:.35rem}
+  #eob-comp .eob-fresh .eob-warn{color:#e8b9b0;font-weight:600}
+
+  /* Controls */
+  #eob-comp .eob-controls{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.1rem 1.2rem;box-shadow:var(--shadow);margin-bottom:1.1rem;
+    display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.1rem;
+  }
+  #eob-comp .eob-field{display:flex;flex-direction:column;gap:.4rem;min-width:0}
+  #eob-comp .eob-field label{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  }
+  #eob-comp .eob-field select{
+    width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.64rem .85rem;font-family:inherit;font-size:.94rem;color:var(--ink);background:var(--paper);
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='10'%20height='6'%3E%3Cpath%20d='M0%200l5%206%205-6z'%20fill='%237A2129'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .85rem center;padding-right:2.1rem;
+  }
+  #eob-comp .eob-field select:focus{outline:none;border-color:var(--oxblood);background-color:var(--white)}
+  #eob-comp .eob-field .eob-hint{font-size:.78rem;color:var(--muted)}
+
+  /* Headline card */
+  #eob-comp .eob-headline{
+    background:var(--white);border:1px solid var(--line);border-left:3px solid var(--oxblood);
+    border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.25rem;margin-bottom:1.1rem;
+    display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center;
+  }
+  #eob-comp .eob-headline .eob-big{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:600;color:var(--oxblood);
+    font-size:clamp(1.8rem,6vw,2.5rem);line-height:1;
+  }
+  #eob-comp .eob-headline .eob-cap{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;
+  }
+  #eob-comp .eob-headline p{margin:0;font-size:.9rem;color:var(--muted)}
+
+  /* Result panel */
+  #eob-comp .eob-panel{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;margin-bottom:1.1rem;
+  }
+  #eob-comp .eob-panel-head{
+    background:var(--navy);color:#fff;padding:1rem 1.3rem;
+    display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem;
+  }
+  #eob-comp .eob-panel-head h3{color:#fff;font-size:1.12rem;font-weight:600}
+  #eob-comp .eob-panel-head .eob-rlabel{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.7rem;letter-spacing:.12em;
+    text-transform:uppercase;color:#c9b7a0;
+  }
+  #eob-comp .eob-panel-body{padding:1.15rem 1.3rem 1.25rem}
+  #eob-comp .eob-view-note{font-size:.88rem;color:var(--muted);margin:0 0 1rem}
+
+  /* Slice rows */
+  #eob-comp .eob-slice{
+    border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--paper);
+    padding:.9rem 1rem;margin-bottom:.7rem;
+  }
+  #eob-comp .eob-slice:last-child{margin-bottom:0}
+  #eob-comp .eob-slice.eob-thin{background:var(--white);border-style:dashed}
+  #eob-comp .eob-slice-top{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:.45rem;margin-bottom:.4rem;
+  }
+  #eob-comp .eob-slice-name{font-family:'Spectral',Georgia,serif;font-weight:600;font-size:1.02rem;color:var(--ink)}
+  #eob-comp .eob-n{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.7rem;font-weight:600;
+    letter-spacing:.06em;color:var(--navy);background:var(--white);
+    border:1px solid var(--line);border-radius:100px;padding:.14rem .5rem;
+  }
+  #eob-comp .eob-conf{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.6rem;font-weight:600;
+    letter-spacing:.07em;text-transform:uppercase;border-radius:100px;padding:.16rem .5rem;
+    border:1px solid var(--line);background:var(--white);color:var(--navy);
+  }
+  #eob-comp .eob-conf.c-wide{background:var(--navy);color:#fff;border-color:var(--navy)}
+  #eob-comp .eob-conf.c-mod{background:var(--paper-deep);color:var(--ink)}
+  #eob-comp .eob-conf.c-thin{background:var(--oxblood-tint);color:var(--oxblood-deep);border-color:#e0c4c4}
+  #eob-comp .eob-conf.c-none{background:var(--white);color:var(--oxblood);border-color:var(--oxblood)}
+  #eob-comp .eob-slice-fig{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;margin:.15rem 0 .35rem;
+  }
+  #eob-comp .eob-slice-med{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:600;font-size:1.45rem;
+    color:var(--oxblood);line-height:1.1;
+  }
+  #eob-comp .eob-slice-ci{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.76rem;color:var(--muted);
+  }
+  #eob-comp .eob-slice-note{font-size:.86rem;color:var(--navy);margin:.35rem 0 0}
+  #eob-comp .eob-slice-note.eob-quiet{color:var(--muted)}
+
+  /* Quartile track */
+  #eob-comp .eob-qtrack{
+    position:relative;height:10px;border-radius:100px;background:var(--paper-deep);
+    margin:.55rem 0 .3rem;border:1px solid var(--line);
+  }
+  #eob-comp .eob-qfill{
+    position:absolute;top:-1px;bottom:-1px;background:var(--oxblood-tint);
+    border:1px solid #ddbcbc;border-radius:100px;
+  }
+  #eob-comp .eob-qmed{position:absolute;top:-4px;width:3px;height:16px;background:var(--oxblood);border-radius:2px}
+  #eob-comp .eob-qscale{
+    display:flex;justify-content:space-between;font-family:'IBM Plex Mono',ui-monospace,monospace;
+    font-size:.66rem;color:var(--muted);
+  }
+
+  /* Missing bucket + notices */
+  #eob-comp .eob-missing{
+    margin-top:.9rem;padding:.7rem .9rem;border-left:3px solid var(--navy);background:var(--paper-deep);
+    border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:.86rem;color:var(--navy);
+  }
+  #eob-comp .eob-notice{
+    margin-top:.9rem;padding:.75rem .9rem;border-left:3px solid var(--oxblood);
+    background:var(--oxblood-tint);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+    color:var(--navy);font-size:.86rem;
+  }
+  #eob-comp .eob-notice strong,#eob-comp .eob-missing strong{color:var(--ink)}
+  #eob-comp .eob-loading{padding:1rem;color:var(--muted);font-size:.9rem}
+
+  /* Method blocks */
+  #eob-comp .eob-method{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:1.15rem 1.3rem;margin-bottom:1.1rem;
+  }
+  #eob-comp .eob-method h4{font-size:1.04rem;margin-bottom:.5rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+  #eob-comp .eob-method .eob-badge{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.6rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--oxblood);background:var(--oxblood-tint);
+    border-radius:100px;padding:.18rem .55rem;
+  }
+  #eob-comp .eob-method p{font-size:.9rem;color:var(--muted);margin:0 0 .6rem}
+  #eob-comp .eob-method p:last-child{margin-bottom:0}
+  #eob-comp .eob-method a{color:var(--oxblood);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  #eob-comp .eob-method a:hover{color:var(--oxblood-deep)}
+  #eob-comp .eob-facts{list-style:none;padding:0;margin:.2rem 0 0}
+  #eob-comp .eob-facts li{
+    font-size:.88rem;color:var(--navy);padding:.5rem 0;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline;
+  }
+  #eob-comp .eob-facts li .eob-fnum{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:600;color:var(--oxblood);
+    white-space:nowrap;font-size:.95rem;
+  }
+  #eob-comp .eob-derive{
+    font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.78rem;color:var(--navy);
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:.6rem .8rem;margin:.2rem 0 .7rem;overflow-x:auto;
+  }
+  #eob-comp .eob-caveat{margin-top:.9rem;padding-top:.85rem;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+  #eob-comp .eob-caveat strong{color:var(--oxblood);font-weight:600}
+
+  /* CTA */
+  #eob-comp .eob-cta{
+    background:var(--ink);color:#fff;border-radius:var(--radius);padding:2rem 2.1rem;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-lift);
+  }
+  #eob-comp .eob-cta:before{
+    content:"";position:absolute;top:-50px;right:-30px;width:180px;height:180px;border-radius:50%;
+    background:radial-gradient(circle,rgba(122,33,41,.4),transparent 70%);pointer-events:none;
+  }
+  #eob-comp .eob-cta .eob-eyebrow{color:#d69a8f;position:relative}
+  #eob-comp .eob-cta h3{color:#fff;font-size:1.5rem;margin:.4rem 0;position:relative}
+  #eob-comp .eob-cta p{color:#c2b6a6;font-size:.94rem;max-width:32rem;position:relative;margin:0}
+  #eob-comp .eob-cta form{display:flex;gap:.6rem;min-width:300px;position:relative}
+  #eob-comp .eob-cta input{
+    flex:1;min-width:0;border:1px solid #3a322a;background:#241f19;color:#fff;
+    border-radius:var(--radius-sm);padding:.78rem .95rem;font-family:inherit;font-size:.94rem;
+  }
+  #eob-comp .eob-cta input::placeholder{color:#8a7f70}
+  #eob-comp .eob-cta input:focus{outline:none;border-color:var(--oxblood)}
+  #eob-comp .eob-cta button{
+    background:var(--oxblood);color:#fff;font-family:inherit;font-weight:600;font-size:.94rem;
+    border:none;border-radius:var(--radius-sm);padding:.78rem 1.3rem;cursor:pointer;transition:all .16s;white-space:nowrap;
+  }
+  #eob-comp .eob-cta button:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
+  #eob-comp .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#8a7f70}
+  #eob-comp .eob-cta-msg{position:relative;margin-top:.55rem;font-size:.86rem;color:#d69a8f;font-weight:600;min-height:1.1em}
+
+  @media (max-width:720px){
+    #eob-comp .eob-controls{grid-template-columns:1fr}
+    #eob-comp .eob-headline{grid-template-columns:1fr;gap:.5rem}
+    #eob-comp .eob-cta{grid-template-columns:1fr}
+    #eob-comp .eob-cta form{flex-direction:column;min-width:0}
+  }
+</style>
+
+  <div class="eob-head">
+    <span class="eob-eyebrow">The Comp Explorer</span>
+    <h2>Live comp explorer.</h2>
+    <p>Slice the pay actually published on our own roles board by role family, metro, source type and work arrangement. The board is rebuilt every morning, so these figures move with it. Every number here carries its sample size, and a slice too small to support a figure says so instead of showing one.</p>
+  </div>
+
+  <div class="eob-fresh" id="eob-fresh">
+    <span class="eob-fresh-label">Data vintage</span>
+    <div class="eob-fresh-line" id="eob-fresh-line">Loading the current board snapshot...</div>
+    <div class="eob-fresh-sub" id="eob-fresh-sub"></div>
+  </div>
+
+  <div class="eob-controls">
+    <div class="eob-field">
+      <label for="eob-view">Slice by</label>
+      <select id="eob-view">
+        <option value="category" selected>Role family</option>
+        <option value="metro">Metro</option>
+        <option value="source_type">Source type</option>
+        <option value="remote">Work arrangement</option>
+        <option value="cross">Role family within a metro</option>
+        <option value="stage">Company stage</option>
+      </select>
+    </div>
+    <div class="eob-field">
+      <label for="eob-sort">Order</label>
+      <select id="eob-sort">
+        <option value="n" selected>Largest sample first</option>
+        <option value="median">Highest median first</option>
+        <option value="name">Alphabetical</option>
+      </select>
+      <span class="eob-hint">Slices with too few postings to publish a median always sort last.</span>
+    </div>
+  </div>
+
+  <div class="eob-headline" id="eob-headline"></div>
+
+  <div class="eob-panel">
+    <div class="eob-panel-head">
+      <span class="eob-rlabel">Published range midpoints, active postings</span>
+      <h3 id="eob-view-title">Role family</h3>
+    </div>
+    <div class="eob-panel-body" id="eob-output">
+      <div class="eob-loading">Loading the current board snapshot...</div>
+    </div>
+  </div>
+
+  <div class="eob-method" id="eob-gaps"></div>
+
+  <div class="eob-method">
+    <h4>What is missing from this picture <span class="eob-badge">Read this part</span></h4>
+    <p>These gaps are in what employers publish, not in the collection. They are listed because a comp figure without its gaps is a number pretending to be an answer.</p>
+    <ul class="eob-facts" id="eob-gaps-list"></ul>
+  </div>
+
+  <div class="eob-method">
+    <h4>How this is computed <span class="eob-badge">Same code as the report</span></h4>
+    <div class="eob-derive" id="eob-derive">Method details load with the data file.</div>
+    <p>Each figure is the median of the <strong>midpoint of the range each posting published</strong>. Where a posting publishes a single figure, that figure is its own midpoint. Nothing is estimated, inferred, or filled in. These are advertised ranges, not paid compensation, and the interval shown describes sampling noise inside this snapshot only. It says nothing about how well this board represents the wider market.</p>
+    <p>The statistics are produced by the same script that produces our Salary Transparency Report, imported as a module rather than copied, so the two cannot drift apart. The bootstrap uses a fixed seed, so the same snapshot always yields the same interval.</p>
+    <p>Related: <a href="/salary-benchmarker">the Salary Benchmarker</a> compares this board against outside survey and employer data. <a href="/roles">The roles board</a> is the underlying source, one row per posting, with a link to each original listing.</p>
+    <div class="eob-caveat">
+      <strong>Before you cite or negotiate.</strong> This is a premium opportunity market, not a national median. Every posting here clears a published midpoint of $100,000, so the low end of the real market is missing by construction. Postings concentrate in the Bay Area and New York. A median built on a small slice can move a long way when one posting is added or expires, which is what the sample size and the interval beside each figure are for.
+    </div>
+  </div>
+
+  <div class="eob-cta">
+    <div>
+      <span class="eob-eyebrow">The Brief</span>
+      <h3>Get the pay picture weekly.</h3>
+      <p>New $100k-plus exec-ops roles, what they published, and what moved in the numbers. One email a week.</p>
+      <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
+    </div>
+    <form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-comp-frame">
+      <input type="email" id="eob-email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>
+      <input type="hidden" name="ml-submit" value="1">
+      <input type="hidden" name="anticsrf" value="true">
+      <button type="submit">Subscribe to The Brief</button>
+      <div class="eob-cta-msg" id="eob-sub-msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById("eob-comp");
+  var DATA_URL = "comp-explorer-data.json";
+  var DATA_URL_FALLBACK = "https://gaughanadrienne-gif.github.io/execops-brief-assets/tools/comp-explorer-data.json";
+  var ROLES_URL = "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json";
+
+  var data = null;
+  var els = {
+    view: root.querySelector("#eob-view"),
+    sort: root.querySelector("#eob-sort"),
+    output: root.querySelector("#eob-output"),
+    viewTitle: root.querySelector("#eob-view-title"),
+    headline: root.querySelector("#eob-headline"),
+    fresh: root.querySelector("#eob-fresh-line"),
+    freshSub: root.querySelector("#eob-fresh-sub"),
+    derive: root.querySelector("#eob-derive"),
+    gaps: root.querySelector("#eob-gaps"),
+    gapsList: root.querySelector("#eob-gaps-list")
+  };
+
+  function esc(v){
+    return String(v == null ? "" : v)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+  }
+  function money(v){
+    return v == null ? "not published" : "$" + Math.round(v).toLocaleString("en-US");
+  }
+  function n_(v){ return Number(v).toLocaleString("en-US"); }
+  function postings(n){ return n_(n) + (Number(n) === 1 ? " posting" : " postings"); }
+
+  /* Confidence pill. The label comes from the data file so the wording and the
+     thresholds live in one place, in the build script, not in two. */
+  function confClass(label){
+    if (/^wide/i.test(label)) return "c-wide";
+    if (/^moderate/i.test(label)) return "c-mod";
+    if (/^thin|^very thin/i.test(label)) return "c-thin";
+    return "c-none";
+  }
+  function pill(label){
+    return '<span class="eob-conf ' + confClass(label) + '">' + esc(label) + '</span>';
+  }
+
+  /* ---------------------------------------------------------------- freshness */
+  function renderFreshness(boardUpdated, boardCount, boardFailed){
+    var f = data.freshness || {};
+    var parts = [];
+    if (f.last_run_label){
+      parts.push("Board rebuilt " + f.last_run_label);
+    } else {
+      parts.push("Board snapshot " + (data.snapshot_date || "date not recorded"));
+    }
+    if (f.sources_total){
+      parts.push(f.sources_ok + " of " + f.sources_total + " sources answered");
+    }
+    parts.push(n_(data.board.roles_total) + " postings on the board");
+    parts.push(n_(data.board.salaried_n) + " salaried, " + n_(data.board.hourly_n) + " hourly");
+    els.fresh.textContent = parts.join(" \u00b7 ");
+
+    var sub = "Figures on this page were computed from the " + (data.snapshot_date || "current")
+      + " snapshot. The board refreshes every morning and these figures are rebuilt with it.";
+    if (boardFailed){
+      sub = "Figures on this page were computed from the " + (data.snapshot_date || "current")
+        + " snapshot. The live board could not be reached just now, so this page cannot confirm "
+        + "whether a newer snapshot exists.";
+    } else if (boardUpdated && data.snapshot_date && boardUpdated !== data.snapshot_date){
+      sub = '<span class="eob-warn">The board has refreshed since these figures were computed.</span> '
+        + "Board is now " + esc(boardUpdated) + " with " + postings(boardCount)
+        + ". The figures below are from the " + esc(data.snapshot_date)
+        + " snapshot and have not been recomputed yet.";
+    } else if (boardUpdated){
+      sub = "Confirmed against the live board just now: same " + esc(boardUpdated)
+        + " snapshot, " + postings(boardCount) + ".";
+    }
+    els.freshSub.innerHTML = sub;
+  }
+
+  /* ---------------------------------------------------------------- headline */
+  function renderHeadline(){
+    var o = data.overall;
+    var ci = (o.ci_low != null)
+      ? "95% interval " + money(o.ci_low) + " to " + money(o.ci_high)
+      : "interval not published at this sample size";
+    els.headline.innerHTML =
+      '<div><div class="eob-cap">Median posted midpoint</div>'
+      + '<div class="eob-big">' + money(o.median) + '</div></div>'
+      + '<div><div class="eob-slice-top">' + pill(o.confidence)
+      + '<span class="eob-n">n = ' + postings(o.n) + '</span></div>'
+      + '<p>Every salaried posting on the board right now. ' + esc(ci)
+      + '. Quartiles ' + money(o.p25) + ' to ' + money(o.p75)
+      + '. Hourly postings are excluded and reported separately below.</p></div>';
+  }
+
+  /* ---------------------------------------------------------------- slices */
+  function qtrack(s, lo, hi){
+    if (s.p25 == null || s.p75 == null || hi <= lo) return "";
+    function pos(v){ return Math.max(0, Math.min(100, 100 * (v - lo) / (hi - lo))); }
+    var a = pos(s.p25), b = pos(s.p75), m = pos(s.median);
+    return '<div class="eob-qtrack">'
+      + '<div class="eob-qfill" style="left:' + a.toFixed(1) + '%;right:' + (100 - b).toFixed(1) + '%"></div>'
+      + '<div class="eob-qmed" style="left:calc(' + m.toFixed(1) + '% - 1.5px)"></div>'
+      + '</div>'
+      + '<div class="eob-qscale"><span>' + money(s.p25) + ' (P25)</span>'
+      + '<span>' + money(s.p75) + ' (P75)</span></div>';
+  }
+
+  function sliceHTML(s, lo, hi){
+    var t = data.thresholds;
+    var head = '<div class="eob-slice-top">'
+      + '<span class="eob-slice-name">' + esc(s.key) + '</span>'
+      + '<span class="eob-n">n = ' + postings(s.n) + '</span>'
+      + pill(s.confidence) + '</div>';
+
+    if (!s.show_median){
+      var why = s.n === 0
+        ? "No postings on the board match this slice right now."
+        : postings(s.n) + (s.n === 1 ? " matches" : " match")
+          + " this slice, fewer than the " + t.publish_median_min_n
+          + " this page requires before it publishes a median.";
+      return '<div class="eob-slice eob-thin">' + head
+        + '<p class="eob-slice-note eob-quiet"><strong>Not enough data yet.</strong> ' + esc(why)
+        + ' The count is shown because it is real. A median is not, because it would move with a single posting.</p></div>';
+    }
+
+    var fig = '<div class="eob-slice-fig"><span class="eob-slice-med">' + money(s.median) + '</span>';
+    if (s.ci_low != null){
+      fig += '<span class="eob-slice-ci">95% interval ' + money(s.ci_low) + ' to ' + money(s.ci_high) + '</span>';
+    }
+    fig += '</div>';
+
+    var body = "";
+    if (s.show_spread){
+      body = qtrack(s, lo, hi)
+        + '<p class="eob-slice-note eob-quiet">Mean ' + money(s.mean)
+        + ' \u00b7 full published spread ' + money(s.min) + ' to ' + money(s.max) + '.</p>';
+    } else {
+      body = '<p class="eob-slice-note eob-quiet">Median only. Below '
+        + t.publish_spread_min_n + ' postings this page does not publish quartiles or an interval, '
+        + 'because both would be dominated by single postings.</p>';
+    }
+    return '<div class="eob-slice">' + head + fig + body + '</div>';
+  }
+
+  function sortSlices(slices){
+    var mode = els.sort.value;
+    var pub = slices.filter(function(s){ return s.show_median; });
+    var thin = slices.filter(function(s){ return !s.show_median; });
+    if (mode === "median"){
+      pub.sort(function(a,b){ return b.median - a.median; });
+    } else if (mode === "name"){
+      pub.sort(function(a,b){ return a.key.localeCompare(b.key); });
+    } else {
+      pub.sort(function(a,b){ return b.n - a.n; });
+    }
+    thin.sort(function(a,b){ return b.n - a.n || a.key.localeCompare(b.key); });
+    return pub.concat(thin);
+  }
+
+  function bounds(slices){
+    var lows = [], highs = [];
+    slices.forEach(function(s){
+      if (s.p25 != null){ lows.push(s.p25); highs.push(s.p75); }
+    });
+    if (!lows.length) return [0, 0];
+    return [Math.min.apply(null, lows), Math.max.apply(null, highs)];
+  }
+
+  function renderStage(){
+    var st = data.stage;
+    els.viewTitle.textContent = st.label;
+    var rows = st.rows.map(function(r){
+      return '<li><span class="eob-fnum">' + postings(r.n) + '</span><span>' + esc(r.key) + '</span></li>';
+    }).join("");
+    var html = '<p class="eob-view-note">' + esc(st.note) + '</p>'
+      + '<div class="eob-notice"><strong>No stage median is published on this page.</strong> '
+      + 'Of ' + n_(st.salaried_n) + ' salaried postings, ' + n_(st.stated_n)
+      + ' state a stage in their own text (' + st.stated_pct + '%) and ' + n_(st.not_stated_n)
+      + ' state none. A stage read out of prose describes the wording of the posting, not a verified '
+      + 'company attribute, so it is reported as a count and nothing else.</div>';
+    if (rows){
+      html += '<div class="eob-method" style="box-shadow:none;margin:1rem 0 0">'
+        + '<h4>Postings that state a stage <span class="eob-badge">Counts only</span></h4>'
+        + '<ul class="eob-facts">' + rows
+        + (st.ambiguous_n ? '<li><span class="eob-fnum">' + postings(st.ambiguous_n)
+            + '</span><span>state more than one stage word, so they are counted as ambiguous and assigned to neither</span></li>' : "")
+        + '</ul></div>';
+    }
+    html += '<div class="eob-missing"><strong>The closest cut this board can actually support</strong> is who published the posting. '
+      + 'Venture portfolio feeds, specialist search firms, generalist staffing firms and professional networks '
+      + 'differ on pay, and that is a fact about the publisher rather than the company stage. Switch the slicer '
+      + 'to Source type to see it.</div>';
+    els.output.innerHTML = html;
+  }
+
+  function render(){
+    if (!data) return;
+    var key = els.view.value;
+    if (key === "stage"){ renderStage(); afterRender(); return; }
+
+    var slices, label, note;
+    if (key === "cross"){
+      slices = data.category_by_metro;
+      label = "Role family within a metro";
+      note = "Each role family inside the two metros with enough postings to ask the question. "
+           + "Most of these cells are small, and the ones that are too small say so.";
+    } else {
+      var view = data.views[key];
+      slices = view.slices;
+      label = view.label;
+      note = view.note;
+    }
+    els.viewTitle.textContent = label;
+
+    var b = bounds(slices);
+    var ordered = sortSlices(slices.slice());
+    var html = '<p class="eob-view-note">' + esc(note) + '</p>'
+      + ordered.map(function(s){ return sliceHTML(s, b[0], b[1]); }).join("");
+
+    if (key !== "cross"){
+      var miss = data.views[key].missing;
+      if (miss && miss.n > 0){
+        html += '<div class="eob-missing"><strong>' + esc(miss.label) + ': ' + postings(miss.n)
+          + '.</strong> ' + esc(miss.note) + ' An empty field is not a zero and is not a category.</div>';
+      } else if (miss){
+        html += '<div class="eob-missing"><strong>' + esc(miss.label)
+          + ': none.</strong> Every posting in this view publishes the field.</div>';
+      }
+    }
+
+    if (key === "category" && data.hourly && data.hourly.n){
+      var h = data.hourly;
+      var rate = h.rate;
+      html += '<div class="eob-slice eob-thin" style="margin-top:.9rem">'
+        + '<div class="eob-slice-top"><span class="eob-slice-name">Hourly postings, reported separately</span>'
+        + '<span class="eob-n">n = ' + postings(h.n) + '</span>' + pill(h.confidence) + '</div>'
+        + (h.show_median
+            ? '<div class="eob-slice-fig"><span class="eob-slice-med">$' + n_(rate.median)
+              + '/hr</span><span class="eob-slice-ci">range $' + n_(rate.min) + ' to $' + n_(rate.max)
+              + ' per hour, rounded to the dollar</span></div>'
+            : '<p class="eob-slice-note eob-quiet"><strong>Not enough data yet.</strong> '
+              + postings(h.n) + ' publish an hourly rate, fewer than the '
+              + data.thresholds.publish_median_min_n + ' required for a median.</p>')
+        + '<p class="eob-slice-note eob-quiet">' + esc(h.note) + '</p></div>';
+    }
+
+    els.output.innerHTML = html;
+    afterRender();
+  }
+
+  /* ---------------------------------------------------------------- context blocks */
+  function renderGaps(){
+    var g = data.headline_gaps || {};
+    var cards = [];
+    Object.keys(g).forEach(function(k){
+      var x = g[k];
+      if (!x) return;
+      cards.push('<li><span class="eob-fnum">+' + money(x.dollar_gap) + '</span><span>'
+        + esc(x.a) + ' median ' + money(x.a_median) + ' (n = ' + n_(x.a_n) + ') against '
+        + esc(x.b) + ' median ' + money(x.b_median) + ' (n = ' + n_(x.b_n) + '), a gap of '
+        + x.pct_gap + '%. Both medians are computed from the same snapshot, so the gap is a '
+        + 'comparison of these postings and not of these professions.</span></li>');
+    });
+    els.gaps.innerHTML = '<h4>Gaps between role families <span class="eob-badge">Same snapshot, both sides</span></h4>'
+      + '<p>Each comparison shows both sample sizes, because a gap is only as solid as its thinner side.</p>'
+      + '<ul class="eob-facts">' + cards.join("") + '</ul>';
+  }
+
+  function renderGapsList(){
+    var q = data.data_quality || {};
+    var u = q.undisclosed_pay || {};
+    var b = data.band_shape || {};
+    var r = data.recency || {};
+    var items = [];
+
+    if (u.published_no_pay_pct_of_in_scope != null){
+      items.push([u.published_no_pay_pct_of_in_scope + "%",
+        "of the " + n_(u.in_scope) + " in-scope postings the last refresh found publish no pay figure at all ("
+        + n_(u.published_no_pay) + " postings). None of them are on the board and none are in any figure here. "
+        + "This is the single largest hole in the picture."]);
+    }
+    if (u.published_pay_below_floor != null){
+      items.push([n_(u.published_pay_below_floor) + " postings",
+        "published pay below the $100,000 midpoint floor and were excluded by that floor, not by an editorial call. "
+        + "The board's low end is missing by construction, which is why nothing here is a national median."]);
+    }
+    if (q.seniority_missing > 0){
+      items.push([n_(q.seniority_missing) + " of " + n_(data.board.roles_total),
+        "postings carry no seniority label. " + (q.seniority_note || "")]);
+    } else {
+      items.push([n_(q.seniority_equals_category) + " of " + n_(data.board.roles_total),
+        "postings carry a seniority label that only repeats the role family, so the field "
+        + "adds no level detail and is not used for any pay cut here. Where it is empty it is "
+        + "counted as missing and never read as a level. It is empty on "
+        + n_(q.seniority_missing) + " postings in this snapshot, which has not always been true "
+        + "of this field."]);
+    }
+    if (q.location_missing != null){
+      items.push([n_(q.location_missing) + " postings",
+        "publish no location, so they appear in the metro view as missing rather than in a metro."]);
+    }
+    if (q.date_posted_missing != null){
+      items.push([n_(q.date_posted_missing) + " postings",
+        "carry no posting date, so board freshness is measured on the "
+        + n_(r.n_with_date) + " that do. Median age of those is "
+        + n_(r.median_age_days) + " days."]);
+    }
+    if (q.hiring_org_withheld != null){
+      items.push([n_(q.hiring_org_withheld) + " postings",
+        "withhold the hiring organization, which is normal for search-firm listings and is recorded as withheld."]);
+    }
+    if (b.single_figure_n != null){
+      items.push([b.single_figure_n + " postings",
+        "publish a single figure instead of a range (" + b.single_figure_pct
+        + "% of salaried). That figure is treated as its own midpoint. Across the "
+        + n_(b.two_ended_n) + " that do publish a range, the median band is " + money(b.band_width_median)
+        + " wide, about " + b.band_width_pct_median + "% of the midpoint."]);
+    }
+    if (q.board_metro_field_disagrees_with_report_classifier){
+      items.push([n_(q.board_metro_field_disagrees_with_report_classifier) + " postings",
+        "are tagged with a metro on the board that does not line up with the classifier used in our "
+        + "published report. This page uses the report's classifier so the two stay consistent, and the "
+        + "disagreement is disclosed rather than smoothed over."]);
+    }
+    els.gapsList.innerHTML = items.map(function(p){
+      return '<li><span class="eob-fnum">' + esc(p[0]) + '</span><span>' + esc(p[1]) + '</span></li>';
+    }).join("");
+  }
+
+  function renderDerive(){
+    var t = data.thresholds, fc = data.floor_check;
+    els.derive.innerHTML = esc(
+      "figure = median of published range midpoints  \u00b7  floor: every posting >= $"
+      + n_(fc.floor) + " annualized midpoint, re-asserted at build time on all "
+      + n_(fc.checked) + " postings, lowest = $" + n_(fc.lowest_annualized_midpoint)
+      + "  \u00b7  hourly annualized at " + n_(fc.hourly_annualized_at_hours)
+      + "h for the floor test only  \u00b7  median published at n >= " + t.publish_median_min_n
+      + ", quartiles and 95% interval at n >= " + t.publish_spread_min_n
+      + "  \u00b7  interval = percentile bootstrap, " + n_(t.bootstrap_resamples)
+      + " resamples, fixed seed " + t.bootstrap_seed
+      + "  \u00b7  built " + (data.generated_at || "") + " by build_comp_explorer.py from salary_report.py"
+    );
+  }
+
+  /* ---------------------------------------------------------------- load */
+  function checkBoard(){
+    fetch(ROLES_URL, { cache: "no-store" })
+      .then(function(res){ if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+      .then(function(p){
+        renderFreshness(p && p.updated,
+                        p && Array.isArray(p.roles) ? p.roles.length : null, false);
+        postHeight();
+      })
+      .catch(function(){ renderFreshness(null, null, true); postHeight(); });
+  }
+
+  function boot(payload){
+    data = payload;
+    renderFreshness(null, null, false);
+    renderHeadline();
+    renderDerive();
+    renderGaps();
+    renderGapsList();
+    render();
+    checkBoard();
+  }
+
+  function loadData(url, isRetry){
+    fetch(url, { cache: "no-store" })
+      .then(function(res){ if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+      .then(boot)
+      .catch(function(){
+        if (!isRetry && url !== DATA_URL_FALLBACK){ loadData(DATA_URL_FALLBACK, true); return; }
+        els.output.innerHTML = '<div class="eob-notice"><strong>The comp data file could not be loaded.</strong> '
+          + 'Nothing is shown rather than a stale or partial figure. Refresh the page, or read '
+          + '<a href="/roles">the roles board</a> directly.</div>';
+        els.fresh.textContent = "Data file unavailable";
+        els.freshSub.textContent = "";
+        postHeight();
+      });
+  }
+
+  els.view.addEventListener("change", render);
+  els.sort.addEventListener("change", render);
+  loadData(DATA_URL, false);
+
+  /* ---------------------------------------------------------------- iframe height */
+  function postHeight(){
+    var h = root.scrollHeight;
+    if (window.parent && window.parent !== window){
+      window.parent.postMessage({ type: "eob-compexp-height", height: h }, "*");
+    }
+  }
+  function afterRender(){ setTimeout(postHeight, 60); }
+  if (window.ResizeObserver){ new ResizeObserver(postHeight).observe(root); }
+  window.addEventListener("load", postHeight);
+  window.addEventListener("resize", postHeight);
+
+  var subForm = root.querySelector("#eob-subscribe");
+  var subMsg = root.querySelector("#eob-sub-msg");
+  if (subForm){
+    var frame = document.createElement("iframe");
+    frame.name = "eob-ml-comp-frame";
+    frame.style.display = "none";
+    frame.setAttribute("aria-hidden", "true");
+    root.appendChild(frame);
+    subForm.addEventListener("submit", function(){
+      var btn = subForm.querySelector("button");
+      if (btn){ btn.disabled = true; btn.textContent = "Sending..."; }
+      setTimeout(function(){
+        if (subMsg) subMsg.textContent = "You are in. Check your inbox for the next note.";
+        subForm.reset();
+        if (btn){ btn.disabled = false; btn.textContent = "Subscribe to The Brief"; }
+        postHeight();
+      }, 900);
+    });
+  }
+})();
+</script>
