@@ -479,6 +479,139 @@
       + '<div class="eob-notice">There is no clean national Executive Operations occupation series. Level, scope, and title normalization are more reliable than the word operations alone.</div>';
   }
 
+  /* ======================================================================
+     LIVE BOARD BENCHMARK
+     Everything above is the static July 2026 research file. This row is the
+     same board the /roles page shows, read at page load, so the tool carries
+     one figure that cannot go stale between research refreshes. It is
+     computed here rather than baked into compensation-data.json for exactly
+     that reason.
+
+     Honesty rules, in order:
+     - Posted midpoints only, annualized for hourly roles at 2080h, which is
+       what the board's own $100k floor uses. Nothing is estimated.
+     - The cut is stated in full, including the $100k floor, because this
+       population is truncated and is not a national median.
+     - No median below the file's own minimumSampleRules.medianOnly, and no
+       percentiles below minimumSampleRules.percentiles.
+     - The board carries no company-stage field, so the Chief of Staff row is
+       all stages and says so. It does not silently track the stage selector.
+     ====================================================================== */
+  var ROLES_URL = "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json";
+  var board = null;      // { roles: [...], updated: "YYYY-MM-DD" }
+  var boardFailed = false;
+  var XOPS_CATEGORIES = ["Executive Operations", "Director / VP of Operations",
+                         "COO / Operating Executive"];
+
+  function boardMid(r){
+    if (r.comp_low == null || r.comp_high == null) return null;
+    var f = r.comp_period === "hr" ? 2080 : 1;
+    return (r.comp_low * f + r.comp_high * f) / 2;
+  }
+  function pct(sorted, p){
+    if (!sorted.length) return null;
+    var i = (sorted.length - 1) * p;
+    var lo = Math.floor(i), hi = Math.ceil(i);
+    return lo === hi ? sorted[lo] : sorted[lo] + (sorted[hi] - sorted[lo]) * (i - lo);
+  }
+
+  /* The cut that matches what the reader has selected, described in words. */
+  function liveCut(){
+    var role = els.role.value;
+    if (role === "cos"){
+      return {
+        label: "Chief of Staff postings",
+        note: "All company stages. The board does not carry a funding stage, so this figure does not change with the stage selector above.",
+        test: function(r){ return r.category === "Chief of Staff"; }
+      };
+    }
+    if (role === "ops"){
+      return {
+        label: "Executive Operations and operations leadership postings",
+        note: "Executive Operations plus the operations-leadership categories.",
+        test: function(r){ return XOPS_CATEGORIES.indexOf(r.category) !== -1; }
+      };
+    }
+    var titleKey = els.title.value, marketKey = els.market.value;
+    var track = titleKey === "senior_ea" ? "Senior Executive Assistant"
+              : titleKey === "ebp" ? "Executive Business Partner" : null;
+    if (titleKey === "epa" || titleKey === "eapa"){
+      return { unavailable: "The board does not carry a personal-assistant or hybrid title cut, so there is no live comparison for this selection." };
+    }
+    var metro = marketKey === "sf" ? "SF Bay Area" : marketKey === "ny" ? "NYC" : null;
+    var label = (track || "Executive Assistant") + " postings"
+      + (metro ? " in " + metro : "");
+    return {
+      label: label,
+      note: track
+        ? "Titles that state this track. Postings whose title states no track are not counted."
+        : "All Executive Assistant postings, including senior and business-partner titles.",
+      test: function(r){
+        if (r.category !== "Executive Assistant") return false;
+        if (track && r.seniority !== track) return false;
+        if (metro && r.metro !== metro) return false;
+        return true;
+      }
+    };
+  }
+
+  function liveBlockHTML(){
+    if (boardFailed){
+      return '<div class="eob-notice">The live roles board could not be reached, so only the compiled dataset above is shown.</div>';
+    }
+    if (!board) return "";
+    var cut = liveCut();
+    if (cut.unavailable){
+      return '<div class="eob-notice"><strong>Live board benchmark.</strong> ' + esc(cut.unavailable) + '</div>';
+    }
+    var mids = board.roles.filter(cut.test).map(boardMid)
+      .filter(function(v){ return v != null; })
+      .sort(function(a, b){ return a - b; });
+    var n = mids.length;
+    var rules = (data && data.minimumSampleRules) || { medianOnly: 10, percentiles: 15 };
+    var stamp = "EOB roles board, updated daily, n=" + n;
+    var cite_ = cite("Exec Ops Brief roles board", ROLES_URL,
+                     "posted midpoints; $100k floor; board snapshot " + (board.updated || "today"));
+
+    if (n < rules.medianOnly){
+      return '<div class="eob-tc"><span class="eob-tc-title">Live board benchmark'
+        + confidence(stamp) + '</span>'
+        + '<p>' + esc(n === 0 ? "No postings on the board match this cut right now."
+            : n + (n === 1 ? " posting matches" : " postings match") + " this cut right now, fewer than the "
+              + rules.medianOnly + " this tool requires before it publishes a median.")
+        + " " + esc(cut.note) + '</p>' + cite_ + '</div>';
+    }
+    var body = '<p>Median posted midpoint across the ' + n + " " + esc(cut.label)
+      + " on the board right now. " + esc(cut.note)
+      + " Hourly rates are annualized at 2080 hours, and every posting clears the board's $100,000 midpoint floor, so this is a premium opportunity market, not a national median.</p>";
+    var pcts = "";
+    if (n >= rules.percentiles){
+      pcts = '<p>P25 ' + money(pct(mids, 0.25)) + " and P75 " + money(pct(mids, 0.75)) + ".</p>";
+    }
+    return '<div class="eob-tc"><span class="eob-tc-title">Live board benchmark'
+      + confidence(stamp) + '</span>'
+      + '<div class="eob-stat">' + money(pct(mids, 0.5)) + '</div>'
+      + body + pcts + cite_ + '</div>';
+  }
+
+  function loadBoard(){
+    fetch(ROLES_URL, { cache: "no-store" })
+      .then(function(res){
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function(payload){
+        var roles = (payload && Array.isArray(payload.roles)) ? payload.roles
+                  : (Array.isArray(payload) ? payload : []);
+        board = { roles: roles, updated: payload && payload.updated };
+        render();
+      })
+      .catch(function(){
+        boardFailed = true;
+        render();
+      });
+  }
+
   function updateControls(){
     var role = els.role.value;
     els.titleWrap.classList.toggle("eob-hidden",role !== "ea");
@@ -491,6 +624,7 @@
     if (els.role.value === "ea") renderEA();
     else if (els.role.value === "cos") renderCoS();
     else renderOps();
+    els.output.insertAdjacentHTML("beforeend", liveBlockHTML());
     setTimeout(postHeight,60);
   }
 
@@ -506,8 +640,10 @@
     })
     .then(function(payload){
       data = payload;
-      els.derive.textContent = "Data version: " + data.updatedLabel + " · USD annual base unless labeled otherwise";
+      els.derive.textContent = "Benchmark sources compiled " + data.updatedLabel
+        + " · USD annual base unless labeled otherwise · the live board row refreshes daily";
       render();
+      loadBoard();
     })
     .catch(function(){
       els.output.innerHTML = '<div class="eob-notice"><strong>Benchmark data is temporarily unavailable.</strong> Refresh the page or use the linked source reports below.</div>';
