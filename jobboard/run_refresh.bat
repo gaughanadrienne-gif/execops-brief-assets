@@ -23,6 +23,26 @@ if errorlevel 1 (
 )
 
 cd /d "%REPO%"
+
+REM -- Live Comp Explorer data, rebuilt from the board we just scraped.
+REM    Kept here rather than on its own schedule so the figures can never be
+REM    older than the roles.json they describe. build_comp_explorer.py imports
+REM    salary_report.py as a module, re-asserts the $100k published-comp floor
+REM    across every posting, and RAISES rather than writing if one fails, so a
+REM    bad board cannot publish a figure. Its write is temp-file-then-replace,
+REM    so a failed build leaves the last good data file intact. On failure we
+REM    log and carry on: the tool then states on-page that the board has
+REM    refreshed since the figures were computed, which is honest, whereas
+REM    aborting the whole refresh over it would cost the roles push too.
+REM    No CDN purge: the tool fetches this file from GitHub Pages, not jsDelivr.
+set ANALYTICS=C:\Users\Adrie\OneDrive\Businesses\Exec Ops Brief\Analytics ^& SEO\Analytics
+python "%ANALYTICS%\build_comp_explorer.py" --out "%REPO%\tools\comp-explorer-data.json" >> "%LOG%" 2>&1
+if errorlevel 1 (
+  echo [%DATE% %TIME%] comp explorer build failed -- keeping previous data file >> "%LOG%"
+) else (
+  git add tools/comp-explorer-data.json >> "%LOG%" 2>&1
+)
+
 git add jobboard/roles.json >> "%LOG%" 2>&1
 git commit -m "Daily roles refresh" >> "%LOG%" 2>&1
 if errorlevel 1 (
