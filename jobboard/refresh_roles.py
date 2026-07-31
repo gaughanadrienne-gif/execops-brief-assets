@@ -43,6 +43,28 @@ from html import unescape as html_unescape
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROLES_PATH = os.path.join(HERE, "roles.json")
 
+# Per-run outcome ledger, read by check_source_health.py. It lives in the
+# PRIVATE folder alongside the operational README, not in this public repo:
+# nothing here is secret, but it is operational telemetry and it churns daily,
+# and a file that changes every morning has no business in a CDN-served repo.
+# Falls back to this folder if the private tree is not present (fresh clone).
+def _default_history_path():
+    override = os.environ.get("EOB_SOURCE_HISTORY")
+    if override:
+        return override
+    private = os.path.abspath(os.path.join(HERE, "..", "..", "jobboard-private"))
+    if os.path.isdir(private):
+        return os.path.join(private, "source_history.json")
+    return os.path.join(HERE, "source_history.json")
+
+
+HISTORY_PATH = _default_history_path()
+
+# Roughly four months of daily runs. Long enough that the health check can see a
+# source's normal yield across a full hiring cycle, short enough that the file
+# stays a few hundred KB and can be read in one gulp every morning.
+HISTORY_MAX_RUNS = 120
+
 SCRATCH = os.environ.get(
     "REFRESH_SCRATCH",
     tempfile.gettempdir(),
@@ -3406,6 +3428,80 @@ def assert_floor(roles):
     return True
 
 
+def record_run_history(run_date, per_source, board_total, pre_floor, manual_n,
+                       wrote, path=None):
+    """
+    Append this run's per-source outcome to the history ledger.
+
+    This function exists so that a source dying is a FACT ON DISK rather than a
+    line of stderr nobody reads. It records every source in SOURCES, including
+    the ones that succeeded, because "failed" can only be distinguished from
+    "was never attempted" if the successes are written down too.
+
+    Two rules it must never break:
+      * It never raises. The caller wraps it as well, belt and braces. Roles are
+        the product; telemetry about roles is not, and telemetry must never be
+        able to cost the board a day.
+      * It never truncates the existing file on a partial write. Temp file plus
+        os.replace, so an interrupted run leaves the previous ledger intact.
+    """
+    path = path or HISTORY_PATH
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            hist = json.load(fh)
+        if not isinstance(hist, dict) or not isinstance(hist.get("runs"), list):
+            raise ValueError("history file is not the expected shape")
+    except (OSError, ValueError):
+        # A missing or corrupt ledger is not a reason to lose today's record.
+        hist = {"_note": "Per-run source outcomes for the roles refresh. "
+                         "Written by refresh_roles.py, read by "
+                         "check_source_health.py. Safe to delete; it rebuilds "
+                         "from refresh.log via --backfill-from-log.",
+                "runs": []}
+
+    sources = []
+    for name, (status, info) in per_source.items():
+        if status == "ok":
+            sources.append({"name": name, "ok": True, "roles": int(info),
+                            "error": None})
+        else:
+            sources.append({"name": name, "ok": False, "roles": 0,
+                            "error": str(info)[:400]})
+
+    entry = {
+        "run_date": run_date,
+        "recorded_at": _now_stamp(),
+        "sources": sources,
+        # Counted here, at the source, and NOT recomputed downstream by
+        # filtering the list. A filter that selects for a property errors do not
+        # have makes the errors vanish instead of reporting.
+        "source_count": len(sources),
+        "ok_count": sum(1 for s in sources if s["ok"]),
+        "fail_count": sum(1 for s in sources if not s["ok"]),
+        "zero_count": sum(1 for s in sources if s["ok"] and s["roles"] == 0),
+        "manual_roles": manual_n,
+        "roles_deduped": pre_floor,
+        "board_total": board_total,
+        "wrote_roles_json": bool(wrote),
+    }
+
+    runs = [r for r in hist["runs"] if isinstance(r, dict)]
+    runs.append(entry)
+    hist["runs"] = runs[-HISTORY_MAX_RUNS:]
+
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as fh:
+        json.dump(hist, fh, indent=1, ensure_ascii=False)
+        fh.write("\n")
+    os.replace(tmp, path)
+    return path
+
+
+def _now_stamp():
+    from datetime import datetime
+    return datetime.now().replace(microsecond=0).isoformat()
+
+
 def main():
     run_date = (sys.argv[1] if len(sys.argv) > 1 else
                 os.environ.get("REFRESH_DATE") or date.today().isoformat())
@@ -3502,6 +3598,24 @@ def main():
     assert_floor(merged)
 
     ok_sources = sum(1 for s, _ in per_source.values() if s == "ok")
+
+    # ---- telemetry, recorded BEFORE the safety-floor decision so that a run
+    # which refuses to write roles.json is still on the record. That refusal is
+    # the single most important thing the health check can learn about, and it
+    # is exactly the run that would otherwise leave no trace but a stderr line.
+    #
+    # Wrapped so alerting can NEVER cost the board a refresh. If the ledger
+    # cannot be written we say so on stderr and carry on: the roles are the
+    # product, the ledger is a note about the product.
+    try:
+        record_run_history(
+            run_date, per_source,
+            board_total=total, pre_floor=pre_floor, manual_n=len(manual),
+            wrote=(total >= MIN_SAFE_TOTAL))
+    except Exception as e:                                   # noqa: BLE001
+        print(f"[warn] source history not recorded ({e.__class__.__name__}: {e}). "
+              f"The refresh is unaffected.", file=sys.stderr)
+
     if total < MIN_SAFE_TOTAL:
         print(f"\n!! Only {total} roles (< {MIN_SAFE_TOTAL} safety floor). "
               f"REFUSING to overwrite roles.json to avoid wiping good data.",

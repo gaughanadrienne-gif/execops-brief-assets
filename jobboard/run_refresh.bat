@@ -43,6 +43,17 @@ if errorlevel 1 (
   git add tools/comp-explorer-data.json >> "%LOG%" 2>&1
 )
 
+REM -- Source health check. refresh_roles.py used to catch a dead source, print
+REM    [FAIL] and do nothing else, so a source could die silently and stay dead
+REM    while it fed /roles, the benchmarker's live row, /salary-data and the
+REM    published salary report. This reads the ledger the run above just wrote
+REM    and alarms on a newly failed source, sustained failure, sustained
+REM    ZERO-YIELD (the case no try/except can see, where a parser runs clean
+REM    against changed markup and returns nothing), a board-size cliff and a
+REM    slow bleed. Thresholds are backtested against 25 real runs. It is silent
+REM    when healthy and exits 0 on findings, so it can never fail this batch.
+python "%REPO%\..\jobboard-private\check_source_health.py" >> "%LOG%" 2>&1
+
 git add jobboard/roles.json >> "%LOG%" 2>&1
 git commit -m "Daily roles refresh" >> "%LOG%" 2>&1
 if errorlevel 1 (
