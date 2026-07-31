@@ -937,6 +937,144 @@
     else { host.appendChild(box); }
   }
 
+  // ---- 3c. Content upgrades (free downloads) --------------------------------
+  // The ~18 free assets on /resources are checkboxes carrying a MailerLite form id.
+  // None of them has a URL, so none can be linked from an article, and until now no
+  // article offered the download that matches it: a reader on the salary guide had to
+  // notice the footer, open /resources, and find the right item among eighteen.
+  //
+  // Each entry pairs an article with the ONE download written for that exact question.
+  // The link carries ?pick=<form id>; the current picker ignores an unknown param and
+  // the rebuilt one pre-ticks that item, so this ships safely before that lands.
+  //
+  // Slot discipline: module 3 injects after the 2nd H2 and toolCallout at a LATE H2,
+  // so this takes an EARLY heading and skips any anchor either of them already owns.
+  // Idempotent via #eob-upgrade.
+  var DOWNLOAD_CALLOUTS = [
+    { match:['chief-of-staff-salary-guide'], form:'192281528647025768',
+      title:'The full salary and leveling guide, free',
+      body:'The company-stage pay table, the leveling matrix, and every source behind the numbers in this article, in one document you can keep.',
+      cta:'Get the guide' },
+    { match:['chief-of-staff-certifications-compared'], form:'192281526697723412',
+      title:'The certification comparison, in one document',
+      body:'Every programme in this article side by side: cost, format, time commitment, and what each one is actually good for. Free.',
+      cta:'Get the comparison' },
+    { match:['ea-to-chief-of-staff-path'], form:'192281524799800449',
+      title:'The EA-to-Chief-of-Staff roadmap',
+      body:'The skills to build, the gaps to close, and how to make the case for the move, laid out as a path you can work through.',
+      cta:'Get the roadmap' },
+    { match:['negotiate-chief-of-staff-offer'], form:'192281532606448779',
+      title:'The offer negotiation one-pager',
+      body:'What to ask for, in what order, and the wording that keeps the conversation collaborative. One page, free.',
+      cta:'Get the one-pager' },
+    { match:['resume-linkedin-for-exec-ops'], form:'192281534518003231',
+      title:'The repositioning worksheet',
+      body:'Work through your own resume and LinkedIn against the same checks this article describes, section by section.',
+      cta:'Get the worksheet' },
+    { match:['chief-of-staff-interview-questions'], form:'192281514021487997',
+      title:'The interview prep checklist',
+      body:'What to prepare for each stage of an exec-ops loop, and the evidence to have ready before you walk in.',
+      cta:'Get the checklist' },
+    { match:['board-meeting-prep-chief-of-staff'], form:'192710844994290792',
+      title:'The board prep checklist and deck outline',
+      body:'The send timeline, the six-section deck outline, a pre-meeting call script, and the follow-up format. Reuse it every quarter.',
+      cta:'Get the checklist' },
+    { match:['run-effective-leadership-team-meeting'], form:'192281506358494520',
+      title:'The meeting agenda and run sheet',
+      body:'A working agenda and run sheet for the leadership meeting this article describes, ready to adapt.',
+      cta:'Get the template' },
+    { match:['single-source-of-truth-decision-logs'], form:'192281510200477565',
+      title:'The decision log template',
+      body:'The decision log described here, ready to use, plus the Notion version if you would rather duplicate it.',
+      cta:'Get the template' },
+    { match:['first-90-days-chief-of-staff-operating-plan'], form:'192281504641975480',
+      title:'The operating plan as a document',
+      body:'The same plan in a form you can edit, share with your principal, and mark up as the ninety days run.',
+      cta:'Get the plan' },
+    { match:['protecting-an-executives-time-and-focus'], form:'192281512088962273',
+      title:'The weekly executive priorities brief',
+      body:'The one-page format for showing a principal where the week actually went and what needs their decision next.',
+      cta:'Get the template' }
+  ];
+
+  function downloadCallout(slug, host){
+    if (!DOWNLOAD_CALLOUTS.length || byId('eob-upgrade')) return;
+    var hit = null, i, j;
+    for (i=0;i<DOWNLOAD_CALLOUTS.length && !hit;i++){
+      var m = DOWNLOAD_CALLOUTS[i].match || [];
+      for (j=0;j<m.length;j++){ if (slug === m[j]){ hit = DOWNLOAD_CALLOUTS[i]; break; } }
+    }
+    if (!hit || !hit.form) return;
+
+    var b = CFG.brand;
+    var box = el('aside','margin:2.25rem 0;padding:1.25rem 1.4rem;background:#fff;border:1px solid '+b.rule+';border-left:4px solid '+b.oxblood+';');
+    box.id = 'eob-upgrade';
+    box.appendChild(el('div','font:600 .66rem/1 "Public Sans",system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:'+b.oxblood+';margin-bottom:.5rem;','Free download'));
+    box.appendChild(el('div','font:600 1.1rem/1.3 "Spectral",Georgia,serif;color:'+b.ink+';margin-bottom:.4rem;', hit.title));
+    box.appendChild(el('div','font:400 .95rem/1.5 "Public Sans",system-ui,sans-serif;color:'+b.slate+';margin-bottom:.8rem;', hit.body));
+    var a = el('a','display:inline-block;padding:.55rem 1.1rem;background:'+b.navy+';color:#fff;text-decoration:none;font:600 .9rem "Public Sans",system-ui,sans-serif;border-radius:2px;', hit.cta);
+    a.href = '/resources?pick=' + encodeURIComponent(hit.form);
+    a.rel = 'noopener';
+    a.setAttribute('data-eob-track','download');
+    a.setAttribute('data-eob-asset', hit.form);
+    box.appendChild(a);
+
+    // Early heading. Skip the FAQ, anything module 3 or the tool callout already owns,
+    // and any heading immediately followed by a branded graphic.
+    var h2s = host.querySelectorAll('h2');
+    var order = [0, 1, 2, 3];
+    for (i=0;i<order.length;i++){
+      var anchor = h2s[order[i]];
+      if (!anchor || isFaqHeading(anchor)) continue;
+      var prev = anchor.previousElementSibling;
+      if (prev && (prev.id === 'eob-callout' || prev.id === 'eob-tool-callout')) continue;
+      var next = anchor.nextElementSibling;
+      if (next && (/^eob-gfx-/.test(next.id || '') || next.id === 'eob-tool-callout')) continue;
+      anchor.parentNode.insertBefore(box, anchor.nextSibling);
+      return;
+    }
+    var last = host.lastElementChild;
+    if (last && (last.id === 'eob-tool-callout' || last.id === 'eob-callout')) return;  // never stack
+    host.appendChild(box);
+  }
+
+  // ---- 3d. Tool and download attribution ------------------------------------
+  // The 2026-07-29 tools audit found ZERO attribution on any tool anywhere in the
+  // portfolio: no way to answer "which tool converts". GA4 is present on EOB pages
+  // but cannot see inside the tool iframes, so the honest thing to measure from here
+  // is INTENT: the click that leaves an article for a tool or a download.
+  //
+  // Deliberately NOT using UTM parameters on these internal links. An internal UTM
+  // starts a new GA4 session and overwrites the real traffic source, which destroys
+  // the very attribution this is trying to create, and it mints duplicate crawlable
+  // URLs. Events in, UTMs only for inbound links we do not control.
+  var TOOL_PATHS = ['/roles','/salary-benchmarker','/salary-data','/offer-evaluator',
+                    '/first-90-days','/readiness-quiz','/tools','/resources'];
+  function trackClicks(){
+    if (window.__eobTrackBound) return;
+    window.__eobTrackBound = true;
+    document.addEventListener('click', function(ev){
+      var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (href.charAt(0) !== '/') return;                 // internal only
+      var path = href.split('?')[0].split('#')[0].replace(/\/+$/,'') || '/';
+      var kind = a.getAttribute('data-eob-track');
+      if (!kind && TOOL_PATHS.indexOf(path) === -1) return;
+      if (typeof window.gtag !== 'function') return;      // no GA4 on this page, do nothing
+      try {
+        window.gtag('event', kind === 'download' ? 'download_intent' : 'tool_open', {
+          destination: path,
+          asset: a.getAttribute('data-eob-asset') || null,
+          placement: a.closest('#eob-upgrade') ? 'content_upgrade'
+                   : a.closest('#eob-tool-callout') ? 'tool_callout'
+                   : a.closest('footer') ? 'footer' : 'body',
+          source_slug: currentSlug() || null
+        });
+      } catch(e){}
+    }, true);
+  }
+
   // ---- 3b. Tool callouts ---------------------------------------------------
   // A SECOND, independent callout slot that routes readers into the four free
   // interactive tools. Deliberately separate from module 3 so a tool callout and
@@ -1467,12 +1605,14 @@
     try { honestCopy(); } catch(e){}           // "curated" overclaim in shared CTA copy (site-wide)
     try { rolesOptIn(); } catch(e){}           // /roles weekly new-roles trade (dark until form id set)
     try { breadcrumbs(); } catch(e){}          // BreadcrumbList JSON-LD (site-wide, non-home)
+    try { trackClicks(); } catch(e){}          // tool + download intent events (site-wide)
     if (!slug || !findArticle(slug)) return;   // only on known article pages (path-agnostic)
     var host = contentEl();
     if (!host) return;
     try { graphics(slug, host); } catch(e){}
     try { callout(slug, host); } catch(e){}
     try { toolCallout(slug, host); } catch(e){}   // separate slot: free-tool routing
+    try { downloadCallout(slug, host); } catch(e){}  // content upgrade: the matching free download
     try { faqPolish(host); } catch(e){}
     try { keepReading(slug, host); } catch(e){}
   }
