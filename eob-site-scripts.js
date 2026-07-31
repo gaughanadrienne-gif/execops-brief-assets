@@ -301,7 +301,12 @@
   (function headingMeasure(){
     try {
       if (document.getElementById('eob-measure-fix')) return;
-      var css = '[id^="eob-"] h1{max-width:48rem !important}';
+      var css = '[id^="eob-"] h1{max-width:48rem !important}'
+              // Body-flow h2s had the same inversion: /tools capped them at 457px
+              // against a 720px body measure, so they broke onto two lines. Section
+              // and CTA headings (.sec-h, .final, .nudge) are deliberately tight and
+              // centered, so they are left alone.
+              + '[id^="eob-"] .prose h2,[id^="eob-"] .band-head h2{max-width:48rem !important}';
       var st = document.createElement('style');
       st.id = 'eob-measure-fix';
       st.textContent = css;
