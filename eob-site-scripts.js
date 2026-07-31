@@ -266,6 +266,49 @@
       href:'/roles' }
   ];
 
+  // ---- 0. Heading measure correction (site-wide, runs before paint) ---------
+  // The owner reported text "cut off with forced paragraph breaks" across the
+  // whole site. Measured 2026-07-31 in a fixed 1440px frame: on EVERY page the
+  // h1 was capped NARROWER than the body copy beneath it.
+  //
+  //   /                    h1 534px vs body 640px   headline broke onto 4 lines
+  //   /about               h1 539px vs body 672px   3 lines
+  //   /resources           h1 571px vs body 672px   3 lines
+  //   /tools, /benchmarker h1 632px vs body 720px   3 lines
+  //   /roles               h1 698px vs body 736px   2 lines
+  //
+  // Cause: headings were measured in `ch`, body copy in `rem`. `ch` is the width
+  // of the "0" glyph in the element's OWN font, so on a narrow display serif at
+  // 53-66px it resolves to FEWER pixels than a rem cap does on 18px body text.
+  // Each value looked fine alone; they were never comparable by eye. The tell is
+  // a fractional computed max-width (533.856px) beside round body values (640px).
+  //
+  // 48rem = 768px sits at or above every body measure on the site (max 736px) and
+  // still well inside the 1080px .wrap, so one value fixes every page. Verified
+  // before shipping: 4 lines to 3 on home, 3 to 2 on about/resources/tools, 2 to 1
+  // on roles, no wrap overflow and no document overflow on any page.
+  //
+  // This is a PRESENTATION override and that is why it is acceptable here, unlike
+  // the honestCopy() scrubber, which rewrites a factual claim in the DOM while the
+  // served source keeps the old wording where crawlers still read it. A max-width
+  // has no equivalent: nothing consumes it but the renderer. The per-page sources
+  // still carry the ch values and should be corrected opportunistically; until
+  // then this wins, including on any page that gets re-pasted from an old file.
+  //
+  // Scoped to [id^="eob-"] so it can only ever touch our own injected blocks and
+  // never a native Squarespace heading. Injected at parse time rather than on
+  // DOMContentLoaded to minimise any flash of the narrow measure.
+  (function headingMeasure(){
+    try {
+      if (document.getElementById('eob-measure-fix')) return;
+      var css = '[id^="eob-"] h1{max-width:48rem !important}';
+      var st = document.createElement('style');
+      st.id = 'eob-measure-fix';
+      st.textContent = css;
+      (document.head || document.documentElement).appendChild(st);
+    } catch(e){}
+  })();
+
   // ---- helpers -----------------------------------------------------------
   function currentSlug() {
     // path-agnostic: last URL segment; run() confirms it is a known article, so
