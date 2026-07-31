@@ -111,6 +111,12 @@
     display:inline-block;font-size:.74rem;font-weight:600;padding:.28rem .68rem;border-radius:100px;
     background:var(--ox-tint);color:var(--ox-deep);white-space:nowrap;
   }
+  /* Location strings can carry several metros ("San Francisco, CA - New York,
+     NY - United States", 48 chars, 54 of 268 roles run over 30). Kept nowrap it
+     measured 294px, which set a hard 343px floor on every card and clipped the
+     right edge of the board on any phone. Let this one pill wrap. */
+  #eob-jobboard .eob-pill{max-width:100%}
+  #eob-jobboard .eob-pill-loc{white-space:normal}
   #eob-jobboard .eob-pill-cat{background:var(--paper-deep);color:var(--navy);border:1px solid var(--line)}
   #eob-jobboard .eob-pill-remote{background:var(--green-tint);color:var(--green)}
   #eob-jobboard .eob-pill-loc{background:var(--paper-deep);color:var(--slate);border:1px solid var(--line)}
@@ -168,14 +174,19 @@
     #eob-jobboard .eob-controls{grid-template-columns:1fr 1fr}
     #eob-jobboard .eob-field-wide{grid-column:span 2}
     #eob-jobboard .eob-cta{grid-template-columns:1fr}
+    /* A card will not shrink below about 391px, so two columns stop fitting
+       here. Dropping to one column at 820 rather than 600 keeps tablet
+       portrait from overflowing its right edge. Desktop is unchanged. */
+    #eob-jobboard .eob-grid{grid-template-columns:1fr}
   }
   @media (max-width:600px){
     #eob-jobboard .eob-controls{grid-template-columns:1fr}
     #eob-jobboard .eob-field-wide{grid-column:auto}
-    #eob-jobboard .eob-grid{grid-template-columns:1fr}
     #eob-jobboard .eob-cta{padding:1.6rem}
-    #eob-jobboard .eob-cta form{flex-direction:column}
+    #eob-jobboard .eob-cta form{flex-direction:column;min-width:0}
     #eob-jobboard .eob-card-top{flex-direction:column;gap:.5rem}
+    /* grid items default to min-width:auto, so let cards shrink to the column */
+    #eob-jobboard .eob-card{min-width:0}
   }
 </style>
 
