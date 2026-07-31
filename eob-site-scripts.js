@@ -224,7 +224,46 @@
       title:'The alignment conversation has a checklist',
       body:'Our free First 90 Days tool carries the principal-alignment checks for week one, day 30, and day 60: what success means, what you own outright, what you can decide without asking. Work it as a checklist and print it.',
       cta:'Open the First 90 Days tool',
-      href:'/first-90-days' }
+      href:'/first-90-days' },
+
+    /* ---- Roles board (/roles) ----
+     * Added 2026-07-30. The board is the site's largest asset and had no
+     * callout routing to it at all. These six slugs are verified against the
+     * live sitemap and are the ones that carried NO callout before, so first
+     * match precedence leaves every existing callout untouched. Copy states
+     * only what the tool enforces: a published-pay floor of $100,000 checked
+     * in code, a daily refresh, and the filters that exist. Never "vetted"
+     * or "curated", and no role count, which moves every day. */
+    { match:['resume-linkedin-for-exec-ops'],
+      title:'Once the resume is right, go where the roles actually are',
+      body:'The roles board collects exec-ops openings from every source we track and refreshes daily. One rule is enforced in code: a posting that does not publish pay of $100,000 or more never appears. You can see the compensation before you spend an evening on the application.',
+      cta:'Open the roles board',
+      href:'/roles' },
+    { match:['chief-of-staff-exit-paths'],
+      title:'What the next seat pays, before you decide which one to chase',
+      body:'Every role on our board publishes its compensation, because a posting that hides pay does not make it in. Sort by highest comp and filter by track and location to see what the exits from this seat are worth right now rather than in a survey from last year.',
+      cta:'Open the roles board',
+      href:'/roles' },
+    { match:['three-types-of-chief-of-staff'],
+      title:'See which of these the market is hiring for this week',
+      body:'The roles board refreshes daily and filters by role track and location, so you can look at what is genuinely open before you aim a search at one version of the job. Every listing on it publishes pay of $100,000 or more.',
+      cta:'Open the roles board',
+      href:'/roles' },
+    { match:['chief-of-staff-founder-vs-established-ceo'],
+      title:'The kind of company you would be joining is visible in the posting',
+      body:'Our roles board tags each opening by source type, so a venture portfolio posting reads differently from a recruiter listing, and you can filter by location and compensation alongside it. Every role on it publishes pay of $100,000 or more.',
+      cta:'Open the roles board',
+      href:'/roles' },
+    { match:['when-does-a-company-need-a-chief-of-staff'],
+      title:'See the companies hiring one right now',
+      body:'The roles board carries live exec-ops openings from every source we track, refreshed daily. It is the fastest way to see which stages and company types are actually creating this seat, rather than arguing from first principles about when they should.',
+      cta:'Open the roles board',
+      href:'/roles' },
+    { match:['what-an-executive-assistant-to-a-ceo-does'],
+      title:'What the seat pays, in live postings',
+      body:'Our roles board carries executive assistant and exec-ops openings that publish pay of $100,000 or more, refreshed daily. Filter by location and track to see what CEO-facing seats are going for now.',
+      cta:'Open the roles board',
+      href:'/roles' }
   ];
 
   // ---- helpers -----------------------------------------------------------
