@@ -236,7 +236,7 @@
      * or "curated", and no role count, which moves every day. */
     { match:['resume-linkedin-for-exec-ops'],
       title:'Once the resume is right, go where the roles actually are',
-      body:'The roles board collects exec-ops openings from every source we track and refreshes daily. One rule is enforced in code: a posting that does not publish pay of $100,000 or more never appears. You can see the compensation before you spend an evening on the application.',
+      body:'The roles board collects exec-ops openings from every source we track and refreshes daily. One rule is enforced in code: if the source firm did not publish a comp figure, the role is not there, and the midpoint of that figure is at least $100,000. You can see the compensation before you spend an evening on the application.',
       cta:'Open the roles board',
       href:'/roles' },
     { match:['chief-of-staff-exit-paths'],
@@ -246,12 +246,12 @@
       href:'/roles' },
     { match:['three-types-of-chief-of-staff'],
       title:'See which of these the market is hiring for this week',
-      body:'The roles board refreshes daily and filters by role track and location, so you can look at what is genuinely open before you aim a search at one version of the job. Every listing on it publishes pay of $100,000 or more.',
+      body:'The roles board refreshes daily and filters by role track and location, so you can look at what is genuinely open before you aim a search at one version of the job. Every listing on it carries a published comp figure whose midpoint is at least $100,000.',
       cta:'Open the roles board',
       href:'/roles' },
     { match:['chief-of-staff-founder-vs-established-ceo'],
       title:'The kind of company you would be joining is visible in the posting',
-      body:'Our roles board tags each opening by source type, so a venture portfolio posting reads differently from a recruiter listing, and you can filter by location and compensation alongside it. Every role on it publishes pay of $100,000 or more.',
+      body:'Our roles board tags each opening by source type, so a venture portfolio posting reads differently from a recruiter listing, and you can filter by location and compensation alongside it. Every role on it carries a published comp figure whose midpoint is at least $100,000.',
       cta:'Open the roles board',
       href:'/roles' },
     { match:['when-does-a-company-need-a-chief-of-staff'],
@@ -261,7 +261,7 @@
       href:'/roles' },
     { match:['what-an-executive-assistant-to-a-ceo-does'],
       title:'What the seat pays, in live postings',
-      body:'Our roles board carries executive assistant and exec-ops openings that publish pay of $100,000 or more, refreshed daily. Filter by location and track to see what CEO-facing seats are going for now.',
+      body:'Our roles board carries executive assistant and exec-ops openings that publish a real comp figure, with a midpoint of at least $100,000, refreshed daily. Filter by location and track to see what CEO-facing seats are going for now.',
       cta:'Open the roles board',
       href:'/roles' }
   ];
