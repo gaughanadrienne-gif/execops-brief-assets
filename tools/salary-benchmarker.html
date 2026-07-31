@@ -454,7 +454,7 @@
       + sourceCard("Overall incumbent cross-check",money(cos.networkCrosscheck.median),"Overall median; published mean " + money(cos.networkCrosscheck.mean) + ".",cite(cos.networkCrosscheck.source,cos.networkCrosscheck.sourceUrl,"public sample size not disclosed"),"Context only")
       + sourceCard("Premium active postings",money(cos.premium.median),"Posted midpoint P25 " + money(cos.premium.p25) + "; P75 " + money(cos.premium.p75) + ".",cite(cos.premium.source,cos.premium.sourceUrl,"n=" + cos.premium.sample + "; $100k midpoint floor"),"Moderate confidence")
       + sourceCard("CoS versus BizOps","About 15% ±5%","Pave finds a same-level CoS salary premium over BizOps. This is a relationship, not a stage-specific salary band.",cite(data.executiveOperations.paveContext.source,data.executiveOperations.paveContext.sourceUrl,data.executiveOperations.paveContext.coverage),"Employer records")
-      + sourceCard("Bonus and equity incidence","56% / 54%","In a small mixed-geography CoS survey, 56% received bonus and 54% held equity. Do not treat either as guaranteed.",cite(cos.bonusContext.source,cos.bonusContext.sourceUrl,"n=" + cos.bonusContext.sample),"Context only")
+      + sourceCard("Bonus and equity incidence",pctOf(cos.bonusContext.prevalence) + " / " + pctOf(cos.equityContext.prevalence),"In a small, seniority-weighted CoS survey based mainly outside the US, " + pctOf(cos.bonusContext.prevalence) + " received a bonus and " + pctOf(cos.equityContext.prevalence) + " held equity. Incidence is not an amount, and neither is guaranteed in any single offer.",cite(cos.bonusContext.source,cos.bonusContext.sourceUrl,"n=" + cos.bonusContext.sample),"Context only")
       + '</div>';
   }
 
@@ -508,6 +508,11 @@
     var f = r.comp_period === "hr" ? 2080 : 1;
     return (r.comp_low * f + r.comp_high * f) / 2;
   }
+  /* Percentages come from compensation-data.json, never retyped into the copy.
+     The bonus and equity card used to hardcode both figures beside a citation
+     that was read from the file, so refreshing the source desynced the numbers
+     from the source they were attributed to. Derive them, always. */
+  function pctOf(v){ return Math.round(v * 100) + "%"; }
   function pct(sorted, p){
     if (!sorted.length) return null;
     var i = (sorted.length - 1) * p;

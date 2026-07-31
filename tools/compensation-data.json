@@ -1,7 +1,7 @@
 {
-  "version": "2026-07-14",
+  "version": "2026-07-31",
   "currency": "USD",
-  "updatedLabel": "July 14, 2026",
+  "updatedLabel": "July 31, 2026",
   "minimumSampleRules": {
     "percentiles": 15,
     "medianOnly": 10
@@ -172,17 +172,17 @@
       "measure": "Posted salary midpoint"
     },
     "bonusContext": {
-      "prevalence": 0.56,
-      "averagePercentAmongRecipients": 19,
-      "source": "Chief of Staff Collective 2025",
-      "sourceUrl": "https://www.chiefofstaffcollective.org/2025-cosc-salary-survey",
-      "sample": 63
+      "prevalence": 0.57,
+      "averagePercentAmongRecipients": 16,
+      "source": "Chief of Staff Collective 2026",
+      "sourceUrl": "https://www.chiefofstaffcollective.org/2026-cosc-salary-survey",
+      "sample": 56
     },
     "equityContext": {
-      "prevalence": 0.54,
-      "source": "Chief of Staff Collective 2025",
-      "sourceUrl": "https://www.chiefofstaffcollective.org/2025-cosc-salary-survey",
-      "sample": 63
+      "prevalence": 0.77,
+      "source": "Chief of Staff Collective 2026",
+      "sourceUrl": "https://www.chiefofstaffcollective.org/2026-cosc-salary-survey",
+      "sample": 56
     }
   },
   "executiveOperations": {
