@@ -175,11 +175,15 @@
       href:'/offer-evaluator' },
 
     /* ---- Salary and comp benchmarker (/salary-benchmarker) ---- */
+    /* Re-pointed 2026-07-31 from the benchmarker to the comp explorer. The
+       benchmarker answers what SURVEYS say people are paid; this article is about
+       reading what a POSTING says, which is the explorer's own population. The
+       explorer did not exist when these callouts were written. */
     { match:['how-to-read-exec-ops-job-post'],
-      title:'The post gives you a range. Here is what the seat actually pays.',
-      body:'Before you answer a recruiter’s comp question, run the role through the benchmarker. It shows named role-relevant sources and keeps broad employer pay, incumbent surveys, and premium postings separate.',
-      cta:'Open the salary benchmarker',
-      href:'/salary-benchmarker' },
+      title:'This post gives you a range. Here is what the rest of the market is posting.',
+      body:'The comp explorer slices the live board by role family, metro and work arrangement, so you can put the range in front of you next to what comparable postings are advertising this week. Every figure carries its sample size, and slices too thin to publish say so.',
+      cta:'Open the comp explorer',
+      href:'/salary-data' },
     { match:['chief-of-staff-salary-guide','executive-assistant-salary-and-how-to-get-a-raise'],
       title:'Get the number for your seat, not the national average',
       body:'The benchmarker shows role-specific source cards, including observed company-stage medians for Chiefs of Staff and distinct broad, incumbent, and premium comparisons for EAs. Sources, populations, and limitations are cited in the tool.',
