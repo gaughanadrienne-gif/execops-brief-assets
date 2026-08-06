@@ -1,7 +1,7 @@
 {
   "_note": "REAL curated Executive Assistant, Executive Operations, and Chief of Staff roles for The Exec Ops Brief job board, aggregated from recruiting agencies, direct job boards, and VC portfolio feeds. PAY FLOOR (enforced in code since 2026-07-13): every role on this board carries a compensation figure PUBLISHED BY THE SOURCE whose midpoint -- (comp_low + comp_high) / 2, or the single figure where only one is published -- is at least $100,000. A role whose published midpoint falls below $100k is excluded, and a role whose source publishes no comp figure at all is excluded (there are no 'comp not listed' rows). No comp figure is ever estimated, inferred, or invented; comp honesty outranks board size. Where a posting publishes an HOURLY rate instead of a salary, comp_period='hr' and comp_low/comp_high hold the verbatim $/hr figures (annualized at 2080h ONLY to apply the floor, never for display). Most roles also carry a short summary excerpted VERBATIM from the posting (never paraphrased); summary is null rather than invented when the source lacks readable role-specific text. A benefits list (bonus, equity, 401(k), health coverage, PTO, etc) is detected only where the posting states it. Apply links point to the original source listing.",
   "updated": "2026-08-06",
-  "count": 273,
+  "count": 280,
   "roles": [
     {
       "id": "bloom-1483",
@@ -5742,7 +5742,8 @@
         "Equity",
         "Health coverage"
       ],
-      "metro": "SF Bay Area"
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
     },
     {
       "id": "larko-1",
@@ -5758,7 +5759,8 @@
       "source": "The Larko Group",
       "summary": "We are seeking a highly capable Executive Assistant to provide strategic administrative support to the CIO Office and key members of the Alternative Investments Department for a highly reputable financial services firm.",
       "benefits": [],
-      "metro": "NYC"
+      "metro": "NYC",
+      "source_type": "Recruiter"
     },
     {
       "id": "larko-2",
@@ -5774,7 +5776,121 @@
       "source": "The Larko Group",
       "summary": "Reporting directly to the CEO, this role drives the operating rhythm that keeps the leadership team aligned and key priorities moving forward.",
       "benefits": [],
-      "metro": "Other"
+      "metro": "Other",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "blackbook-17",
+      "title": "Senior Executive Assistant",
+      "org_type": "Technology",
+      "category": "Executive Assistant",
+      "seniority": "Senior Executive Assistant",
+      "comp_low": 250000,
+      "comp_high": 375000,
+      "location": "Austin, TX",
+      "remote": "Onsite",
+      "apply_url": "https://blackbookassociates.com/mandates/senior-executive-assistant-17",
+      "source": "Blackbook Associates",
+      "summary": "I've been retained by the CEO of one of the world's leading technology companies to identify a Senior Executive Assistant in Austin, Texas. This is one of the most significant Executive Assistant opportunities currently in the market, supporting a CEO who is widely considered one of the most impactful leaders of our time.",
+      "metro": "Other",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "blackbook-15",
+      "title": "Executive Assistant",
+      "org_type": "Private Equity",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 150000,
+      "comp_high": 165000,
+      "location": "Chicago, IL",
+      "remote": "Onsite",
+      "apply_url": "https://blackbookassociates.com/mandates/executive-assistant-15",
+      "source": "Blackbook Associates",
+      "summary": "We are searching for an experienced Executive Assistant to support the two founders of a boutique private equity firm focused on the life sciences sector, based in Chicago. This is a classic dual-principal EA role, requiring a seasoned operator who can run two demanding diaries in parallel, anticipate the rhythm of a founder-led investment firm, and provide the calm, consistent backbone that allows both principals to operate at full capacity.",
+      "metro": "Other",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "blackbook-14",
+      "title": "Analyst, Office of the CEO (VP)",
+      "org_type": "Investment Management",
+      "category": "Executive Operations",
+      "comp_low": 250000,
+      "comp_high": 300000,
+      "location": "New York, NY",
+      "remote": "Onsite",
+      "apply_url": "https://blackbookassociates.com/mandates/analyst-office-of-the-ceo-vp-14",
+      "source": "Blackbook Associates",
+      "summary": "Blackbook Associates is retained on an Analyst search within the Office of the CEO at a large alternative asset manager headquartered in New York. This is a high-impact, decision-support role designed to strengthen the analytical engine around the CEO. This is not a CEO-facing administrative or scheduling role.",
+      "metro": "NYC",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "blackbook-12",
+      "title": "Chief of Staff",
+      "org_type": "Multi-Family Office",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 250000,
+      "comp_high": 250000,
+      "location": "New York, NY",
+      "remote": "Onsite",
+      "apply_url": "https://blackbookassociates.com/mandates/chief-of-staff-12",
+      "source": "Blackbook Associates",
+      "summary": "Blackbook Associates is retained on a Chief of Staff search for a multi-family office in New York. This is a technical Chief of Staff role supporting the founder directly across investment activity, portfolio oversight, and the strategic operations of the firm.",
+      "metro": "NYC",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "blackbook-11",
+      "title": "Senior Executive Assistant",
+      "org_type": "Hedge Fund",
+      "category": "Executive Assistant",
+      "seniority": "Senior Executive Assistant",
+      "comp_low": 220000,
+      "comp_high": 250000,
+      "location": "New York, NY",
+      "remote": "Onsite",
+      "apply_url": "https://blackbookassociates.com/mandates/senior-executive-assistant-11",
+      "source": "Blackbook Associates",
+      "summary": "A rare and confidential mandate at one of the most recognised names in the hedge fund industry - a firm that genuinely sits at the top of its market. This is a principally business-focused EA role, supporting the principal across his commercial life. A separate PA covers the personal side, though some natural crossover sits between the two.",
+      "metro": "NYC",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "blackbook-7",
+      "title": "Analyst, Office of the CEO",
+      "org_type": "Financial Technology",
+      "category": "Executive Operations",
+      "comp_low": 200000,
+      "comp_high": 265000,
+      "location": "San Francisco, CA",
+      "remote": "Hybrid",
+      "apply_url": "https://blackbookassociates.com/mandates/analyst-office-of-the-ceo-7",
+      "source": "Blackbook Associates",
+      "summary": "A well-funded, scaling fintech with a proven product, a growing enterprise customer base, and serious momentum. The Chief of Staff drives strategy and cross-functional execution. The EA manages access, logistics, and the operating rhythm. The Analyst owns the information layer.",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "blackbook-5",
+      "title": "Executive Assistant to Founder",
+      "org_type": "Private Equity",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 145000,
+      "comp_high": 160000,
+      "location": "Philadelphia, PA",
+      "remote": "Hybrid",
+      "apply_url": "https://blackbookassociates.com/mandates/executive-assistant-to-founder-5",
+      "source": "Blackbook Associates",
+      "summary": "You will be the primary point of coordination for a Founding Partner who splits his time between Philadelphia and Belgium, and a CFO based in New Jersey. The Founding Partner requires more intensive day-to-day support; the CFO needs sharp coordination, travel management, and someone who can chase information and move things forward on his behalf.",
+      "metro": "Other",
+      "source_type": "Recruiter"
     }
   ]
 }

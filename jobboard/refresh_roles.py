@@ -907,11 +907,23 @@ def metro_of(location, remote=""):
 # Derived from the source registry below, never hand-listed twice: every
 # CONSIDER_BOARDS / GETRO_BOARDS label is a VC portfolio board, the Chief of
 # Staff Network is a professional network, and the remaining named firms in
-# SOURCES are search/staffing recruiters. A source not in the registry (a hand
-# curated manual.json row, say) returns "" and is omitted from the filter.
+# SOURCES are search/staffing recruiters. A source not in the registry returns
+# "" and is omitted from the filter.
+#
+# CURATED_SOURCE_TYPES (added 2026-08-06) covers the manual.json firms, which
+# never appear in SOURCES because nothing scrapes them. They are recruiters just
+# the same, and leaving them unclassified dropped real roles out of the source
+# filter entirely -- a role reachable only under "all sources" reads as absent.
 # --------------------------------------------------------------------------- #
 SOURCE_TYPE_LABELS = ["VC portfolio", "Recruiter", "Network"]
 NETWORK_SOURCES = {"Chief of Staff Network"}
+
+CURATED_SOURCE_TYPES = {
+    "Blackbook Associates": "Recruiter",
+    "Dali Associates": "Recruiter",
+    "The Larko Group": "Recruiter",
+    "Premier Talent Partners": "Recruiter",
+}
 
 _SOURCE_TYPES = None
 
@@ -920,7 +932,7 @@ def source_type_of(source):
     """One of SOURCE_TYPE_LABELS for a registered source name, else ""."""
     global _SOURCE_TYPES
     if _SOURCE_TYPES is None:
-        types = {}
+        types = dict(CURATED_SOURCE_TYPES)
         for name, _fn in SOURCES:
             if name in NETWORK_SOURCES:
                 types[name] = "Network"
