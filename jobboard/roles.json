@@ -1,7 +1,7 @@
 {
   "_note": "REAL curated Executive Assistant, Executive Operations, and Chief of Staff roles for The Exec Ops Brief job board, aggregated from recruiting agencies, direct job boards, and VC portfolio feeds. PAY FLOOR (enforced in code since 2026-07-13): every role on this board carries a compensation figure PUBLISHED BY THE SOURCE whose midpoint -- (comp_low + comp_high) / 2, or the single figure where only one is published -- is at least $100,000. A role whose published midpoint falls below $100k is excluded, and a role whose source publishes no comp figure at all is excluded (there are no 'comp not listed' rows). No comp figure is ever estimated, inferred, or invented; comp honesty outranks board size. Where a posting publishes an HOURLY rate instead of a salary, comp_period='hr' and comp_low/comp_high hold the verbatim $/hr figures (annualized at 2080h ONLY to apply the floor, never for display). Most roles also carry a short summary excerpted VERBATIM from the posting (never paraphrased); summary is null rather than invented when the source lacks readable role-specific text. A benefits list (bonus, equity, 401(k), health coverage, PTO, etc) is detected only where the posting states it. Apply links point to the original source listing.",
-  "updated": "2026-08-09",
-  "count": 273,
+  "updated": "2026-08-10",
+  "count": 279,
   "roles": [
     {
       "id": "bloom-1484",
@@ -710,6 +710,169 @@
       "source_type": "Recruiter"
     },
     {
+      "id": "burke-JmYzZ2aWlj",
+      "title": "Executive Assistant",
+      "org_type": "Stealth AI Startup",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 125000,
+      "comp_high": 150000,
+      "location": "San Francisco, California",
+      "remote": "Onsite",
+      "date_posted": "2026-08-08",
+      "apply_url": "https://app.loxo.co/job/MTcwNS02emZqNXV3aTJmYzZ2aWlj",
+      "source": "Burke & Co",
+      "summary": "Our client, a well-capitalized, stealth-mode AI company building next-generation artificial intelligence, seeks a razor-sharp Executive Assistant to support one of their high-performing teams.",
+      "benefits": [
+        "Bonus",
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "burke-YxYWY1Z2li",
+      "title": "Executive Assistant/Client Services Associate",
+      "org_type": "Wealth Management Firm",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 100000,
+      "comp_high": 110000,
+      "location": "Chicago, Illinois",
+      "remote": "Onsite",
+      "date_posted": "2026-07-31",
+      "apply_url": "https://app.loxo.co/job/MTcwNS1xNnA5bzdldTYxYWY1Z2li",
+      "source": "Burke & Co",
+      "summary": "Our client, a rapidly growing independent wealth management firm managing over $1 billion in assets for UHNWIs, is seeking an Executive Assistant/Client Services Associate to support their CEO/Managing Partner & team of advisors.",
+      "benefits": [
+        "Bonus"
+      ],
+      "metro": "Other",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "burke-Exd2ZmdmZz",
+      "title": "Executive Assistant to CFO & Head of Talent",
+      "org_type": "AI Tech Startup",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 160000,
+      "comp_high": 180000,
+      "location": "San Francisco, California",
+      "remote": "Onsite",
+      "date_posted": "2026-08-09",
+      "apply_url": "https://app.loxo.co/job/MTcwNS0wanJ3Nm43bDExd2ZmdmZz",
+      "source": "Burke & Co",
+      "summary": "Our client, a rapidly growing AI startup, is seeking a high-impact Executive Assistant to support their CFO and VP of Sales. This is a highly visible, strategic role and is the perfect opportunity for someone who thrives in fast-paced environments and enjoys serving as the operational backbone for...",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "burke-FxY2sya3A5",
+      "title": "Executive Assistant to CEO",
+      "org_type": "Health Tech Startup",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 150000,
+      "comp_high": 180000,
+      "location": "Palo Alto, California",
+      "remote": "Onsite",
+      "date_posted": "2026-08-09",
+      "apply_url": "https://app.loxo.co/job/MTcwNS05aHh1djdpbTFxY2sya3A5",
+      "source": "Burke & Co",
+      "summary": "Our client, a rapidly scaling health tech startup in Palo Alto, is seeking an experienced Executive Assistant to provide high-level support to their CEO.",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "burke-Z2YndvOHhl",
+      "title": "Executive Assistant to Senior Leadership",
+      "org_type": "Stealth AI Startup",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 170000,
+      "comp_high": 200000,
+      "location": "San Francisco, California",
+      "remote": "Onsite",
+      "date_posted": "2026-08-06",
+      "apply_url": "https://app.loxo.co/job/MTcwNS0zeTk3M2pmdHZ2YndvOHhl",
+      "source": "Burke & Co",
+      "summary": "Our client, a well-capitalized, stealth-mode AI company building next-generation artificial intelligence, seeks a razor-sharp Executive Assistant to support two senior executives and take on strategic initiatives as the company expands.",
+      "benefits": [
+        "Bonus",
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "burke-c4MGdxcHU4",
+      "title": "Executive Assistant to Senior Leadership",
+      "org_type": "SaaS Startup",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 140000,
+      "comp_high": 160000,
+      "location": "San Francisco, California",
+      "remote": "Onsite",
+      "date_posted": "2026-08-09",
+      "apply_url": "https://app.loxo.co/job/MTcwNS1qM2xhcXp5MTc4MGdxcHU4",
+      "source": "Burke & Co",
+      "summary": "Our client, a Bay Area based SaaS startup with global reach, seeks a top-notch Executive Assistant to support two senior executives. This is a highly visible, high-impact role for someone who thrives at the center of executive operations and brings structure, rigor, and forward-thinking execution...",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "burke-Q1eGQ5aXlm",
+      "title": "Executive Assistant to CEO/Co-Founder",
+      "org_type": "AI Startup",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 135000,
+      "comp_high": 180000,
+      "location": "Santa Clara, California",
+      "remote": "Onsite",
+      "date_posted": "2026-08-08",
+      "apply_url": "https://app.loxo.co/job/MTcwNS04d2VtZjMycHQ1eGQ5aXlm",
+      "source": "Burke & Co",
+      "summary": "Our client, a rapidly growing AI-powered developer platform, is seeking an exceptional Executive Assistant to support its Co-Founder & CEO.",
+      "benefits": [
+        "Bonus",
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "burke-Z3eGl3OGRk",
+      "title": "Strategic Executive Assistant to Founder",
+      "org_type": "Hedge Fund",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 150000,
+      "comp_high": 180000,
+      "location": "NYC",
+      "remote": "Onsite",
+      "date_posted": "2026-08-09",
+      "apply_url": "https://app.loxo.co/job/MTcwNS0xa2NjeWJzaHZ3eGl3OGRk",
+      "source": "Burke & Co",
+      "summary": "Our client, a multi-billion dollar hedge fund in New York City, seeks a razor-sharp Senior Executive Assistant to support their Founder. This is a unique opportunity spanning Executive Assistant, Personal Assistant, and operational support responsibilities.",
+      "benefits": [
+        "Bonus"
+      ],
+      "metro": "NYC",
+      "source_type": "Recruiter"
+    },
+    {
       "id": "aux-chief-of-staff-for-series-b-ai-startup",
       "title": "Chief of Staff for Series B AI Startup",
       "org_type": "",
@@ -1072,7 +1235,7 @@
       "comp_high": 150000,
       "location": "San Francisco Bay Area (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-08-08",
+      "date_posted": "2026-08-09",
       "apply_url": "https://www.linkedin.com/jobs/view/4449975987/",
       "source": "Truex Metier",
       "summary": "Compensation: ~$90k (hourly equivalent) during the temp period. Opportunity for a higher salary upon conversion + fantastic benefits!",
@@ -1090,7 +1253,7 @@
       "comp_high": 140000,
       "location": "New York City Metropolitan Area (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-08-06",
+      "date_posted": "2026-08-07",
       "apply_url": "https://www.linkedin.com/jobs/view/4439320452/",
       "source": "Truex Metier",
       "summary": "We are partnering with a highly successful private investment firm to find a dynamic, team-oriented Executive Assistant for their close-knit New York office.",
@@ -1110,7 +1273,7 @@
       "comp_high": 120000,
       "location": "San Francisco Bay Area (Hybrid)",
       "remote": "Hybrid",
-      "date_posted": "2026-08-05",
+      "date_posted": "2026-08-06",
       "apply_url": "https://www.linkedin.com/jobs/view/4448339061/",
       "source": "Truex Metier",
       "benefits": [
@@ -1130,7 +1293,7 @@
       "comp_high": 190000,
       "location": "San Francisco Bay Area (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-08-02",
+      "date_posted": "2026-08-03",
       "apply_url": "https://www.linkedin.com/jobs/view/4439344702/",
       "source": "Truex Metier",
       "summary": "We are seeking a highly organized, execution-oriented Executive Business Partner to serve as a strategic partner to executive leadership at a rapidly scaling Series G technology company backed by some of Silicon Valley’s most prominent venture capital firms.",
@@ -1148,7 +1311,7 @@
       "comp_high": 130000,
       "location": "New York City Metropolitan Area (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-08-02",
+      "date_posted": "2026-08-03",
       "apply_url": "https://www.linkedin.com/jobs/view/4446348331/",
       "source": "Truex Metier",
       "benefits": [
@@ -1168,7 +1331,7 @@
       "comp_high": 180000,
       "location": "Austin, TX (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-07-26",
+      "date_posted": "2026-07-27",
       "apply_url": "https://www.linkedin.com/jobs/view/4444232135/",
       "source": "Truex Metier",
       "summary": "About the Company We're partnering with a leading venture capital firm on the search for an exceptional Executive Assistant to support a Partner during a high-growth chapter for the firm.",
@@ -1188,7 +1351,7 @@
       "comp_high": 180000,
       "location": "New York City Metropolitan Area (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-07-12",
+      "date_posted": "2026-07-13",
       "apply_url": "https://www.linkedin.com/jobs/view/4439333458/",
       "source": "Truex Metier",
       "summary": "We are recruiting on behalf of a premier investment management firm seeking a polished, proactive, and highly organized Executive Assistant to support their Investor Relations team in New York City.",
@@ -1209,7 +1372,7 @@
       "comp_high": 150000,
       "location": "Sunnyvale, CA (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-07-12",
+      "date_posted": "2026-07-13",
       "apply_url": "https://www.linkedin.com/jobs/view/4439340860/",
       "source": "Truex Metier",
       "summary": "We are partnering with a high-growth, mission-driven EdTech startup located in the San Francisco Bay Area to find a highly organized and proactive Executive Assistant to support their Chief Content Officer (CCO).",
@@ -2315,27 +2478,6 @@
       "source_type": "Recruiter"
     },
     {
-      "id": "beacon-129072",
-      "title": "Executive Assistant",
-      "org_type": "Beacon Hill Staffing Group",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 100000,
-      "comp_high": 120000,
-      "location": "New York, New York",
-      "remote": "Onsite",
-      "date_posted": "2026-07-13",
-      "apply_url": "https://bhsg.com/jobs/job/a1466134ny-perm_1783946016-executive-assistant-new-york-new-york/",
-      "source": "Beacon Hill",
-      "summary": "Our client is seeking a highly capable, proactive Executive Assistant to support the Managing Partner of a growing venture capital firm. This is a true right‑hand EA/operations role with significant exposure across business operations, investor relations, and firm-building initiatives.",
-      "benefits": [
-        "Bonus",
-        "Paid time off"
-      ],
-      "metro": "NYC",
-      "source_type": "Recruiter"
-    },
-    {
       "id": "beacon-129283",
       "title": "Executive Assistant",
       "org_type": "Beacon Hill Staffing Group",
@@ -2460,7 +2602,7 @@
       "comp_high": 145000,
       "location": "New York, New York",
       "remote": "Onsite",
-      "date_posted": "2026-08-03",
+      "date_posted": "2026-08-06",
       "apply_url": "https://www.thelasallenetwork.com/jobs/executive-assistant-161835/",
       "source": "LaSalle Network",
       "summary": "A prestigious law firm in New York City is seeking an experienced Executive Assistant to support a senior partner. The ideal candidate is a polished professional who thrives on staying one step ahead, managing complex priorities, and serving as a trusted right hand.",
@@ -2480,7 +2622,7 @@
       "comp_high": 130000,
       "location": "Chicago, Illinois",
       "remote": "Onsite",
-      "date_posted": "2026-07-31",
+      "date_posted": "2026-08-05",
       "apply_url": "https://www.thelasallenetwork.com/jobs/executive-assistant-travel-162012/",
       "source": "LaSalle Network",
       "summary": "3-7+ years of experience in executive assistance, executive travel coordination or corporate travel management.",
@@ -3476,26 +3618,6 @@
         "Overtime pay"
       ],
       "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "consider-a16z-5187316007",
-      "title": "Head of Operations, Global Defense",
-      "org_type": "Anduril Industries",
-      "category": "Director / VP of Operations",
-      "seniority": "Operations",
-      "comp_low": 254000,
-      "comp_high": 336000,
-      "location": "Costa Mesa, California, United States",
-      "remote": "Onsite",
-      "date_posted": "2026-07-30",
-      "apply_url": "https://boards.greenhouse.io/andurilindustries/jobs/5187316007?gh_jid=5187316007",
-      "source": "a16z Portfolio",
-      "summary": "Oversee the success of international program management across the growing portfolio in support of Anduril’s business lines, ensuring excellence across people, product, delivery, customer management, and all enabling functions.",
-      "benefits": [
-        "Equity"
-      ],
-      "metro": "Other",
       "source_type": "VC portfolio"
     },
     {
