@@ -2,34 +2,6 @@
   "_note": "Non-automatable curated roles (per-role PDFs, low-volume firms). Merged into roles.json on every refresh run so they are not lost. Update by hand as these roles fill/expire. Removed 2026-07-06: truex-* (now scraped automatically from truexmetier.com/jobs), mission-1/2 (postings taken down, 404), whitman-1 ($65-70k, below the $100k board floor). Added 2026-08-06: blackbook-* from blackbookassociates.com/mandates, a retained search firm; comp figures are those PUBLISHED ON THE FIRM'S OWN LISTING CARDS. Its Senior Personal Assistant mandate (Miami, $185-200k) was deliberately NOT taken: UHNW private-service/household work is out of scope for this board. CORRECTION 2026-08-06 (same day): these rows were curated by hand on the belief that the page's client-side rendering put it out of reach of the scrapers. THAT WAS WRONG. firecrawl renders JavaScript, and `firecrawl scrape https://blackbookassociates.com/mandates --wait-for 6000` returns all 8 mandates with titles, industries, locations, comp ranges and detail URLs in clean markdown. Blackbook SHOULD BE PROMOTED TO A REAL PARSER IN SOURCES; until it is, these hand rows go stale (a filled mandate keeps showing, a new one never appears).",
   "roles": [
     {
-      "id": "blackbook-17",
-      "title": "Senior Executive Assistant",
-      "org_type": "Technology",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 250000,
-      "comp_high": 375000,
-      "location": "Austin, TX",
-      "remote": "Onsite",
-      "apply_url": "https://blackbookassociates.com/mandates/senior-executive-assistant-17",
-      "source": "Blackbook Associates",
-      "summary": "I've been retained by the CEO of one of the world's leading technology companies to identify a Senior Executive Assistant in Austin, Texas. This is one of the most significant Executive Assistant opportunities currently in the market, supporting a CEO who is widely considered one of the most impactful leaders of our time."
-    },
-    {
-      "id": "blackbook-15",
-      "title": "Executive Assistant",
-      "org_type": "Private Equity",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 150000,
-      "comp_high": 165000,
-      "location": "Chicago, IL",
-      "remote": "Onsite",
-      "apply_url": "https://blackbookassociates.com/mandates/executive-assistant-15",
-      "source": "Blackbook Associates",
-      "summary": "We are searching for an experienced Executive Assistant to support the two founders of a boutique private equity firm focused on the life sciences sector, based in Chicago. This is a classic dual-principal EA role, requiring a seasoned operator who can run two demanding diaries in parallel, anticipate the rhythm of a founder-led investment firm, and provide the calm, consistent backbone that allows both principals to operate at full capacity."
-    },
-    {
       "id": "blackbook-14",
       "title": "Analyst, Office of the CEO (VP)",
       "org_type": "Investment Management",
@@ -42,34 +14,6 @@
       "apply_url": "https://blackbookassociates.com/mandates/analyst-office-of-the-ceo-vp-14",
       "source": "Blackbook Associates",
       "summary": "Blackbook Associates is retained on an Analyst search within the Office of the CEO at a large alternative asset manager headquartered in New York. This is a high-impact, decision-support role designed to strengthen the analytical engine around the CEO. This is not a CEO-facing administrative or scheduling role."
-    },
-    {
-      "id": "blackbook-12",
-      "title": "Chief of Staff",
-      "org_type": "Multi-Family Office",
-      "category": "Chief of Staff",
-      "seniority": "",
-      "comp_low": 250000,
-      "comp_high": 250000,
-      "location": "New York, NY",
-      "remote": "Onsite",
-      "apply_url": "https://blackbookassociates.com/mandates/chief-of-staff-12",
-      "source": "Blackbook Associates",
-      "summary": "Blackbook Associates is retained on a Chief of Staff search for a multi-family office in New York. This is a technical Chief of Staff role supporting the founder directly across investment activity, portfolio oversight, and the strategic operations of the firm."
-    },
-    {
-      "id": "blackbook-11",
-      "title": "Senior Executive Assistant",
-      "org_type": "Hedge Fund",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 220000,
-      "comp_high": 250000,
-      "location": "New York, NY",
-      "remote": "Onsite",
-      "apply_url": "https://blackbookassociates.com/mandates/senior-executive-assistant-11",
-      "source": "Blackbook Associates",
-      "summary": "A rare and confidential mandate at one of the most recognised names in the hedge fund industry - a firm that genuinely sits at the top of its market. This is a principally business-focused EA role, supporting the principal across his commercial life. A separate PA covers the personal side, though some natural crossover sits between the two."
     },
     {
       "id": "blackbook-7",
@@ -87,20 +31,6 @@
       "benefits": [
         "Equity"
       ]
-    },
-    {
-      "id": "blackbook-5",
-      "title": "Executive Assistant to Founder",
-      "org_type": "Private Equity",
-      "category": "Executive Assistant",
-      "seniority": "",
-      "comp_low": 145000,
-      "comp_high": 160000,
-      "location": "Philadelphia, PA",
-      "remote": "Hybrid",
-      "apply_url": "https://blackbookassociates.com/mandates/executive-assistant-to-founder-5",
-      "source": "Blackbook Associates",
-      "summary": "You will be the primary point of coordination for a Founding Partner who splits his time between Philadelphia and Belgium, and a CFO based in New Jersey. The Founding Partner requires more intensive day-to-day support; the CFO needs sharp coordination, travel management, and someone who can chase information and move things forward on his behalf."
     },
     {
       "id": "daliassociates-1",

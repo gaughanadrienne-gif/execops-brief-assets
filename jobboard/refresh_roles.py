@@ -33,6 +33,7 @@ import subprocess
 import tempfile
 import urllib.request
 import urllib.parse
+import http.cookiejar
 from collections import Counter
 from datetime import date, timedelta
 from html import unescape as html_unescape
@@ -204,8 +205,13 @@ def is_soft_404(text):
     return "has been removed, renamed, or is unavailable" in low_all
 
 
-def http_get(url, headers=None, timeout=45, as_json=False, data=None):
-    """Throttled GET (POST when `data` is given). Returns text or parsed JSON."""
+def http_get(url, headers=None, timeout=45, as_json=False, data=None,
+             opener=None):
+    """Throttled GET (POST when `data` is given). Returns text or parsed JSON.
+
+    Pass `opener` (see new_session()) when a site binds a token to a cookie and
+    the whole exchange has to share one session.
+    """
     _throttle()
     h = {"User-Agent": UA,
          "Accept": "application/json" if as_json else "text/html,*/*",
@@ -217,7 +223,8 @@ def http_get(url, headers=None, timeout=45, as_json=False, data=None):
         body = json.dumps(data).encode("utf-8")
         h.setdefault("Content-Type", "application/json")
     req = urllib.request.Request(url, data=body, headers=h)
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
+    _open = opener.open if opener is not None else urllib.request.urlopen
+    with _open(req, timeout=timeout) as resp:
         raw = resp.read()
         if resp.headers.get("Content-Encoding") == "gzip":
             raw = gzip.decompress(raw)
@@ -225,8 +232,16 @@ def http_get(url, headers=None, timeout=45, as_json=False, data=None):
     return json.loads(text) if as_json else text
 
 
-def http_json(url, data=None, headers=None, timeout=60):
-    return http_get(url, headers=headers, timeout=timeout, as_json=True, data=data)
+def http_json(url, data=None, headers=None, timeout=60, opener=None):
+    return http_get(url, headers=headers, timeout=timeout, as_json=True,
+                    data=data, opener=opener)
+
+
+def new_session():
+    """A cookie-carrying opener, for sites whose CSRF token is bound to a
+    session cookie (Consider does this as of 2026-08-12)."""
+    return urllib.request.build_opener(
+        urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
 
 
 # --------------------------------------------------------------------------- #
@@ -368,6 +383,35 @@ TAXONOMY = [
     ("Strategy and Operations Analyst", CAT_XOPS, INC),
     ("Corporate Operations Analyst", CAT_XOPS, INC),
     ("Senior Operations Analyst", CAT_XOPS, CON),
+    # ADDED 2026-08-13, not from the xlsx. The sheet carries "Business Manager,
+    # Office of the CEO" but no other Office-of-the-CEO seat, so titles like
+    # "Analyst, Office of the CEO" classified as None and were dropped. The
+    # owner already ruled these IN on 2026-08-06 (two Blackbook mandates, filed
+    # Executive Operations, reasoning: the postings state the seat is explicitly
+    # not administrative and sits beside the Chief of Staff). This encodes that
+    # decision instead of re-curating it by hand every time.
+    #
+    # CONDITIONAL on purpose: it fires only when no earlier taxonomy title
+    # matches (so "Executive Assistant, Office of the CEO" stays an EA), and CON
+    # then demands a real description plus >= 2 inclusion signals, which is what
+    # keeps an administrative "Office of the CEO Coordinator" out.
+    #
+    # NOTE this gap was NOT confined to Blackbook: "office of the ceo" is one of
+    # the Consider TITLE_SEEDS, so the four VC boards have been querying for
+    # these titles and silently discarding the non-CoS ones all along.
+    #
+    # NAMED SEATS, not a bare "Office of the CEO" match. A bare match was tried
+    # first and was too broad: nothing else in the taxonomy matches
+    # "Receptionist, Office of the CEO" or "Office of the CEO Intern", so the
+    # bare entry became their only match path and pulled both into Executive
+    # Operations. The functional exclusions do not catch them (they cover sales
+    # ops / HR ops style domains, not junior admin titles), so the CON signal
+    # gate would have been the only thing standing between a receptionist and
+    # the board. These four are the professional seats in the family.
+    ("Analyst, Office of the CEO", CAT_XOPS, CON),
+    ("Associate, Office of the CEO", CAT_XOPS, CON),
+    ("Manager, Office of the CEO", CAT_XOPS, CON),
+    ("Director, Office of the CEO", CAT_XOPS, CON),
     ("Transformation Office Lead", CAT_XOPS, CON),
     ("Enterprise Program Lead", CAT_XOPS, CON),
     ("Operating Cadence Lead", CAT_XOPS, CON),
@@ -596,9 +640,16 @@ _INCLUSION_SIGNALS = [
     ("Strategic planning",
      r"(?:annual|quarterly|long[\s-]range|strategic)\s+planning|strategic\s+initiatives"
      r"|enterprise\s+roadmap|operating\s+plan|goal[\s-]setting\s+process"),
+    # "packs?" and the [\s-] in decision-support added 2026-08-13: both are the
+    # SAME signal written differently, not a widening of what counts. "Board
+    # pack" is the standard finance-sector term for board materials, and
+    # "decision-support" only failed on a hyphen. Found because a real posting
+    # (Blackbook's Analyst, Office of the CEO) stated this signal twice in
+    # plain English and scored zero for it.
     ("Executive decision support",
-     r"board\s+(?:materials|decks?|meetings?|presentations?)|investor\s+(?:materials|updates?)"
-     r"|executive\s+(?:brief\w*|summar\w+)|decision\s+support"
+     r"board\s+(?:materials|decks?|packs?|meetings?|presentations?)"
+     r"|investor\s+(?:materials|updates?)"
+     r"|executive\s+(?:brief\w*|summar\w+)|decision[\s-]+support"
      r"|(?:analysis|recommendations)\s+(?:to|for)\s+(?:the\s+)?(?:ceo|executive|leadership)"),
     ("Special projects",
      r"special\s+projects|high(?:est)?[\s-]priority\s+(?:work|initiatives|projects)"
@@ -2260,15 +2311,22 @@ _BOARD_RE = re.compile(r'"board":\{"id":"([^"]+)","isParent":(true|false)\}')
 
 
 def _consider_session(base):
-    """Read the board id + CSRF token the board's own JS uses."""
-    html = http_get(base + "/jobs")
+    """Read the board id + CSRF token the board's own JS uses.
+
+    CHANGED 2026-08-13: Consider now binds the csrfToken to the `session` cookie
+    set on this very /jobs response, so the search POST must reuse the SAME
+    opener. Sending the token alone returns 412 {"error":"INVALID_CSRF"} on
+    every seed, which is what silently emptied all four boards on 08-12.
+    """
+    opener = new_session()
+    html = http_get(base + "/jobs", opener=opener)
     if is_soft_404(html):
         raise RuntimeError(f"{base}/jobs returned a not-found body")
     m = _CSRF_RE.search(html)
     b = _BOARD_RE.search(html)
     if not m or not b:
         raise RuntimeError(f"could not read the Consider board config at {base}")
-    return {"id": b.group(1), "isParent": b.group(2) == "true"}, m.group(1)
+    return {"id": b.group(1), "isParent": b.group(2) == "true"}, m.group(1), opener
 
 
 def _consider_salary(job):
@@ -2297,18 +2355,20 @@ def _consider_salary(job):
 
 def make_consider_parser(label, base):
     def parse(run_date):
-        board, csrf = _consider_session(base)
+        board, csrf, opener = _consider_session(base)
         api = base + "/api-boards/search-jobs"
         headers = {"x-csrf-token": csrf, "Referer": base + "/jobs",
-                   "Accept": "application/json"}
+                   "Accept": "application/json", "Origin": base}
         roles, seen = [], set()
+        seeds_ok = 0
         for seed in TITLE_SEEDS:
             try:
                 res = http_json(api, data={
                     "meta": {"size": 100},
                     "board": board,
                     "query": {"titlePrefix": seed},
-                }, headers=headers)
+                }, headers=headers, opener=opener)
+                seeds_ok += 1
             except Exception as e:
                 print(f"[warn] Consider/{label}: seed {seed!r} failed -- {e}",
                       file=sys.stderr)
@@ -2351,6 +2411,16 @@ def make_consider_parser(label, base):
                 if period:
                     r["comp_period"] = period
                 roles.append(r)
+        # A seed that errors is caught and skipped above so one bad phrase cannot
+        # kill a board. That resilience is what let the 08-12 CSRF break report
+        # `[ ok ] 0 roles` on all four boards: EVERY seed failed, and the sum of
+        # skipped seeds is an empty list, which raises nothing. Distinguish the
+        # two cases -- seeds that ran and matched nothing is a real (if odd)
+        # answer; NO seed running at all is a broken source and must say so.
+        if seeds_ok == 0:
+            raise RuntimeError(
+                f"Consider/{label}: all {len(TITLE_SEEDS)} seed queries failed; "
+                f"treating as a dead source rather than an empty board")
         return roles
     return parse
 
@@ -2762,6 +2832,162 @@ def parse_lasalle(run_date):
     return roles
 
 
+# --------------------------------------------------------------------------- #
+# GLOCAP  (glocap.com)  -- added 2026-08-13
+#
+# NYC hedge fund / PE / VC admin recruiter, top-5 volume, no household mixing.
+#
+# TWO THINGS THAT MAKE THIS SOURCE CHEAP, both worth keeping in mind on a
+# re-check:
+#   1. Detail pages are STATIC HTML with a labelled "COMPENSATION:" field, so
+#      plain http_get is enough -- no firecrawl, no browser, ~44 cheap fetches.
+#   2. Enumeration comes from the SITEMAP, not the /jobs index. The index is an
+#      SPA and renders nothing useful to a fetcher; sitemap.xml lists every job
+#      URL as `/jobs/<slug>-JOB-<id>`.
+#
+# Measured 2026-08-13: 44 job URLs, 22 publish a COMPENSATION line, 11 both
+# classify in scope and clear the $100k floor.
+# --------------------------------------------------------------------------- #
+_GLOCAP_JOB_RE = re.compile(r"/jobs/.+-JOB-(\d+)$")
+# The fields run together in the flattened text, so each one stops at the next
+# ALL-CAPS label rather than at end-of-line.
+_GLOCAP_FIELD = (r"{0}\s*:\s*(.+?)"
+                 r"(?=\s{{2,}}|LOCATION\s*:|COMPENSATION\s*:|HOURS\s*:"
+                 r"|BACHELOR|RESPONSIBILITIES|REQUIREMENTS|$)")
+
+
+def _glocap_field(text, label):
+    m = re.search(_GLOCAP_FIELD.format(label), text, re.I | re.S)
+    return _clean(m.group(1)) if m else ""
+
+
+def parse_glocap(run_date):
+    sm = http_get("https://glocap.com/sitemap.xml")
+    urls, seen = [], set()
+    for u in re.findall(r"<loc>([^<]+)</loc>", sm):
+        m = _GLOCAP_JOB_RE.search(u)
+        if m and m.group(1) not in seen:
+            seen.add(m.group(1))
+            urls.append((m.group(1), u))
+    roles = []
+    for jid, url in urls:
+        try:
+            html = http_get(url)
+        except Exception as e:
+            print(f"[warn] Glocap: {url} failed -- {e}", file=sys.stderr)
+            continue
+        if is_soft_404(html):
+            continue
+        body = re.sub(r"<script.*?</script>", " ", html, flags=re.S | re.I)
+        body = re.sub(r"<style.*?</style>", " ", body, flags=re.S | re.I)
+        text = re.sub(r"[ \t]+", " ", html_unescape(re.sub(r"<[^>]+>", " ", body)))
+        tm = re.search(r"<title>\s*(.*?)\s*(?:\||</title>)", html, re.S | re.I)
+        title = _clean(html_unescape(tm.group(1))) if tm else ""
+        if not title:
+            continue
+        cat = classify(title, context=text[:4000])
+        if not cat:
+            continue
+        loc = _glocap_field(text, "LOCATION")
+        comp_txt = _glocap_field(text, "COMPENSATION")
+        # field=True: COMPENSATION is a dedicated, labelled comp slot, so the
+        # figures in it ARE the salary. Everything else about the extractor
+        # (money marking, sanity band, disqualifiers) still applies.
+        comp = extract_comp(comp_txt, field=True) if comp_txt else (None, None)
+        period = None
+        if comp == (None, None) and comp_txt:
+            hr = extract_comp_hourly(comp_txt, field=True)
+            if hr != (None, None):
+                comp, period = hr, "hr"
+        remote = "Onsite"
+        if re.search(r"\bfully remote\b|\bremote\b", loc, re.I):
+            remote = "Remote"
+        elif re.search(r"\bhybrid\b", loc, re.I):
+            remote = "Hybrid"
+        if not is_us_location(loc or "New York, NY"):
+            continue
+        r = build_role(f"glocap-{jid}", title, "Glocap", url,
+                       location=loc, remote=remote, category=cat, comp=comp)
+        if period:
+            r["comp_period"] = period
+        roles.append(r)
+    return roles
+
+
+# --------------------------------------------------------------------------- #
+# BLACKBOOK ASSOCIATES  (blackbookassociates.com/mandates) -- parser 2026-08-13
+#
+# Promoted from hand-curated manual.json rows. The page is client-rendered from
+# a Supabase API, which is why it was curated by hand first -- but firecrawl
+# renders JavaScript, so `scrape()` returns all mandates as clean markdown:
+#
+#     Industry / ### Title / summary / Location$Low - $High / [Learn more](url)
+#
+# GENERAL RULE THIS SOURCE ESTABLISHED: never rule a source out as
+# "client-rendered" in this pipeline without testing firecrawl first. That
+# reasoning would also have wrongly disqualified Glocap, Solomon Page, Maven
+# Recruiting and the CATS/SPA boards.
+#
+# SCOPE, and this is the re-check trap: Blackbook mixes UHNW private-service
+# work into the same list (a Senior Personal Assistant at $185-200k was
+# deliberately left off on 2026-08-06 -- it clears the floor easily). Comp is
+# NOT the test, the WORK is. classify_role()'s household rules already drop it
+# on the title, which is why this parser does not need a hand-maintained
+# skip-list -- but any future re-check must read the description, not the pay.
+# --------------------------------------------------------------------------- #
+_BB_BLOCK = re.compile(
+    r"###\s+(?P<title>[^\n]+?)\s*\n+"
+    r"(?P<summary>.*?)\n+"
+    r"(?P<loc>[^\n$]+?)\$(?P<comp>[\d,]+(?:\s*-\s*\$[\d,]+)?)\s*\n+"
+    r"\[Learn more\]\((?P<url>https://blackbookassociates\.com/mandates/[^)]+)\)",
+    re.S)
+
+
+def parse_blackbook(run_date):
+    md = scrape("https://blackbookassociates.com/mandates", wait=6000)
+    # CURATED ROWS WIN, EXPLICITLY. Two Blackbook mandates ("Analyst, Office of
+    # the CEO") are in manual.json because the OWNER ruled them in scope on
+    # 2026-08-06, while the automated conditional gate drops them: their
+    # postings score 0-1 of the 7 required inclusion signals because they state
+    # the work in different words. That is the gate behaving correctly, not a
+    # bug to tune away, so the human judgement is preserved as a curated row
+    # instead of by loosening the rule for every source.
+    #
+    # Skipping them here rather than letting dedupe() sort it out on purpose:
+    # dedupe keeps whichever copy scores higher on _role_quality, so the parsed
+    # copy could win, arrive carrying _conditional, and then be dropped by the
+    # scope gate -- silently reversing an owner decision.
+    curated = {(r.get("apply_url") or "").strip()
+               for r in load_manual()
+               if (r.get("source") or "") == "Blackbook Associates"}
+    roles, seen = [], set()
+    for m in _BB_BLOCK.finditer(md):
+        url = m.group("url").strip()
+        if url in seen or url in curated:
+            continue
+        seen.add(url)
+        title = unescape_md(m.group("title"))
+        summary = unescape_md(m.group("summary"))
+        cat = classify(title, context=summary)
+        if not cat:
+            continue
+        comp = extract_comp("$" + m.group("comp"), field=True)
+        loc = _clean(m.group("loc"))
+        remote = "Onsite"
+        if re.search(r"\bremote\b", summary, re.I):
+            remote = "Remote"
+        elif re.search(r"\bhybrid\b", summary, re.I):
+            remote = "Hybrid"
+        roles.append(build_role(
+            f"blackbook-{slugish(url)[:32]}", title, "Blackbook Associates",
+            url, location=loc, remote=remote, category=cat, comp=comp))
+    if not roles:
+        raise RuntimeError(
+            "Blackbook: parsed zero mandates from a page that rendered; "
+            "the markdown shape has probably changed")
+    return roles
+
+
 SOURCES = [
     ("Bloom Talent", parse_bloom),
     ("Career Group", parse_career_group),
@@ -2778,6 +3004,9 @@ SOURCES = [
     ("Pocketbook Agency", parse_pocketbook),
     ("Beacon Hill", parse_beacon_hill),
     ("LaSalle Network", parse_lasalle),
+    # ---- 2026-08-13 additions (owner go, 08-13) ----
+    ("Glocap", parse_glocap),
+    ("Blackbook Associates", parse_blackbook),
 ] + [
     (f"{label} Portfolio", make_consider_parser(label, base))
     for label, base in CONSIDER_BOARDS
