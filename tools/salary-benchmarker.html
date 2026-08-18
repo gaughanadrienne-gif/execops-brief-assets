@@ -435,7 +435,15 @@
       }
     }
 
-    html += '<div class="eob-notice">Bonus and equity are not assumed. In C-Suite Assistants, 52% reported discretionary bonus, 16% guaranteed bonus, and 17% equity/options. The independent survey reported equity/options for 23.4%. See the linked reports before applying these rates to a specific offer.</div>';
+    /* Incidence percentages are read from compensation-data.json, never retyped,
+       so an updated dataset updates this sentence too. */
+    var eaBonus = data.executiveAssistant.bonusContext;
+    var eaEquity = data.executiveAssistant.equityContext;
+    html += '<div class="eob-notice">Bonus and equity are not assumed. In C-Suite Assistants, '
+      + pctOf(eaBonus.discretionaryShare) + ' reported discretionary bonus, '
+      + pctOf(eaBonus.guaranteedShare) + ' guaranteed bonus, and '
+      + pctOf(eaEquity.cSuiteShare) + ' equity/options. The independent survey reported equity/options for '
+      + pctOf(eaEquity.independentShare) + '. See the linked reports before applying these rates to a specific offer.</div>';
     els.output.innerHTML = html;
   }
 
@@ -512,7 +520,7 @@
      The bonus and equity card used to hardcode both figures beside a citation
      that was read from the file, so refreshing the source desynced the numbers
      from the source they were attributed to. Derive them, always. */
-  function pctOf(v){ return Math.round(v * 100) + "%"; }
+  function pctOf(v){ return (Math.round(v * 1000) / 10) + "%"; }
   function pct(sorted, p){
     if (!sorted.length) return null;
     var i = (sorted.length - 1) * p;

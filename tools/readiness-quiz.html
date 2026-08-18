@@ -223,7 +223,7 @@
   <div class="eob-head">
     <span class="eob-eyebrow">The Readiness Quiz</span>
     <h2>Are you ready to be a Chief of Staff?</h2>
-    <p>Twelve direct questions across the six competencies the role actually runs on. No vanity score. You get a candid read on where you stand and a specific path for the gaps.</p>
+    <p>Twelve reflection questions across six competencies commonly emphasized in Chief of Staff roles. You get a structured view of the examples you have and the areas you may want to develop.</p>
   </div>
 
   <!-- ================= INTRO ================= -->
@@ -267,7 +267,7 @@
       <div class="eob-result-head">
         <span class="eob-eyebrow" id="eob-band-eyebrow">Your result</span>
         <h3 id="eob-band-title">Band</h3>
-        <p class="eob-meta-note">Editorial reflection only — use the prompts to organize examples and development priorities, not as a hiring prediction.</p>
+        <p class="eob-meta-note">Editorial reflection only. Use the prompts to organize examples and development priorities, not as a hiring prediction.</p>
       </div>
 
       <p class="eob-band-para" id="eob-band-para"></p>
@@ -293,7 +293,7 @@
       <div>
         <span class="eob-eyebrow">The Brief</span>
         <h3>Get your personalized path plus the weekly roles in The Brief.</h3>
-        <p>The free weekly newsletter for exec-ops operators: the guides that close each gap above, the operator templates you will use in the seat, and curated Chief of Staff roles.</p>
+        <p>The free weekly newsletter for exec-ops operators: the guides that close each gap above, the operator templates you will use in the seat, and the week's Chief of Staff roles.</p>
         <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
       </div>
 <form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
@@ -322,7 +322,7 @@
       tag: "Business acumen",
       focus: "Business fluency is often the biggest gap for people moving up from a support or specialist track. Learn how your organization actually makes money, read the board deck if you can, and be able to reason about the metrics leadership watches. That is the line between shaping priorities and coordinating logistics.",
       rec: { tag:"Article", title:"The Skills That Actually Get You Hired",
-             desc:"The five hard-to-fake skills hiring managers screen for, including business fluency, and how to show evidence of each.",
+             desc:"The five hard-to-fake skills that guide names, including business fluency, and how to show evidence of each.",
              url:"/library/skills-to-get-hired-as-chief-of-staff" }
     },
     comm: {
@@ -413,7 +413,7 @@
                   url:"/resources" },
       anchorSlug: "skills-to-get-hired-as-chief-of-staff",
       anchor: { tag:"Article", title:"The Skills That Actually Get You Hired",
-                desc:"Audit yourself against the five skills hiring managers screen for, and close the weakest gap deliberately.",
+                desc:"Audit yourself against the five skills named in that guide, and close the weakest gap deliberately.",
                 url:"/library/skills-to-get-hired-as-chief-of-staff" }
     },
     stronger: {
@@ -524,6 +524,11 @@
     }
   }
 
+  var COUNT_WORD = ["", "one", "two", "three", "four", "five", "six"];
+  function labelsFor(keys){
+    return keys.map(function(k){ return DIMS[k].label.toLowerCase(); }).join(", ");
+  }
+
   function bandFor(pct){
     if (pct >= 79) return "stronger";
     if (pct >= 60) return "nearly";
@@ -545,11 +550,25 @@
     var bandKey = bandFor(pct);
     var band = BANDS[bandKey];
 
-    // Rank dimensions weakest first (stable) to find the focus areas.
+    /* Rank dimensions lowest first. Source order breaks a tie, which is
+       arbitrary, so ties are REPORTED rather than silently resolved: the tool
+       must not tell somebody two areas are their weakest when six are level. */
     var order = Object.keys(DIMS);
     var ranked = order.slice().sort(function(a, b){ return dimScore[a] - dimScore[b]; });
     var lowest = ranked[0];
     var second = ranked[1];
+
+    var distinct = [];
+    for (var q = 0; q < ranked.length; q++){
+      if (distinct.indexOf(dimScore[ranked[q]]) === -1) distinct.push(dimScore[ranked[q]]);
+    }
+    // Everything sharing the lowest score, plus the next score down if the lowest is unique.
+    var lowGroup = order.filter(function(k){ return dimScore[k] === distinct[0]; });
+    var focusGroup = lowGroup.slice();
+    if (lowGroup.length === 1 && distinct.length > 1){
+      focusGroup = focusGroup.concat(order.filter(function(k){ return dimScore[k] === distinct[1]; }));
+    }
+    var allLevel = focusGroup.length === order.length;
 
     // Header + band paragraph.
     els.bandEyebrow.textContent = band.eyebrow;
@@ -562,7 +581,8 @@
       var key = order[d];
       var sc = dimScore[key];
       var w = Math.round(sc / 8 * 100);
-      var lowClass = (key === lowest || key === second) ? " is-low" : "";
+      // No highlight at all when every area is level: marking all six says nothing.
+      var lowClass = (!allLevel && focusGroup.indexOf(key) !== -1) ? " is-low" : "";
       bdHTML += '<div class="eob-bd-row">' +
                   '<span class="eob-bd-label">' + esc(DIMS[key].label) + '</span>' +
                   '<span class="eob-bd-track"><span class="eob-bd-fill' + lowClass + '" data-w="' + w + '"></span></span>' +
@@ -571,8 +591,20 @@
     }
     els.breakdown.innerHTML = bdHTML;
 
-    // Focus callout = the weakest dimension.
-    els.focusBody.textContent = DIMS[lowest].focus;
+    /* Focus callout. A tie is stated in words before any area is suggested. */
+    if (allLevel){
+      els.focusBody.textContent = "Every competency scored the same here, so this quiz has not separated them for you. "
+        + "Pick the area where the example you would give an interviewer feels thinnest, and treat the next steps below as suggestions rather than findings.";
+    } else if (lowGroup.length > 1){
+      els.focusBody.textContent = "Your lowest score is shared by " + COUNT_WORD[lowGroup.length] + " areas ("
+        + labelsFor(lowGroup) + "), so the order between them is not meaningful. Choose the one where your evidence feels thinnest. "
+        + DIMS[lowest].focus;
+    } else {
+      var tiedSecond = focusGroup.length > 2
+        ? " " + COUNT_WORD[focusGroup.length - 1] + " other areas share the next score, so the second suggestion below is one of several equally placed."
+        : "";
+      els.focusBody.textContent = DIMS[lowest].focus + tiedSecond;
+    }
 
     // Recommendations: weakest dimension article, second-weakest dimension
     // article, and the band-appropriate free download. If the band anchor

@@ -28,9 +28,27 @@
 
   function $(id){ return root.querySelector("#" + id); }
   function money(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  /* Share -> percentage string, straight from compensation-data.json. Survey
+     percentages are never retyped into the copy; they are read and formatted
+     here, so a dataset update changes every sentence that quotes it. */
+  function pct(v){ return (Math.round(v * 1000) / 10) + "%"; }
+  /* Months between a YYYY-MM valuation date and today. Null when unparsable. */
+  function monthsSince(ym){
+    var m = /^(\d{4})-(\d{1,2})$/.exec(String(ym || "").trim());
+    if (!m) return null;
+    var y = parseInt(m[1], 10), mo = parseInt(m[2], 10);
+    if (!(mo >= 1 && mo <= 12)) return null;
+    var now = new Date();
+    return (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - mo);
+  }
+  /* The minus sign is preserved deliberately. Stripping it used to turn -10
+     into 10 and evaluate an offer the user never typed. */
   function parseNum(v){
-    var n = parseFloat(String(v).replace(/[^0-9.]/g,""));
-    return isNaN(n) ? null : n;
+    var raw = String(v == null ? "" : v).trim();
+    var negative = raw.charAt(0) === "-";
+    var n = parseFloat(raw.replace(/[^0-9.]/g,""));
+    if (isNaN(n)) return null;
+    return negative ? -n : n;
   }
   function amount(id){
     var n = parseNum($(id).value);
@@ -53,6 +71,51 @@
     return '<div class="eob-cash-grid">' + items.map(function(item){
       return '<div class="eob-cash-stat"><span>' + esc(item[0]) + '</span><strong>' + esc(item[1]) + '</strong></div>';
     }).join("") + '</div>';
+  }
+
+  /* ======================================================================
+     Input plausibility. The tool used to multiply any base under 1,000 by
+     1,000, so 999 became $999,000 while 1,000 stayed $1,000, and a stripped
+     minus sign turned -10 into 10. Nothing is silently reinterpreted now:
+     a value outside these ranges is refused with the reason.
+     ====================================================================== */
+  var LIMITS = {
+    "eob-oe-base":       { label:"Annual base salary", min:10000, max:3000000, range:"$10,000 and $3,000,000",
+                           hint:"Enter the full annual amount, for example 150000. Shorthand like 150 is no longer read as $150,000." },
+    "eob-oe-guaranteed": { label:"Guaranteed annual bonus", min:0, max:2000000, range:"$0 and $2,000,000" },
+    "eob-oe-bonus":      { label:"Target bonus", min:0, max:100, range:"0 and 100",
+                           hint:"This field is a percentage of base, not a dollar amount." },
+    "eob-oe-signon":     { label:"Sign-on bonus", min:0, max:2000000, range:"$0 and $2,000,000" },
+    "eob-oe-shares":     { label:"Grant shares or options", min:0, max:1000000000, range:"0 and 1,000,000,000" },
+    "eob-oe-fdshares":   { label:"Fully diluted shares", min:0, max:100000000000, range:"0 and 100,000,000,000" },
+    "eob-oe-ownership":  { label:"Ownership percentage", min:0, max:100, range:"0 and 100" },
+    "eob-oe-strike":     { label:"Strike price per share", min:0, max:100000, range:"$0 and $100,000" },
+    "eob-oe-409a":       { label:"Latest 409A or common value", min:0, max:100000, range:"$0 and $100,000" },
+    "eob-oe-preferred":  { label:"Latest preferred price", min:0, max:100000, range:"$0 and $100,000" },
+    "eob-oe-grantvalue": { label:"Stated RSU or grant value", min:0, max:100000000, range:"$0 and $100,000,000" }
+  };
+  function validateInputs(){
+    var problems = [];
+    Object.keys(LIMITS).forEach(function(id){
+      var el = $(id);
+      if (!el) return;
+      var raw = String(el.value == null ? "" : el.value).trim();
+      if (raw === "") return;
+      var rule = LIMITS[id];
+      var n = parseNum(raw);
+      if (n == null){
+        problems.push(rule.label + " is not a number.");
+        return;
+      }
+      if (n < 0){
+        problems.push(rule.label + " cannot be negative.");
+        return;
+      }
+      if (n < rule.min || n > rule.max){
+        problems.push(rule.label + " must be between " + rule.range + "." + (rule.hint ? " " + rule.hint : ""));
+      }
+    });
+    return problems;
   }
 
   function benchmarkFor(role,stage,location){
@@ -124,12 +187,15 @@
   function bonusCitation(role){
     if (role === "cos"){
       var c = data.chiefOfStaff.bonusContext;
-      return "In a small CoS survey, 56% received a bonus and recipients averaged 19% of base. "
+      return "In a small CoS survey, " + pct(c.prevalence) + " received a bonus and recipients averaged "
+        + c.averagePercentAmongRecipients + "% of base. "
         + cite(c.source,c.sourceUrl,"n=" + c.sample);
     }
     if (role === "ea" || role === "senior_ea"){
       var ea = data.executiveAssistant;
-      return "C-Suite Assistants reports 52% discretionary and 16% guaranteed bonus. The independent survey reports an 8.66% average bonus, but its denominator is unclear. "
+      return "C-Suite Assistants reports " + pct(ea.bonusContext.discretionaryShare) + " discretionary and "
+        + pct(ea.bonusContext.guaranteedShare) + " guaranteed bonus. The independent survey reports a "
+        + ea.bonusContext.independentAveragePercent + "% average bonus, but its denominator is unclear. "
         + cite(ea.cSuiteNational.source,ea.cSuiteNational.sourceUrl,"n≈" + ea.cSuiteNational.sample + " EAs")
         + " " + cite(ea.independentNational.source,ea.independentNational.sourceUrl,"n=" + ea.independentNational.sample + " overall");
     }
@@ -149,12 +215,17 @@
     var location = $("eob-oe-tier").value;
     var equity = $("eob-oe-equity").value;
     var base = parseNum($("eob-oe-base").value);
-    if (base == null || base <= 0){
+    if (base == null){
       err.textContent = "Enter the annual base salary.";
       $("eob-oe-result").className = $("eob-oe-result").className.replace(" eob-show","");
       return;
     }
-    if (base < 1000) base *= 1000;
+    var problems = validateInputs();
+    if (problems.length){
+      err.textContent = problems[0];
+      $("eob-oe-result").className = $("eob-oe-result").className.replace(" eob-show","");
+      return;
+    }
 
     var guaranteed = amount("eob-oe-guaranteed");
     var targetPct = amount("eob-oe-bonus");
@@ -208,11 +279,28 @@
     ]) + '<p>Guaranteed first-year cash includes the one-time sign-on bonus and does not assign value to target bonus or equity.</p>';
     setStatus($("eob-oe-g-guaranteed"),"Calculated","solid");
 
+    /* The row is NOT called "target bonus". When a guaranteed minimum exceeds
+       the target percentage, the figure shown is the guaranteed minimum, and
+       calling that the target bonus misreports what the user entered. */
+    var bonusBasis;
+    if (guaranteed > 0 && guaranteed >= targetBonus){
+      bonusBasis = "The guaranteed annual minimum of " + money(guaranteed) + " is larger than the "
+        + targetPct + "% target on base (" + money(targetBonus) + "), so the guaranteed minimum is the figure used above. "
+        + "This tool treats the guaranteed minimum as a floor that replaces the target amount, not as a payment that stacks on top of it. "
+        + "If your offer pays the guaranteed minimum and the target bonus separately, add them yourself and confirm the wording in writing.";
+    } else if (targetBonus > 0){
+      bonusBasis = "The figure above is the " + targetPct + "% target on a base of " + money(base) + ". "
+        + (guaranteed > 0
+            ? "The guaranteed annual minimum of " + money(guaranteed) + " is lower, and it is treated as a floor inside that target rather than as an addition to it."
+            : "No guaranteed annual minimum was entered, so none of this target is contractually assured.");
+    } else {
+      bonusBasis = "No target bonus percentage and no guaranteed annual minimum were entered, so no annual bonus is included in target cash.";
+    }
     $("eob-oe-targettext").innerHTML = cashGrid([
-      ["Target bonus",money(annualBonusUsed)],
+      ["Bonus used for target cash",money(annualBonusUsed)],
       ["Target annual cash",money(targetAnnual)],
       ["Target first year",money(targetFirstYear)]
-    ]) + '<p>The target calculation uses the larger of the guaranteed annual minimum and the target percentage, so the same bonus is not counted twice. Sign-on appears only in first-year cash.</p><p>' + bonusCitation(role) + '</p>';
+    ]) + '<p>' + esc(bonusBasis) + ' Sign-on appears only in first-year cash.</p><p>' + bonusCitation(role) + '</p>';
     setStatus($("eob-oe-g-target"),targetPct > 0 ? "Target entered" : (guaranteed > 0 ? "Guaranteed only" : "No bonus entered"),targetPct > 0 || guaranteed > 0 ? "solid" : "wait");
 
     evaluateEquityAndTerms({
@@ -237,6 +325,12 @@
     var ownership = amount("eob-oe-ownership");
     var strike = amount("eob-oe-strike");
     var common409a = amount("eob-oe-409a");
+    /* The result used to claim the 409A date had been checked while the form
+       collected only the value. The date is collected now, and its age is
+       stated rather than assumed. */
+    var valuationDateEl = $("eob-oe-409a-date");
+    var valuationDateRaw = valuationDateEl ? String(valuationDateEl.value || "").trim() : "";
+    var valuationAge = monthsSince(valuationDateRaw);
     var preferred = amount("eob-oe-preferred");
     var grantValue = amount("eob-oe-grantvalue");
     var missingEquity = [];
@@ -245,18 +339,31 @@
     var equityText = "";
 
     if (ctx.equity === "none"){
-      equityText = "No equity is included. This is not automatically below market: 54% held equity in a small CoS survey, while the EA surveys report equity/options for 17% and 23.4% of respondents. Evaluate cash on its own and ask whether equity is available at the internal level.";
+      equityText = "No equity is included. This is not automatically below market: "
+        + pct(data.chiefOfStaff.equityContext.prevalence) + " held equity in a small CoS survey, while the EA surveys report equity/options for "
+        + pct(data.executiveAssistant.equityContext.cSuiteShare) + " and "
+        + pct(data.executiveAssistant.equityContext.independentShare)
+        + " of respondents. Evaluate cash on its own and ask whether equity is available at the internal level.";
       setStatus($("eob-oe-g-equity"),"No equity entered","wait");
     } else if (ctx.equity === "options"){
       if (!(ownershipCalc > 0)) missingEquity.push("Ownership percentage, or both grant shares and fully diluted shares");
       if (!(strike > 0)) missingEquity.push("Strike price");
-      if (!(common409a > 0)) missingEquity.push("Latest 409A/common value and date");
+      if (!(common409a > 0)) missingEquity.push("Latest 409A/common share value");
+      if (valuationAge === null) missingEquity.push("The date of that 409A valuation");
+      else if (valuationAge < 0) missingEquity.push("A 409A valuation date that is not in the future");
       if (!$("eob-oe-t-vesting").checked) missingEquity.push("Vesting schedule and cliff");
       if (!$("eob-oe-t-window").checked) missingEquity.push("Post-termination exercise window");
       equityReady = missingEquity.length === 0;
+      var ageNote = "";
+      if (valuationAge !== null && valuationAge >= 0){
+        ageNote = " The 409A valuation you entered is about " + valuationAge + " month" + (valuationAge === 1 ? "" : "s")
+          + " old." + (valuationAge > 12
+            ? " A 409A more than twelve months old is usually superseded, so ask whether a newer valuation exists before you rely on this spread."
+            : "");
+      }
       equityText = equityReady
-        ? "The core inputs needed to discuss this private-option grant are present. Ownership is " + ownershipCalc.toFixed(3) + "%. This still does not make the grant liquid, guaranteed, or comparable with cash."
-        : "The grant cannot yet be evaluated responsibly. Treat its value as unknown until the missing items below are supplied.";
+        ? "The core inputs needed to discuss this private-option grant are present. Ownership is " + ownershipCalc.toFixed(3) + "%." + ageNote + " This still does not make the grant liquid, guaranteed, or comparable with cash."
+        : "The grant cannot yet be evaluated responsibly. Treat its value as unknown until the missing items below are supplied." + ageNote;
       setStatus($("eob-oe-g-equity"),equityReady ? "Enough information" : "Missing information",equityReady ? "strong" : "wait");
     } else if (ctx.equity === "rsu"){
       if (!(grantValue > 0)) missingEquity.push("Stated grant value or a current share-price valuation");
@@ -296,11 +403,12 @@
     var equityCitation = "";
     if (ctx.role === "cos"){
       var cosEquity = data.chiefOfStaff.equityContext;
-      equityCitation = '<p class="eob-cite">Incidence context: 54% held equity in this small survey. '
+      equityCitation = '<p class="eob-cite">Incidence context: ' + pct(cosEquity.prevalence) + ' held equity in this small survey. '
         + cite(cosEquity.source,cosEquity.sourceUrl,"n=" + cosEquity.sample) + '</p>';
     } else if (ctx.role === "ea" || ctx.role === "senior_ea"){
       var eaEquity = data.executiveAssistant;
-      equityCitation = '<p class="eob-cite">Incidence context: 17% in C-Suite Assistants and 23.4% in the independent survey. '
+      equityCitation = '<p class="eob-cite">Incidence context: ' + pct(eaEquity.equityContext.cSuiteShare)
+        + ' in C-Suite Assistants and ' + pct(eaEquity.equityContext.independentShare) + ' in the independent survey. '
         + cite(eaEquity.cSuiteNational.source,eaEquity.cSuiteNational.sourceUrl,"n≈" + eaEquity.cSuiteNational.sample + " EAs")
         + " " + cite(eaEquity.independentNational.source,eaEquity.independentNational.sourceUrl,"n=" + eaEquity.independentNational.sample + " overall") + '</p>';
     } else {
