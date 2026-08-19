@@ -421,7 +421,7 @@
     // Roles without listed comp are kept unless the include toggle is off.
     if (f.minComp){
       if (hasComp(role)){
-        if (annualHigh(role) < f.minComp) return false;
+        if (annualMid(role) < f.minComp) return false;
       } else if (!f.includeNoComp){
         return false;
       }

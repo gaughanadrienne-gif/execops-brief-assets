@@ -65,7 +65,7 @@
   }
   function setStatus(el,label,style){
     el.textContent = label;
-    el.className = el.className.replace(/eob-g-w+/g,"").trim() + " " + STATUS_CLASS[style];
+    el.className = el.className.replace(/eob-g-\w+/g,"").trim() + " " + STATUS_CLASS[style];
   }
   function cashGrid(items){
     return '<div class="eob-cash-grid">' + items.map(function(item){

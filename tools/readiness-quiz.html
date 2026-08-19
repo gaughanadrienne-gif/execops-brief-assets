@@ -568,7 +568,10 @@
     if (lowGroup.length === 1 && distinct.length > 1){
       focusGroup = focusGroup.concat(order.filter(function(k){ return dimScore[k] === distinct[1]; }));
     }
-    var allLevel = focusGroup.length === order.length;
+    var allLevel = distinct.length === 1;
+    // When the lowest is unique but the rest tie at the next score, focusGroup
+    // spans all six; highlighting six bars says nothing, so mark only the true low group.
+    var highlightGroup = (focusGroup.length === order.length) ? lowGroup : focusGroup;
 
     // Header + band paragraph.
     els.bandEyebrow.textContent = band.eyebrow;
@@ -582,7 +585,7 @@
       var sc = dimScore[key];
       var w = Math.round(sc / 8 * 100);
       // No highlight at all when every area is level: marking all six says nothing.
-      var lowClass = (!allLevel && focusGroup.indexOf(key) !== -1) ? " is-low" : "";
+      var lowClass = (!allLevel && highlightGroup.indexOf(key) !== -1) ? " is-low" : "";
       bdHTML += '<div class="eob-bd-row">' +
                   '<span class="eob-bd-label">' + esc(DIMS[key].label) + '</span>' +
                   '<span class="eob-bd-track"><span class="eob-bd-fill' + lowClass + '" data-w="' + w + '"></span></span>' +
