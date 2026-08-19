@@ -3649,6 +3649,33 @@ def apply_pay_floor(roles):
     return kept, no_comp, below
 
 
+def apply_age_cap(roles, max_days=365):
+    """Drop roles whose own date_posted is older than max_days.
+
+    2026-08-18 audit C7: the board carried postings from 2022 and 2025 on a
+    page that says it syncs every morning. A stale posting that states its own
+    age is worse than no posting. Rows with NO date_posted are kept: absence
+    of a date is a source limitation, not evidence of staleness, and dropping
+    them would gut the board (43 undated rows on the day this shipped).
+    """
+    kept, dropped = [], []
+    today = date.today()
+    for r in roles:
+        dp = r.get("date_posted")
+        if dp:
+            try:
+                posted = date(*[int(x) for x in dp.split("-")])
+                if (today - posted).days > max_days:
+                    dropped.append(r)
+                    print(f"[stale ] drop {r['id']:<26} {r['source']:<20} "
+                          f"posted {dp} ({(today - posted).days} days ago)")
+                    continue
+            except (ValueError, TypeError):
+                pass
+        kept.append(r)
+    return kept, dropped
+
+
 def assert_floor(roles):
     """Hard proof of the board promise. Raises if the board would ever lie."""
     bad_null = [r["id"] for r in roles if comp_midpoint(r) is None]
@@ -3798,6 +3825,7 @@ def main():
     merged, dropped_scope = scope_gate(merged)
 
     merged, dropped_nocomp, dropped_floor = apply_pay_floor(merged)
+    merged, dropped_stale = apply_age_cap(merged)
     dropped_floor = dropped_early + dropped_floor
     total = len(merged)
     for r in merged:

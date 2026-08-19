@@ -614,7 +614,9 @@
       data = payload;
       $("eob-oe-go").disabled = false;
       $("eob-oe-go").textContent = "Evaluate this offer";
-      $("eob-oe-data-version").textContent = "Compensation data version: " + data.updatedLabel + ".";
+      var liveAsOf = data.chiefOfStaff && data.chiefOfStaff.premium && data.chiefOfStaff.premium.asOf;
+      $("eob-oe-data-version").textContent = "Compensation data version: " + data.updatedLabel +
+        (liveAsOf ? ". Live-board comparison recomputed " + liveAsOf + "." : ".");
       // A restored session gets its readout back, not just its inputs. The
       // benchmark file has to be in hand first, so this runs here.
       if (state.evaluated && $("eob-oe-base").value) evaluate();

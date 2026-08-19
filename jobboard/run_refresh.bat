@@ -43,6 +43,18 @@ if errorlevel 1 (
   git add tools/comp-explorer-data.json >> "%LOG%" 2>&1
 )
 
+REM -- Offer Evaluator premium blocks, recomputed from the board we just
+REM    scraped (2026-08-18 audit C1: they were hand-built once and froze while
+REM    roles.json moved daily). Same philosophy as the comp explorer build:
+REM    raises rather than writes on a floor breach or thin sample, temp-file
+REM    write, and on failure we log and carry on with yesterday's blocks.
+python "%REPO%\jobboard\build_premium_blocks.py" >> "%LOG%" 2>&1
+if errorlevel 1 (
+  echo [%DATE% %TIME%] premium blocks build failed -- keeping previous compensation data >> "%LOG%"
+) else (
+  git add tools/compensation-data.json >> "%LOG%" 2>&1
+)
+
 REM -- Source health check. refresh_roles.py used to catch a dead source, print
 REM    [FAIL] and do nothing else, so a source could die silently and stay dead
 REM    while it fed /roles, the benchmarker's live row, /salary-data and the
