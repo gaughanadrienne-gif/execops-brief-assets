@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certification Directory | The Exec Ops Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F0E9; --paper2:#EBE6DA; --ink:#1B1712; --ink-soft:#3A342B;
+    --navy:#1C2C3A; --ox:#7A2129; --ox-deep:#5E181F; --muted:#6B6255; --line:#D8D0BF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink-soft);font-family:'Public Sans',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;padding:4px 2px 24px}
+  .tool-head{border-top:2px solid var(--ink);padding:14px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .tool-title{font-family:'Spectral',Georgia,serif;font-weight:600;font-size:1.25rem;color:var(--ink)}
+  .asof{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .asof b{color:var(--ox);font-weight:600}
+
+  .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:6px}
+  .frow{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .flabel{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-width:74px}
+  .chip{font-family:'Public Sans',system-ui,sans-serif;font-size:.8rem;font-weight:600;padding:.35rem .7rem;border:1px solid var(--line);background:#fff;color:var(--ink-soft);border-radius:2px;cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--ox);border-color:var(--ox);color:#fff}
+  .chip:hover{border-color:var(--ox)}
+  select{font-family:'Public Sans',system-ui,sans-serif;font-size:.8rem;padding:.35rem .5rem;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:2px}
+
+  .count{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 0;border-bottom:1px solid var(--ink)}
+  .count b{color:var(--ink)}
+
+  .row{border-bottom:1px solid var(--line);padding:14px 0;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:6px 18px}
+  .r-name{font-family:'Spectral',Georgia,serif;font-weight:600;font-size:1.02rem;color:var(--ink);line-height:1.25}
+  .r-name a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(122,33,41,.35)}
+  .r-name a:hover{color:var(--ox)}
+  .r-provider{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  .r-price{font-family:'Spectral',Georgia,serif;font-weight:600;font-size:1rem;color:var(--ink);text-align:right}
+  .r-price .np{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ox);font-weight:500}
+  .r-meta{grid-column:1 / -1;display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted)}
+  .r-meta span b{color:var(--ink-soft);font-weight:600}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;padding:.14rem .4rem;border:1px solid var(--line);border-radius:2px;color:var(--muted)}
+  .tag.gate-hard{border-color:var(--ox);color:var(--ox)}
+  .r-note{grid-column:1 / -1;font-size:.82rem;color:var(--ink-soft)}
+  .empty{padding:26px 0;font-size:.9rem;color:var(--muted)}
+
+  .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:12px;font-size:.78rem;color:var(--muted);max-width:60rem}
+  @media(max-width:560px){
+    .row{grid-template-columns:1fr}
+    .r-price{text-align:left}
+    .flabel{min-width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="tool-head">
+  <div class="tool-title">Certification and course directory</div>
+  <div class="asof">Every fact checked on the provider's own page <b id="asof"></b></div>
+</div>
+
+<div class="filters" id="filters">
+  <div class="frow" id="f-cluster"><span class="flabel">Audience</span></div>
+  <div class="frow" id="f-gate"><span class="flabel">Gate</span></div>
+  <div class="frow">
+    <span class="flabel">Price</span>
+    <select id="f-price" aria-label="Price band">
+      <option value="">Any price</option>
+      <option value="0-500">Under $500</option>
+      <option value="500-1000">$500 to $1,000</option>
+      <option value="1000-3000">$1,000 to $3,000</option>
+      <option value="3000-8000">$3,000 to $8,000</option>
+      <option value="8000-999999">Over $8,000</option>
+      <option value="unpublished">Price not published</option>
+    </select>
+    <select id="f-sort" aria-label="Sort order">
+      <option value="default">Sort: by audience, then price</option>
+      <option value="price-asc">Sort: price, low to high</option>
+      <option value="price-desc">Sort: price, high to low</option>
+      <option value="name">Sort: name</option>
+    </select>
+  </div>
+</div>
+
+<div class="count" id="count" role="status"></div>
+<div id="list"></div>
+
+<div class="foot">
+  Prices and formats change without notice, and some providers publish no price at all, so treat every figure here as a
+  starting point and confirm on the provider page before paying anyone. Rows without a link were verified on the
+  provider's site on the date above. A credential that gates on experience or a proctored exam certifies something a
+  purchase can't; most programs here certify that you bought and finished a curriculum, which has value, but a different kind.
+</div>
+
+<script>
+(function(){
+  var DATA_URL = 'certifications-data.json';
+  var state = { cluster:'', gate:'', price:'', sort:'default' };
+  var DB = null;
+
+  function esc(t){ var d=document.createElement('div'); d.textContent=t==null?'':String(t); return d.innerHTML; }
+
+  function chip(label, group, value){
+    var b=document.createElement('button');
+    b.className='chip'; b.type='button'; b.textContent=label;
+    b.setAttribute('aria-pressed', state[group]===value ? 'true':'false');
+    b.addEventListener('click', function(){
+      state[group] = (state[group]===value) ? '' : value;
+      renderChips(); renderList();
+    });
+    return b;
+  }
+
+  function renderChips(){
+    var fc=document.getElementById('f-cluster');
+    var fg=document.getElementById('f-gate');
+    while(fc.children.length>1) fc.removeChild(fc.lastChild);
+    while(fg.children.length>1) fg.removeChild(fg.lastChild);
+    Object.keys(DB.clusters).forEach(function(k){ fc.appendChild(chip(DB.clusters[k],'cluster',k)); });
+    Object.keys(DB.gates).forEach(function(k){ fg.appendChild(chip(DB.gates[k],'gate',k)); });
+  }
+
+  function passes(p){
+    if(state.cluster && p.cluster!==state.cluster) return false;
+    if(state.gate && p.gate!==state.gate) return false;
+    if(state.price){
+      if(state.price==='unpublished'){ if(p.price_published) return false; }
+      else{
+        var parts=state.price.split('-'); var lo=+parts[0], hi=+parts[1];
+        if(!p.price_published) return false;
+        if(p.price_min<lo || p.price_min>hi) return false;
+      }
+    }
+    return true;
+  }
+
+  function sorted(list){
+    var out=list.slice();
+    if(state.sort==='price-asc') out.sort(function(a,b){ return (a.price_min==null)-(b.price_min==null) || (a.price_min||0)-(b.price_min||0); });
+    else if(state.sort==='price-desc') out.sort(function(a,b){ return (a.price_min==null)-(b.price_min==null) || (b.price_min||0)-(a.price_min||0); });
+    else if(state.sort==='name') out.sort(function(a,b){ return a.name.localeCompare(b.name); });
+    return out;
+  }
+
+  function renderList(){
+    var list=document.getElementById('list');
+    var rows=sorted(DB.programs.filter(passes));
+    document.getElementById('count').innerHTML='<b>'+rows.length+'</b> of '+DB.programs.length+' programs shown';
+    if(!rows.length){ list.innerHTML='<div class="empty">Nothing matches that combination. Clear a filter to widen the set.</div>'; postH(); return; }
+    var h='';
+    rows.forEach(function(p){
+      var name = p.url ? '<a href="'+esc(p.url)+'" target="_blank" rel="noopener">'+esc(p.name)+'</a>' : esc(p.name);
+      var price = p.price_published ? esc(p.price_display) : '<span class="np">'+esc(p.price_display)+'</span>';
+      var gateCls = p.gate==='experience-or-exam' ? ' gate-hard' : '';
+      h+='<div class="row">'
+        +'<div><div class="r-name">'+name+'</div><div class="r-provider">'+esc(p.provider)+'</div></div>'
+        +'<div class="r-price">'+price+'</div>'
+        +'<div class="r-meta">'
+          +'<span class="tag">'+esc(DB.clusters[p.cluster]||p.cluster)+'</span>'
+          +'<span class="tag'+gateCls+'">'+esc(DB.gates[p.gate]||p.gate)+'</span>'
+          +'<span><b>Format:</b> '+esc(p.format)+'</span>'
+          +'<span><b>Length:</b> '+esc(p.duration)+'</span>'
+          +'<span><b>For:</b> '+esc(p.audience)+'</span>'
+        +'</div>'
+        +(p.note ? '<div class="r-note">'+esc(p.note)+'</div>' : '')
+      +'</div>';
+    });
+    list.innerHTML=h;
+    postH();
+  }
+
+  function postH(){
+    if(window.parent===window) return;
+    window.setTimeout(function(){
+      window.parent.postMessage({type:'eob-certdir-height', height:document.body.scrollHeight}, '*');
+    }, 60);
+  }
+
+  document.getElementById('f-price').addEventListener('change', function(e){ state.price=e.target.value; renderList(); });
+  document.getElementById('f-sort').addEventListener('change', function(e){ state.sort=e.target.value; renderList(); });
+  window.addEventListener('resize', postH);
+
+  fetch(DATA_URL, {cache:'no-store'}).then(function(r){ return r.json(); }).then(function(d){
+    DB=d;
+    document.getElementById('asof').textContent=d.as_of;
+    renderChips();
+    renderList();
+  }).catch(function(){
+    document.getElementById('list').innerHTML='<div class="empty">The directory data failed to load. Refresh the page, and if it persists the dataset is temporarily unavailable.</div>';
+    postH();
+  });
+})();
+</script>
+</body>
+</html>
