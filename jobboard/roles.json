@@ -1,7 +1,7 @@
 {
   "_note": "REAL curated Executive Assistant, Executive Operations, and Chief of Staff roles for The Exec Ops Brief job board, aggregated from recruiting agencies, direct job boards, and VC portfolio feeds. PAY FLOOR (enforced in code since 2026-07-13): every role on this board carries a compensation figure PUBLISHED BY THE SOURCE whose midpoint -- (comp_low + comp_high) / 2, or the single figure where only one is published -- is at least $100,000. A role whose published midpoint falls below $100k is excluded, and a role whose source publishes no comp figure at all is excluded (there are no 'comp not listed' rows). No comp figure is ever estimated, inferred, or invented; comp honesty outranks board size. Where a posting publishes an HOURLY rate instead of a salary, comp_period='hr' and comp_low/comp_high hold the verbatim $/hr figures (annualized at 2080h ONLY to apply the floor, never for display). Most roles also carry a short summary excerpted VERBATIM from the posting (never paraphrased); summary is null rather than invented when the source lacks readable role-specific text. A benefits list (bonus, equity, 401(k), health coverage, PTO, etc) is detected only where the posting states it. Apply links point to the original source listing.",
-  "updated": "2026-08-26",
-  "count": 266,
+  "updated": "2026-08-27",
+  "count": 268,
   "roles": [
     {
       "id": "bloom-1484",
@@ -726,7 +726,7 @@
       "comp_high": 150000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS02emZqNXV3aTJmYzZ2aWlj",
       "source": "Burke & Co",
       "summary": "Our client, a well-capitalized, stealth-mode AI company building next-generation artificial intelligence, seeks a razor-sharp Executive Assistant to support one of their high-performing teams.",
@@ -747,7 +747,7 @@
       "comp_high": 170000,
       "location": "San Francisco, California",
       "remote": "Hybrid",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS1wdGE1bG9ldnJwaWZ0bTNt",
       "source": "Burke & Co",
       "summary": "Our client, a fast-growing fintech startup, seeks a top-notch Executive Assistant to support two senior leaders. This is a high-impact, hands-on Executive Assistant role for someone who loves being the connective tissue across people, priorities, schedules, and systems.",
@@ -767,7 +767,7 @@
       "comp_high": 180000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS0wanJ3Nm43bDExd2ZmdmZz",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing AI startup, is seeking a high-impact Executive Assistant to support their CFO and VP of Sales. This is a highly visible, strategic role and is the perfect opportunity for someone who thrives in fast-paced environments and enjoys serving as the operational backbone for...",
@@ -787,7 +787,7 @@
       "comp_high": 200000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS0zeTk3M2pmdHZ2YndvOHhl",
       "source": "Burke & Co",
       "summary": "Our client, a well-capitalized, stealth-mode AI company building next-generation artificial intelligence, seeks a razor-sharp Executive Assistant to support two senior executives and take on strategic initiatives as the company expands.",
@@ -808,7 +808,7 @@
       "comp_high": 160000,
       "location": "Palo Alto, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS05aHh1djdpbTFxY2sya3A5",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly scaling health tech startup in Palo Alto, is seeking an experienced Executive Assistant to provide high-level support to their CEO.",
@@ -828,7 +828,7 @@
       "comp_high": 180000,
       "location": "Santa Clara, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS04d2VtZjMycHQ1eGQ5aXlm",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing AI-powered developer platform, is seeking an exceptional Executive Assistant to support its Co-Founder & CEO.",
@@ -849,7 +849,7 @@
       "comp_high": 180000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS1qM2xhcXp5MTc4MGdxcHU4",
       "source": "Burke & Co",
       "summary": "Our client, a Bay Area based SaaS startup with global reach, seeks a top-notch Executive Assistant to support their CEO & CFO. This is a highly visible, high-impact role for someone who thrives at the center of executive operations and brings structure, rigor, and forward-thinking execution to...",
@@ -869,7 +869,7 @@
       "comp_high": 160000,
       "location": "San Mateo, California",
       "remote": "Hybrid",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS10bjVrcW13d2VqaGR5ZDd2",
       "source": "Burke & Co",
       "summary": "Our client, a fast-growing & mission-driven healthcare tech startup, is looking for a top-notch Executive Assistant to support their CEO & COO.",
@@ -889,7 +889,7 @@
       "comp_high": 150000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-20",
+      "date_posted": "2026-08-21",
       "apply_url": "https://app.loxo.co/job/MTcwNS1rMDkwNXByYjlrdGJkZWNs",
       "source": "Burke & Co",
       "summary": "Our client, a Bay Area based SaaS startup with global reach, seeks a top-notch Executive Assistant to support their Chief People Officer and play an integral role in company event management.",
@@ -909,7 +909,7 @@
       "comp_high": 180000,
       "location": "NYC",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS0xa2NjeWJzaHZ3eGl3OGRk",
       "source": "Burke & Co",
       "summary": "Our client, a multi-billion dollar hedge fund in New York City, seeks a razor-sharp Senior Executive Assistant to support their Founder. This is a unique opportunity spanning Executive Assistant, Personal Assistant, and operational support responsibilities.",
@@ -929,7 +929,7 @@
       "comp_high": 175000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://app.loxo.co/job/MTcwNS1vbmxod2lyeXd6eXhxeDQ5",
       "source": "Burke & Co",
       "summary": "Our client, a global investment firm with an impressive portfolio, seeks a proactive Senior Executive Assistant to join their stellar administrative team in support of a General Partner and Partner.",
@@ -1327,6 +1327,84 @@
         "Health coverage",
         "Paid time off",
         "Wellness"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "cosn-chief-of-staff-moneycorp-0lm",
+      "title": "Chief of Staff",
+      "org_type": "Moneycorp",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 180000,
+      "comp_high": 250000,
+      "location": "Stamford, CT",
+      "remote": "Onsite",
+      "date_posted": "2026-08-25",
+      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-moneycorp-0lm",
+      "source": "Chief of Staff Network",
+      "summary": null,
+      "benefits": [],
+      "metro": "Other",
+      "source_type": "Network"
+    },
+    {
+      "id": "cosn-chief-of-staff-niural-ai-skp",
+      "title": "Chief of Staff",
+      "org_type": "Niural AI",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 100000,
+      "comp_high": 140000,
+      "location": "New York, NY",
+      "remote": "Onsite",
+      "date_posted": "2026-08-24",
+      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-niural-ai-skp",
+      "source": "Chief of Staff Network",
+      "summary": null,
+      "benefits": [],
+      "metro": "NYC",
+      "source_type": "Network"
+    },
+    {
+      "id": "cosn-chief-of-staff-helios-uod",
+      "title": "Chief of Staff",
+      "org_type": "Helios",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 150000,
+      "comp_high": 200000,
+      "location": "New York, NY",
+      "remote": "Onsite",
+      "date_posted": "2026-08-24",
+      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-helios-uod",
+      "source": "Chief of Staff Network",
+      "summary": null,
+      "benefits": [],
+      "metro": "NYC",
+      "source_type": "Network"
+    },
+    {
+      "id": "consider-a16z-e3689211-e008-48f7-b82d-",
+      "title": "Chief of Staff, Office of the President",
+      "org_type": "Ambience Healthcare",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 185000,
+      "comp_high": 295000,
+      "location": "San Francisco, California, United States",
+      "remote": "Hybrid",
+      "date_posted": "2026-02-11",
+      "apply_url": "https://jobs.ashbyhq.com/ambiencehealthcare/e3689211-e008-48f7-b82d-c2cea4e283d3?utm_source=jobs.a16z.com",
+      "source": "a16z Portfolio",
+      "summary": "You will be the quarterback of the Office of the President, reporting directly to Mike Ng, President and Co-Founder of Ambience . You will manage approximately four other OOTP members and partner with the recruiting team to hire and onboard them.",
+      "benefits": [
+        "Bonus",
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Parental leave"
       ],
       "metro": "SF Bay Area",
       "source_type": "VC portfolio"
@@ -1944,29 +2022,6 @@
       "source_type": "Network"
     },
     {
-      "id": "getro-222-86156144",
-      "title": "Chief of Staff to the CEO",
-      "org_type": "Lila Sciences",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 250000,
-      "comp_high": 350000,
-      "location": "Cambridge, MA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-13",
-      "apply_url": "https://boards.greenhouse.io/lilasciences/jobs/4285660009",
-      "source": "General Catalyst Portfolio",
-      "summary": "Lila Sciences is seeking an experienced Chief of Staff to partner with our Founder and CEO, Geoff von Maltzahn, in advancing the company's strategic and scientific priorities.",
-      "benefits": [
-        "Bonus",
-        "Equity",
-        "Health coverage",
-        "Parental leave"
-      ],
-      "metro": "Other",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "pocketbook-2620",
       "title": "Executive Assistant to CEO and Founder",
       "org_type": "",
@@ -2298,28 +2353,6 @@
       "source_type": "Recruiter"
     },
     {
-      "id": "beacon-130736",
-      "title": "Executive Assistant",
-      "org_type": "Beacon Hill Staffing Group",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 110000,
-      "comp_high": 110000,
-      "location": "New York, New York",
-      "remote": "Onsite",
-      "date_posted": "2026-08-10",
-      "apply_url": "https://bhsg.com/jobs/job/a1469817ny-perm_1786389601-executive-assistant-new-york-new-york/",
-      "source": "Beacon Hill",
-      "summary": "Our client is seeking a highly polished, proactive Executive Assistant to support senior leadership within a leading growth equity investment firm. This is a high‑touch EA role supporting a fast‑paced investment team and serving as the first true Executive Assistant hire at the firm.",
-      "benefits": [
-        "Bonus",
-        "Equity",
-        "Health coverage"
-      ],
-      "metro": "NYC",
-      "source_type": "Recruiter"
-    },
-    {
       "id": "beacon-130465",
       "title": "Executive Assistant",
       "org_type": "Beacon Hill Staffing Group",
@@ -2333,6 +2366,28 @@
       "apply_url": "https://bhsg.com/jobs/job/a1469200ny-perm_1785942926-executive-assistant-new-york-new-york/",
       "source": "Beacon Hill",
       "summary": "Our client is seeking a highly polished, proactive Executive Assistant to support senior leadership within a growing private investment firm.",
+      "benefits": [
+        "Bonus",
+        "Equity",
+        "Health coverage"
+      ],
+      "metro": "NYC",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "beacon-130736",
+      "title": "Executive Assistant",
+      "org_type": "Beacon Hill Staffing Group",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 110000,
+      "comp_high": 110000,
+      "location": "New York, New York",
+      "remote": "Onsite",
+      "date_posted": "2026-08-10",
+      "apply_url": "https://bhsg.com/jobs/job/a1469817ny-perm_1786389601-executive-assistant-new-york-new-york/",
+      "source": "Beacon Hill",
+      "summary": "Our client is seeking a highly polished, proactive Executive Assistant to support senior leadership within a leading growth equity investment firm. This is a high‑touch EA role supporting a fast‑paced investment team and serving as the first true Executive Assistant hire at the firm.",
       "benefits": [
         "Bonus",
         "Equity",
@@ -2376,7 +2431,7 @@
       "comp_high": 130000,
       "location": "Chicago, Illinois",
       "remote": "Onsite",
-      "date_posted": "2026-08-22",
+      "date_posted": "2026-08-26",
       "apply_url": "https://www.thelasallenetwork.com/jobs/executive-assistant-travel-162012/",
       "source": "LaSalle Network",
       "summary": "3-7+ years of experience in executive assistance, executive travel coordination or corporate travel management.",
@@ -2803,30 +2858,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "consider-a16z-e3689211-e008-48f7-b82d-",
-      "title": "Chief of Staff, Office of the President",
-      "org_type": "Ambience Healthcare",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 185000,
-      "comp_high": 295000,
-      "location": "San Francisco, California, United States",
-      "remote": "Hybrid",
-      "date_posted": "2026-02-11",
-      "apply_url": "https://jobs.ashbyhq.com/ambiencehealthcare/e3689211-e008-48f7-b82d-c2cea4e283d3?utm_source=jobs.a16z.com",
-      "source": "a16z Portfolio",
-      "summary": "You will be the quarterback of the Office of the President, reporting directly to Mike Ng, President and Co-Founder of Ambience . You will manage approximately four other OOTP members and partner with the recruiting team to hire and onboard them.",
-      "benefits": [
-        "Bonus",
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Parental leave"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "consider-a16z-49c03702-d9a6-4d8d-97ff-",
       "title": "Chief of Staff",
       "org_type": "HappyRobot",
@@ -2891,6 +2922,52 @@
         "Health coverage"
       ],
       "metro": "NYC",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "consider-a16z-5222244007",
+      "title": "Senior Executive Assistant",
+      "org_type": "Anduril Industries",
+      "category": "Executive Assistant",
+      "seniority": "Senior Executive Assistant",
+      "comp_low": 99000,
+      "comp_high": 130000,
+      "location": "Bellevue, Washington, United States",
+      "remote": "Onsite",
+      "date_posted": "2026-08-26",
+      "apply_url": "https://boards.greenhouse.io/andurilindustries/jobs/5222244007?gh_jid=5222244007",
+      "source": "a16z Portfolio",
+      "summary": "Provide high-level administrative support to 2-3 VPs including managing calendars, preparing reports, drafting correspondence, coordinating complex travel plans, scheduling meetings, and compiling documents",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "Other",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "consider-a16z-8731142002",
+      "title": "Executive Assistant",
+      "org_type": "Instabase",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 120000,
+      "comp_high": 145000,
+      "location": "San Francisco, CA",
+      "remote": "Hybrid",
+      "date_posted": "2026-08-26",
+      "apply_url": "https://job-boards.greenhouse.io/instabase/jobs/8731142002",
+      "source": "a16z Portfolio",
+      "summary": "SuperApp is looking for an exceptional Executive Assistant to the CEO to help our CEO and leadership team operate with focus, speed, and precision.",
+      "benefits": [
+        "Bonus",
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off",
+        "Parental leave",
+        "Wellness"
+      ],
+      "metro": "SF Bay Area",
       "source_type": "VC portfolio"
     },
     {
@@ -3361,7 +3438,7 @@
       "comp_high": 250000,
       "location": "San Francisco, California, United States",
       "remote": "Hybrid",
-      "date_posted": "2026-08-04",
+      "date_posted": "2026-08-12",
       "apply_url": "https://jobs.ashbyhq.com/ThinkingMachines/740ab75b-954c-46fe-9ffa-2d9ede9c135a?utm_source=jobs.a16z.com",
       "source": "a16z Portfolio",
       "summary": "We're hiring an Executive Business Partner to support several technical leaders out of our San Francisco office. You will help our team stay focused and organized, managing personal logistics and any tasks that might fall through the cracks.",
@@ -3753,31 +3830,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "consider-sequoia-2ed33963-d4b4-430b-867b-",
-      "title": "Executive Business Partner",
-      "org_type": "Vanta",
-      "category": "Executive Assistant",
-      "seniority": "Executive Business Partner",
-      "comp_low": 124000,
-      "comp_high": 146000,
-      "location": "USA",
-      "remote": "Remote",
-      "date_posted": "2026-05-09",
-      "apply_url": "https://jobs.ashbyhq.com/vanta/2ed33963-d4b4-430b-867b-07b14bfd561d?utm_source=jobs.sequoiacap.com",
-      "source": "Sequoia Portfolio",
-      "summary": "Excellent communication and organization skills, able to synthesize and communicate information with clarity and precision.",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Paid time off",
-        "Parental leave",
-        "Wellness"
-      ],
-      "metro": "Remote",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "consider-sequoia-4669992003",
       "title": "Business Operations Lead",
       "org_type": "Vise",
@@ -3798,28 +3850,6 @@
         "Paid time off"
       ],
       "metro": "NYC",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "consider-sequoia-am9icg9zddqhrgl-7em245eu",
-      "title": "Business Operations Manager",
-      "org_type": "Retool",
-      "category": "Executive Operations",
-      "seniority": "Operations",
-      "comp_low": 176800,
-      "comp_high": 218400,
-      "location": "San Francisco",
-      "remote": "Onsite",
-      "date_posted": "2026-07-29",
-      "apply_url": "https://jobs.gem.com/retool/am9icG9zdDqhrGl_7EM245euIt73QGM1?utm_source=jobs.sequoiacap.com",
-      "source": "Sequoia Portfolio",
-      "summary": "Nearly every company in the world runs on custom software for critical operations like tracking performance metrics, handling support workflows, building admin dashboards, and countless processes you might never have thought of.",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Health coverage"
-      ],
-      "metro": "SF Bay Area",
       "source_type": "VC portfolio"
     },
     {
@@ -4223,24 +4253,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "consider-lightspeed-5dbfe9cfe9201001c2d77b11",
-      "title": "AVP , Chief Of Staff & Business Operations, Data Center Networking Groups",
-      "org_type": "Marvell Semiconductor",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 224460,
-      "comp_high": 336300,
-      "location": "Santa Clara, CA",
-      "remote": "Onsite",
-      "date_posted": "2026-06-18",
-      "apply_url": "https://marvell.wd1.myworkdayjobs.com/MarvellCareers/job/Santa-Clara-CA/AVP---Chief-Of-Staff---Business-Operations--Data-Center-Networking-Groups_2602106",
-      "source": "Lightspeed Portfolio",
-      "summary": "Marvell’s semiconductor solutions are the essential building blocks of the data infrastructure that connects our world. Across enterprise, cloud and AI, and carrier architectures, our innovative technology is enabling new possibilities.",
-      "benefits": [],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "consider-lightspeed-7a452f37-e6c0-445d-8ecf-",
       "title": "Chief of Staff to CEO and President",
       "org_type": "Orca Bio",
@@ -4279,26 +4291,6 @@
       "apply_url": "https://job-boards.greenhouse.io/olema/jobs/6147547004",
       "source": "Lightspeed Portfolio",
       "summary": "We are seeking a highly motivated, resourceful, and experienced Executive Assistant to support our Chief Financial Officer (CFO) and approximately 4–6 senior leaders within the organization.",
-      "benefits": [
-        "Equity"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "consider-lightspeed-5373349008",
-      "title": "Executive Assistant",
-      "org_type": "Goodfire",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 100000,
-      "comp_high": 200000,
-      "location": "San Francisco, CA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-28",
-      "apply_url": "https://job-boards.greenhouse.io/goodfire/jobs/5373349008",
-      "source": "Lightspeed Portfolio",
-      "summary": "We’re searching for an Executive Assistant who will support our COO and Principal Investigator- someone who will make it their mission to protect their time and attention so they can stay focused on the highest-impact work.",
       "benefits": [
         "Equity"
       ],
@@ -4369,6 +4361,46 @@
         "Health coverage",
         "Paid time off",
         "Parental leave"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "consider-lightspeed-5373349008",
+      "title": "Executive Assistant",
+      "org_type": "Goodfire",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 100000,
+      "comp_high": 200000,
+      "location": "San Francisco, CA",
+      "remote": "Onsite",
+      "date_posted": "2026-07-28",
+      "apply_url": "https://job-boards.greenhouse.io/goodfire/jobs/5373349008",
+      "source": "Lightspeed Portfolio",
+      "summary": "We’re searching for an Executive Assistant who will support our COO and Principal Investigator- someone who will make it their mission to protect their time and attention so they can stay focused on the highest-impact work.",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "consider-lightspeed-fd725b700c8210017a3ecf88",
+      "title": "Executive Business Partner to the Chief Legal Officer",
+      "org_type": "Normalyze",
+      "category": "Executive Assistant",
+      "seniority": "Executive Business Partner",
+      "comp_low": 92100,
+      "comp_high": 193600,
+      "location": "Sunnyvale, CA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-26",
+      "apply_url": "https://proofpoint.wd5.myworkdayjobs.com/ProofpointCareers/job/Sunnyvale-CA/Executive-Business-Partner-to-the-Chief-Legal-Officer_R14655",
+      "source": "Lightspeed Portfolio",
+      "summary": "Proofpoint is a global leader in human- and agent-centric cybersecurity. We protect how people, data, and AI agents connect across email, cloud, and collaboration tools.",
+      "benefits": [
+        "Equity"
       ],
       "metro": "SF Bay Area",
       "source_type": "VC portfolio"
@@ -4516,6 +4548,29 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-222-86156144",
+      "title": "Chief of Staff to the CEO",
+      "org_type": "Lila Sciences",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 250000,
+      "comp_high": 350000,
+      "location": "Cambridge, MA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-07-13",
+      "apply_url": "https://boards.greenhouse.io/lilasciences/jobs/4285660009",
+      "source": "General Catalyst Portfolio",
+      "summary": "Lila Sciences is seeking an experienced Chief of Staff to partner with our Founder and CEO, Geoff von Maltzahn, in advancing the company's strategic and scientific priorities.",
+      "benefits": [
+        "Bonus",
+        "Equity",
+        "Health coverage",
+        "Parental leave"
+      ],
+      "metro": "Other",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-222-84532689",
       "title": "Chief of Staff",
       "org_type": "Arca Wealth",
@@ -4533,6 +4588,31 @@
         "Equity"
       ],
       "metro": "NYC",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-222-91300556",
+      "title": "Executive Assistant",
+      "org_type": "Varda Space Industries",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 92820,
+      "comp_high": 125580,
+      "location": "El Segundo, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-27",
+      "apply_url": "https://boards.greenhouse.io/vardaspace/jobs/7978450003",
+      "source": "General Catalyst Portfolio",
+      "summary": "We are seeking a highly organized, service-oriented, and proactive Executive Administrative Assistant to support our Manager of Administration & Executive Projects and Executive Leadership Team, with a primary focus on our Pharma, Business Development, and Gov Affairs executives.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off",
+        "Parental leave",
+        "Wellness"
+      ],
+      "metro": "LA",
       "source_type": "VC portfolio"
     },
     {
@@ -4643,30 +4723,6 @@
       "apply_url": "https://wonder.wd1.myworkdayjobs.com/WG/job/New-York-NY/Executive-Assistant-Investor-Relations-Coordinator_JR101282",
       "source": "General Catalyst Portfolio",
       "summary": "Wonder is seeking a high-velocity, detail-oriented Executive Assistant & Investor Relations Coordinator to partner directly with our Chief Financial Officer.",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Paid time off",
-        "Parental leave"
-      ],
-      "metro": "NYC",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "getro-222-89245153",
-      "title": "Executive Assistant",
-      "org_type": "Wonder",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 96000,
-      "comp_high": 114500,
-      "location": "New York, NY, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-08-08",
-      "apply_url": "https://wonder.wd1.myworkdayjobs.com/WG/job/New-York-NY/Executive-Assistant_JR101280-1",
-      "source": "General Catalyst Portfolio",
-      "summary": "Wonder is the mealtime platform built to feed every craving in one order. With Wonder, you can mix and match hundreds of dishes from 20+ exclusive restaurants in a single order, so everyone gets exactly what they’re craving.",
       "benefits": [
         "Equity",
         "401(k)",
@@ -4857,31 +4913,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "getro-8672-90087814",
-      "title": "Chief of Staff",
-      "org_type": "Celonis",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 130000,
-      "comp_high": 153000,
-      "location": "New York, NY, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-08-15",
-      "apply_url": "https://boards.greenhouse.io/celonis/jobs/7818828003",
-      "source": "Accel Portfolio",
-      "summary": "Apply Celonis is the global leader in Process Intelligence and the pioneer of Process Mining technology. As one of the world’s fastest-growing enterprise SaaS companies, we are changemakers pushing the boundaries of what’s possible.",
-      "benefits": [
-        "Bonus",
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Paid time off",
-        "Parental leave"
-      ],
-      "metro": "NYC",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "getro-8672-88618679",
       "title": "Chief of Staff, Public Sector Engineering & Security",
       "org_type": "Scale AI",
@@ -4997,6 +5028,23 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-8672-91275859",
+      "title": "Senior Executive Assistant",
+      "org_type": "Cortex by Palo Alto Networks",
+      "category": "Executive Assistant",
+      "seniority": "Senior Executive Assistant",
+      "comp_low": 101000,
+      "comp_high": 163000,
+      "location": "",
+      "remote": "Onsite",
+      "date_posted": "2026-08-27",
+      "apply_url": "https://jobs.paloaltonetworks.com/en/job/dallas/senior-executive-assistant/47263/99722095696",
+      "source": "Accel Portfolio",
+      "summary": "At Palo Alto Networks®, we’re united by a shared mission—to protect our digital way of life. We thrive at the intersection of innovation and impact, solving real-world problems with cutting-edge technology and bold thinking. Here, everyone has a voice, and every idea counts.",
+      "benefits": [],
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-8672-90837062",
       "title": "Senior Executive Assistant - Investor Relations & Strategic Finance",
       "org_type": "Cortex by Palo Alto Networks",
@@ -5032,26 +5080,6 @@
         "401(k)",
         "Health coverage",
         "Parental leave"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "getro-8672-89629068",
-      "title": "Executive Assistant",
-      "org_type": "Frame.io",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 84200,
-      "comp_high": 174700,
-      "location": "San Jose, CA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-08-12",
-      "apply_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced/job/San-Jose/Executive-Assistant_R171159",
-      "source": "Accel Portfolio",
-      "summary": "At Adobe, the Executive Assistant (EA) role offers an outstanding chance to support the Vice President of our Global Marketing Organization (GMO). We are hiring for multiple Executive Assistant roles for GMO.",
-      "benefits": [
-        "Equity"
       ],
       "metro": "SF Bay Area",
       "source_type": "VC portfolio"
@@ -5099,6 +5127,26 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-8672-91212461",
+      "title": "Strategy and Business Operations Manager",
+      "org_type": "Frame.io",
+      "category": "Executive Operations",
+      "seniority": "Operations",
+      "comp_low": 98800,
+      "comp_high": 202250,
+      "location": "San Jose, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-26",
+      "apply_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced/job/San-Jose/Strategy-and-Business-Operations-Manager_R171412-1",
+      "source": "Accel Portfolio",
+      "summary": "The GTM organization at Adobe provides business-critical insights through analytics. It ensures multi-functional goal alignment and helps teams advance pivotal initiatives.",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-8672-90947717",
       "title": "Senior Business Operations Manager",
       "org_type": "Frame.io",
@@ -5119,26 +5167,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "getro-8672-88648118",
-      "title": "Programs & Business Operations Lead",
-      "org_type": "HotelTonight",
-      "category": "Executive Operations",
-      "seniority": "Operations",
-      "comp_low": 168000,
-      "comp_high": 203000,
-      "location": "United States",
-      "remote": "Onsite",
-      "date_posted": "2026-08-04",
-      "apply_url": "https://careers.airbnb.com/positions/8095268/",
-      "source": "Accel Portfolio",
-      "summary": "Airbnb was born in 2007 when two hosts welcomed three guests to their San Francisco home, and has since grown to over 5 million hosts who have welcomed over 2 billion guest arrivals in almost every country across the globe.",
-      "benefits": [
-        "Equity"
-      ],
-      "metro": "Other",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "getro-8672-90679287",
       "title": "Director, Strategy and Operations of Account Health Management",
       "org_type": "Cortex by Palo Alto Networks",
@@ -5153,6 +5181,27 @@
       "source": "Accel Portfolio",
       "summary": "At Palo Alto Networks®, we’re united by a shared mission—to protect our digital way of life. We thrive at the intersection of innovation and impact, solving real-world problems with cutting-edge technology and bold thinking. Here, everyone has a voice, and every idea counts.",
       "benefits": [],
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-8672-91334593",
+      "title": "Strategic Operations Lead, Tier 1 Banks",
+      "org_type": "Socure",
+      "category": "Executive Operations",
+      "seniority": "Operations",
+      "comp_low": 135000,
+      "comp_high": 155000,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-27",
+      "apply_url": "https://jobs.ashbyhq.com/socure/4131f066-58a1-4225-935a-c67e5fe8f9d6",
+      "source": "Accel Portfolio",
+      "summary": "We are hiring a Strategic Operations Lead, Tier 1 Banks to serve as a force multiplier for our Tier 1 Banks segment. This role sits at the intersection of GTM execution and strategy—supporting leadership by driving operational rigor, enabling customer-facing deliverables, developing AI tooling, and...",
+      "benefits": [
+        "Bonus",
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
       "source_type": "VC portfolio"
     },
     {
@@ -5349,7 +5398,7 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "getro-246-89840699",
+      "id": "getro-246-89649925",
       "title": "Executive Assistant",
       "org_type": "A Place for Mom",
       "category": "Executive Assistant",
@@ -5358,8 +5407,8 @@
       "comp_high": 120000,
       "location": "New York, NY, USA",
       "remote": "Onsite",
-      "date_posted": "2026-08-13",
-      "apply_url": "https://www.linkedin.com/jobs/view/executive-assistant-at-a-place-for-mom-4452680243",
+      "date_posted": "2026-08-12",
+      "apply_url": "https://jobs.ashbyhq.com/a-place-for-mom/7a90b21b-f084-476b-9fd7-a20d39cd93b3",
       "source": "Insight Partners Portfolio",
       "summary": "We are seeking a highly organized, proactive, and resourceful Executive Assistant to join our New York City team. This individual will provide day-to-day support to three executives, managing complex priorities with discretion, sound judgment, and a strong sense of urgency.",
       "benefits": [
@@ -5388,28 +5437,6 @@
         "Bonus"
       ],
       "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "getro-246-88635433",
-      "title": "Senior Executive Assistant (West Coast preferred)",
-      "org_type": "Sysdig",
-      "category": "Executive Assistant",
-      "seniority": "Senior Executive Assistant",
-      "comp_low": 110000,
-      "comp_high": 145000,
-      "location": "United States",
-      "remote": "Onsite",
-      "date_posted": "2026-08-04",
-      "apply_url": "https://jobs.lever.co/sysdig/835da28e-d41b-417b-b0ca-2dcf0ca31bbb",
-      "source": "Insight Partners Portfolio",
-      "summary": "Relationship Management: Cultivate strong relationships with key stakeholders, both internal and external, to foster collaboration, streamline communications and deconflict redundancies",
-      "benefits": [
-        "401(k)",
-        "Health coverage",
-        "Parental leave"
-      ],
-      "metro": "Other",
       "source_type": "VC portfolio"
     },
     {
