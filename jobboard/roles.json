@@ -1,7 +1,7 @@
 {
   "_note": "REAL curated Executive Assistant, Executive Operations, and Chief of Staff roles for The Exec Ops Brief job board, aggregated from recruiting agencies, direct job boards, and VC portfolio feeds. PAY FLOOR (enforced in code since 2026-07-13): every role on this board carries a compensation figure PUBLISHED BY THE SOURCE whose midpoint -- (comp_low + comp_high) / 2, or the single figure where only one is published -- is at least $100,000. A role whose published midpoint falls below $100k is excluded, and a role whose source publishes no comp figure at all is excluded (there are no 'comp not listed' rows). No comp figure is ever estimated, inferred, or invented; comp honesty outranks board size. Where a posting publishes an HOURLY rate instead of a salary, comp_period='hr' and comp_low/comp_high hold the verbatim $/hr figures (annualized at 2080h ONLY to apply the floor, never for display). Most roles also carry a short summary excerpted VERBATIM from the posting (never paraphrased); summary is null rather than invented when the source lacks readable role-specific text. A benefits list (bonus, equity, 401(k), health coverage, PTO, etc) is detected only where the posting states it. Apply links point to the original source listing.",
-  "updated": "2026-08-30",
-  "count": 234,
+  "updated": "2026-08-31",
+  "count": 240,
   "roles": [
     {
       "id": "bloom-1484",
@@ -19,6 +19,27 @@
       "benefits": [
         "401(k)",
         "Health coverage",
+        "Paid time off"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "bloom-1498",
+      "title": "Executive Assistant to VP of Sales & Head of Talent at Series C Infrastructure Startup",
+      "org_type": "",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 150000,
+      "comp_high": 180000,
+      "location": "San Francisco",
+      "remote": "Hybrid",
+      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1498",
+      "source": "Bloom Talent",
+      "summary": "Well-funded, fast-growing infrastructure technology company (Series C) is looking for an Executive Assistant to support their VP of Sales and Head of Talent.",
+      "benefits": [
+        "Equity",
+        "401(k)",
         "Paid time off"
       ],
       "metro": "SF Bay Area",
@@ -291,6 +312,49 @@
       "source_type": "Recruiter"
     },
     {
+      "id": "bloom-1497",
+      "title": "Executive Assistant/Office Executive Assistant & Office Manager to Founder at Leading AI Media & Events Company",
+      "org_type": "",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 140000,
+      "comp_high": 180000,
+      "location": "San Francisco",
+      "remote": "Hybrid",
+      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1497",
+      "source": "Bloom Talent",
+      "summary": "Leading AI media and events company, sitting at the center of one of tech's most exciting industries, is looking for an Executive Assistant & Office Manager to support their Founder as he juggles multiple fast-moving ventures out of one growing San Francisco office.",
+      "benefits": [
+        "Bonus",
+        "Equity",
+        "401(k)",
+        "Paid time off"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "bloom-1495",
+      "title": "Executive Assistant & Office Manager to Founder + CEO at Boutique Real Estate Advisory Firm",
+      "org_type": "",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 120000,
+      "comp_high": 150000,
+      "location": "New York",
+      "remote": "Onsite",
+      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1495",
+      "source": "Bloom Talent",
+      "summary": "Boutique retail real estate advisory and brokerage firm is looking for an Executive Assistant & Office Manager to support their Founder & CEO. This is a high-trust opportunity to become a true right hand to a fast-moving, relationship-driven founder.",
+      "benefits": [
+        "Bonus",
+        "Health coverage",
+        "Paid time off"
+      ],
+      "metro": "NYC",
+      "source_type": "Recruiter"
+    },
+    {
       "id": "bloom-1493",
       "title": "Executive Assistant at Early-Stage Venture Capital Firm",
       "org_type": "",
@@ -345,25 +409,6 @@
       "summary": "Early-stage AI venture capital firm is looking for an Executive Assistant & Operations Manager to support the Founder/Managing Partner. This is a great opportunity to join an ambitious, high-velocity team at the forefront of AI and own the operational backbone of a growing firm.",
       "benefits": [],
       "metro": "SF Bay Area",
-      "source_type": "Recruiter"
-    },
-    {
-      "id": "bloom-1469",
-      "title": "Executive Assistant to Founder & Operations at Early-stage, Mission-driven Startup",
-      "org_type": "",
-      "category": "Executive Operations",
-      "seniority": "Executive Assistant",
-      "comp_low": 120000,
-      "comp_high": 170000,
-      "location": "New York",
-      "remote": "Onsite",
-      "apply_url": "https://recruiterflow.com/bloomtalent/jobs/1469",
-      "source": "Bloom Talent",
-      "summary": "Early-stage, seed-funded startup on a mission to build cleaner alternatives to high-exposure everyday consumer products is looking for an Executive Assistant & Operations partner to support the Founder/CEO.",
-      "benefits": [
-        "Equity"
-      ],
-      "metro": "NYC",
       "source_type": "Recruiter"
     },
     {
@@ -710,7 +755,7 @@
       "comp_high": 170000,
       "location": "San Francisco, California",
       "remote": "Hybrid",
-      "date_posted": "2026-08-28",
+      "date_posted": "2026-08-26",
       "apply_url": "https://app.loxo.co/job/MTcwNS1wdGE1bG9ldnJwaWZ0bTNt",
       "source": "Burke & Co",
       "summary": "Our client, a fast-growing fintech startup, seeks a top-notch Executive Assistant to support two senior leaders. This is a high-impact, hands-on Executive Assistant role for someone who loves being the connective tissue across people, priorities, schedules, and systems.",
@@ -741,27 +786,6 @@
       "source_type": "Recruiter"
     },
     {
-      "id": "burke-Z2YndvOHhl",
-      "title": "Executive Assistant to Senior Leadership",
-      "org_type": "Stealth AI Startup",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 170000,
-      "comp_high": 200000,
-      "location": "San Francisco, California",
-      "remote": "Onsite",
-      "date_posted": "2026-08-28",
-      "apply_url": "https://app.loxo.co/job/MTcwNS0zeTk3M2pmdHZ2YndvOHhl",
-      "source": "Burke & Co",
-      "summary": "Our client, a well-capitalized, stealth-mode AI company building next-generation artificial intelligence, seeks a razor-sharp Executive Assistant to support two senior executives and take on strategic initiatives as the company expands.",
-      "benefits": [
-        "Bonus",
-        "Equity"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "Recruiter"
-    },
-    {
       "id": "burke-FxY2sya3A5",
       "title": "Executive Assistant to CEO",
       "org_type": "Health Tech Startup",
@@ -771,7 +795,7 @@
       "comp_high": 160000,
       "location": "Palo Alto, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-26",
+      "date_posted": "2026-08-28",
       "apply_url": "https://app.loxo.co/job/MTcwNS05aHh1djdpbTFxY2sya3A5",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly scaling health tech startup in Palo Alto, is seeking an experienced Executive Assistant to provide high-level support to their CEO.",
@@ -852,7 +876,7 @@
       "comp_high": 175000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-26",
+      "date_posted": "2026-08-28",
       "apply_url": "https://app.loxo.co/job/MTcwNS1vbmxod2lyeXd6eXhxeDQ5",
       "source": "Burke & Co",
       "summary": "Our client, a global investment firm with an impressive portfolio, seeks a proactive Senior Executive Assistant to join their stellar administrative team in support of a General Partner and Partner.",
@@ -918,6 +942,97 @@
         "Bonus"
       ],
       "metro": "Other",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "tack-159",
+      "title": "White-Glove Operator | EA to Founder/General Partner",
+      "org_type": "",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 180000,
+      "comp_high": 250000,
+      "location": "San Francisco, California",
+      "remote": "Onsite",
+      "date_posted": "2026-05-31",
+      "apply_url": "https://www.tackadvisors.co/wp-content/plugins/bullhorn-oscp/#/jobs/159",
+      "source": "Tack Advisors",
+      "summary": "We’re seeking an exceptional Executive Assistant to support a Founder/General Partner. You’ll work in close partnership with the Chief of Staff to manage constantly shifting priorities across both professional and personal domains.",
+      "benefits": [
+        "Bonus"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "tack-154",
+      "title": "Context Carrier | EA, Office of the CEO",
+      "org_type": "",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 150000,
+      "comp_high": 225000,
+      "location": "New York, New York",
+      "remote": "Onsite",
+      "date_posted": "2026-05-31",
+      "apply_url": "https://www.tackadvisors.co/wp-content/plugins/bullhorn-oscp/#/jobs/154",
+      "source": "Tack Advisors",
+      "summary": "The Office of the CEO exists to multiply the founders' capacity. This is a high-trust, high-agency role at one of the fastest-growing AI companies in the country, a unicorn that scaled from 20 to 95 employees in under a year and shows no signs of slowing down.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off"
+      ],
+      "metro": "NYC",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "tack-158",
+      "title": "Multi-Agent | Executive Assistant to EPAD Leads",
+      "org_type": "",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 150000,
+      "comp_high": 180000,
+      "location": "San Francisco, California",
+      "remote": "Hybrid",
+      "date_posted": "2026-05-31",
+      "apply_url": "https://www.tackadvisors.co/wp-content/plugins/bullhorn-oscp/#/jobs/158",
+      "source": "Tack Advisors",
+      "summary": "We are seeking an Executive Assistant to support three leaders across the Agent Development and Platform Product organizations at a fast-growing, in-person AI company.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off",
+        "Parental leave"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "tack-152",
+      "title": "Product Whisperer | Executive Assistant to Head of Product",
+      "org_type": "",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 180000,
+      "comp_high": 200000,
+      "location": "San Francisco, California",
+      "remote": "Hybrid",
+      "date_posted": "2026-05-29",
+      "apply_url": "https://www.tackadvisors.co/wp-content/plugins/bullhorn-oscp/#/jobs/152",
+      "source": "Tack Advisors",
+      "summary": "We are seeking a seasoned Executive Assistant to support the Head of Product & Agent Development at a fast-growing, in-person AI company.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off",
+        "Parental leave"
+      ],
+      "metro": "SF Bay Area",
       "source_type": "Recruiter"
     },
     {
@@ -1183,7 +1298,7 @@
       "comp_high": 130000,
       "location": "Mountain View, CA (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-08-23",
+      "date_posted": "2026-08-24",
       "apply_url": "https://www.linkedin.com/jobs/view/4455342377/",
       "source": "Truex Metier",
       "summary": "The primary focus of this role is to ensure the executive remains organized and day-to-day operations run smoothly. You will also play a key role in coordinating content-related projects and workflows across creative, production, and external teams.",
@@ -1201,7 +1316,7 @@
       "comp_high": 190000,
       "location": "San Francisco Bay Area (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-07-31",
+      "date_posted": "2026-08-01",
       "apply_url": "https://www.linkedin.com/jobs/view/4439344702/",
       "source": "Truex Metier",
       "summary": "We are seeking a highly organized, execution-oriented Executive Business Partner to serve as a strategic partner to executive leadership at a rapidly scaling Series G technology company backed by some of Silicon Valley’s most prominent venture capital firms.",
@@ -1752,24 +1867,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "cosn-chief-of-staff-to-the-ceo-travefy-zsk",
-      "title": "Chief of Staff to the CEO",
-      "org_type": "Travefy",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 90000,
-      "comp_high": 125000,
-      "location": "Pennington, NJ",
-      "remote": "Hybrid",
-      "date_posted": "2026-07-16",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-to-the-ceo-travefy-zsk",
-      "source": "Chief of Staff Network",
-      "summary": null,
-      "benefits": [],
-      "metro": "Other",
-      "source_type": "Network"
-    },
-    {
       "id": "pocketbook-2628",
       "title": "Executive Assistant to Vice Chair",
       "org_type": "",
@@ -2251,7 +2348,7 @@
       "comp_high": 130000,
       "location": "Chicago, Illinois",
       "remote": "Onsite",
-      "date_posted": "2026-08-21",
+      "date_posted": "2026-08-29",
       "apply_url": "https://www.thelasallenetwork.com/jobs/executive-assistant-travel-162012/",
       "source": "LaSalle Network",
       "summary": "3-7+ years of experience in executive assistance, executive travel coordination or corporate travel management.",
@@ -4087,6 +4184,50 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-222-91656559",
+      "title": "Head of Business Operations",
+      "org_type": "Veho",
+      "category": "Executive Operations",
+      "seniority": "Operations",
+      "comp_low": 165000,
+      "comp_high": 180000,
+      "location": "",
+      "remote": "Onsite",
+      "date_posted": "2026-08-30",
+      "apply_url": "https://jobs.ashbyhq.com/veho-tech-inc/6a8e7e74-d891-43d9-95dd-bb57c4e2c208",
+      "source": "General Catalyst Portfolio",
+      "summary": "We are hiring a Leader for our Business Operations team to be Veho's internal execution engine. This person owns two interconnected things: the operating rhythm that keeps the company aligned on its priorities, and the ability to lead high-priority cross-functional efforts that do not have a...",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off"
+      ],
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-222-91656572",
+      "title": "Expansion Strategy and Operations Manager",
+      "org_type": "Veho",
+      "category": "Executive Operations",
+      "seniority": "Operations",
+      "comp_low": 135000,
+      "comp_high": 150000,
+      "location": "",
+      "remote": "Onsite",
+      "date_posted": "2026-08-30",
+      "apply_url": "https://jobs.ashbyhq.com/veho-tech-inc/fe3a229f-b32c-42c4-8ec7-66af099f866a",
+      "source": "General Catalyst Portfolio",
+      "summary": "The pay range is subject to the discretion of the Company and may be differentiated based on the candidate's work location. Additionally, Veho offers a competitive equity package, comprehensive medical, dental, and vision coverage as well as other benefits such as 401k and generous PTO for...",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off"
+      ],
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-222-91494455",
       "title": "Director of Operations",
       "org_type": "Campus",
@@ -4470,6 +4611,26 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-8672-87708370",
+      "title": "CAO Strategy and Operations Lead",
+      "org_type": "Frame.io",
+      "category": "COO / Operating Executive",
+      "seniority": "Operations",
+      "comp_low": 139700,
+      "comp_high": 202250,
+      "location": "San Jose, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-07-28",
+      "apply_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced/job/San-Jose/CAO-Strategy-and-Operations-Lead_R164494",
+      "source": "Accel Portfolio",
+      "summary": "Our 30,000+ employees worldwide are creating the future and raising the bar as we drive the next decade of growth. We’re on a mission to hire the very best and believe in creating a company culture where all employees are empowered to make an impact.",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-8672-91334593",
       "title": "Strategic Operations Lead, Tier 1 Banks",
       "org_type": "Socure",
@@ -4485,26 +4646,6 @@
       "summary": "We are hiring a Strategic Operations Lead, Tier 1 Banks to serve as a force multiplier for our Tier 1 Banks segment. This role sits at the intersection of GTM execution and strategy—supporting leadership by driving operational rigor, enabling customer-facing deliverables, developing AI tooling, and...",
       "benefits": [
         "Bonus",
-        "Equity"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "getro-8672-87708370",
-      "title": "CAO Strategy and Operations Lead",
-      "org_type": "Frame.io",
-      "category": "COO / Operating Executive",
-      "seniority": "Operations",
-      "comp_low": 139700,
-      "comp_high": 202250,
-      "location": "San Jose, CA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-28",
-      "apply_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced/job/San-Jose/CAO-Strategy-and-Operations-Lead_R164494",
-      "source": "Accel Portfolio",
-      "summary": "Our 30,000+ employees worldwide are creating the future and raising the bar as we drive the next decade of growth. We’re on a mission to hire the very best and believe in creating a company culture where all employees are empowered to make an impact.",
-      "benefits": [
         "Equity"
       ],
       "metro": "SF Bay Area",
