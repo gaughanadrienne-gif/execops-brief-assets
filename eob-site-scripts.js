@@ -1460,6 +1460,31 @@
         '@media(max-width:560px){#eob-pick-bar .bar-wrap{gap:.6rem}#eob-pick-bar form{min-width:100%;margin-left:0}}';
       document.head.appendChild(st);
     }
+
+    /* The CSS above hides the bar until it carries .on, but nothing ever added
+       that class: the page's own picker script toggles "on" on the .eob-pick
+       LABELS, not on the bar. So from 2026-07-21 the bar sat below the fold and
+       "Send my downloads" was unclickable, and every asset request was lost with
+       no error anywhere. The class belongs to whoever wrote the rule, so it is
+       owned here now. Idempotent, and safe if the page later adds it too. */
+    if (!bar.dataset.eobBarSync){
+      bar.dataset.eobBarSync = "1";
+      var syncBar = function(){
+        var n = document.querySelectorAll('.eob-pick input[type="checkbox"]:checked').length;
+        bar.classList.toggle("on", n > 0);
+      };
+      document.addEventListener("change", function(ev){
+        var t = ev.target;
+        if (t && t.matches && t.matches('.eob-pick input[type="checkbox"]')) syncBar();
+      });
+      /* The page pre-selects a starter set, but its script may run after ours,
+         so sync now and again once it has, or the bar hides a live selection. */
+      syncBar();
+      if (window.requestAnimationFrame) window.requestAnimationFrame(syncBar);
+      window.setTimeout(syncBar, 300);
+      window.setTimeout(syncBar, 1200);
+      window.addEventListener("load", syncBar);
+    }
   }
 
   // ---- 10. Roles page self-heal (H1 + honest board language) ----------------
