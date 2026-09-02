@@ -1644,7 +1644,9 @@
   }
   function breadcrumbs(){
     if (byId('eob-schema-breadcrumb')) return;
-    var origin = 'https://execopsbrief.com';
+    // Must match the canonical host Squarespace emits (www). A non-www origin
+    // here made every BreadcrumbList item URL contradict the page's own canonical.
+    var origin = 'https://www.execopsbrief.com';
     var parts = window.location.pathname.split('/').filter(Boolean);
     if (!parts.length) return;                       // homepage: no breadcrumb
     var items = [{ '@type': 'ListItem', position: 1, name: 'Home', item: origin }];
