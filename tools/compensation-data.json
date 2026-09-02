@@ -82,16 +82,16 @@
   },
   "premium": {
    "p25": 120000,
-   "median": 138750,
-   "p75": 159375,
-   "medianPublishedLow": 125000,
+   "median": 140650,
+   "p75": 161125,
+   "medianPublishedLow": 127000,
    "medianPublishedHigh": 150000,
-   "sample": 142,
+   "sample": 150,
    "source": "Exec Ops Brief active roles",
    "sourceUrl": "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json",
    "measure": "Posted salary midpoint",
    "selection": "Only postings with a published pay midpoint of at least $100,000",
-   "asOf": "2026-09-01",
+   "asOf": "2026-09-02",
    "hourlyExcluded": 6
   },
   "geography": {
@@ -168,11 +168,11 @@
    "p75": 250000,
    "medianPublishedLow": 180000,
    "medianPublishedHigh": 250000,
-   "sample": 59,
+   "sample": 61,
    "source": "Exec Ops Brief active roles",
    "sourceUrl": "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json",
    "measure": "Posted salary midpoint",
-   "asOf": "2026-09-01"
+   "asOf": "2026-09-02"
   },
   "bonusContext": {
    "prevalence": 0.57,
@@ -190,16 +190,16 @@
  },
  "executiveOperations": {
   "premium": {
-   "p25": 149144,
-   "median": 191694,
-   "p75": 233375,
-   "medianPublishedLow": 162500,
+   "p25": 149500,
+   "median": 192500,
+   "p75": 232500,
+   "medianPublishedLow": 160000,
    "medianPublishedHigh": 215000,
-   "sample": 32,
+   "sample": 33,
    "source": "Exec Ops Brief active roles",
    "sourceUrl": "https://gaughanadrienne-gif.github.io/execops-brief-assets/jobboard/roles.json",
    "measure": "Posted salary midpoint",
-   "asOf": "2026-09-01",
+   "asOf": "2026-09-02",
    "hourlyExcluded": 1
   },
   "blsProxies": [
