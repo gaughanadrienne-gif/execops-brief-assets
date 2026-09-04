@@ -1,7 +1,7 @@
 {
   "_note": "REAL curated Executive Assistant, Executive Operations, and Chief of Staff roles for The Exec Ops Brief job board, aggregated from recruiting agencies, direct job boards, and VC portfolio feeds. PAY FLOOR (enforced in code since 2026-07-13): every role on this board carries a compensation figure PUBLISHED BY THE SOURCE whose midpoint -- (comp_low + comp_high) / 2, or the single figure where only one is published -- is at least $100,000. A role whose published midpoint falls below $100k is excluded, and a role whose source publishes no comp figure at all is excluded (there are no 'comp not listed' rows). No comp figure is ever estimated, inferred, or invented; comp honesty outranks board size. Where a posting publishes an HOURLY rate instead of a salary, comp_period='hr' and comp_low/comp_high hold the verbatim $/hr figures (annualized at 2080h ONLY to apply the floor, never for display). Most roles also carry a short summary excerpted VERBATIM from the posting (never paraphrased); summary is null rather than invented when the source lacks readable role-specific text. A benefits list (bonus, equity, 401(k), health coverage, PTO, etc) is detected only where the posting states it. Apply links point to the original source listing.",
-  "updated": "2026-09-03",
-  "count": 254,
+  "updated": "2026-09-04",
+  "count": 262,
   "roles": [
     {
       "id": "bloom-1500",
@@ -776,7 +776,7 @@
       "comp_high": 150000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-31",
+      "date_posted": "2026-09-01",
       "apply_url": "https://app.loxo.co/job/MTcwNS02emZqNXV3aTJmYzZ2aWlj",
       "source": "Burke & Co",
       "summary": "Our client, a well-capitalized, stealth-mode AI company building next-generation artificial intelligence, seeks a razor-sharp Executive Assistant to support one of their high-performing teams.",
@@ -797,7 +797,7 @@
       "comp_high": 170000,
       "location": "San Francisco, California",
       "remote": "Hybrid",
-      "date_posted": "2026-09-02",
+      "date_posted": "2026-09-03",
       "apply_url": "https://app.loxo.co/job/MTcwNS1wdGE1bG9ldnJwaWZ0bTNt",
       "source": "Burke & Co",
       "summary": "Our client, a fast-growing fintech startup, seeks a top-notch Executive Assistant to support two senior leaders. This is a high-impact, hands-on Executive Assistant role for someone who loves being the connective tissue across people, priorities, schedules, and systems.",
@@ -817,7 +817,7 @@
       "comp_high": 180000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-09-02",
+      "date_posted": "2026-09-03",
       "apply_url": "https://app.loxo.co/job/MTcwNS0wanJ3Nm43bDExd2ZmdmZz",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing AI startup, is seeking a high-impact Executive Assistant to support their CFO and VP of Sales. This is a highly visible, strategic role and is the perfect opportunity for someone who thrives in fast-paced environments and enjoys serving as the operational backbone for...",
@@ -837,7 +837,7 @@
       "comp_high": 160000,
       "location": "Palo Alto, California",
       "remote": "Onsite",
-      "date_posted": "2026-08-31",
+      "date_posted": "2026-09-01",
       "apply_url": "https://app.loxo.co/job/MTcwNS05aHh1djdpbTFxY2sya3A5",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly scaling health tech startup in Palo Alto, is seeking an experienced Executive Assistant to provide high-level support to their CEO.",
@@ -857,7 +857,7 @@
       "comp_high": 200000,
       "location": "Santa Clara, California",
       "remote": "Onsite",
-      "date_posted": "2026-09-02",
+      "date_posted": "2026-09-03",
       "apply_url": "https://app.loxo.co/job/MTcwNS04d2VtZjMycHQ1eGQ5aXlm",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing AI-powered developer platform, is seeking an exceptional Executive Assistant to support its Co-Founder & CEO.",
@@ -878,7 +878,7 @@
       "comp_high": 160000,
       "location": "San Mateo, California",
       "remote": "Hybrid",
-      "date_posted": "2026-09-02",
+      "date_posted": "2026-09-03",
       "apply_url": "https://app.loxo.co/job/MTcwNS10bjVrcW13d2VqaGR5ZDd2",
       "source": "Burke & Co",
       "summary": "Our client, a fast-growing & mission-driven healthcare tech startup, is looking for a top-notch Executive Assistant to support their CEO & COO.",
@@ -898,7 +898,7 @@
       "comp_high": 180000,
       "location": "NYC",
       "remote": "Onsite",
-      "date_posted": "2026-09-02",
+      "date_posted": "2026-09-03",
       "apply_url": "https://app.loxo.co/job/MTcwNS0xa2NjeWJzaHZ3eGl3OGRk",
       "source": "Burke & Co",
       "summary": "Our client, a multi-billion dollar hedge fund in New York City, seeks a razor-sharp Senior Executive Assistant to support their Founder. This is a unique opportunity spanning Executive Assistant, Personal Assistant, and operational support responsibilities.",
@@ -918,7 +918,7 @@
       "comp_high": 175000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-09-02",
+      "date_posted": "2026-09-03",
       "apply_url": "https://app.loxo.co/job/MTcwNS1vbmxod2lyeXd6eXhxeDQ5",
       "source": "Burke & Co",
       "summary": "Our client, a global investment firm with an impressive portfolio, seeks a proactive Senior Executive Assistant to join their stellar administrative team in support of a General Partner and Partner.",
@@ -1286,7 +1286,7 @@
       "comp_high": 160000,
       "location": "San Mateo, CA (Hybrid)",
       "remote": "Hybrid",
-      "date_posted": "2026-09-02",
+      "date_posted": "2026-09-03",
       "apply_url": "https://www.linkedin.com/jobs/view/4462058342/",
       "source": "Truex Metier",
       "summary": "We are recruiting on behalf of a fast-growing technology company seeking a polished, highly organized, and discreet Executive Assistant to support a Co-Founder & Chief Operating Officer.",
@@ -1306,7 +1306,7 @@
       "comp_high": 130000,
       "location": "Palo Alto, CA (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-08-20",
+      "date_posted": "2026-08-21",
       "apply_url": "https://www.linkedin.com/jobs/view/4455342377/",
       "source": "Truex Metier",
       "summary": "The primary focus of this role is to ensure the executive remains organized and day-to-day operations run smoothly. You will also play a key role in coordinating content-related projects and workflows across creative, production, and external teams.",
@@ -1315,28 +1315,97 @@
       "source_type": "Recruiter"
     },
     {
-      "id": "consider-lightspeed-1bec097f-edfb-4d4d-847f-",
+      "id": "getro-222-89655080",
       "title": "Chief of Staff",
-      "org_type": "Nirvana Insurance",
+      "org_type": "Amperity",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 215000,
+      "comp_high": 235000,
+      "location": "New York, NY, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-12",
+      "apply_url": "https://boards.greenhouse.io/amperity/jobs/8122891",
+      "source": "General Catalyst Portfolio",
+      "summary": "At Amperity, we are proudly customer-obsessed. Working here means getting deep in the data and seeing through the eyes of our customers to help them transform their businesses.",
+      "benefits": [
+        "Health coverage",
+        "Paid time off"
+      ],
+      "metro": "NYC",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "cosn-chief-of-staff-broccoli-ai-ohl",
+      "title": "Chief of Staff",
+      "org_type": "Broccoli AI",
       "category": "Chief of Staff",
       "seniority": "Chief of Staff",
       "comp_low": 180000,
-      "comp_high": 300000,
-      "location": "San Francisco, California, USA",
+      "comp_high": 230000,
+      "location": "San Francisco, CA",
       "remote": "Onsite",
-      "date_posted": "2026-08-03",
-      "apply_url": "https://jobs.ashbyhq.com/nirvana/1bec097f-edfb-4d4d-847f-91be576e900c?utm_source=jobs.lsvp.com",
-      "source": "Lightspeed Portfolio",
-      "summary": "About Nirvana The $1 trillion commercial insurance industry is broken, still running on paperwork and fax machines. Rates are disconnected from actual risk, quotes take weeks, and claims drag on for months. Nirvana is changing that - using data and AI to reimagine insurance from the ground up.",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Paid time off",
-        "Wellness"
-      ],
+      "date_posted": "2026-09-01",
+      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-broccoli-ai-ohl",
+      "source": "Chief of Staff Network",
+      "summary": null,
+      "benefits": [],
       "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
+      "source_type": "Network"
+    },
+    {
+      "id": "cosn-chief-of-staff-beyond-reach-labs-yc-w26-rr4",
+      "title": "Chief of Staff",
+      "org_type": "Beyond Reach Labs (YC W26)",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 150000,
+      "comp_high": 200000,
+      "location": "Brooklyn, NY",
+      "remote": "Onsite",
+      "date_posted": "2026-09-01",
+      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-beyond-reach-labs-yc-w26-rr4",
+      "source": "Chief of Staff Network",
+      "summary": null,
+      "benefits": [],
+      "metro": "NYC",
+      "source_type": "Network"
+    },
+    {
+      "id": "cosn-chief-of-staff-atlas-search-4ma",
+      "title": "Chief of Staff",
+      "org_type": "Atlas Search",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 150000,
+      "comp_high": 195000,
+      "location": "New York, NY",
+      "remote": "Onsite",
+      "date_posted": "2026-09-01",
+      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-atlas-search-4ma",
+      "source": "Chief of Staff Network",
+      "summary": null,
+      "benefits": [],
+      "metro": "NYC",
+      "source_type": "Network"
+    },
+    {
+      "id": "cosn-chief-of-staff-hayden-ai-xdm",
+      "title": "Chief of Staff",
+      "org_type": "Hayden AI",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 173000,
+      "comp_high": 225000,
+      "location": "San Francisco, CA",
+      "remote": "Hybrid",
+      "date_posted": "2026-08-31",
+      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-hayden-ai-xdm",
+      "source": "Chief of Staff Network",
+      "summary": null,
+      "benefits": [],
+      "metro": "SF Bay Area",
+      "source_type": "Network"
     },
     {
       "id": "cosn-chief-of-staff-moneycorp-0lm",
@@ -1601,6 +1670,30 @@
       "source_type": "Network"
     },
     {
+      "id": "consider-lightspeed-1bec097f-edfb-4d4d-847f-",
+      "title": "Chief of Staff",
+      "org_type": "Nirvana Insurance",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 180000,
+      "comp_high": 300000,
+      "location": "San Francisco, California, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-03",
+      "apply_url": "https://jobs.ashbyhq.com/nirvana/1bec097f-edfb-4d4d-847f-91be576e900c?utm_source=jobs.lsvp.com",
+      "source": "Lightspeed Portfolio",
+      "summary": "About Nirvana The $1 trillion commercial insurance industry is broken, still running on paperwork and fax machines. Rates are disconnected from actual risk, quotes take weeks, and claims drag on for months. Nirvana is changing that - using data and AI to reimagine insurance from the ground up.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off",
+        "Wellness"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "cosn-chief-of-staff-to-founder-at-equity-ls-hedge-fund-long-ridge",
       "title": "Chief of Staff to Founder at Equity L/S Hedge Fund",
       "org_type": "Long Ridge Partners",
@@ -1781,102 +1874,6 @@
       "source_type": "Network"
     },
     {
-      "id": "cosn-chief-of-staff-lhh-v1u",
-      "title": "Chief of Staff",
-      "org_type": "LHH",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 150000,
-      "comp_high": 210000,
-      "location": "Atlanta Metropolitan Area",
-      "remote": "Hybrid",
-      "date_posted": "2026-07-20",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-lhh-v1u",
-      "source": "Chief of Staff Network",
-      "summary": null,
-      "benefits": [],
-      "metro": "Other",
-      "source_type": "Network"
-    },
-    {
-      "id": "cosn-chief-of-staff-to-the-ceo-clickup-6hb",
-      "title": "Chief of Staff to the CEO",
-      "org_type": "ClickUp",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 175000,
-      "comp_high": 275000,
-      "location": "United States",
-      "remote": "Remote",
-      "date_posted": "2026-07-20",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-to-the-ceo-clickup-6hb",
-      "source": "Chief of Staff Network",
-      "summary": null,
-      "benefits": [],
-      "metro": "Remote",
-      "source_type": "Network"
-    },
-    {
-      "id": "cosn-chief-of-staff-coris-qze",
-      "title": "Chief of Staff",
-      "org_type": "Coris",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 120000,
-      "comp_high": 150000,
-      "location": "Palo Alto, CA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-20",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-coris-qze",
-      "source": "Chief of Staff Network",
-      "summary": null,
-      "benefits": [],
-      "metro": "SF Bay Area",
-      "source_type": "Network"
-    },
-    {
-      "id": "getro-8672-87031896",
-      "title": "Chief of Staff",
-      "org_type": "VSCO",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 150000,
-      "comp_high": 175000,
-      "location": "San Francisco, CA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-07-21",
-      "apply_url": "https://boards.greenhouse.io/vsco39/jobs/8632353002",
-      "source": "Accel Portfolio",
-      "summary": "For years, we've helped photographers create their work. Now we're building what comes next.",
-      "benefits": [
-        "Equity",
-        "401(k)",
-        "Health coverage"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "pocketbook-2628",
-      "title": "Executive Assistant to Vice Chair",
-      "org_type": "",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 150000,
-      "comp_high": 175000,
-      "location": "New York , New York",
-      "remote": "Hybrid",
-      "date_posted": "2026-08-27",
-      "apply_url": "https://careers.pocketbookagency.com/job/2628",
-      "source": "Pocketbook Agency",
-      "summary": "Manage complex, high-volume scheduling and calendar decisions with a high degree of independent judgment.",
-      "benefits": [
-        "Bonus"
-      ],
-      "metro": "NYC",
-      "source_type": "Recruiter"
-    },
-    {
       "id": "beacon-131867",
       "title": "Executive Assistant",
       "org_type": "Beacon Hill Staffing Group",
@@ -1990,6 +1987,24 @@
         "Health coverage"
       ],
       "metro": "NYC",
+      "source_type": "Recruiter"
+    },
+    {
+      "id": "beacon-132177",
+      "title": "EA to Senior Leader in Conshohocken- Hybrid, Up to $115,000",
+      "org_type": "Beacon Hill Staffing Group",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 115000,
+      "comp_high": 115000,
+      "location": "Conshohocken, Pennsylvania",
+      "remote": "Onsite",
+      "date_posted": "2026-09-03",
+      "apply_url": "https://bhsg.com/jobs/job/a1473146phikjc_1788459306-ea-to-senior-leader-in-conshohocken-hybrid-up-to-115000-conshohocken-pennsylvania/",
+      "source": "Beacon Hill",
+      "summary": "Our client, a prominent pharma company in Conshohocken, is seeking an experienced Executive Assistant to provide high-level administrative and operational support to a senior leader.",
+      "benefits": [],
+      "metro": "Other",
       "source_type": "Recruiter"
     },
     {
@@ -2164,31 +2179,6 @@
       "source_type": "Recruiter"
     },
     {
-      "id": "beacon-131282",
-      "title": "Executive Assistant",
-      "org_type": "Beacon Hill Staffing Group",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 120000,
-      "comp_high": 120000,
-      "location": "New York, New York",
-      "remote": "Hybrid",
-      "date_posted": "2026-08-19",
-      "apply_url": "https://bhsg.com/jobs/job/a1471167ny-perm_1787163981-executive-assistant-new-york-new-york/",
-      "source": "Beacon Hill",
-      "summary": "Our client is seeking a highly organized, proactive Executive Assistant to support a senior team within the Capital Markets group of a leading global alternative asset management firm.",
-      "benefits": [
-        "Bonus",
-        "401(k)",
-        "Health coverage",
-        "Paid time off",
-        "Wellness",
-        "Overtime pay"
-      ],
-      "metro": "NYC",
-      "source_type": "Recruiter"
-    },
-    {
       "id": "beacon-131322",
       "title": "Executive Assistant",
       "org_type": "Beacon Hill Staffing Group",
@@ -2350,31 +2340,6 @@
       "source_type": "Recruiter"
     },
     {
-      "id": "beacon-130567",
-      "title": "Executive Assistant",
-      "org_type": "Beacon Hill Staffing Group",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 125000,
-      "comp_high": 135000,
-      "location": "New York, New York",
-      "remote": "Onsite",
-      "date_posted": "2026-08-06",
-      "apply_url": "https://bhsg.com/jobs/job/a1469441ny-perm_1786045315-executive-assistant-new-york-new-york/",
-      "source": "Beacon Hill",
-      "summary": "Our client is seeking a highly polished, proactive Executive Assistant to support a team within a leading growth equity investment firm.",
-      "benefits": [
-        "Bonus",
-        "Equity",
-        "401(k)",
-        "Health coverage",
-        "Wellness",
-        "Meals"
-      ],
-      "metro": "NYC",
-      "source_type": "Recruiter"
-    },
-    {
       "id": "beacon-131137",
       "title": "Executive Assistant/Office Administrator",
       "org_type": "Beacon Hill Staffing Group",
@@ -2407,7 +2372,7 @@
       "comp_high": 130000,
       "location": "Chicago, Illinois",
       "remote": "Onsite",
-      "date_posted": "2026-08-31",
+      "date_posted": "2026-08-30",
       "apply_url": "https://www.thelasallenetwork.com/jobs/executive-assistant-travel-162012/",
       "source": "LaSalle Network",
       "summary": "3-7+ years of experience in executive assistance, executive travel coordination or corporate travel management.",
@@ -2624,6 +2589,29 @@
         "Equity"
       ],
       "metro": "Remote",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "consider-sequoia-4729357005",
+      "title": "Executive Assistant",
+      "org_type": "Glean",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 100000,
+      "comp_high": 140000,
+      "location": "Mountian View, CA",
+      "remote": "Hybrid",
+      "date_posted": "2026-09-03",
+      "apply_url": "https://job-boards.greenhouse.io/gleanwork/jobs/4729357005",
+      "source": "Sequoia Portfolio",
+      "summary": "Glean is the Work AI platform that helps everyone work smarter with AI. What began as the industry’s most advanced enterprise search has evolved into a full-scale Work AI ecosystem, powering intelligent Search, an AI Assistant, and scalable AI agents on one secure, open platform.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Wellness"
+      ],
+      "metro": "Other",
       "source_type": "VC portfolio"
     },
     {
@@ -3010,6 +2998,26 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "consider-sequoia-6336aff7-c225-4db5-b978-",
+      "title": "Senior Manager, Executive Business Partner (Office of the CEO)",
+      "org_type": "Strava",
+      "category": "Executive Assistant",
+      "seniority": "Executive Business Partner",
+      "comp_low": 200000,
+      "comp_high": 225000,
+      "location": "San Francisco, California, United States",
+      "remote": "Hybrid",
+      "date_posted": "2026-07-03",
+      "apply_url": "https://jobs.ashbyhq.com/strava/6336aff7-c225-4db5-b978-c0c29aacdcab?utm_source=jobs.sequoiacap.com",
+      "source": "Sequoia Portfolio",
+      "summary": "Movement brings us together. At Strava, we’re building the world’s largest community of active people, helping them stay motivated and achieve their goals.",
+      "benefits": [
+        "Equity"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "consider-sequoia-9db24007-a432-4eda-a453-",
       "title": "Executive Business Partner",
       "org_type": "Strava",
@@ -3030,23 +3038,27 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "consider-sequoia-6336aff7-c225-4db5-b978-",
-      "title": "Senior Manager, Executive Business Partner (Office of the CEO)",
-      "org_type": "Strava",
-      "category": "Executive Assistant",
-      "seniority": "Executive Business Partner",
-      "comp_low": 200000,
-      "comp_high": 225000,
-      "location": "San Francisco, California, United States",
-      "remote": "Hybrid",
-      "date_posted": "2026-07-03",
-      "apply_url": "https://jobs.ashbyhq.com/strava/6336aff7-c225-4db5-b978-c0c29aacdcab?utm_source=jobs.sequoiacap.com",
+      "id": "consider-sequoia-8782770002",
+      "title": "Sr. Business Operations Analyst (Starlink)",
+      "org_type": "SpaceX",
+      "category": "Executive Operations",
+      "seniority": "Operations",
+      "comp_low": 120000,
+      "comp_high": 170000,
+      "location": "Hawthorne, CA",
+      "remote": "Onsite",
+      "date_posted": "2026-09-03",
+      "apply_url": "https://boards.greenhouse.io/spacex/jobs/8782770002?gh_jid=8782770002",
       "source": "Sequoia Portfolio",
-      "summary": "Movement brings us together. At Strava, we’re building the world’s largest community of active people, helping them stay motivated and achieve their goals.",
+      "summary": "Starlink, our revolutionary satellite constellation, delivers low-latency broadband internet worldwide. We are looking for a Sr. Business Analyst to own analysis of data and trends across all Broadband business metrics, globally—surface issues and opportunities, and innovate uses of AI to make that...",
       "benefits": [
-        "Equity"
+        "Bonus",
+        "401(k)",
+        "Health coverage",
+        "Paid time off",
+        "Parental leave"
       ],
-      "metro": "SF Bay Area",
+      "metro": "Other",
       "source_type": "VC portfolio"
     },
     {
@@ -3937,29 +3949,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "consider-lightspeed-8761403002",
-      "title": "Business Operations Manager",
-      "org_type": "Roofstock",
-      "category": "Executive Operations",
-      "seniority": "Operations",
-      "comp_low": 128000,
-      "comp_high": 135000,
-      "location": "Oakland, California, United States",
-      "remote": "Onsite",
-      "date_posted": "2026-08-31",
-      "apply_url": "https://job-boards.greenhouse.io/roofstock/jobs/8761403002",
-      "source": "Lightspeed Portfolio",
-      "summary": "Roofstock is looking for a Business Operations Manager to help bridge the gap between strategy, finance, product, and operations. This role sits at the center of the company’s most complex and cross-functional work and is responsible for translating strategic and financial plans into clear...",
-      "benefits": [
-        "401(k)",
-        "Health coverage",
-        "Paid time off",
-        "Parental leave"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "consider-lightspeed-5075058008",
       "title": "Business Operations Manager",
       "org_type": "Goodfire",
@@ -4088,26 +4077,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "consider-lightspeed-e27c30e5-72fe-4856-a13f-",
-      "title": "Head of Business Operations",
-      "org_type": "truthsystems",
-      "category": "Executive Operations",
-      "seniority": "Operations",
-      "comp_low": 100000,
-      "comp_high": 180000,
-      "location": "San Francisco, California, United States",
-      "remote": "Onsite",
-      "date_posted": "2025-10-26",
-      "apply_url": "https://jobs.ashbyhq.com/truthsystems/e27c30e5-72fe-4856-a13f-08e61f3f455e?utm_source=jobs.lsvp.com",
-      "source": "Lightspeed Portfolio",
-      "summary": "At Truth Systems , we’re building the only trust and safety software any organization will ever need. A protection layer for every individual.",
-      "benefits": [
-        "Equity"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "getro-222-89904150",
       "title": "Chief of Staff",
       "org_type": "Finni Health",
@@ -4123,27 +4092,6 @@
       "summary": "Two things define it. First, you will own the company's metrics and operating rhythm — how we set goals, what we measure, how we review it, and whether anything actually gets closed out. Second, you will take real work off the CEO's plate permanently, not temporarily. Not \"help with\" — own.",
       "benefits": [],
       "metro": "Remote",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "getro-222-89655080",
-      "title": "Chief of Staff",
-      "org_type": "Amperity",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 215000,
-      "comp_high": 235000,
-      "location": "New York, NY, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-08-12",
-      "apply_url": "https://boards.greenhouse.io/amperity/jobs/8122891",
-      "source": "General Catalyst Portfolio",
-      "summary": "At Amperity, we are proudly customer-obsessed. Working here means getting deep in the data and seeing through the eyes of our customers to help them transform their businesses.",
-      "benefits": [
-        "Health coverage",
-        "Paid time off"
-      ],
-      "metro": "NYC",
       "source_type": "VC portfolio"
     },
     {
@@ -4229,6 +4177,29 @@
       "benefits": [
         "Equity"
       ],
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-222-92221542",
+      "title": "Executive Assistant",
+      "org_type": "Glean",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 100000,
+      "comp_high": 140000,
+      "location": "Mountain View, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-09-04",
+      "apply_url": "https://boards.greenhouse.io/gleanwork/jobs/4729357005",
+      "source": "General Catalyst Portfolio",
+      "summary": "Glean is the Work AI platform that helps everyone work smarter with AI. What began as the industry’s most advanced enterprise search has evolved into a full-scale Work AI ecosystem, powering intelligent Search, an AI Assistant, and scalable AI agents on one secure, open platform.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Wellness"
+      ],
+      "metro": "SF Bay Area",
       "source_type": "VC portfolio"
     },
     {
@@ -4375,6 +4346,74 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-222-89441983",
+      "title": "Administrative Business Partner, Office of the CEO",
+      "org_type": "Stripe",
+      "category": "Executive Assistant",
+      "seniority": "Executive Business Partner",
+      "comp_low": 140400,
+      "comp_high": 210600,
+      "location": "South San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-10",
+      "apply_url": "https://stripe.com/careers/listing/administrative-business-partner-office-of-the-ceo/8050878",
+      "source": "General Catalyst Portfolio",
+      "summary": "Stripe is seeking an eager and poised individual with a high attention to detail, strong communication skills, and professional drive to support the Office of the CEO. This role reports directly to the Administrative Business Partner (ABP) to the CEO and is responsible for a wide range of tasks.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Wellness"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-222-89441981",
+      "title": "Administrative Business Partner",
+      "org_type": "Stripe",
+      "category": "Executive Assistant",
+      "seniority": "Executive Business Partner",
+      "comp_low": 131200,
+      "comp_high": 196800,
+      "location": "Seattle, WA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-10",
+      "apply_url": "https://stripe.com/careers/listing/administrative-business-partner/8081673",
+      "source": "General Catalyst Portfolio",
+      "summary": "We're looking for someone who meets the minimum requirements to be considered for the role. If you meet these requirements, you are encouraged to apply. The preferred qualifications are a bonus, not a requirement.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Wellness"
+      ],
+      "metro": "Other",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-222-92192145",
+      "title": "Business Operations Lead",
+      "org_type": "Serval",
+      "category": "Executive Operations",
+      "seniority": "Operations",
+      "comp_low": 200000,
+      "comp_high": 265000,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-09-04",
+      "apply_url": "https://jobs.ashbyhq.com/Serval/bd57bb71-99f2-412f-92fa-b27ad205af7b",
+      "source": "General Catalyst Portfolio",
+      "summary": "We’re launching a new business line in response to exceptional market demand. As our Business Operations Lead, you’ll act like a GM and own the strategy, operations, reporting, and ultimately the P&L for this function.",
+      "benefits": [
+        "Equity",
+        "Health coverage",
+        "Paid time off"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-222-91933671",
       "title": "Business Operations Lead, Docs",
       "org_type": "Grammarly",
@@ -4458,6 +4497,29 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-222-91909537",
+      "title": "Campaign Strategy & Operations Manager",
+      "org_type": "Stripe",
+      "category": "Executive Operations",
+      "seniority": "Operations",
+      "comp_low": 171400,
+      "comp_high": 257000,
+      "location": "United States",
+      "remote": "Remote",
+      "date_posted": "2026-09-02",
+      "apply_url": "https://stripe.com/careers/listing/campaign-strategy-operations-manager/7584016",
+      "source": "General Catalyst Portfolio",
+      "summary": "As the Campaign Strategy & Operations Manager, you'll own the operational foundation that powers Stripe's global demand engine — building the systems, processes, and workflows that enable our marketing teams to move faster and perform better at scale.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Wellness"
+      ],
+      "metro": "Remote",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-222-91494455",
       "title": "Director of Operations",
       "org_type": "Campus",
@@ -4524,6 +4586,30 @@
         "Parental leave"
       ],
       "metro": "NYC",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-8672-92087657",
+      "title": "Director, Chief of Staff",
+      "org_type": "Simility, a Paypal Service",
+      "category": "Chief of Staff",
+      "seniority": "Senior Chief of Staff",
+      "comp_low": 159500,
+      "comp_high": 236500,
+      "location": "San Jose, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-09-03",
+      "apply_url": "https://paypal.eightfold.ai/careers/job/274922258433",
+      "source": "Accel Portfolio",
+      "summary": "PayPal has been revolutionizing commerce globally for more than 25 years. Creating innovative experiences that make moving money, selling, and shopping simple, personalized, and secure, PayPal empowers consumers and businesses in approximately 200 markets to join and thrive in the global economy.",
+      "benefits": [
+        "Bonus",
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Paid time off"
+      ],
+      "metro": "SF Bay Area",
       "source_type": "VC portfolio"
     },
     {
@@ -4619,6 +4705,68 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-8672-87031896",
+      "title": "Chief of Staff",
+      "org_type": "VSCO",
+      "category": "Chief of Staff",
+      "seniority": "Chief of Staff",
+      "comp_low": 150000,
+      "comp_high": 175000,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-07-21",
+      "apply_url": "https://boards.greenhouse.io/vsco39/jobs/8632353002",
+      "source": "Accel Portfolio",
+      "summary": "For years, we've helped photographers create their work. Now we're building what comes next.",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-8672-92242185",
+      "title": "Executive Assistant",
+      "org_type": "Govini",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 125000,
+      "comp_high": 140000,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-09-04",
+      "apply_url": "https://boards.greenhouse.io/air/jobs/4394498009",
+      "source": "Accel Portfolio",
+      "summary": "We are seeking an experienced Executive Assistant to support our Chief Product and Technology Officer (CPTO), serving as a critical partner in enabling leadership effectiveness at a rapidly growing, mission-driven company.",
+      "benefits": [],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-8672-92144793",
+      "title": "Executive Assistant Business Partner",
+      "org_type": "Thinking Machines Lab",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 200000,
+      "comp_high": 250000,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-09-03",
+      "apply_url": "https://www.linkedin.com/jobs/view/executive-assistant-business-partner-at-thinking-machines-lab-4461775940",
+      "source": "Accel Portfolio",
+      "summary": "Thinking Machines Lab's mission is to empower humanity through advancing collaborative general intelligence. We're building a future where everyone has access to the knowledge and tools to make AI work for their unique needs and goals.",
+      "benefits": [
+        "Health coverage",
+        "Paid time off",
+        "Parental leave"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-8672-91953304",
       "title": "Senior Executive Assistant",
       "org_type": "Cortex by Palo Alto Networks",
@@ -4680,6 +4828,29 @@
       "source_type": "VC portfolio"
     },
     {
+      "id": "getro-8672-91819910",
+      "title": "Senior Executive Assistant",
+      "org_type": "Airkit",
+      "category": "Executive Assistant",
+      "seniority": "Senior Executive Assistant",
+      "comp_low": 96300,
+      "comp_high": 145200,
+      "location": "San Francisco, CA, USA",
+      "remote": "Onsite",
+      "date_posted": "2026-09-01",
+      "apply_url": "https://www.salesforce.com/company/careers/jobs/JR356620/senior-executive-assistant/",
+      "source": "Accel Portfolio",
+      "summary": "We are seeking an elite, highly proactive Senior Executive Assistant to serve as a strategic partner to our C-Staff leadership. In a high-velocity enterprise ($50B+ revenue environment), your core mission is to act as an operational multiplier: architecting the executive’s time, managing complex...",
+      "benefits": [
+        "Equity",
+        "401(k)",
+        "Health coverage",
+        "Parental leave"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
       "id": "getro-8672-91772542",
       "title": "Senior Executive Assistant",
       "org_type": "Skydio",
@@ -4735,23 +4906,6 @@
         "Parental leave"
       ],
       "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "getro-8672-92026112",
-      "title": "Sr. Digital Strategic Operations Manager",
-      "org_type": "Cortex by Palo Alto Networks",
-      "category": "Executive Operations",
-      "seniority": "Operations",
-      "comp_low": 144200,
-      "comp_high": 233200,
-      "location": "",
-      "remote": "Onsite",
-      "date_posted": "2026-09-03",
-      "apply_url": "https://jobs.paloaltonetworks.com/en/job/santa-clara/sr-digital-strategic-operations-manager/47263/96174870096",
-      "source": "Accel Portfolio",
-      "summary": "At Palo Alto Networks®, we’re united by a shared mission—to protect our digital way of life. We thrive at the intersection of innovation and impact, solving real-world problems with cutting-edge technology and bold thinking. Here, everyone has a voice, and every idea counts.",
-      "benefits": [],
       "source_type": "VC portfolio"
     },
     {
@@ -4869,6 +5023,23 @@
         "Equity"
       ],
       "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "getro-8672-92026112",
+      "title": "Sr. Digital Strategic Operations Manager",
+      "org_type": "Cortex by Palo Alto Networks",
+      "category": "Executive Operations",
+      "seniority": "Operations",
+      "comp_low": 144200,
+      "comp_high": 233200,
+      "location": "",
+      "remote": "Onsite",
+      "date_posted": "2026-09-03",
+      "apply_url": "https://jobs.paloaltonetworks.com/en/job/santa-clara/sr-digital-strategic-operations-manager/47263/96174870096",
+      "source": "Accel Portfolio",
+      "summary": "At Palo Alto Networks®, we’re united by a shared mission—to protect our digital way of life. We thrive at the intersection of innovation and impact, solving real-world problems with cutting-edge technology and bold thinking. Here, everyone has a voice, and every idea counts.",
+      "benefits": [],
       "source_type": "VC portfolio"
     },
     {
@@ -5047,7 +5218,7 @@
       "org_type": "Anaconda",
       "category": "Chief of Staff",
       "seniority": "Chief of Staff",
-      "comp_low": 200000,
+      "comp_low": 150000,
       "comp_high": 250000,
       "location": "United States",
       "remote": "Remote",
