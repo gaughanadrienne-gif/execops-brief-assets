@@ -1670,9 +1670,44 @@
     document.head.appendChild(s);
   }
 
+  // ---- Job-board measurement bridge (2026-09-06) --------------------------
+  // postMessage cannot infer a completed application or confirmed subscription.
+  // Allow only the live board frame, fixed event names, and non-personal fields.
+  function jobBoardMetrics(){
+    if (window.__eobJobMetricsBound) return;
+    window.__eobJobMetricsBound = true;
+    window.addEventListener('message', function(ev){
+      if (ev.origin !== 'https://gaughanadrienne-gif.github.io') return;
+      var d = ev.data;
+      if (!d || d.eobMetric !== 1 || typeof d.params !== 'object' || !d.params) return;
+      var allowed = {
+        job_search: ['category','work_arrangement','location_group','search_used','result_count'],
+        job_apply_click: ['job_id','category','listing_source','work_arrangement'],
+        newsletter_signup_attempt: ['form_id','placement']
+      };
+      if (!Object.prototype.hasOwnProperty.call(allowed, d.name)) return;
+      var frame = Array.prototype.find.call(document.querySelectorAll('iframe'), function(f){
+        try {
+          var u = new URL(f.src);
+          return f.contentWindow === ev.source && u.origin === ev.origin &&
+            u.pathname === '/execops-brief-assets/jobboard/roles-widget.html';
+        } catch(e){ return false; }
+      });
+      if (!frame || typeof window.gtag !== 'function') return;
+      var params = {measurement_version: 'eob_jobs_v1', placement: 'job_board'};
+      allowed[d.name].forEach(function(k){
+        var v = d.params[k];
+        if (typeof v === 'number' && isFinite(v) && v >= 0) params[k] = v;
+        else if (typeof v === 'string' && v.length <= 100 && !/[@?]/.test(v)) params[k] = v;
+      });
+      try { window.gtag('event', d.name, params); } catch(e){}
+    });
+  }
+
   // ---- boot --------------------------------------------------------------
   function run(){
     var slug = currentSlug();
+    try { jobBoardMetrics(); } catch(e){}
     try { fixLinks(); } catch(e){}             // stale slug rewrite (site-wide)
     try { formFeedback(); } catch(e){}         // opt-in form success feedback backstop (site-wide)
     try { subMemory(); } catch(e){}            // subscriber memory: ?e= handoff + known-sub one-click (site-wide)

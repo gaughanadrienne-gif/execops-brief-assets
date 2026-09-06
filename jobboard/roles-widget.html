@@ -276,7 +276,7 @@
     <div>
       <span class="eob-eyebrow">The Brief</span>
       <h3>Get these roles weekly in The Brief.</h3>
-      <p>A weekly digest of EA, exec-ops, and Chief of Staff roles paying $100k and up, plus one operator insight. Free, every week.</p>
+      <p>A weekly digest of EA, exec-ops, and Chief of Staff roles with published pay whose midpoint is at least $100k, plus one operator insight. Free, every week.</p>
       <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
     </div>
     <form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
@@ -318,6 +318,45 @@
   };
 
   var ALL = [];
+
+  // Aggregate intent only. Never send typed searches, emails, or offer details.
+  // The embedding EOB page owns GA4 and its existing consent configuration.
+  function boardMetric(name, params){
+    try {
+      if (window.parent === window) return;
+      var ref = new URL(document.referrer);
+      if (ref.origin !== "https://www.execopsbrief.com" && ref.origin !== "https://execopsbrief.com") return;
+      parent.postMessage({eobMetric: 1, name: name, params: params}, ref.origin);
+    } catch(e){}
+  }
+  var lastSearch = "", searchTimer;
+  function searchMetric(){
+    var f = getFilters();
+    var signature = JSON.stringify(f) + (els.sort ? els.sort.value : "");
+    if (signature === lastSearch) return;
+    lastSearch = signature;
+    boardMetric("job_search", {
+      category: els.category.value || "all",
+      work_arrangement: els.remote.value || "all",
+      location_group: els.metro ? els.metro.value || "all" : "all",
+      search_used: els.search.value.trim() ? 1 : 0,
+      result_count: ALL.filter(function(r){ return matches(r, f); }).length
+    });
+  }
+  function filterChanged(){ render(); searchMetric(); }
+  function roleClickMetric(ev){
+    if (ev.type === "auxclick" && ev.button !== 1) return;
+    var a = ev.target.closest ? ev.target.closest("a.eob-apply[data-role-id]") : null;
+    if (!a) return;
+    var role = ALL.find(function(r){ return String(r.id) === a.getAttribute("data-role-id"); });
+    if (!role) return;
+    boardMetric("job_apply_click", {
+      job_id: String(role.id), category: role.category || "unknown",
+      listing_source: role.source || "unknown", work_arrangement: role.remote || "unknown"
+    });
+  }
+  els.results.addEventListener("click", roleClickMetric);
+  els.results.addEventListener("auxclick", roleClickMetric);
 
   function fmtK(n){
     // 165000 -> "165k"; 220000 -> "220k"; keeps one decimal only if needed.
@@ -474,7 +513,7 @@
       benefitsHTML(r) +
       '<div class="eob-card-foot">' +
         '<span class="eob-posted">' + esc(relTime(r.date_posted)) + '</span>' +
-        '<a class="eob-apply" href="' + esc(r.apply_url || "#") + '" target="_blank" rel="noopener">View role</a>' +
+        '<a class="eob-apply" data-role-id="' + esc(r.id) + '" href="' + esc(r.apply_url || "#") + '" target="_blank" rel="noopener">View role</a>' +
       '</div>' +
     '</div>';
   }
@@ -514,7 +553,7 @@
       els.results.innerHTML =
         '<div class="eob-empty">' +
           '<h3>No roles match those filters.</h3>' +
-          '<p>Try widening the comp range or clearing the search. The board syncs with the source agencies every morning, and subscribers get the full set in The Brief.</p>' +
+          '<p>Try widening the comp range or clearing the search. The board syncs with the source agencies every morning, and The Brief sends six roles plus one operator insight each week.</p>' +
         '</div>';
       return;
     }
@@ -534,15 +573,17 @@
     render();
   }
 
-  els.search.addEventListener("input", render);
-  els.category.addEventListener("change", render);
-  els.remote.addEventListener("change", render);
-  els.comp.addEventListener("change", render);
-  ["sort", "seniority", "metro", "srctype"].forEach(function(k){
-    if (els[k]) els[k].addEventListener("change", render);
+  els.search.addEventListener("input", function(){
+    render(); clearTimeout(searchTimer); searchTimer = setTimeout(searchMetric, 600);
   });
-  if (els.nocomp) els.nocomp.addEventListener("change", render);
-  els.reset.addEventListener("click", resetFilters);
+  els.category.addEventListener("change", filterChanged);
+  els.remote.addEventListener("change", filterChanged);
+  els.comp.addEventListener("change", filterChanged);
+  ["sort", "seniority", "metro", "srctype"].forEach(function(k){
+    if (els[k]) els[k].addEventListener("change", filterChanged);
+  });
+  if (els.nocomp) els.nocomp.addEventListener("change", filterChanged);
+  els.reset.addEventListener("click", function(){ resetFilters(); searchMetric(); });
 
   var subForm = root.querySelector("#eob-subscribe");
   var subMsg = root.querySelector("#eob-sub-msg");
@@ -553,12 +594,13 @@
     frame.setAttribute("aria-hidden", "true");
     root.appendChild(frame);
     subForm.addEventListener("submit", function(){
+      boardMetric("newsletter_signup_attempt", {form_id: "192281502704207669", placement: "job_board"});
       var btn = subForm.querySelector("button");
       if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
       setTimeout(function(){
         if (subMsg) {
           subMsg.style.color = "";
-          subMsg.textContent = "You are in. Check your inbox for the next note.";
+          subMsg.textContent = "Request submitted. Check your inbox for the next note.";
         }
         subForm.reset();
         if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; }
