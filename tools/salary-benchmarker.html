@@ -191,19 +191,19 @@
   #eob-salary .eob-cta .eob-eyebrow{color:#d69a8f;position:relative}
   #eob-salary .eob-cta h3{color:#fff;font-size:1.5rem;margin:.4rem 0;position:relative}
   #eob-salary .eob-cta p{color:#c2b6a6;font-size:.94rem;max-width:32rem;position:relative}
-  #eob-salary .eob-cta form{display:flex;gap:.6rem;min-width:300px;position:relative}
+  #eob-salary .eob-cta form{display:flex;flex-wrap:wrap;gap:.6rem;min-width:300px;position:relative}
   #eob-salary .eob-cta input{
     flex:1;min-width:0;border:1px solid #3a322a;background:#241f19;color:#fff;
     border-radius:var(--radius-sm);padding:.78rem .95rem;font-family:inherit;font-size:.94rem;
   }
-  #eob-salary .eob-cta input::placeholder{color:#8a7f70}
+  #eob-salary .eob-cta input::placeholder{color:#c2b6a6}
   #eob-salary .eob-cta input:focus{outline:none;border-color:var(--oxblood)}
   #eob-salary .eob-cta button{
     background:var(--oxblood);color:#fff;font-family:inherit;font-weight:600;font-size:.94rem;
     border:none;border-radius:var(--radius-sm);padding:.78rem 1.3rem;cursor:pointer;transition:all .16s;white-space:nowrap;
   }
   #eob-salary .eob-cta button:hover{background:var(--oxblood-deep);transform:translateY(-1px)}
-  #eob-salary .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#8a7f70}
+  #eob-salary .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#c2b6a6}
   #eob-salary .eob-cta-msg{position:relative;margin-top:.55rem;font-size:.86rem;color:#d69a8f;font-weight:600;min-height:1.1em}
 
   /* Responsive */
@@ -277,6 +277,12 @@
     </div>
   </div>
 
+  <aside id="eob-salary-next" style="margin:1.4rem 0;padding:1.3rem 0;border-top:1px solid #D8D0BF;border-bottom:1px solid #D8D0BF">
+    <h3 style="font-family:Spectral,Georgia,serif;font-size:1.3rem;margin:0 0 .5rem">Negotiating a Chief of Staff offer?</h3>
+    <p style="max-width:65ch;margin:0 0 .75rem">The Salary and Leveling Playbook includes an equity worksheet, an eight-dimension scope assessment, six negotiation scripts, and four worked scenarios. A paid PDF for preparing the Chief of Staff offer conversation.</p>
+    <a href="https://www.execopsbrief.com/shop/p/salary-leveling-playbook" target="_top" data-eob-product="salary-leveling-playbook" style="color:#7A2129;font-weight:600;text-decoration:underline;text-underline-offset:3px">See what's inside the playbook, $24</a>
+  </aside>
+
   <div class="eob-method">
     <h4>How to read this <span class="eob-badge">Observed, not blended</span></h4>
     <p>Each card preserves what its source actually measures: employer wages, projected starting pay, self-reported incumbent pay, or active posted salary. No role, location, remote-work, or experience multiplier is applied. Sample and confidence notes appear beside the result.</p>
@@ -300,16 +306,16 @@
   <!-- Newsletter call to action -->
   <div class="eob-cta">
     <div>
-      <span class="eob-eyebrow">The Brief</span>
-      <h3>Get the full Salary and Leveling Guide.</h3>
-      <p>The complete guide with the company-stage pay table, the leveling matrix, and every source, plus new $100k-plus exec-ops roles delivered weekly in The Brief.</p>
+      <h3>Keep the free Salary and Leveling Guide.</h3>
+      <p>Get the free guide with its company-stage pay table, leveling matrix, and sources. You'll also join The Brief, our weekly newsletter with six roles and one operator insight.</p>
       <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
     </div>
-<form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
+<form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281528647025768/subscribe" method="post" target="eob-ml-frame">
+      <label for="eob-email" style="color:#fff;font-size:.85rem;flex-basis:100%">Email address</label>
       <input type="email" id="eob-email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>
           <input type="hidden" name="ml-submit" value="1">
           <input type="hidden" name="anticsrf" value="true">
-      <button type="submit">Subscribe to The Brief</button>
+      <button type="submit">Email me the guide</button>
       <div class="eob-cta-msg" id="eob-sub-msg" role="status" aria-live="polite"></div>
     </form>
   </div>
@@ -319,6 +325,16 @@
 (function(){
   var root = document.getElementById("eob-salary");
 
+  function salaryMetric(name, params){
+    try {
+      var origin = new URL(document.referrer).origin;
+      if (parent !== window && (origin === "https://www.execopsbrief.com" || origin === "https://execopsbrief.com"))
+        parent.postMessage({eobMetric:1,name:name,params:params}, origin);
+    } catch(e){}
+  }
+  root.querySelector('[data-eob-product]').addEventListener('click', function(){
+    salaryMetric('product_click', {product_id:'salary-leveling-playbook',placement:'salary_result'});
+  });
   var data = null;
   var ROLE_LABEL = { ea:"Executive Assistant", cos:"Chief of Staff", ops:"Executive Operations / BizOps" };
   var els = {
@@ -626,6 +642,7 @@
   }
 
   function updateControls(){
+    root.querySelector("#eob-salary-next").hidden = els.role.value !== "cos";
     var role = els.role.value;
     els.titleWrap.classList.toggle("eob-hidden",role !== "ea");
     els.marketWrap.classList.toggle("eob-hidden",role !== "ea");
@@ -691,12 +708,13 @@
     frame.setAttribute("aria-hidden", "true");
     root.appendChild(frame);
     subForm.addEventListener("submit", function(){
+      salaryMetric("newsletter_signup_attempt", {form_id:"192281528647025768",placement:"salary_guide"});
       var btn = subForm.querySelector("button");
       if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
       setTimeout(function(){
-        if (subMsg) subMsg.textContent = "You are in. Check your inbox for the next note.";
+        if (subMsg) subMsg.textContent = "Request submitted. Check your inbox. Already received the guide? Look for \"Your Salary and Leveling Guide\" in your email.";
         subForm.reset();
-        if (btn) { btn.disabled = false; btn.textContent = "Subscribe"; }
+        if (btn) { btn.disabled = false; btn.textContent = "Email me the guide"; }
         postHeight();
       }, 900);
     });

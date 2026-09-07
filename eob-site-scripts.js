@@ -185,9 +185,9 @@
       cta:'Open the comp explorer',
       href:'/salary-data' },
     { match:['chief-of-staff-salary-guide','executive-assistant-salary-and-how-to-get-a-raise'],
-      title:'Get the number for your seat, not the national average',
+      title:'Compare the pay sources for your role',
       body:'The benchmarker shows role-specific source cards, including observed company-stage medians for Chiefs of Staff and distinct broad, incumbent, and premium comparisons for EAs. Sources, populations, and limitations are cited in the tool.',
-      cta:'Open the salary benchmarker',
+      cta:'Open the free salary benchmarker',
       href:'/salary-benchmarker' },
     { match:['how-to-create-a-chief-of-staff-role','how-to-become-a-fractional-chief-of-staff'],
       title:'Put a real number on the seat',
@@ -1112,13 +1112,16 @@
       if (href.charAt(0) !== '/') return;                 // internal only
       var path = href.split('?')[0].split('#')[0].replace(/\/+$/,'') || '/';
       var kind = a.getAttribute('data-eob-track');
-      if (!kind && TOOL_PATHS.indexOf(path) === -1) return;
+      var product = /^\/shop\/p\/([a-z0-9-]+)$/.exec(path);
+      if (!kind && !product && TOOL_PATHS.indexOf(path) === -1) return;
       if (typeof window.gtag !== 'function') return;      // no GA4 on this page, do nothing
       try {
-        window.gtag('event', kind === 'download' ? 'download_intent' : 'tool_open', {
+        window.gtag('event', product ? 'product_click' : kind === 'download' ? 'download_intent' : 'tool_open', {
+          product_id: product ? product[1] : null,
           destination: path,
           asset: a.getAttribute('data-eob-asset') || null,
-          placement: a.closest('#eob-upgrade') ? 'content_upgrade'
+          placement: a.closest('#eob-callout') ? 'article_callout'
+                   : a.closest('#eob-upgrade') ? 'content_upgrade'
                    : a.closest('#eob-tool-callout') ? 'tool_callout'
                    : a.closest('footer') ? 'footer' : 'body',
           source_slug: currentSlug() || null
@@ -1276,6 +1279,17 @@
   function homePolish(){
     var home = document.getElementById('eob-home');
     if (!home) return;
+    // Guarded display corrections; native page source is a separate CMS edit.
+    var headline = home.querySelector('h1');
+    if (headline && /they can't run the company/.test(headline.textContent))
+      headline.innerHTML = 'Become the operator who keeps decisions <span class="mark">moving</span>.';
+    var lead = home.querySelector('.lead');
+    if (lead && /impossible to replace/.test(lead.textContent))
+      lead.textContent = 'The Exec Ops Brief brings Executive Assistants, Chiefs of Staff, and executive operations professionals roles with published pay, practical tools, and playbooks for the work.';
+    home.querySelectorAll('p').forEach(function(p){
+      if (/The paid work, templates and guides, comes later/.test(p.textContent))
+        p.innerHTML = 'The Brief is free and it stays free. Alongside it there\'s a small <a href="/shop">paid library of templates and guides</a>, for anyone who\'d rather start from a finished artifact than build one from scratch.';
+    });
     var st = document.createElement('style');
     st.textContent = '@media(max-width:480px){' +
       '#eob-home .sub-form{flex-wrap:wrap}' +
@@ -1683,18 +1697,22 @@
       var allowed = {
         job_search: ['category','work_arrangement','location_group','search_used','result_count'],
         job_apply_click: ['job_id','category','listing_source','work_arrangement'],
-        newsletter_signup_attempt: ['form_id','placement']
+        newsletter_signup_attempt: ['form_id','placement'],
+        product_click: ['product_id','placement']
       };
       if (!Object.prototype.hasOwnProperty.call(allowed, d.name)) return;
       var frame = Array.prototype.find.call(document.querySelectorAll('iframe'), function(f){
         try {
           var u = new URL(f.src);
           return f.contentWindow === ev.source && u.origin === ev.origin &&
-            u.pathname === '/execops-brief-assets/jobboard/roles-widget.html';
+            ((u.pathname === '/execops-brief-assets/jobboard/roles-widget.html' && d.name !== 'product_click') ||
+             (u.pathname === '/execops-brief-assets/tools/salary-benchmarker.html' &&
+              (d.name === 'product_click' || d.name === 'newsletter_signup_attempt')));
         } catch(e){ return false; }
       });
       if (!frame || typeof window.gtag !== 'function') return;
-      var params = {measurement_version: 'eob_jobs_v1', placement: 'job_board'};
+      var params = {measurement_version: 'eob_funnel_v2',
+        placement: /roles-widget\.html$/.test(new URL(frame.src).pathname) ? 'job_board' : 'salary_benchmarker'};
       allowed[d.name].forEach(function(k){
         var v = d.params[k];
         if (typeof v === 'number' && isFinite(v) && v >= 0) params[k] = v;
@@ -1702,6 +1720,26 @@
       });
       try { window.gtag('event', d.name, params); } catch(e){}
     });
+  }
+
+  // The existing /roles page is a campaign landing page. Let repeat visitors
+  // reach the actual filters immediately without removing its editorial context.
+  function rolesLanding(){
+    var page = byId('eob-roles'), frame = byId('eob-roles-frame');
+    var lead = page && page.querySelector('.hero .lead-sub');
+    if (!lead || !frame || byId('eob-roles-shortcuts')) return;
+    var nav = document.createElement('nav');
+    nav.id = 'eob-roles-shortcuts';
+    nav.setAttribute('aria-label','Job board shortcuts');
+    nav.style.cssText = 'display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin:1.35rem 0;';
+    var browse = el('a','display:inline-block;background:#7A2129;color:#fff;padding:.8rem 1.1rem;text-decoration:none;font-weight:600;','Browse current openings');
+    browse.href = '#eob-roles-frame';
+    browse.addEventListener('click',function(){ frame.setAttribute('tabindex','0'); frame.focus({preventScroll:true}); });
+    var brief = el('a','color:#7A2129;text-decoration:underline;text-underline-offset:3px;','Get six roles weekly in The Brief');
+    brief.href = '/the-brief';
+    nav.appendChild(browse);nav.appendChild(brief);
+    lead.parentNode.insertBefore(nav,lead.nextSibling);
+    frame.style.scrollMarginTop = '100px';
   }
 
   // ---- boot --------------------------------------------------------------
@@ -1715,6 +1753,7 @@
     try { homePolish(); } catch(e){}           // home page mobile overflow + live counts
     try { autoHeader(); } catch(e){}           // featured image -> in-article header (any article page)
     try { shopPolish(); } catch(e){}           // native store styling (shop list + product pages)
+    try { rolesLanding(); } catch(e){}
     try { rolesPolish(); } catch(e){}          // /roles: h1 + honest board language until re-paste
     try { honestCopy(); } catch(e){}           // "curated" overclaim in shared CTA copy (site-wide)
     try { rolesOptIn(); } catch(e){}           // /roles weekly new-roles trade (dark until form id set)

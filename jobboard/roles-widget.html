@@ -144,9 +144,12 @@
   /* Newsletter CTA */
   #eob-jobboard .eob-cta{
     background:var(--ink);color:#fff;border-radius:var(--radius);padding:2rem 2.2rem;margin-top:1.8rem;
-    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;overflow:hidden;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;position:relative;overflow:hidden;grid-column:1 / -1;
     box-shadow:var(--shadow-lift);
   }
+  #eob-jobboard .eob-cta label{font-size:.85rem;color:#fff}
+  #eob-jobboard .eob-cta form{flex-wrap:wrap}
+  #eob-jobboard .eob-cta form label,#eob-jobboard .eob-cta-msg{flex-basis:100%}
   #eob-jobboard .eob-cta:before{
     content:"";position:absolute;top:-50px;right:-30px;width:180px;height:180px;border-radius:50%;
     background:radial-gradient(circle,rgba(192,134,43,.32),transparent 70%);pointer-events:none;
@@ -159,14 +162,14 @@
     flex:1;min-width:0;border:1px solid var(--line-dark);background:#111c2b;color:#fff;
     border-radius:var(--radius-sm);padding:.78rem .95rem;font-family:inherit;font-size:.94rem;
   }
-  #eob-jobboard .eob-cta input::placeholder{color:#7c889b}
+  #eob-jobboard .eob-cta input::placeholder{color:#b7c1d1}
   #eob-jobboard .eob-cta input:focus{outline:none;border-color:var(--ox)}
   #eob-jobboard .eob-cta button{
     background:var(--ox);color:#fff;font-family:inherit;font-weight:600;font-size:.94rem;
     border:none;border-radius:var(--radius-sm);padding:.78rem 1.3rem;cursor:pointer;transition:all .16s;white-space:nowrap;
   }
   #eob-jobboard .eob-cta button:hover{background:var(--ox-deep);transform:translateY(-1px)}
-  #eob-jobboard .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#7c889b}
+  #eob-jobboard .eob-cta-note{position:relative;margin-top:.55rem;font-size:.78rem;color:#b7c1d1}
   #eob-jobboard .eob-cta-msg{position:relative;margin-top:.55rem;font-size:.86rem;color:var(--ox);font-weight:600;min-height:1.1em}
 
   /* Responsive */
@@ -274,12 +277,12 @@
   <!-- Newsletter call to action -->
   <div class="eob-cta">
     <div>
-      <span class="eob-eyebrow">The Brief</span>
-      <h3>Get these roles weekly in The Brief.</h3>
-      <p>A weekly digest of EA, exec-ops, and Chief of Staff roles with published pay whose midpoint is at least $100k, plus one operator insight. Free, every week.</p>
+      <h3>Six roles. One useful operator insight. Every week.</h3>
+      <p>The Brief sends six roles from the board and one practical operator insight. Keep up with opportunities without checking every day.</p>
       <div class="eob-cta-note">Free. No spam. Unsubscribe in one click.</div>
     </div>
     <form id="eob-subscribe" action="https://assets.mailerlite.com/jsonp/2493859/forms/192281502704207669/subscribe" method="post" target="eob-ml-frame">
+      <label for="eob-email">Email address</label>
       <input type="email" id="eob-email" name="fields[email]" placeholder="you@work.com" aria-label="Email address" required>
       <input type="hidden" name="ml-submit" value="1">
       <input type="hidden" name="anticsrf" value="true">
@@ -318,6 +321,8 @@
   };
 
   var ALL = [];
+  // Keep one real form and its listeners as filters rebuild the results.
+  var newsletterBox = root.querySelector(".eob-cta");
 
   // Aggregate intent only. Never send typed searches, emails, or offer details.
   // The embedding EOB page owns GA4 and its existing consent configuration.
@@ -556,9 +561,12 @@
           '<h3>No roles match those filters.</h3>' +
           '<p>Try widening the comp range or clearing the search. The board syncs with the source agencies every morning, and The Brief sends six roles plus one operator insight each week.</p>' +
         '</div>';
+      els.results.appendChild(newsletterBox);
       return;
     }
     els.results.innerHTML = '<div class="eob-grid">' + list.map(cardHTML).join("") + '</div>';
+    var grid = els.results.querySelector(".eob-grid");
+    grid.insertBefore(newsletterBox, grid.children[6] || null);
   }
 
   function resetFilters(){
