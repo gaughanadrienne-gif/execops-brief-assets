@@ -80,14 +80,26 @@
   #eob-jobboard .eob-toggle input{width:15px;height:15px;accent-color:var(--ox);cursor:pointer;margin:0}
 
   /* Role cards */
-  #eob-jobboard .eob-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  /* 2026-09-07: fluid, not fixed. `1fr 1fr` plus grid items' default
+     min-width:auto let each column claim its content's intrinsic width, which
+     overflowed the 1120px shell and clipped the right column's salary figures.
+     auto-fit + minmax(0,...) lets columns shrink and drops to one column by
+     itself, so the 820px breakpoint is no longer load-bearing. */
+  #eob-jobboard .eob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:16px}
+  /* min-width:0 at EVERY width, not only <=600px. A grid item defaults to
+     min-width:auto and so refuses to shrink below its widest nowrap child
+     (the salary range, the benefit chips). That floor, not the column count,
+     is what clipped 122 of 249 cards at 1024px. */
   #eob-jobboard .eob-card{
+    min-width:0;
     background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
     padding:1.4rem 1.5rem;box-shadow:var(--shadow);display:flex;flex-direction:column;
     transition:transform .16s,box-shadow .16s;
   }
   #eob-jobboard .eob-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
-  #eob-jobboard .eob-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.6rem}
+  #eob-jobboard .eob-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.6rem;min-width:0}
+  #eob-jobboard .eob-card-top>*{min-width:0}
+  #eob-jobboard .eob-card h3{overflow-wrap:anywhere}
   #eob-jobboard .eob-card h3{font-size:1.18rem;line-height:1.24}
   #eob-jobboard .eob-org{color:var(--slate);font-size:.88rem;margin-top:.25rem}
   #eob-jobboard .eob-comp{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ox-deep,#5E181F);font-size:1.1rem;white-space:nowrap}
@@ -180,6 +192,7 @@
     /* A card will not shrink below about 391px, so two columns stop fitting
        here. Dropping to one column at 820 rather than 600 keeps tablet
        portrait from overflowing its right edge. Desktop is unchanged. */
+    /* auto-fit already collapses this; kept as an explicit floor for old engines */
     #eob-jobboard .eob-grid{grid-template-columns:1fr}
   }
   @media (max-width:600px){
