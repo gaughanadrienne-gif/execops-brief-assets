@@ -476,7 +476,8 @@
   }
 
   function summaryHTML(r){
-    if (!r.summary) return "";
+    // Source template placeholders are not a usable job description.
+    if (!r.summary || /\{\{[^}]*\}\}/.test(r.summary)) return "";
     return '<p class="eob-summary">' + esc(r.summary) + '</p>';
   }
   function benefitsHTML(r){
