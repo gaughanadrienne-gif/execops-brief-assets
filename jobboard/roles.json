@@ -1,7 +1,7 @@
 {
   "_note": "REAL curated Executive Assistant, Executive Operations, and Chief of Staff roles for The Exec Ops Brief job board, aggregated from recruiting agencies, direct job boards, and VC portfolio feeds. PAY FLOOR (enforced in code since 2026-07-13): every role on this board carries a compensation figure PUBLISHED BY THE SOURCE whose midpoint -- (comp_low + comp_high) / 2, or the single figure where only one is published -- is at least $100,000. A role whose published midpoint falls below $100k is excluded, and a role whose source publishes no comp figure at all is excluded (there are no 'comp not listed' rows). No comp figure is ever estimated, inferred, or invented; comp honesty outranks board size. Where a posting publishes an HOURLY rate instead of a salary, comp_period='hr' and comp_low/comp_high hold the verbatim $/hr figures (annualized at 2080h ONLY to apply the floor, never for display). Most roles also carry a short summary excerpted VERBATIM from the posting (never paraphrased); summary is null rather than invented when the source lacks readable role-specific text. A benefits list (bonus, equity, 401(k), health coverage, PTO, etc) is detected only where the posting states it. Apply links point to the original source listing.",
-  "updated": "2026-09-07",
-  "count": 256,
+  "updated": "2026-09-08",
+  "count": 253,
   "roles": [
     {
       "id": "bloom-1500",
@@ -733,7 +733,7 @@
       "comp_high": 150000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-09-05",
+      "date_posted": "2026-09-06",
       "apply_url": "https://app.loxo.co/job/MTcwNS02emZqNXV3aTJmYzZ2aWlj",
       "source": "Burke & Co",
       "summary": "Our client, a well-capitalized, stealth-mode AI company building next-generation artificial intelligence, seeks a razor-sharp Executive Assistant to support one of their high-performing teams.",
@@ -754,7 +754,7 @@
       "comp_high": 170000,
       "location": "San Francisco, California",
       "remote": "Hybrid",
-      "date_posted": "2026-09-05",
+      "date_posted": "2026-09-06",
       "apply_url": "https://app.loxo.co/job/MTcwNS1wdGE1bG9ldnJwaWZ0bTNt",
       "source": "Burke & Co",
       "summary": "Our client, a fast-growing fintech startup, seeks a top-notch Executive Assistant to support two senior leaders. This is a high-impact, hands-on Executive Assistant role for someone who loves being the connective tissue across people, priorities, schedules, and systems.",
@@ -774,7 +774,7 @@
       "comp_high": 180000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-09-03",
+      "date_posted": "2026-09-04",
       "apply_url": "https://app.loxo.co/job/MTcwNS0wanJ3Nm43bDExd2ZmdmZz",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing AI startup, is seeking a high-impact Executive Assistant to support their CFO and VP of Sales. This is a highly visible, strategic role and is the perfect opportunity for someone who thrives in fast-paced environments and enjoys serving as the operational backbone for...",
@@ -794,7 +794,7 @@
       "comp_high": 160000,
       "location": "Palo Alto, California",
       "remote": "Onsite",
-      "date_posted": "2026-09-01",
+      "date_posted": "2026-09-02",
       "apply_url": "https://app.loxo.co/job/MTcwNS05aHh1djdpbTFxY2sya3A5",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly scaling health tech startup in Palo Alto, is seeking an experienced Executive Assistant to provide high-level support to their CEO.",
@@ -814,7 +814,7 @@
       "comp_high": 200000,
       "location": "Santa Clara, California",
       "remote": "Onsite",
-      "date_posted": "2026-09-05",
+      "date_posted": "2026-09-06",
       "apply_url": "https://app.loxo.co/job/MTcwNS04d2VtZjMycHQ1eGQ5aXlm",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing AI-powered developer platform, is seeking an exceptional Executive Assistant to support its Co-Founder & CEO.",
@@ -835,7 +835,7 @@
       "comp_high": 180000,
       "location": "San Francisco, California",
       "remote": "Hybrid",
-      "date_posted": "2026-09-04",
+      "date_posted": "2026-09-05",
       "apply_url": "https://app.loxo.co/job/MTcwNS1tMWgxOTZxOWwxNG1yOGF6",
       "source": "Burke & Co",
       "summary": "Our client, a rapidly growing technology company, is seeking an exceptional Executive Assistant to support their CEO. This is a highly visible opportunity to serve as a trusted partner to a brilliant, high-energy CEO and play a critical role in helping their executive operate effectively as the...",
@@ -855,7 +855,7 @@
       "comp_high": 160000,
       "location": "San Mateo, California",
       "remote": "Hybrid",
-      "date_posted": "2026-09-05",
+      "date_posted": "2026-09-06",
       "apply_url": "https://app.loxo.co/job/MTcwNS10bjVrcW13d2VqaGR5ZDd2",
       "source": "Burke & Co",
       "summary": "Our client, a fast-growing & mission-driven healthcare tech startup, is looking for a top-notch Executive Assistant to support their CEO & COO.",
@@ -875,7 +875,7 @@
       "comp_high": 180000,
       "location": "NYC",
       "remote": "Onsite",
-      "date_posted": "2026-09-05",
+      "date_posted": "2026-09-06",
       "apply_url": "https://app.loxo.co/job/MTcwNS0xa2NjeWJzaHZ3eGl3OGRk",
       "source": "Burke & Co",
       "summary": "Our client, a multi-billion dollar hedge fund in New York City, seeks a razor-sharp Senior Executive Assistant to support their Founder. This is a unique opportunity spanning Executive Assistant, Personal Assistant, and operational support responsibilities.",
@@ -895,7 +895,7 @@
       "comp_high": 175000,
       "location": "San Francisco, California",
       "remote": "Onsite",
-      "date_posted": "2026-09-05",
+      "date_posted": "2026-09-06",
       "apply_url": "https://app.loxo.co/job/MTcwNS1vbmxod2lyeXd6eXhxeDQ5",
       "source": "Burke & Co",
       "summary": "Our client, a global investment firm with an impressive portfolio, seeks a proactive Senior Executive Assistant to join their stellar administrative team in support of a General Partner and Partner.",
@@ -1282,7 +1282,7 @@
       "comp_high": 160000,
       "location": "San Mateo, CA (Hybrid)",
       "remote": "Hybrid",
-      "date_posted": "2026-09-04",
+      "date_posted": "2026-09-05",
       "apply_url": "https://www.linkedin.com/jobs/view/4462058342/",
       "source": "Truex Metier",
       "summary": "We are recruiting on behalf of a fast-growing technology company seeking a polished, highly organized, and discreet Executive Assistant to support a Co-Founder & Chief Operating Officer.",
@@ -1302,7 +1302,7 @@
       "comp_high": 130000,
       "location": "Palo Alto, CA (On-site)",
       "remote": "Onsite",
-      "date_posted": "2026-08-24",
+      "date_posted": "2026-08-25",
       "apply_url": "https://www.linkedin.com/jobs/view/4455342377/",
       "source": "Truex Metier",
       "summary": "The primary focus of this role is to ensure the executive remains organized and day-to-day operations run smoothly. You will also play a key role in coordinating content-related projects and workflows across creative, production, and external teams.",
@@ -1816,24 +1816,6 @@
       "source_type": "Network"
     },
     {
-      "id": "cosn-chief-of-staff-the-ad-hoc-group-hkz",
-      "title": "Chief of Staff",
-      "org_type": "The Ad Hoc Group",
-      "category": "Chief of Staff",
-      "seniority": "Chief of Staff",
-      "comp_low": 175000,
-      "comp_high": 200000,
-      "location": "Washington, D.C.",
-      "remote": "Hybrid",
-      "date_posted": "2026-07-24",
-      "apply_url": "https://www.chiefofstaff.network/jobs/chief-of-staff-the-ad-hoc-group-hkz",
-      "source": "Chief of Staff Network",
-      "summary": null,
-      "benefits": [],
-      "metro": "Other",
-      "source_type": "Network"
-    },
-    {
       "id": "beacon-131867",
       "title": "Executive Assistant",
       "org_type": "Beacon Hill Staffing Group",
@@ -2278,28 +2260,6 @@
       "source_type": "Recruiter"
     },
     {
-      "id": "beacon-130736",
-      "title": "Executive Assistant",
-      "org_type": "Beacon Hill Staffing Group",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 110000,
-      "comp_high": 110000,
-      "location": "New York, New York",
-      "remote": "Onsite",
-      "date_posted": "2026-08-10",
-      "apply_url": "https://bhsg.com/jobs/job/a1469817ny-perm_1786389601-executive-assistant-new-york-new-york/",
-      "source": "Beacon Hill",
-      "summary": "Our client is seeking a highly polished, proactive Executive Assistant to support senior leadership within a leading growth equity investment firm. This is a high‑touch EA role supporting a fast‑paced investment team and serving as the first true Executive Assistant hire at the firm.",
-      "benefits": [
-        "Bonus",
-        "Equity",
-        "Health coverage"
-      ],
-      "metro": "NYC",
-      "source_type": "Recruiter"
-    },
-    {
       "id": "beacon-131137",
       "title": "Executive Assistant/Office Administrator",
       "org_type": "Beacon Hill Staffing Group",
@@ -2575,29 +2535,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "consider-sequoia-e963514d-8b85-4747-9620-",
-      "title": "Executive Assistant, Office of the Co-Founders",
-      "org_type": "Sierra",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 130000,
-      "comp_high": 140000,
-      "location": "San Francisco, CA, United States",
-      "remote": "Onsite",
-      "date_posted": "2026-09-01",
-      "apply_url": "https://jobs.ashbyhq.com/Sierra/e963514d-8b85-4747-9620-cf9a66ce9b4c?utm_source=jobs.sequoiacap.com",
-      "source": "Sequoia Portfolio",
-      "summary": "We're working to bring the transformative power of AI to every organization in the world. To do so, it is important to us that the diversity of our employees represents the diversity of our customers.",
-      "benefits": [
-        "Equity",
-        "Health coverage",
-        "Paid time off",
-        "Parental leave"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "consider-sequoia-5230b7d7-f813-4942-96ca-",
       "title": "Executive Assistant, Product & Agent Development",
       "org_type": "Sierra",
@@ -2611,6 +2548,29 @@
       "apply_url": "https://jobs.ashbyhq.com/Sierra/5230b7d7-f813-4942-96ca-a7de154c4b50?utm_source=jobs.sequoiacap.com",
       "source": "Sequoia Portfolio",
       "summary": "At Sierra, we’re building a platform to enable every company in the world to build better, more human customer experiences with AI. We partner with industry leaders such as SoftBank, Uber, Rivian, CLEAR, and Sutter Health.",
+      "benefits": [
+        "Equity",
+        "Health coverage",
+        "Paid time off",
+        "Parental leave"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "consider-sequoia-e963514d-8b85-4747-9620-",
+      "title": "Executive Assistant, Office of the Co-Founders",
+      "org_type": "Sierra",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 130000,
+      "comp_high": 140000,
+      "location": "San Francisco, CA, United States",
+      "remote": "Onsite",
+      "date_posted": "2026-09-01",
+      "apply_url": "https://jobs.ashbyhq.com/Sierra/e963514d-8b85-4747-9620-cf9a66ce9b4c?utm_source=jobs.sequoiacap.com",
+      "source": "Sequoia Portfolio",
+      "summary": "We're working to bring the transformative power of AI to every organization in the world. To do so, it is important to us that the diversity of our employees represents the diversity of our customers.",
       "benefits": [
         "Equity",
         "Health coverage",
@@ -3743,26 +3703,6 @@
       "source_type": "VC portfolio"
     },
     {
-      "id": "consider-lightspeed-7824731003",
-      "title": "Executive Assistant",
-      "org_type": "Carta",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 136000,
-      "comp_high": 160000,
-      "location": "San Francisco, CA",
-      "remote": "Onsite",
-      "date_posted": "2026-08-10",
-      "apply_url": "https://job-boards.greenhouse.io/carta/jobs/7824731003",
-      "source": "Lightspeed Portfolio",
-      "summary": "We are looking for an Executive Assistant (EA) to join our team and support our Chief Financial Officer and SVP of Finance. This person will report to an EA Manager and work closely with our EA team, the Finance team, and the broader leadership team at Carta.",
-      "benefits": [
-        "Equity"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
       "id": "consider-lightspeed-e2d0cdf4-c416-4710-bc08-",
       "title": "Executive Assistant",
       "org_type": "Handshake",
@@ -3825,6 +3765,26 @@
         "Equity",
         "Health coverage",
         "Wellness"
+      ],
+      "metro": "SF Bay Area",
+      "source_type": "VC portfolio"
+    },
+    {
+      "id": "consider-lightspeed-7824731003",
+      "title": "Executive Assistant",
+      "org_type": "Carta",
+      "category": "Executive Assistant",
+      "seniority": "Executive Assistant",
+      "comp_low": 136000,
+      "comp_high": 160000,
+      "location": "San Francisco, CA",
+      "remote": "Onsite",
+      "date_posted": "2026-08-10",
+      "apply_url": "https://job-boards.greenhouse.io/carta/jobs/7824731003",
+      "source": "Lightspeed Portfolio",
+      "summary": "We are looking for an Executive Assistant (EA) to join our team and support our Chief Financial Officer and SVP of Finance. This person will report to an EA Manager and work closely with our EA team, the Finance team, and the broader leadership team at Carta.",
+      "benefits": [
+        "Equity"
       ],
       "metro": "SF Bay Area",
       "source_type": "VC portfolio"
@@ -4795,26 +4755,6 @@
         "Health coverage",
         "Paid time off",
         "Parental leave"
-      ],
-      "metro": "SF Bay Area",
-      "source_type": "VC portfolio"
-    },
-    {
-      "id": "getro-8672-91921520",
-      "title": "Executive Assistant",
-      "org_type": "Frame.io",
-      "category": "Executive Assistant",
-      "seniority": "Executive Assistant",
-      "comp_low": 84200,
-      "comp_high": 174700,
-      "location": "San Jose, CA, USA",
-      "remote": "Onsite",
-      "date_posted": "2026-09-02",
-      "apply_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced/job/San-Jose/Executive-Assistant_R171440",
-      "source": "Accel Portfolio",
-      "summary": "At Adobe, you will be immersed in an exceptional work environment that is recognized around the world. You will also be surrounded by colleagues who are committed to helping each other grow through our unique Check-In approach where ongoing feedback flows freely.",
-      "benefits": [
-        "Equity"
       ],
       "metro": "SF Bay Area",
       "source_type": "VC portfolio"
